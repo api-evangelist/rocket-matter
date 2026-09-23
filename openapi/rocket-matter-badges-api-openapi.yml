@@ -1,0 +1,227 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Badges API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Badges
+paths:
+  /Badges.svc/json/GetCurrentBadge:
+    post:
+      tags:
+      - Badges
+      description: Get current badge and upcoming badges based on current user id.
+      operationId: GetCurrentBadge
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCurrentBadgeResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get current badge
+      x-summary-source: derived
+  /Badges.svc/json/UserViewBadge:
+    post:
+      tags:
+      - Badges
+      description: View badge by name. Takes in current userid and badge name.
+      operationId: UserViewBadge
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserViewBadgeResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserViewBadgeRequest'
+        required: true
+      summary: User view badge
+      x-summary-source: derived
+  /Badges.svc/json/GetUserBadgeHistory:
+    post:
+      tags:
+      - Badges
+      description: Gets badge history based on current userid.
+      operationId: GetUserBadgeHistory
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserBadgeHistoryResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get user badge history
+      x-summary-source: derived
+components:
+  schemas:
+    UserViewBadgeResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    BadgeHistory:
+      type: object
+      properties:
+        Name:
+          type: string
+        DateCompleted:
+          type: string
+          format: date-time
+        ID:
+          type: integer
+          format: int32
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    GetUserBadgeHistoryResponse:
+      type: object
+      properties:
+        BadgeHistories:
+          type: array
+          items:
+            $ref: '#/components/schemas/BadgeHistory'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UserViewBadgeRequest:
+      type: object
+      properties:
+        BadgeName:
+          type: string
+    GetCurrentBadgeResponse:
+      type: object
+      properties:
+        CurrentBadge:
+          type: string
+        CurrentBadgeViewed:
+          type: boolean
+        NextBadge:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

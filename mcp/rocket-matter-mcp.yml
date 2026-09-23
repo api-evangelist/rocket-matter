@@ -1,0 +1,214 @@
+generated: '2026-09-23'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/rocket-matter-openapi.json
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: probed
+note: No MCP server was found. The pre-flight posted tools/list to /mcp on api.rocketmatter.com, www.rocketmatter.com, developer.rocketmatter.com,
+  kb.rocketmatter.com; verdict absent. Candidate tools below are derived from the 305 operation(s) in the provider's own OpenAPI (40 listed);
+  they describe what a server WOULD expose, not one that exists.
+tools:
+- name: grant_token
+  operationId: GrantToken
+  method: POST
+  path: /Authentication.svc/json/GrantToken
+  description: Grants token and refresh token to the API consumer based on the grant type.
+- name: refresh_token
+  operationId: RefreshToken
+  method: POST
+  path: /Authentication.svc/json/RefreshToken
+  description: Generates a new access and refresh token from a valid refresh token.
+- name: log_out
+  operationId: LogOut
+  method: POST
+  path: /Authentication.svc/json/LogOut
+  description: Revokes tokens for the user.
+- name: get_new_refresh_token
+  operationId: GetNewRefreshToken
+  method: POST
+  path: /Authentication.svc/json/GetNewRefreshToken
+  description: Gets new refresh token from existing access token.
+- name: revoke_token
+  operationId: RevokeToken
+  method: POST
+  path: /Authentication.svc/json/RevokeToken
+  description: Revokes the token that is passed in.
+- name: get_mobile_authentication_code
+  operationId: GetMobileAuthenticationCode
+  method: POST
+  path: /Authentication.svc/json/GetMobileAuthenticationCode
+  description: Gets a temporary authentication code to be used for granting a token for the given device and authentication token.
+- name: get_current_badge
+  operationId: GetCurrentBadge
+  method: POST
+  path: /Badges.svc/json/GetCurrentBadge
+  description: Get current badge and upcoming badges based on current user id.
+- name: user_view_badge
+  operationId: UserViewBadge
+  method: POST
+  path: /Badges.svc/json/UserViewBadge
+  description: View badge by name. Takes in current userid and badge name.
+- name: get_user_badge_history
+  operationId: GetUserBadgeHistory
+  method: POST
+  path: /Badges.svc/json/GetUserBadgeHistory
+  description: Gets badge history based on current userid.
+- name: get_billable_activities
+  operationId: GetBillableActivities
+  method: POST
+  path: /BillableActivity.svc/json/GetBillableActivities
+  description: Get billable activities for a user by ID.
+- name: get_firm_balances
+  operationId: GetFirmBalances
+  method: POST
+  path: /BillableActivity.svc/json/GetFirmBalances
+  description: To get the various balances of pending billable activity for the firm.
+- name: save_billable_time
+  operationId: SaveBillableTime
+  method: POST
+  path: /BillableActivity.svc/json/SaveBillableTime
+  description: To create a new billable time activity (non-expense).
+- name: save_expense
+  operationId: SaveExpense
+  method: POST
+  path: /BillableActivity.svc/json/SaveExpense
+  description: To create a new billable expense activity.
+- name: get_units_billed_for_period
+  operationId: GetUnitsBilledForPeriod
+  method: POST
+  path: /BillableActivity.svc/json/GetUnitsBilledForPeriod
+  description: Gets all the billable units for a user over a specific time period.
+- name: get_units_billed_for_firm
+  operationId: GetUnitsBilledForFirm
+  method: POST
+  path: /BillableActivity.svc/json/GetUnitsBilledForFirm
+  description: Gets all the billable units for the entire firm over a specific time period.
+- name: get_time_expense
+  operationId: GetTimeExpense
+  method: POST
+  path: /BillableActivity.svc/json/GetTimeExpense
+  description: Get a time or expense billable activity by ID.
+- name: get_activity_type_id
+  operationId: GetActivityTypeId
+  method: POST
+  path: /BillableActivity.svc/json/GetActivityTypeId
+  description: See the type of an activity.
+- name: delete_activity
+  operationId: DeleteActivity
+  method: POST
+  path: /BillableActivity.svc/json/DeleteActivity
+  description: To delete a specific activity.
+- name: get_activities_for_matter
+  operationId: GetActivitiesForMatter
+  method: POST
+  path: /BillableActivity.svc/json/GetActivitiesForMatter
+  description: See all billable activities for a specific matter.
+- name: get_all_ledes
+  operationId: GetAllLedes
+  method: POST
+  path: /BillableActivity.svc/json/GetAllLedes
+  description: Get all LEDES codes for expense activities.
+- name: save_billing_feature_interest
+  operationId: SaveBillingFeatureInterest
+  method: POST
+  path: /BillingTiers.svc/json/SaveBillingFeatureInterest
+  description: Saves billing feature for current install.
+- name: get_default_billing_tiers
+  operationId: GetDefaultBillingTiers
+  method: POST
+  path: /BillingTiers.svc/json/GetDefaultBillingTiers
+  description: Gets default tiers for current install.
+- name: get_upcoming_events_for_matter
+  operationId: GetUpcomingEventsForMatter
+  method: POST
+  path: /CalendarEntries.svc/json/GetUpcomingEventsForMatter
+  description: Get all upcoming events for a specific matter.
+- name: sync_events
+  operationId: SyncEvents
+  method: POST
+  path: /CalendarEntries.svc/json/SyncEvents
+  description: 'Sync event with the Rocket Matter Outlook plugin. Note: Only for desktop PC version of Microsoft Outlook.'
+- name: get_upcoming_events_for_user
+  operationId: GetUpcomingEventsForUser
+  method: POST
+  path: /CalendarEntries.svc/json/GetUpcomingEventsForUser
+  description: Get all upcoming events for the current user.
+- name: save_calendar_entry
+  operationId: SaveCalendarEntry
+  method: POST
+  path: /CalendarEntries.svc/json/SaveCalendarEntry
+  description: Create a new calendar event.
+- name: check_contact_availability
+  operationId: CheckContactAvailability
+  method: POST
+  path: /CalendarEntries.svc/json/CheckContactAvailability
+  description: Check a contact(s) calendar availability.
+- name: get_calendar_entry
+  operationId: GetCalendarEntry
+  method: POST
+  path: /CalendarEntries.svc/json/GetCalendarEntry
+  description: Get a specific calendar event based on ID.
+- name: delete_calendar_entry
+  operationId: DeleteCalendarEntry
+  method: POST
+  path: /CalendarEntries.svc/json/DeleteCalendarEntry
+  description: Delete a specific calendar event, or series of recurring events.
+- name: get_calendar_entries_for_date_range
+  operationId: GetCalendarEntriesForDateRange
+  method: POST
+  path: /CalendarEntries.svc/json/GetCalendarEntriesForDateRange
+  description: See user(s) calendar events for a specific date range and/or a specific matter.
+- name: get_calendar_entries_dates
+  operationId: GetCalendarEntriesDates
+  method: POST
+  path: /CalendarEntries.svc/json/GetCalendarEntriesDates
+  description: Get all event dates for specific user(s).
+- name: save
+  operationId: Save
+  method: POST
+  path: /Clients.svc/json/Save
+  description: Create a new client by specifying all attributes.
+- name: create_client_from_string
+  operationId: CreateClientFromString
+  method: POST
+  path: /Clients.svc/json/CreateClientFromString
+  description: Create a new client with only the client name.
+- name: get_countries
+  operationId: GetCountries
+  method: POST
+  path: /Clients.svc/json/GetCountries
+  description: See a list of all available countries.
+- name: get_all_clients
+  operationId: GetAllClients
+  method: POST
+  path: /Clients.svc/json/GetAllClients
+  description: See a list of all clients.
+- name: search
+  operationId: Search
+  method: POST
+  path: /Clients.svc/json/Search
+  description: Search through all existing clients by text keyword.
+- name: search_client_and_potential_clients
+  operationId: SearchClientAndPotentialClients
+  method: POST
+  path: /Clients.svc/json/SearchClientAndPotentialClients
+  description: Search through existing clients and potential clients by text keyword.
+- name: search_client_include_pending_clients
+  operationId: SearchClientIncludePendingClients
+  method: POST
+  path: /Clients.svc/json/SearchClientIncludePendingClients
+  description: Search through existing clients and pending clients by text keyword.
+- name: get_client_by_code
+  operationId: GetClientByCode
+  method: POST
+  path: /Clients.svc/json/GetClientByCode
+  description: Find a client by name.
+- name: get_matter_read_only_relationships_for_client
+  operationId: GetMatterReadOnlyRelationshipsForClient
+  method: POST
+  path: /Clients.svc/json/GetMatterReadOnlyRelationshipsForClient
+  description: See all relationships for a client.

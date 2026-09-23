@@ -1,0 +1,872 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Calendar Entries API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: CalendarEntries
+  description: View, create, and delete calendar events.
+paths:
+  /CalendarEntries.svc/json/GetUpcomingEventsForMatter:
+    post:
+      tags:
+      - CalendarEntries
+      description: Get all upcoming events for a specific matter.
+      operationId: GetUpcomingEventsForMatter
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUpcomingEventsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetUpcomingEventsForMatterRequest'
+        required: true
+      summary: Get upcoming events for matter
+      x-summary-source: derived
+  /CalendarEntries.svc/json/SyncEvents:
+    post:
+      tags:
+      - CalendarEntries
+      description: 'Sync event with the Rocket Matter Outlook plugin. Note: Only for desktop PC version of Microsoft Outlook.'
+      operationId: SyncEvents
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncEventsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyncEventsRequest'
+        required: true
+      summary: Sync events
+      x-summary-source: derived
+  /CalendarEntries.svc/json/GetUpcomingEventsForUser:
+    post:
+      tags:
+      - CalendarEntries
+      description: Get all upcoming events for the current user.
+      operationId: GetUpcomingEventsForUser
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUpcomingEventsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetUpcomingEventsForUserRequest'
+        required: true
+      summary: Get upcoming events for user
+      x-summary-source: derived
+  /CalendarEntries.svc/json/SaveCalendarEntry:
+    post:
+      tags:
+      - CalendarEntries
+      description: Create a new calendar event.
+      operationId: SaveCalendarEntry
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaveCalendarEntryResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveCalendarEntryRequest'
+        required: true
+      summary: Save calendar entry
+      x-summary-source: derived
+  /CalendarEntries.svc/json/CheckContactAvailability:
+    post:
+      tags:
+      - CalendarEntries
+      description: Check a contact(s) calendar availability.
+      operationId: CheckContactAvailability
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckContactAvailabilityResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckContactAvailabilityRequest'
+        required: true
+      summary: Check contact availability
+      x-summary-source: derived
+  /CalendarEntries.svc/json/GetCalendarEntry:
+    post:
+      tags:
+      - CalendarEntries
+      description: Get a specific calendar event based on ID.
+      operationId: GetCalendarEntry
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCalendarEntryResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCalendarEntryRequest'
+        required: true
+      summary: Get calendar entry
+      x-summary-source: derived
+  /CalendarEntries.svc/json/DeleteCalendarEntry:
+    post:
+      tags:
+      - CalendarEntries
+      description: Delete a specific calendar event, or series of recurring events.
+      operationId: DeleteCalendarEntry
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCalendarEntryResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCalendarEntryRequest'
+        required: true
+      summary: Delete calendar entry
+      x-summary-source: derived
+  /CalendarEntries.svc/json/GetCalendarEntriesForDateRange:
+    post:
+      tags:
+      - CalendarEntries
+      description: See user(s) calendar events for a specific date range and/or a specific matter.
+      operationId: GetCalendarEntriesForDateRange
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCalendarEntriesForDateRangeResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCalendarEntriesForDateRangeRequest'
+        required: true
+      summary: Get calendar entries for date range
+      x-summary-source: derived
+  /CalendarEntries.svc/json/GetCalendarEntriesDates:
+    post:
+      tags:
+      - CalendarEntries
+      description: Get all event dates for specific user(s).
+      operationId: GetCalendarEntriesDates
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCalendarEntriesDatesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCalendarEntriesForDateRangeRequest'
+        required: true
+      summary: Get calendar entries dates
+      x-summary-source: derived
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    GetCalendarEntryResponse:
+      type: object
+      properties:
+        CalendarEntry:
+          type: object
+          $ref: '#/components/schemas/Event'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetCalendarEntriesForDateRangeRequest:
+      type: object
+      properties:
+        UserIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+        FromDate:
+          type: string
+          format: date-time
+        ToDate:
+          type: string
+          format: date-time
+        MatterId:
+          type: integer
+          format: int32
+    SyncEventsResponse:
+      type: object
+      properties:
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        CurrentUserContactId:
+          type: integer
+          format: int32
+        IsOutlookCalendarSyncEnabled:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    GetCalendarEntryRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+    Contact:
+      type: object
+      properties:
+        Name:
+          type: string
+        MiddleName:
+          type: string
+        FullName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        WorkEmail:
+          type: string
+        WorkPhone:
+          type: string
+        WorkPhoneExt:
+          type: string
+        WorkFax:
+          type: string
+        WorkAddressLine1:
+          type: string
+        WorkAddressLine2:
+          type: string
+        WorkCity:
+          type: string
+        WorkState:
+          type: string
+        WorkPostalCode:
+          type: string
+        WorkCountry:
+          type: string
+        ClientID:
+          type: integer
+          format: int32
+        HomeEmail:
+          type: string
+        HomePhone:
+          type: string
+        HomeAddressLine1:
+          type: string
+        HomeAddressLine2:
+          type: string
+        HomeCity:
+          type: string
+        HomeState:
+          type: string
+        HomePostalCode:
+          type: string
+        HomeCountry:
+          type: string
+        ExternalID2:
+          type: string
+        LastModifiedDate:
+          type: string
+          format: date-time
+        ContactTypeId:
+          type: integer
+          format: int32
+        CompanyId:
+          type: integer
+          format: int32
+        CompanyName:
+          type: string
+        Initials:
+          type: string
+        Notes:
+          type: string
+        UserId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    CheckContactAvailabilityRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+        StartDate:
+          type: string
+          format: date-time
+        EndDate:
+          type: string
+          format: date-time
+        ContactIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+    DeleteCalendarEntryResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetUpcomingEventsForMatterRequest:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
+        GetFlagged:
+          type: boolean
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    CheckContactAvailabilityResponse:
+      type: object
+      properties:
+        ContactIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetCalendarEntriesDatesResponse:
+      type: object
+      properties:
+        Dates:
+          type: array
+          items:
+            type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    Event:
+      type: object
+      properties:
+        ParentEventId:
+          type: integer
+          format: int32
+        MatterID:
+          type: integer
+          format: int32
+        MatterName:
+          type: string
+        Title:
+          type: string
+        Notes:
+          type: string
+        Location:
+          type: string
+        StartDateString:
+          type: string
+        StartDate:
+          type: string
+          format: date-time
+        StartDay:
+          type: string
+        StartTime:
+          type: string
+        EndDay:
+          type: string
+        EndTime:
+          type: string
+        EndDateString:
+          type: string
+        EndDate:
+          type: string
+          format: date-time
+        BillingDate:
+          type: string
+          format: date-time
+        OwnerID:
+          type: integer
+          format: int32
+        Owner:
+          type: object
+          $ref: '#/components/schemas/User'
+        OwnerName:
+          type: string
+        Bill:
+          type: boolean
+        NonBillable:
+          type: boolean
+        Attendees:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventAttendee'
+        Tags:
+          type: array
+          items:
+            type: string
+        Milestones:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskEventMilestone'
+        MatterTemplateMilestoneActionId:
+          type: integer
+          format: int32
+        IsMilestonePending:
+          type: boolean
+        ActivityId:
+          type: integer
+          format: int32
+        IsPrivate:
+          type: boolean
+        IsFlagged:
+          type: boolean
+        IsAllDayEvent:
+          type: boolean
+        IsRecurringEvent:
+          type: boolean
+        RemindParticipants:
+          type: boolean
+        ReminderInterval:
+          type: integer
+          format: int32
+        RecurringFrequency:
+          type: integer
+          format: int32
+        RecurringInterval:
+          type: string
+          enum:
+          - Day
+          - Weekday
+          - Week
+          - Month
+          - Year
+          - Custom
+        RecurringEventEndType:
+          type: string
+          enum:
+          - Never
+          - After
+          - 'On'
+        ReminderIntervalType:
+          type: string
+          enum:
+          - Minutes
+          - Hours
+          - Days
+          - Months
+        RecurringEventEndDate:
+          type: string
+          format: date-time
+        ReminderDate:
+          type: string
+          format: date-time
+        RecurringEventOccurences:
+          type: integer
+          format: int32
+        OwnerIsRole:
+          type: boolean
+        OwnerRole:
+          type: string
+        IsInvoiced:
+          type: boolean
+        WebLink:
+          type: string
+        IsCourtRule:
+          type: boolean
+        MatterCourtRuleId:
+          type: string
+        ThirdPartyDeadlineId:
+          type: string
+        IsStatute:
+          type: boolean
+        EventUser:
+          type: object
+          $ref: '#/components/schemas/User'
+        ID:
+          type: integer
+          format: int32
+    TaskEventMilestone:
+      type: object
+      properties:
+        TaskId:
+          type: integer
+          format: int32
+        EventId:
+          type: integer
+          format: int32
+        MatterTemplateMilestoneId:
+          type: integer
+          format: int32
+        MilestoneDate:
+          type: string
+          format: date-time
+        ID:
+          type: integer
+          format: int32
+    EventAttendee:
+      type: object
+      properties:
+        EventID:
+          type: integer
+          format: int32
+        UserID:
+          type: integer
+          format: int32
+        User:
+          type: object
+          $ref: '#/components/schemas/User'
+        Bill:
+          type: boolean
+        NonBillable:
+          type: boolean
+        AttendeeName:
+          type: string
+        Contact:
+          type: object
+          $ref: '#/components/schemas/Contact'
+        IsRole:
+          type: boolean
+        Role:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        InviteStatusTypeId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    SaveCalendarEntryRequest:
+      type: object
+      properties:
+        CalendarEntry:
+          type: object
+          $ref: '#/components/schemas/Event'
+        UpdateFutureEvents:
+          type: boolean
+    SyncEventsRequest:
+      type: object
+      properties:
+        ShouldCreateContactAttendees:
+          type: boolean
+        StartUTC:
+          type: string
+          format: date-time
+        EndUTC:
+          type: string
+          format: date-time
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        IsInitialSync:
+          type: boolean
+    GetCalendarEntriesForDateRangeResponse:
+      type: object
+      properties:
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetUpcomingEventsResponse:
+      type: object
+      properties:
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        MatterNameLookup:
+          type: object
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetUpcomingEventsForUserRequest:
+      type: object
+      properties:
+        Date:
+          type: string
+          format: date-time
+        GetFlagged:
+          type: boolean
+    DeleteCalendarEntryRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+        DeleteFutureEvents:
+          type: boolean
+    SaveCalendarEntryResponse:
+      type: object
+      properties:
+        CalendarEntry:
+          type: object
+          $ref: '#/components/schemas/Event'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

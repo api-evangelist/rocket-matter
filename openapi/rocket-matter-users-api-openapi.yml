@@ -1,0 +1,638 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Users API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Users
+  description: Operations to manage Rocket Matter users.
+paths:
+  /Users.svc/json/Search:
+    post:
+      tags:
+      - Users
+      description: Get users by search text.
+      operationId: Search
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchUsersResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchUsersRequest'
+        required: true
+      summary: Search
+      x-summary-source: derived
+  /Users.svc/json/Get:
+    post:
+      tags:
+      - Users
+      description: Get user by ID.
+      operationId: Get
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGetResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserGetRequest'
+        required: true
+      summary: Get
+      x-summary-source: derived
+  /Users.svc/json/GetCurrentUser:
+    post:
+      tags:
+      - Users
+      description: Gets logged in user information.
+      operationId: GetCurrentUser
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGetResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserGetRequest'
+        required: true
+      summary: Get current user
+      x-summary-source: derived
+  /Users.svc/json/GetByFullName:
+    post:
+      tags:
+      - Users
+      description: Get a user by their full name.
+      operationId: GetByFullName
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGetResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetByFullNameRequest'
+        required: true
+      summary: Get by full name
+      x-summary-source: derived
+  /Users.svc/json/GetByInitials:
+    post:
+      tags:
+      - Users
+      description: Get a user by their initials.
+      operationId: GetByInitials
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGetResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetUserByInitialsRequest'
+        required: true
+      summary: Get by initials
+      x-summary-source: derived
+  /Users.svc/json/SetUserPreference:
+    post:
+      tags:
+      - Users
+      description: Set user preference for a variety of settings. Use GetUserPreference to see available settings.
+      operationId: SetUserPreference
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUserPreferenceResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetUserPreferenceRequest'
+        required: true
+      summary: Set user preference
+      x-summary-source: derived
+  /Users.svc/json/GetUserPreference:
+    post:
+      tags:
+      - Users
+      description: Get all user preference settings.
+      operationId: GetUserPreference
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserPreferenceResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetUserPreferenceRequest'
+        required: true
+      summary: Get user preference
+      x-summary-source: derived
+  /Users.svc/json/GetActiveUsers:
+    post:
+      tags:
+      - Users
+      description: Get list of all active users.
+      operationId: GetActiveUsers
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetActiveUsersResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get active users
+      x-summary-source: derived
+  /Users.svc/json/GetUserNavigationPreferences:
+    post:
+      tags:
+      - Users
+      description: View additional navigation setting preferences for users.
+      operationId: GetUserNavigationPreferences
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserNavigationPreferencesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get user navigation preferences
+      x-summary-source: derived
+  /Users.svc/json/GetUsersAccess:
+    post:
+      tags:
+      - Users
+      description: View the installs a user has access.
+      operationId: GetUsersAccess
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUsersAccessResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get users access
+      x-summary-source: derived
+  /Users.svc/json/GetEffectiveUserRates:
+    post:
+      tags:
+      - Users
+      description: Get all user default billing rates.
+      operationId: GetEffectiveUserRates
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEffectiveUserRatesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEffectiveUserRatesRequest'
+        required: true
+      summary: Get effective user rates
+      x-summary-source: derived
+  /Users.svc/json/GetEffectiveUserRateFromDate:
+    post:
+      tags:
+      - Users
+      description: Get user billing rates before or on a specified effective date.
+      operationId: GetEffectiveUserRateFromDate
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEffectiveUserRatesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEffectiveUserRatesRequest'
+        required: true
+      summary: Get effective user rate from date
+      x-summary-source: derived
+components:
+  schemas:
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    GetActiveUsersResponse:
+      type: object
+      properties:
+        Users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SetUserPreferenceResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SearchUsersResponse:
+      type: object
+      properties:
+        Users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    UserPreference:
+      type: object
+      properties:
+        Preference:
+          type: string
+        Value:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    UserGetRequest:
+      type: object
+      properties:
+        ID:
+          type: integer
+          format: int32
+    GetEffectiveUserRatesResponse:
+      type: object
+      properties:
+        UserRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetEffectiveUserRatesRequest:
+      type: object
+      properties:
+        BillingDate:
+          type: string
+          format: date-time
+    UserRate:
+      type: object
+      properties:
+        UserId:
+          type: integer
+          format: int32
+        EffectiveDate:
+          type: string
+          format: date-time
+        Rate:
+          type: number
+          format: double
+        ID:
+          type: integer
+          format: int32
+    GetUserByInitialsRequest:
+      type: object
+      properties:
+        Initials:
+          type: string
+    GetUserPreferenceRequest:
+      type: object
+      properties:
+        Preference:
+          type: string
+        DefaultValue:
+          type: string
+    GetUsersAccessResponse:
+      type: object
+      properties:
+        CurrentInstall:
+          type: string
+        InstallsAccess:
+          type: array
+          items:
+            type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SearchUsersRequest:
+      type: object
+      properties:
+        SearchText:
+          type: string
+    GetUserNavigationPreferencesResponse:
+      type: object
+      properties:
+        EmbeddedHelpEnabled:
+          type: boolean
+        MatterTemplatesEnabled:
+          type: boolean
+        CurrentInstall:
+          type: string
+        InstallsAccess:
+          type: array
+          items:
+            type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetByFullNameRequest:
+      type: object
+      properties:
+        FullName:
+          type: string
+    SetUserPreferenceRequest:
+      type: object
+      properties:
+        Preference:
+          type: object
+          $ref: '#/components/schemas/UserPreference'
+    GetUserPreferenceResponse:
+      type: object
+      properties:
+        Value:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    User:
+      type: object
+      properties:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    UserGetResponse:
+      type: object
+      properties:
+        User:
+          type: object
+          $ref: '#/components/schemas/User'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

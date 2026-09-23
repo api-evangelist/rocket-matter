@@ -1,0 +1,455 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Timer API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Timer
+  description: Operations for timer activities to track billable time worked.
+paths:
+  /Timer.svc/json/Start:
+    post:
+      tags:
+      - Timer
+      description: Start a new timer.
+      operationId: Start
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimerResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartTimerRequest'
+        required: true
+      summary: Start
+      x-summary-source: derived
+  /Timer.svc/json/Pause:
+    post:
+      tags:
+      - Timer
+      description: Pause an active timer.
+      operationId: Pause
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimerResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PauseTimerRequest'
+        required: true
+      summary: Pause
+      x-summary-source: derived
+  /Timer.svc/json/Bill:
+    post:
+      tags:
+      - Timer
+      description: Bills for the elapsed time on a timer. Will also delete the active timer.
+      operationId: Bill
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillTimerRequest'
+        required: true
+      summary: Bill
+      x-summary-source: derived
+  /Timer.svc/json/Get:
+    post:
+      tags:
+      - Timer
+      description: View a specific timer activity based on ID.
+      operationId: Get
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimerResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTimerRequest'
+        required: true
+      summary: Get
+      x-summary-source: derived
+  /Timer.svc/json/GetAllNonBilledForUser:
+    post:
+      tags:
+      - Timer
+      description: Get all non-billed active timers.
+      operationId: GetAllNonBilledForUser
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimersResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get all non billed for user
+      x-summary-source: derived
+  /Timer.svc/json/Save:
+    post:
+      tags:
+      - Timer
+      description: Saves existing timer information.
+      operationId: Save
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimerResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimerRequest'
+        required: true
+      summary: Save
+      x-summary-source: derived
+  /Timer.svc/json/Delete:
+    post:
+      tags:
+      - Timer
+      description: Deletes timer activity based on ID.
+      operationId: Delete
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTimerRequest'
+        required: true
+      summary: Delete
+      x-summary-source: derived
+  /Timer.svc/json/GetEvenIfDeleted:
+    post:
+      tags:
+      - Timer
+      description: Retrieves deleted timer based on ID.
+      operationId: GetEvenIfDeleted
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEvenIfDeletedResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEvenIfDeletedRequest'
+        required: true
+      summary: Get even if deleted
+      x-summary-source: derived
+components:
+  schemas:
+    DeleteTimerRequest:
+      type: object
+      properties:
+        Id:
+          type: string
+    TimerResponse:
+      type: object
+      properties:
+        ActiveTimer:
+          type: object
+          $ref: '#/components/schemas/ActiveTimer'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetEvenIfDeletedRequest:
+      type: object
+      properties:
+        Id:
+          type: string
+    BillTimerRequest:
+      type: object
+      properties:
+        PausedAt:
+          type: string
+          format: date-time
+        ActiveTimer:
+          type: object
+          $ref: '#/components/schemas/ActiveTimer'
+        BrowserSession:
+          type: string
+    StartTimerRequest:
+      type: object
+      properties:
+        StartedAt:
+          type: string
+          format: date-time
+        ActiveTimer:
+          type: object
+          $ref: '#/components/schemas/ActiveTimer'
+        BrowserSession:
+          type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    GetEvenIfDeletedResponse:
+      type: object
+      properties:
+        ActiveTimer:
+          type: object
+          $ref: '#/components/schemas/ActiveTimer'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ActiveTimer:
+      type: object
+      properties:
+        TimerStart:
+          type: string
+          format: date-time
+        AccumulatedTime:
+          type: integer
+          format: int32
+        UserId:
+          type: integer
+          format: int32
+        BillingDate:
+          type: string
+          format: date-time
+        ClientMatter:
+          type: string
+        MatterId:
+          type: integer
+          format: int32
+        Description:
+          type: string
+        NoCharge:
+          type: boolean
+        NonBillable:
+          type: boolean
+        BilledActivityId:
+          type: integer
+          format: int32
+        BillableUnits:
+          type: number
+          format: double
+        IsDeleted:
+          type: boolean
+        Id:
+          type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    GetTimerRequest:
+      type: object
+      properties:
+        Id:
+          type: string
+    TimerRequest:
+      type: object
+      properties:
+        ActiveTimer:
+          type: object
+          $ref: '#/components/schemas/ActiveTimer'
+        BrowserSession:
+          type: string
+    TimersResponse:
+      type: object
+      properties:
+        ActiveTimers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActiveTimer'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    BaseResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    PauseTimerRequest:
+      type: object
+      properties:
+        PausedAt:
+          type: string
+          format: date-time
+        ActiveTimer:
+          type: object
+          $ref: '#/components/schemas/ActiveTimer'
+        BrowserSession:
+          type: string

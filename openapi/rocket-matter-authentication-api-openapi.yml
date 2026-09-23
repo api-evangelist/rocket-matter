@@ -1,0 +1,353 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Authentication API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Authentication
+  description: How to authenticate against Rocket Matter API
+paths:
+  /Authentication.svc/json/GrantToken:
+    post:
+      tags:
+      - Authentication
+      description: Grants token and refresh token to the API consumer based on the grant type.
+      operationId: GrantToken
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantTokenResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantTokenRequest'
+        required: true
+      summary: Grant token
+      x-summary-source: derived
+  /Authentication.svc/json/RefreshToken:
+    post:
+      tags:
+      - Authentication
+      description: Generates a new access and refresh token from a valid refresh token.
+      operationId: RefreshToken
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantTokenResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequest'
+        required: true
+      summary: Refresh token
+      x-summary-source: derived
+  /Authentication.svc/json/LogOut:
+    post:
+      tags:
+      - Authentication
+      description: Revokes tokens for the user.
+      operationId: LogOut
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Log out
+      x-summary-source: derived
+  /Authentication.svc/json/GetNewRefreshToken:
+    post:
+      tags:
+      - Authentication
+      description: Gets new refresh token from existing access token.
+      operationId: GetNewRefreshToken
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantTokenResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantTokenRequest'
+        required: true
+      summary: Get new refresh token
+      x-summary-source: derived
+  /Authentication.svc/json/RevokeToken:
+    post:
+      tags:
+      - Authentication
+      description: Revokes the token that is passed in.
+      operationId: RevokeToken
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevokeTokenResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevokeTokenRequest'
+        required: true
+      summary: Revoke token
+      x-summary-source: derived
+  /Authentication.svc/json/GetMobileAuthenticationCode:
+    post:
+      tags:
+      - Authentication
+      description: Gets a temporary authentication code to be used for granting a token for the given device and authentication token.
+      operationId: GetMobileAuthenticationCode
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMobileAuthenticationCodeResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMobileAuthenticationCodeRequest'
+        required: true
+      summary: Get mobile authentication code
+      x-summary-source: derived
+components:
+  schemas:
+    GrantTokenResponse:
+      type: object
+      properties:
+        expires_at:
+          type: string
+          format: date-time
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        expires_in:
+          type: integer
+          format: int32
+        error:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    RevokeTokenRequest:
+      type: object
+      properties:
+        token:
+          type: string
+    GrantTokenRequest:
+      type: object
+      properties:
+        grant_type:
+          type: string
+        code:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        token:
+          type: string
+    RefreshTokenRequest:
+      type: object
+      properties:
+        refresh_token:
+          type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    RevokeTokenResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    GetMobileAuthenticationCodeResponse:
+      type: object
+      properties:
+        AuthenticationCode:
+          type: string
+        IsValid:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    BaseResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetMobileAuthenticationCodeRequest:
+      type: object
+      properties:
+        DeviceId:
+          type: string
+        AuthenticationToken:
+          type: string

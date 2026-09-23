@@ -1,0 +1,1646 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Documents API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Documents
+paths:
+  /Documents.svc/json/UploadDocument:
+    post:
+      tags:
+      - Documents
+      description: Upload document(s) to a specified Matter.
+      operationId: UploadDocument
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadDocumentResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Upload document
+      x-summary-source: derived
+  /Documents.svc/json/GetDocumentsInPath:
+    post:
+      tags:
+      - Documents
+      description: Shows all documents that are in specified given path. Returns root path if MatterId is null.
+      operationId: GetDocumentsInPath
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDocumentsInPathResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDocumentsInPathRequest'
+        required: true
+      summary: Get documents in path
+      x-summary-source: derived
+  /Documents.svc/json/Save:
+    post:
+      tags:
+      - Documents
+      description: Saves document to matter in specified directory. If directory is null, document will be saved to root directory.
+      operationId: Save
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaveDocumentResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveDocumentRequest'
+        required: true
+      summary: Save
+      x-summary-source: derived
+  /Documents.svc/json/GetDocument:
+    post:
+      tags:
+      - Documents
+      description: Shows all documents that are in specified given path. Returns root path if MatterId is null.
+      operationId: GetDocument
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDocumentResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDocumentRequest'
+        required: true
+      summary: Get document
+      x-summary-source: derived
+  /Documents.svc/json/GetDirectories:
+    post:
+      tags:
+      - Documents
+      description: Retrieves all directories of folders from a specified Matter.
+      operationId: GetDirectories
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDirectoriesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDirectoriesRequest'
+        required: true
+      summary: Get directories
+      x-summary-source: derived
+  /Documents.svc/json/MoveDocumentsToFolder:
+    post:
+      tags:
+      - Documents
+      description: 'Moves document to folder in specified Matter. Note: Cannot move invoices and billed documents from one matter to another.'
+      operationId: MoveDocumentsToFolder
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveDocumentsToFolderResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoveDocumentsToFolderRequest'
+        required: true
+      summary: Move documents to folder
+      x-summary-source: derived
+  /Documents.svc/json/RenameFolder:
+    post:
+      tags:
+      - Documents
+      description: 'Renames specified folder to the new desired name. Note: Folder names must be unique in each matter.'
+      operationId: RenameFolder
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RenameFolderResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RenameFolderRequest'
+        required: true
+      summary: Rename folder
+      x-summary-source: derived
+  /Documents.svc/json/GetInvoicedDocuments:
+    post:
+      tags:
+      - Documents
+      description: Retrieves all invoices within the same matter where the document specified is.
+      operationId: GetInvoicedDocuments
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInvoicedDocumentsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetInvoicedDocumentsRequest'
+        required: true
+      summary: Get invoiced documents
+      x-summary-source: derived
+  /Documents.svc/json/DeleteDocument:
+    post:
+      tags:
+      - Documents
+      description: Deletes document and logs deletion notification to the matter communicator channel.
+      operationId: DeleteDocument
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDocumentResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDocumentRequest'
+        required: true
+      summary: Delete document
+      x-summary-source: derived
+  /Documents.svc/json/DeleteNote:
+    post:
+      tags:
+      - Documents
+      description: Deletes note and logs deletion notification to the matter stream.
+      operationId: DeleteNote
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteNoteResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteNoteRequest'
+        required: true
+      summary: Delete note
+      x-summary-source: derived
+  /Documents.svc/json/GetPortalDocumentContacts:
+    post:
+      tags:
+      - Documents
+      description: Retrieves document and portal users full name based on ActivityId.
+      operationId: GetPortalDocumentContacts
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPortalDocumentContactsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPortalDocumentContactsRequest'
+        required: true
+      summary: Get portal document contacts
+      x-summary-source: derived
+  /Documents.svc/json/SavePortalDocumentContacts:
+    post:
+      tags:
+      - Documents
+      description: Saves document to portal for user. Sends notification to portal user once document is uploaded.
+      operationId: SavePortalDocumentContacts
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavePortalDocumentContactsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SavePortalDocumentContactsRequest'
+        required: true
+      summary: Save portal document contacts
+      x-summary-source: derived
+  /Documents.svc/json/GetDocumentUploadUrl:
+    post:
+      tags:
+      - Documents
+      description: Generates document URL to upload document to specified matter.
+      operationId: GetDocumentUploadUrl
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDocumentUploadUrlResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDocumentUploadUrlRequest'
+        required: true
+      summary: Get document upload url
+      x-summary-source: derived
+  /Documents.svc/json/GetInvoiceTempateUploadUrl:
+    post:
+      tags:
+      - Documents
+      description: Generates invoice URL to upload document to specified matter.
+      operationId: GetInvoiceTempateUploadUrl
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDocumentUploadUrlResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDocumentUploadUrlRequest'
+        required: true
+      summary: Get invoice tempate upload url
+      x-summary-source: derived
+  /Documents.svc/json/SaveDocumentsForMatter:
+    post:
+      tags:
+      - Documents
+      description: Save multiple documents to a specified matter and logs activity created notification to the matter stream.
+      operationId: SaveDocumentsForMatter
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaveDocumentsForMatterResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveDocumentsForMatterRequest'
+        required: true
+      summary: Save documents for matter
+      x-summary-source: derived
+  /Documents.svc/json/GetDocumentFileInfo:
+    post:
+      tags:
+      - Documents
+      description: Retrieves document info including file URL based on DocumentId.
+      operationId: GetDocumentFileInfo
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDocumentFileInfoResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDocumentFileInfoRequest'
+        required: true
+      summary: Get document file info
+      x-summary-source: derived
+  /Documents.svc/json/GetDownloadKey:
+    post:
+      tags:
+      - Documents
+      description: Returns file name and file url of document.
+      operationId: GetDownloadKey
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDownloadKeyResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DownloadDocumentRequest'
+        required: true
+      summary: Get download key
+      x-summary-source: derived
+  /Documents.svc/json/SetDocumentIntegrationFolder:
+    post:
+      tags:
+      - Documents
+      description: Sets integration folder for Matter. Requires current document integration (Dropbox, Box, Evernote, etc..)
+      operationId: SetDocumentIntegrationFolder
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetDocumentIntegrationFolderResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetDocumentIntegrationFolderRequest'
+        required: true
+      summary: Set document integration folder
+      x-summary-source: derived
+  /Documents.svc/json/GetDocumentIntegration:
+    post:
+      tags:
+      - Documents
+      description: Retrieves document integrations for specified matter. (Dropbox, Box, Evernote, etc..)
+      operationId: GetDocumentIntegration
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDocumentIntegrationResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDocumentIntegrationRequest'
+        required: true
+      summary: Get document integration
+      x-summary-source: derived
+  /Documents.svc/json/DeleteDocumentsInPath:
+    post:
+      tags:
+      - Documents
+      description: Deletes all documents in given path in specified matter.
+      operationId: DeleteDocumentsInPath
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDocumentsInPathResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDocumentsInPathRequest'
+        required: true
+      summary: Delete documents in path
+      x-summary-source: derived
+  /Documents.svc/json/DocumentContentsChanged:
+    post:
+      tags:
+      - Documents
+      description: Compares file contents of given file to what is stored. Returns true if file contents have changed.
+      operationId: DocumentContentsChanged
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentContentsChangedResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentContentsChangedRequest'
+        required: true
+      summary: Document contents changed
+      x-summary-source: derived
+  /Documents.svc/json/GetDocumentVersions:
+    post:
+      tags:
+      - Documents
+      description: Retrieves document version info based on DocumentId.
+      operationId: GetDocumentVersions
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDocumentVersionsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDocumentVersionsRequest'
+        required: true
+      summary: Get document versions
+      x-summary-source: derived
+components:
+  schemas:
+    RMFile:
+      type: object
+      properties:
+        ContentType:
+          type: string
+        FileName:
+          type: string
+        FileContents:
+          type: object
+        ParentDirectory:
+          type: string
+        ParentPath:
+          type: string
+        FullPath:
+          type: string
+        FileUUId:
+          type: string
+    DeleteDocumentResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetDocumentIntegrationRequest:
+      type: object
+      properties:
+        Type:
+          type: string
+          enum:
+          - Dropbox
+          - Evernote
+          - Box
+        MatterId:
+          type: integer
+          format: int32
+    RMDirectory:
+      type: object
+      properties:
+        Name:
+          type: string
+        ParentDirectory:
+          type: string
+        ParentPath:
+          type: string
+        FullPath:
+          type: string
+        Files:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMFile'
+        Directories:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMDirectory'
+        FileUUId:
+          type: string
+    DocumentContentsChangedRequest:
+      type: object
+      properties:
+        DocumentId:
+          type: integer
+          format: int32
+        Base64Contents:
+          type: string
+    GetDocumentRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+        IsNote:
+          type: boolean
+        DocumentUId:
+          type: string
+    SavePortalDocumentContactsRequest:
+      type: object
+      properties:
+        Contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortalDocumentContact'
+        ActivityId:
+          type: integer
+          format: int32
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    GetDocumentsInPathRequest:
+      type: object
+      properties:
+        Filter:
+          type: object
+          $ref: '#/components/schemas/DocumentPageFilter'
+        MatterId:
+          type: integer
+          format: int32
+        ReturnCount:
+          type: boolean
+    DocumentPageFilter:
+      type: object
+      properties:
+        DocumentType:
+          type: string
+          enum:
+          - None
+          - Note
+          - UploadedDocument
+          - WebAddress
+          - DropboxFile
+          - DropboxDirectory
+          - EvernoteNote
+          - EvernoteNotebook
+          - MergedDocument
+          - BoxFile
+          - BoxDirectory
+          - UploadedDirectory
+          - Invoice
+          - DocumentTemplate
+          - InvoiceTemplate
+          - DefaultInvoiceTemplate
+          - ImportDocument
+        RootDirectory:
+          type: string
+        DocumentPath:
+          type: string
+        DirectoryId:
+          type: integer
+          format: int32
+        Search:
+          type: string
+        SortExpression:
+          type: string
+        SortDescending:
+          type: boolean
+        Offset:
+          type: integer
+          format: int32
+        Fetch:
+          type: integer
+          format: int32
+        DocumentUId:
+          type: string
+        UserId:
+          type: integer
+          format: int32
+        ExcludeChildren:
+          type: boolean
+        Tags:
+          type: array
+          items:
+            type: string
+    GetDocumentsInPathResponse:
+      type: object
+      properties:
+        Documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentItem'
+        ItemsCount:
+          type: integer
+          format: int32
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetPortalDocumentContactsResponse:
+      type: object
+      properties:
+        Contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortalDocumentContact'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SaveDocumentRequest:
+      type: object
+      properties:
+        Document:
+          type: object
+          $ref: '#/components/schemas/Document'
+        DirectoryId:
+          type: integer
+          format: int32
+        IsNote:
+          type: boolean
+        FileUpdated:
+          type: boolean
+        CleanupFileUrls:
+          type: array
+          items:
+            type: string
+    DocumentContentsChangedResponse:
+      type: object
+      properties:
+        HasChanged:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetDirectoriesRequest:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
+    GetDirectoriesResponse:
+      type: object
+      properties:
+        Documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentItem'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    DocumentUploadUrl:
+      type: object
+      properties:
+        Url:
+          type: string
+        FileUUId:
+          type: string
+        FullPath:
+          type: string
+        SourceFileUUId:
+          type: string
+    DeleteDocumentsInPathRequest:
+      type: object
+      properties:
+        DocumentPaths:
+          type: array
+          items:
+            type: string
+        MatterId:
+          type: integer
+          format: int32
+    DownloadDocumentRequest:
+      type: object
+      properties:
+        Type:
+          type: string
+          enum:
+          - None
+          - Note
+          - UploadedDocument
+          - WebAddress
+          - DropboxFile
+          - DropboxDirectory
+          - EvernoteNote
+          - EvernoteNotebook
+          - MergedDocument
+          - BoxFile
+          - BoxDirectory
+          - UploadedDirectory
+          - Invoice
+          - DocumentTemplate
+          - InvoiceTemplate
+          - DefaultInvoiceTemplate
+          - ImportDocument
+        MatterId:
+          type: integer
+          format: int32
+        DocumentId:
+          type: integer
+          format: int32
+        Path:
+          type: string
+        DocumentUUId:
+          type: string
+        VersionId:
+          type: string
+    SaveDocumentsForMatterResponse:
+      type: object
+      properties:
+        Documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UploadDocumentResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteNoteResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SaveDocumentResponse:
+      type: object
+      properties:
+        Document:
+          type: object
+          $ref: '#/components/schemas/Document'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetDocumentUploadUrlRequest:
+      type: object
+      properties:
+        Files:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMFile'
+        Directories:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMDirectory'
+        DirectoryId:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        UseTemp:
+          type: boolean
+    DocumentVersion:
+      type: object
+      properties:
+        VersionId:
+          type: string
+        VersionDate:
+          type: string
+          format: date-time
+        UserId:
+          type: integer
+          format: int32
+        Comment:
+          type: string
+        UserName:
+          type: string
+    GetInvoicedDocumentsResponse:
+      type: object
+      properties:
+        Documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SavePortalDocumentContactsResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SetDocumentIntegrationFolderResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    PortalDocumentContact:
+      type: object
+      properties:
+        ContactFullName:
+          type: string
+        Position:
+          type: integer
+          format: int32
+        PortalId:
+          type: integer
+          format: int32
+        ContactId:
+          type: integer
+          format: int32
+        SendNotification:
+          type: boolean
+    GetPortalDocumentContactsRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+    SetDocumentIntegrationFolderRequest:
+      type: object
+      properties:
+        Type:
+          type: string
+          enum:
+          - Dropbox
+          - Evernote
+          - Box
+        MatterId:
+          type: integer
+          format: int32
+        Folder:
+          type: string
+    DeleteDocumentRequest:
+      type: object
+      properties:
+        DocumentId:
+          type: integer
+          format: int32
+    SaveDocumentsForMatterRequest:
+      type: object
+      properties:
+        Files:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMFile'
+        Directories:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMDirectory'
+        DirectoryId:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+    GetInvoicedDocumentsRequest:
+      type: object
+      properties:
+        DocumentId:
+          type: integer
+          format: int32
+    GetDocumentUploadUrlResponse:
+      type: object
+      properties:
+        UploadUrls:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentUploadUrl'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    MoveDocumentsToFolderRequest:
+      type: object
+      properties:
+        DirectoryId:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        DocumentIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+    GetDocumentVersionsResponse:
+      type: object
+      properties:
+        Versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentVersion'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetDocumentVersionsRequest:
+      type: object
+      properties:
+        DocumentId:
+          type: integer
+          format: int32
+    GetDocumentFileInfoResponse:
+      type: object
+      properties:
+        File:
+          type: object
+          $ref: '#/components/schemas/RMFile'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetDocumentIntegrationResponse:
+      type: object
+      properties:
+        Path:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetDocumentFileInfoRequest:
+      type: object
+      properties:
+        Files:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMFile'
+        DocumentId:
+          type: integer
+          format: int32
+    RenameFolderResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteNoteRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+    GetDocumentResponse:
+      type: object
+      properties:
+        Document:
+          type: object
+          $ref: '#/components/schemas/Document'
+        PortalContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortalDocumentContact'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    Document:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+        Title:
+          type: string
+        FileName:
+          type: string
+        Size:
+          type: integer
+          format: int32
+        FileUrl:
+          type: string
+        DocumentType:
+          type: string
+          enum:
+          - None
+          - Note
+          - UploadedDocument
+          - WebAddress
+          - DropboxFile
+          - DropboxDirectory
+          - EvernoteNote
+          - EvernoteNotebook
+          - MergedDocument
+          - BoxFile
+          - BoxDirectory
+          - UploadedDirectory
+          - Invoice
+          - DocumentTemplate
+          - InvoiceTemplate
+          - DefaultInvoiceTemplate
+          - ImportDocument
+        IsFlagged:
+          type: boolean
+        LedgerEntryId:
+          type: integer
+          format: int32
+        DocumentUId:
+          type: string
+        IsUnavailable:
+          type: boolean
+        IsDirectory:
+          type: boolean
+        ParentDirectoryId:
+          type: integer
+          format: int32
+        ClientMatter:
+          type: string
+        MatterDefaultBillingTypeId:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        DateAndTime:
+          type: string
+          format: date-time
+        TotalSeconds:
+          type: integer
+          format: int32
+        BillableUnits:
+          type: number
+          format: double
+        Notes:
+          type: string
+        IsNoCharge:
+          type: boolean
+        IsNonBillable:
+          type: boolean
+        InvoiceId:
+          type: integer
+          format: int32
+        IsTaxable:
+          type: boolean
+        IsSurcharge:
+          type: boolean
+        UserId:
+          type: integer
+          format: int32
+        UserName:
+          type: string
+        Contents:
+          type: string
+        IsLineItemOverride:
+          type: boolean
+        Tags:
+          type: array
+          items:
+            type: string
+        InSystemMatter:
+          type: boolean
+        Versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentVersion'
+        ContentBase64String:
+          type: string
+        UpdateComment:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    DocumentItem:
+      type: object
+      properties:
+        Name:
+          type: string
+        Path:
+          type: string
+        IsFolder:
+          type: boolean
+        Ext:
+          type: string
+        DocumentTypeId:
+          type: integer
+          format: int32
+        NestedPath:
+          type: array
+          items:
+            type: string
+        DocumentId:
+          type: integer
+          format: int32
+        DocumentUId:
+          type: string
+        PendingInvoicing:
+          type: boolean
+        Invoiced:
+          type: boolean
+        MatterId:
+          type: integer
+          format: int32
+        User:
+          type: object
+          $ref: '#/components/schemas/User'
+        Tags:
+          type: array
+          items:
+            type: string
+        CreatedDate:
+          type: string
+          format: date-time
+        ClientMatter:
+          type: string
+        DocumentItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentItem'
+        PortalShared:
+          type: boolean
+        IsInvoice:
+          type: boolean
+        BillingDate:
+          type: string
+          format: date-time
+        FutureBilling:
+          type: boolean
+        DisplayOnly:
+          type: boolean
+        ClosedMatter:
+          type: boolean
+        SystemMatter:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    RenameFolderRequest:
+      type: object
+      properties:
+        DocumentId:
+          type: integer
+          format: int32
+        NewName:
+          type: string
+    DeleteDocumentsInPathResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetDownloadKeyResponse:
+      type: object
+      properties:
+        Url:
+          type: string
+        FileName:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    User:
+      type: object
+      properties:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    MoveDocumentsToFolderResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

@@ -1,0 +1,339 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Matter Template Date Options API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: MatterTemplateDateOptions
+  description: Manages the date options for a matter template.
+paths:
+  /MatterTemplateDateOptions.svc/json/GetAll:
+    post:
+      tags:
+      - MatterTemplateDateOptions
+      description: Gets all available date options.
+      operationId: GetAll
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatterTemplateDateOptionsGetResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get all
+      x-summary-source: derived
+  /MatterTemplateDateOptions.svc/json/GetByGroup:
+    post:
+      tags:
+      - MatterTemplateDateOptions
+      description: Gets the available date options for any of the following 'Event', 'Task', 'MatterDetail'.
+      operationId: GetByGroup
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatterTemplateDateOptionsGetByDisplayGroupResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatterTemplateDateOptionsGetByDisplayGroupRequest'
+        required: true
+      summary: Get by group
+      x-summary-source: derived
+  /MatterTemplateDateOptions.svc/json/GetMatterTemplateDateOptionDetails:
+    post:
+      tags:
+      - MatterTemplateDateOptions
+      description: Gets all date options grouped by the different types of actions.
+      operationId: GetMatterTemplateDateOptionDetails
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMatterTemplateDateOptionDetailsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get matter template date option details
+      x-summary-source: derived
+  /MatterTemplateDateOptions.svc/json/Get:
+    post:
+      tags:
+      - MatterTemplateDateOptions
+      description: Gets all available date options.
+      operationId: Get
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatterTemplateDateOptionGetResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatterTemplateDateOptionGetRequest'
+        required: true
+      summary: Get
+      x-summary-source: derived
+components:
+  schemas:
+    MatterTemplateDateOptionGetResponse:
+      type: object
+      properties:
+        MatterTemplateDateOption:
+          type: object
+          $ref: '#/components/schemas/MatterTemplateDateOption'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    MatterTemplateDateOptionsGetByDisplayGroupRequest:
+      type: object
+      properties:
+        Group:
+          type: string
+    MatterTemplateDateOptionsGetByDisplayGroupResponse:
+      type: object
+      properties:
+        MatterTemplateDateOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateDateOption'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    MatterTemplateDateOptionGetRequest:
+      type: object
+      properties:
+        ID:
+          type: integer
+          format: int32
+    LookupItem:
+      type: object
+      properties:
+        ID:
+          type: integer
+          format: int32
+        Name:
+          type: string
+        EnumName:
+          type: string
+    GetMatterTemplateDateOptionDetailsResponse:
+      type: object
+      properties:
+        TaskDateOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateDateOption'
+        EventDateOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateDateOption'
+        MatterDetailDateOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateDateOption'
+        MilestoneOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/LookupItem'
+        DefaultMilestones:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateMilestone'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    MatterTemplateDateOption:
+      type: object
+      properties:
+        Name:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    MatterTemplateDateOptionsGetResponse:
+      type: object
+      properties:
+        MatterTemplateDateOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateDateOption'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    MatterTemplateMilestone:
+      type: object
+      properties:
+        MatterTemplateId:
+          type: integer
+          format: int32
+        MatterTemplateTaskId:
+          type: integer
+          format: int32
+        MatterTemplateEventId:
+          type: integer
+          format: int32
+        MatterTemplateMilestoneTriggerId:
+          type: integer
+          format: int32
+        MatterTemplateMilestoneTrigger:
+          type: string
+          enum:
+          - MatterOpen
+          - EventDate
+          - TaskDueDate
+          - TaskCompletedDate
+          - StatusDate
+        Name:
+          type: string
+        TempId:
+          type: string
+        IsPending:
+          type: boolean
+        ID:
+          type: integer
+          format: int32

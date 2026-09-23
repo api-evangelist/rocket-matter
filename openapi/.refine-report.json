@@ -1,0 +1,62 @@
+{
+  "provider": "rocket-matter",
+  "sources": [
+    "rocket-matter-openapi.json"
+  ],
+  "outputs": [
+    "rocket-matter-authentication-api-openapi.yml",
+    "rocket-matter-badges-api-openapi.yml",
+    "rocket-matter-billableactivity-api-openapi.yml",
+    "rocket-matter-billingtiers-api-openapi.yml",
+    "rocket-matter-calendarentries-api-openapi.yml",
+    "rocket-matter-clients-api-openapi.yml",
+    "rocket-matter-communicator-api-openapi.yml",
+    "rocket-matter-contacts-api-openapi.yml",
+    "rocket-matter-courtrules-api-openapi.yml",
+    "rocket-matter-discounts-api-openapi.yml",
+    "rocket-matter-documenttemplates-api-openapi.yml",
+    "rocket-matter-documents-api-openapi.yml",
+    "rocket-matter-dropbox-api-openapi.yml",
+    "rocket-matter-features-api-openapi.yml",
+    "rocket-matter-firmroles-api-openapi.yml",
+    "rocket-matter-google-api-openapi.yml",
+    "rocket-matter-interests-api-openapi.yml",
+    "rocket-matter-invoices-api-openapi.yml",
+    "rocket-matter-mattertemplatedateoptions-api-openapi.yml",
+    "rocket-matter-mattertemplatemilestoneactions-api-openapi.yml",
+    "rocket-matter-mattertemplates-api-openapi.yml",
+    "rocket-matter-mattertypes-api-openapi.yml",
+    "rocket-matter-matters-api-openapi.yml",
+    "rocket-matter-messages-api-openapi.yml",
+    "rocket-matter-mobile-api-openapi.yml",
+    "rocket-matter-office-api-openapi.yml",
+    "rocket-matter-originsystem-api-openapi.yml",
+    "rocket-matter-quickbooks-api-openapi.yml",
+    "rocket-matter-rates-api-openapi.yml",
+    "rocket-matter-recurringbilling-api-openapi.yml",
+    "rocket-matter-reports-api-openapi.yml",
+    "rocket-matter-search-api-openapi.yml",
+    "rocket-matter-signup-api-openapi.yml",
+    "rocket-matter-surchargerates-api-openapi.yml",
+    "rocket-matter-tags-api-openapi.yml",
+    "rocket-matter-tasks-api-openapi.yml",
+    "rocket-matter-taxrates-api-openapi.yml",
+    "rocket-matter-timeoptions-api-openapi.yml",
+    "rocket-matter-timer-api-openapi.yml",
+    "rocket-matter-trust-api-openapi.yml",
+    "rocket-matter-twofactorauthentication-api-openapi.yml",
+    "rocket-matter-users-api-openapi.yml",
+    "rocket-matter-validations-api-openapi.yml",
+    "rocket-matter-workflow-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/rocket-matter-openapi.json"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "rocket-matter-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+44 apis, 44 total)"
+  ],
+  "skipped": []
+}

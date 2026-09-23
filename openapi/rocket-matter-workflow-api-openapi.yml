@@ -1,0 +1,288 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Work Flow API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: WorkFlow
+paths:
+  /WorkFlow.svc/json/AddEditWorkflowStatus:
+    post:
+      tags:
+      - WorkFlow
+      operationId: AddEditWorkflowStatus
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddEditWorkflowStatusResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddEditWorkflowStatusRequest'
+        required: true
+      summary: Add edit workflow status
+      x-summary-source: derived
+  /WorkFlow.svc/json/ApplyNewMatterWorkFlowStatus:
+    post:
+      tags:
+      - WorkFlow
+      description: Apply new workflow status to matter.
+      operationId: ApplyNewMatterWorkFlowStatus
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplyNewMatterWorkFlowStatusResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplyNewMatterWorkFlowStatusRequest'
+        required: true
+      summary: Apply new matter work flow status
+      x-summary-source: derived
+  /WorkFlow.svc/json/GetMatterCurrentWorkFlowStatus:
+    post:
+      tags:
+      - WorkFlow
+      description: Get workflow status bound to matter.
+      operationId: GetMatterCurrentWorkFlowStatus
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMatterCurrentWorkFlowStatusResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMatterCurrentWorkFlowStatusRequest'
+        required: true
+      summary: Get matter current work flow status
+      x-summary-source: derived
+  /WorkFlow.svc/json/GetMatterWorkFLowStatuses:
+    post:
+      tags:
+      - WorkFlow
+      description: Get a list for workflow statuses configured for the instance.
+      operationId: GetMatterWorkFLowStatuses
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMatterWorkFLowStatusesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get matter work FLow statuses
+      x-summary-source: derived
+components:
+  schemas:
+    GetMatterCurrentWorkFlowStatusRequest:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
+    ApplyNewMatterWorkFlowStatusResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    AddEditWorkflowStatusResponse:
+      type: object
+      properties:
+        MatterWorkFlowStatus:
+          type: object
+          $ref: '#/components/schemas/MatterWorkFlowStatus'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetMatterCurrentWorkFlowStatusResponse:
+      type: object
+      properties:
+        MatterWorkFlowStatus:
+          type: object
+          $ref: '#/components/schemas/MatterWorkFlowStatus'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    GetMatterWorkFLowStatusesResponse:
+      type: object
+      properties:
+        MatterWorkFlowStatuses:
+          type: object
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ApplyNewMatterWorkFlowStatusRequest:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
+        MatterWorkFlowStatusId:
+          type: string
+    MatterWorkFlowStatus:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+    AddEditWorkflowStatusRequest:
+      type: object
+      properties:
+        MatterWorkFlowStatus:
+          type: object
+          $ref: '#/components/schemas/MatterWorkFlowStatus'

@@ -1,0 +1,1253 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Origin System API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: OriginSystem
+paths:
+  /OriginSystem.svc/json/GetUserOperations:
+    post:
+      tags:
+      - OriginSystem
+      description: Get permissions user has access to.
+      operationId: GetUserOperations
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserOperationsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get user operations
+      x-summary-source: derived
+  /OriginSystem.svc/json/DeleteRole:
+    post:
+      tags:
+      - OriginSystem
+      description: Delete permission role.
+      operationId: DeleteRole
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRoleResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRoleRequest'
+        required: true
+      summary: Delete role
+      x-summary-source: derived
+  /OriginSystem.svc/json/GetRoles:
+    post:
+      tags:
+      - OriginSystem
+      description: Get configured permission roles.
+      operationId: GetRoles
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRolesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get roles
+      x-summary-source: derived
+  /OriginSystem.svc/json/GetRole:
+    post:
+      tags:
+      - OriginSystem
+      description: Get configured permission roles.
+      operationId: GetRole
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRoleResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRoleRequest'
+        required: true
+      summary: Get role
+      x-summary-source: derived
+  /OriginSystem.svc/json/GetRoleUsersForPermissions:
+    post:
+      tags:
+      - OriginSystem
+      description: Get users bound to permission role.
+      operationId: GetRoleUsersForPermissions
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRoleUsersForPermissionsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRoleUsersForPermissionsRequest'
+        required: true
+      summary: Get role users for permissions
+      x-summary-source: derived
+  /OriginSystem.svc/json/GetRolePermissions:
+    post:
+      tags:
+      - OriginSystem
+      description: Get permissions associated with role.
+      operationId: GetRolePermissions
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRolePermissionsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRolePermissionsRequest'
+        required: true
+      summary: Get role permissions
+      x-summary-source: derived
+  /OriginSystem.svc/json/GetUsersForPermissions:
+    post:
+      tags:
+      - OriginSystem
+      description: Get list of users available for permission configuration.
+      operationId: GetUsersForPermissions
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUsersForPermissionsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get users for permissions
+      x-summary-source: derived
+  /OriginSystem.svc/json/GetPermissions:
+    post:
+      tags:
+      - OriginSystem
+      description: Get all available system permissions.
+      operationId: GetPermissions
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPermissionsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get permissions
+      x-summary-source: derived
+  /OriginSystem.svc/json/SaveRole:
+    post:
+      tags:
+      - OriginSystem
+      description: Save role configuration.
+      operationId: SaveRole
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaveRoleResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveRoleRequest'
+        required: true
+      summary: Save role
+      x-summary-source: derived
+  /OriginSystem.svc/json/GetPaymentProcessingFeeDefault:
+    post:
+      tags:
+      - OriginSystem
+      description: Get default value for payment processing fee.
+      operationId: GetPaymentProcessingFeeDefault
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPaymentProcessingFeeDefaultResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get payment processing fee default
+      x-summary-source: derived
+  /OriginSystem.svc/json/SetPaymentProcessingFeeDefault:
+    post:
+      tags:
+      - OriginSystem
+      description: Save payment processing fee default.
+      operationId: SetPaymentProcessingFeeDefault
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetPaymentProcessingFeeDefaultResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetPaymentProcessingFeeDefaultRequest'
+        required: true
+      summary: Set payment processing fee default
+      x-summary-source: derived
+  /OriginSystem.svc/json/GenerateRocketMatterPaymentLead:
+    post:
+      tags:
+      - OriginSystem
+      description: Generate a Slack message expressing interest in Rocket Matter payments.
+      operationId: GenerateRocketMatterPaymentLead
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Generate rocket matter payment lead
+      x-summary-source: derived
+  /OriginSystem.svc/json/UpdateFedACHDirectory:
+    post:
+      tags:
+      - OriginSystem
+      description: Update the FedACH lookup directory.
+      operationId: UpdateFedACHDirectory
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFedACHDirectoryResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFedACHDirectoryRequest'
+        required: true
+      summary: Update fed ACH directory
+      x-summary-source: derived
+  /OriginSystem.svc/json/UpdateFedWireDirectory:
+    post:
+      tags:
+      - OriginSystem
+      description: Update the Fed Wire lookup directory.
+      operationId: UpdateFedWireDirectory
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFedWireDirectoryResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFedWireDirectoryRequest'
+        required: true
+      summary: Update fed wire directory
+      x-summary-source: derived
+  /OriginSystem.svc/json/CancelSubscription:
+    post:
+      tags:
+      - OriginSystem
+      description: Cancel Rocket Matter subscription.
+      operationId: CancelSubscription
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelSubscriptionResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelSubscriptionRequest'
+        required: true
+      summary: Cancel subscription
+      x-summary-source: derived
+  /OriginSystem.svc/json/GetSessionCancellationInfo:
+    post:
+      tags:
+      - OriginSystem
+      description: Get information about the session canceling subscription.
+      operationId: GetSessionCancellationInfo
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSessionCancellationInfoResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSessionCancellationInfoRequest'
+        required: true
+      summary: Get session cancellation info
+      x-summary-source: derived
+  /OriginSystem.svc/json/GetCopy2ContactsJavaScript:
+    post:
+      tags:
+      - OriginSystem
+      description: Get copy to contacts JavaScript snippet.
+      operationId: GetCopy2ContactsJavaScript
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCopy2ContactsJavaScriptResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCopy2ContactsJavaScriptRequest'
+        required: true
+      summary: Get copy2 contacts java script
+      x-summary-source: derived
+  /OriginSystem.svc/json/checkIfFeatureIsEnabled:
+    post:
+      tags:
+      - OriginSystem
+      description: Check if install has featured enabled.
+      operationId: checkIfFeatureIsEnabled
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/checkIfFeatureIsEnabledResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/checkIfFeatureIsEnabledRequest'
+        required: true
+      summary: Check if feature is enabled
+      x-summary-source: derived
+  /OriginSystem.svc/json/GetInstallScripts:
+    post:
+      tags:
+      - OriginSystem
+      description: Get custom scripts for installs.
+      operationId: GetInstallScripts
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstallScriptsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get install scripts
+      x-summary-source: derived
+  /OriginSystem.svc/json/SetInstallScriptState:
+    post:
+      tags:
+      - OriginSystem
+      operationId: SetInstallScriptState
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetInstallScriptStateResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetInstallScriptStateRequest'
+        required: true
+      summary: Set install script state
+      x-summary-source: derived
+  /OriginSystem.svc/json/SwitchToNewUI:
+    post:
+      tags:
+      - OriginSystem
+      description: Obsolete DO NOT USE, move user to new UI.
+      operationId: SwitchToNewUI
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Switch to new UI
+      x-summary-source: derived
+  /OriginSystem.svc/json/GetTimezoneOptions:
+    post:
+      tags:
+      - OriginSystem
+      description: Get available time zone options.
+      operationId: GetTimezoneOptions
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTimeZoneOptionsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get timezone options
+      x-summary-source: derived
+  /OriginSystem.svc/json/SendCancellationNotification:
+    post:
+      tags:
+      - OriginSystem
+      description: Notify Rocket Matter of account cancellation.
+      operationId: SendCancellationNotification
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendCancellationNotificationResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Send cancellation notification
+      x-summary-source: derived
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    SendCancellationNotificationResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetRoleUsersForPermissionsRequest:
+      type: object
+      properties:
+        RoleId:
+          type: string
+    CancelSubscriptionRequest:
+      type: object
+      properties:
+        CancellationSurvey:
+          type: object
+          $ref: '#/components/schemas/CancellationSurvey'
+    GetRolePermissionsRequest:
+      type: object
+      properties:
+        RoleId:
+          type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    CancelSubscriptionResponse:
+      type: object
+      properties:
+        CancellationDate:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    Role:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+        Permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        Users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    SetPaymentProcessingFeeDefaultResponse:
+      type: object
+      properties:
+        Value:
+          type: number
+          format: double
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetSessionCancellationInfoRequest:
+      type: object
+      properties:
+        NotifySlack:
+          type: boolean
+    Permission:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+    SetPaymentProcessingFeeDefaultRequest:
+      type: object
+      properties:
+        Value:
+          type: number
+          format: double
+    GetTimeZoneOptionsResponse:
+      type: object
+      properties:
+        Timezones:
+          type: object
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CancellationSurveyItem:
+      type: object
+      properties:
+        Question:
+          type: string
+        Answer:
+          type: string
+    SetInstallScriptStateRequest:
+      type: object
+      properties:
+        InstallScriptID:
+          type: integer
+          format: int32
+        Enabled:
+          type: boolean
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    UpdateFedWireDirectoryResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    Script:
+      type: object
+      properties:
+        Id:
+          type: integer
+          format: int32
+        Name:
+          type: string
+        ScriptText:
+          type: string
+        ApplyToTrialsAccounts:
+          type: boolean
+        ApplyToPaidAccounts:
+          type: boolean
+        InstallScripts:
+          type: object
+        LastModifiedDate:
+          type: string
+          format: date-time
+        CreatedDate:
+          type: string
+          format: date-time
+    GetRoleResponse:
+      type: object
+      properties:
+        Role:
+          type: object
+          $ref: '#/components/schemas/Role'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UpdateFedACHDirectoryRequest:
+      type: object
+      properties:
+        TextBlob:
+          type: string
+    BaseResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SaveRoleResponse:
+      type: object
+      properties:
+        Role:
+          type: object
+          $ref: '#/components/schemas/Role'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetInstallScriptsResponse:
+      type: object
+      properties:
+        InstallScripts:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallScript'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteRoleResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetPaymentProcessingFeeDefaultResponse:
+      type: object
+      properties:
+        Value:
+          type: number
+          format: double
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetPermissionsResponse:
+      type: object
+      properties:
+        Permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetRolesResponse:
+      type: object
+      properties:
+        Roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Role'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SetInstallScriptStateResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetCopy2ContactsJavaScriptResponse:
+      type: object
+      properties:
+        ScriptText:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetCopy2ContactsJavaScriptRequest:
+      type: object
+      properties:
+        Form:
+          type: string
+    GetUserOperationsResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UpdateFedACHDirectoryResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SaveRoleRequest:
+      type: object
+      properties:
+        Role:
+          type: object
+          $ref: '#/components/schemas/Role'
+    InstallScript:
+      type: object
+      properties:
+        Id:
+          type: integer
+          format: int32
+        ScriptID:
+          type: integer
+          format: int32
+        InstallationID:
+          type: integer
+          format: int32
+        Enabled:
+          type: boolean
+        Script:
+          type: object
+          $ref: '#/components/schemas/Script'
+    CancellationSurvey:
+      type: object
+      properties:
+        QuestionAnswers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CancellationSurveyItem'
+    GetRoleUsersForPermissionsResponse:
+      type: object
+      properties:
+        Users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteRoleRequest:
+      type: object
+      properties:
+        RoleId:
+          type: string
+    GetRolePermissionsResponse:
+      type: object
+      properties:
+        Permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    checkIfFeatureIsEnabledRequest:
+      type: object
+      properties:
+        FeatureName:
+          type: string
+    checkIfFeatureIsEnabledResponse:
+      type: object
+      properties:
+        Enabled:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetSessionCancellationInfoResponse:
+      type: object
+      properties:
+        Email:
+          type: string
+        Tenant:
+          type: string
+        CancellationDate:
+          type: string
+        User:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetUsersForPermissionsResponse:
+      type: object
+      properties:
+        Users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UpdateFedWireDirectoryRequest:
+      type: object
+      properties:
+        TextBlob:
+          type: string
+    GetRoleRequest:
+      type: object
+      properties:
+        RoleId:
+          type: string

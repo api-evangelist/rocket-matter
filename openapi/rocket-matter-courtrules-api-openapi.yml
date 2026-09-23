@@ -1,0 +1,1149 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Court Rules API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: CourtRules
+paths:
+  /CourtRules.svc/json/TriggerMockDeadlineUpdate:
+    post:
+      tags:
+      - CourtRules
+      description: Simulate court rule event change, this can be used to simulate email notifications when deadlines change in LawToolBox.
+      operationId: TriggerMockDeadlineUpdate
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerMockDeadlineUpdateResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TriggerMockDeadlineUpdateRequest'
+        required: true
+      summary: Trigger mock deadline update
+      x-summary-source: derived
+  /CourtRules.svc/json/GetMatterCourtRuleEvents:
+    post:
+      tags:
+      - CourtRules
+      description: Get remaining matter court rule events.
+      operationId: GetMatterCourtRuleEvents
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMatterCourtRuleEventsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMatterCourtRuleEventsRequest'
+        required: true
+      summary: Get matter court rule events
+      x-summary-source: derived
+  /CourtRules.svc/json/GetCourtRule:
+    post:
+      tags:
+      - CourtRules
+      description: Get jurisdiction by Id.
+      operationId: GetCourtRule
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCourtRuleResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCourtRuleRequest'
+        required: true
+      summary: Get court rule
+      x-summary-source: derived
+  /CourtRules.svc/json/DeleteMatterCourtRule:
+    post:
+      tags:
+      - CourtRules
+      description: Disassociate matter court rule.
+      operationId: DeleteMatterCourtRule
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMatterCourtRuleResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteMatterCourtRuleRequest'
+        required: true
+      summary: Delete matter court rule
+      x-summary-source: derived
+  /CourtRules.svc/json/GetMatterCourtRules:
+    post:
+      tags:
+      - CourtRules
+      description: Get associated matter court rule information.
+      operationId: GetMatterCourtRules
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMatterCourtRulesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMatterCourtRulesRequest'
+        required: true
+      summary: Get matter court rules
+      x-summary-source: derived
+  /CourtRules.svc/json/AddMatterCourtRule:
+    post:
+      tags:
+      - CourtRules
+      description: Attach calculated deadlines to matters and bind associated court rule information.
+      operationId: AddMatterCourtRule
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddMatterCourtRuleReponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddMatterCourtRuleRequest'
+        required: true
+      summary: Add matter court rule
+      x-summary-source: derived
+  /CourtRules.svc/json/CalculateDeadlines:
+    post:
+      tags:
+      - CourtRules
+      description: Calculate deadlines and retrieve a list of deadline recommendations.
+      operationId: CalculateDeadlines
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculateDeadlinesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculateDeadlinesRequest'
+        required: true
+      summary: Calculate deadlines
+      x-summary-source: derived
+  /CourtRules.svc/json/GetTriggerEvents:
+    post:
+      tags:
+      - CourtRules
+      description: Get trigger events based on tool set.
+      operationId: GetTriggerEvents
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTriggerEventsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get trigger events
+      x-summary-source: derived
+  /CourtRules.svc/json/GetAvailableCourtRules:
+    post:
+      tags:
+      - CourtRules
+      description: Search available jurisdictions.
+      operationId: GetAvailableCourtRules
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAvailableCourtRulesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAvailableCourtRulesRequest'
+        required: true
+      summary: Get available court rules
+      x-summary-source: derived
+  /CourtRules.svc/json/GetCourtRuleDefault:
+    post:
+      tags:
+      - CourtRules
+      description: Get jurisdiction default preference.
+      operationId: GetCourtRuleDefault
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCourtRuleDefaultResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get court rule default
+      x-summary-source: derived
+  /CourtRules.svc/json/GetCourtRules:
+    post:
+      tags:
+      - CourtRules
+      description: Get saved jurisdictions and subscription information.
+      operationId: GetCourtRules
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCourtRulesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get court rules
+      x-summary-source: derived
+  /CourtRules.svc/json/SaveCourtRules:
+    post:
+      tags:
+      - CourtRules
+      description: Save selected jurisdiction preferences.
+      operationId: SaveCourtRules
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaveCourtRulesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Save court rules
+      x-summary-source: derived
+components:
+  schemas:
+    TriggerMockDeadlineUpdateRequest:
+      type: object
+      properties:
+        EventId:
+          type: integer
+          format: int32
+        DeadlineUpdateText:
+          type: string
+    AddMatterCourtRuleReponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    Deadline:
+      type: object
+      properties:
+        DeadlineNumber:
+          type: string
+        DeadlineID:
+          type: string
+        DeadlineType:
+          type: string
+        Location:
+          type: object
+        Description_Short:
+          type: string
+        Description_Long:
+          type: string
+        Link_1:
+          type: string
+        Link_Description_1:
+          type: string
+        Link_2:
+          type: string
+        Link_Description_2:
+          type: string
+        StartDate:
+          type: string
+        EndDate:
+          type: object
+        StartDateTime:
+          type: object
+        EndDateTime:
+          type: object
+        StartTime:
+          type: object
+        EndTime:
+          type: object
+        TimeZone:
+          type: object
+        ReportCode:
+          type: string
+    CalculateDeadlinesRequest:
+      type: object
+      properties:
+        TriggerID:
+          type: string
+        TriggerDate:
+          type: string
+        ToggleID:
+          type: integer
+          format: int32
+        ToggleOptionID:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        ToolSetId:
+          type: integer
+          format: int32
+        HearingNote:
+          type: string
+    GetCourtRulesResponse:
+      type: object
+      properties:
+        CourtRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourtRule'
+        Enable:
+          type: boolean
+        PaidEndDate:
+          type: string
+          format: date-time
+        PaidStartDate:
+          type: string
+          format: date-time
+        PricePerUser:
+          type: string
+        SubscriptionRenewDate:
+          type: string
+        TotalPrice:
+          type: string
+        TotalUsers:
+          type: integer
+          format: int32
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    Contact:
+      type: object
+      properties:
+        Name:
+          type: string
+        MiddleName:
+          type: string
+        FullName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        WorkEmail:
+          type: string
+        WorkPhone:
+          type: string
+        WorkPhoneExt:
+          type: string
+        WorkFax:
+          type: string
+        WorkAddressLine1:
+          type: string
+        WorkAddressLine2:
+          type: string
+        WorkCity:
+          type: string
+        WorkState:
+          type: string
+        WorkPostalCode:
+          type: string
+        WorkCountry:
+          type: string
+        ClientID:
+          type: integer
+          format: int32
+        HomeEmail:
+          type: string
+        HomePhone:
+          type: string
+        HomeAddressLine1:
+          type: string
+        HomeAddressLine2:
+          type: string
+        HomeCity:
+          type: string
+        HomeState:
+          type: string
+        HomePostalCode:
+          type: string
+        HomeCountry:
+          type: string
+        ExternalID2:
+          type: string
+        LastModifiedDate:
+          type: string
+          format: date-time
+        ContactTypeId:
+          type: integer
+          format: int32
+        CompanyId:
+          type: integer
+          format: int32
+        CompanyName:
+          type: string
+        Initials:
+          type: string
+        Notes:
+          type: string
+        UserId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    ToggleOption:
+      type: object
+      properties:
+        ToggleOptionID:
+          type: integer
+          format: int32
+        ToggleDescription:
+          type: string
+    CalculateDeadlinesResponse:
+      type: object
+      properties:
+        Deadlines:
+          type: array
+          items:
+            $ref: '#/components/schemas/Deadline'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    TriggerDate:
+      type: object
+      properties:
+        TriggerID:
+          type: string
+        Name:
+          type: string
+        NoOfDeadlines:
+          type: integer
+          format: int32
+        ToggleID:
+          type: integer
+          format: int32
+        ToggleDetails:
+          type: object
+          $ref: '#/components/schemas/ToggleDetails'
+    GetAvailableCourtRulesRequest:
+      type: object
+      properties:
+        Filter:
+          type: string
+    ToggleDetails:
+      type: object
+      properties:
+        ToggleIntro:
+          type: string
+        ToggleOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToggleOption'
+    DeleteMatterCourtRuleRequest:
+      type: object
+      properties:
+        MatterCourtRuleId:
+          type: string
+    GetMatterCourtRuleEventsResponse:
+      type: object
+      properties:
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterCourtRuleEvent'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    MatterCourtRule:
+      type: object
+      properties:
+        Id:
+          type: string
+        ToolSetId:
+          type: integer
+          format: int32
+        Description:
+          type: string
+        TriggerId:
+          type: string
+        TriggerDate:
+          type: string
+          format: date-time
+        ToggleId:
+          type: string
+        ToggleOptionId:
+          type: string
+        HearingNote:
+          type: string
+        HasBeenUpdated:
+          type: boolean
+        UpdateDescription:
+          type: string
+        UpdateNotifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterCourtRuleUpdateNotification'
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    GetCourtRuleDefaultResponse:
+      type: object
+      properties:
+        CourtRule:
+          type: object
+          $ref: '#/components/schemas/CourtRule'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTriggerEventsResponse:
+      type: object
+      properties:
+        Triggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/TriggerDate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetMatterCourtRuleEventsRequest:
+      type: object
+      properties:
+        Id:
+          type: string
+    GetCourtRuleResponse:
+      type: object
+      properties:
+        CourtRule:
+          type: object
+          $ref: '#/components/schemas/CourtRule'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetAvailableCourtRulesResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CourtRule:
+      type: object
+      properties:
+        ExternalId:
+          type: string
+        Name:
+          type: string
+        Value:
+          type: string
+        IsDefault:
+          type: boolean
+    MatterCourtRuleUpdateNotification:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+        User:
+          type: object
+          $ref: '#/components/schemas/Contact'
+    AddMatterCourtRuleRequest:
+      type: object
+      properties:
+        CalendarEntries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        MatterId:
+          type: integer
+          format: int32
+        ToolSetId:
+          type: integer
+          format: int32
+        ToggleID:
+          type: string
+        ToggleOptionID:
+          type: string
+        Description:
+          type: string
+        HearingNote:
+          type: string
+        TriggerID:
+          type: string
+        TriggerDate:
+          type: string
+        EditMatterCourtRuleId:
+          type: string
+        DeadLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/Deadline'
+        UpdateNotifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterCourtRuleUpdateNotification'
+    Event:
+      type: object
+      properties:
+        ParentEventId:
+          type: integer
+          format: int32
+        MatterID:
+          type: integer
+          format: int32
+        MatterName:
+          type: string
+        Title:
+          type: string
+        Notes:
+          type: string
+        Location:
+          type: string
+        StartDateString:
+          type: string
+        StartDate:
+          type: string
+          format: date-time
+        StartDay:
+          type: string
+        StartTime:
+          type: string
+        EndDay:
+          type: string
+        EndTime:
+          type: string
+        EndDateString:
+          type: string
+        EndDate:
+          type: string
+          format: date-time
+        BillingDate:
+          type: string
+          format: date-time
+        OwnerID:
+          type: integer
+          format: int32
+        Owner:
+          type: object
+          $ref: '#/components/schemas/User'
+        OwnerName:
+          type: string
+        Bill:
+          type: boolean
+        NonBillable:
+          type: boolean
+        Attendees:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventAttendee'
+        Tags:
+          type: array
+          items:
+            type: string
+        Milestones:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskEventMilestone'
+        MatterTemplateMilestoneActionId:
+          type: integer
+          format: int32
+        IsMilestonePending:
+          type: boolean
+        ActivityId:
+          type: integer
+          format: int32
+        IsPrivate:
+          type: boolean
+        IsFlagged:
+          type: boolean
+        IsAllDayEvent:
+          type: boolean
+        IsRecurringEvent:
+          type: boolean
+        RemindParticipants:
+          type: boolean
+        ReminderInterval:
+          type: integer
+          format: int32
+        RecurringFrequency:
+          type: integer
+          format: int32
+        RecurringInterval:
+          type: string
+          enum:
+          - Day
+          - Weekday
+          - Week
+          - Month
+          - Year
+          - Custom
+        RecurringEventEndType:
+          type: string
+          enum:
+          - Never
+          - After
+          - 'On'
+        ReminderIntervalType:
+          type: string
+          enum:
+          - Minutes
+          - Hours
+          - Days
+          - Months
+        RecurringEventEndDate:
+          type: string
+          format: date-time
+        ReminderDate:
+          type: string
+          format: date-time
+        RecurringEventOccurences:
+          type: integer
+          format: int32
+        OwnerIsRole:
+          type: boolean
+        OwnerRole:
+          type: string
+        IsInvoiced:
+          type: boolean
+        WebLink:
+          type: string
+        IsCourtRule:
+          type: boolean
+        MatterCourtRuleId:
+          type: string
+        ThirdPartyDeadlineId:
+          type: string
+        IsStatute:
+          type: boolean
+        EventUser:
+          type: object
+          $ref: '#/components/schemas/User'
+        ID:
+          type: integer
+          format: int32
+    MatterCourtRuleEvent:
+      type: object
+      properties:
+        EventId:
+          type: integer
+          format: int32
+        Description:
+          type: string
+        Date:
+          type: string
+        UpdateDescription:
+          type: string
+    TaskEventMilestone:
+      type: object
+      properties:
+        TaskId:
+          type: integer
+          format: int32
+        EventId:
+          type: integer
+          format: int32
+        MatterTemplateMilestoneId:
+          type: integer
+          format: int32
+        MilestoneDate:
+          type: string
+          format: date-time
+        ID:
+          type: integer
+          format: int32
+    SaveCourtRulesResponse:
+      type: object
+      properties:
+        CourtRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourtRule'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    EventAttendee:
+      type: object
+      properties:
+        EventID:
+          type: integer
+          format: int32
+        UserID:
+          type: integer
+          format: int32
+        User:
+          type: object
+          $ref: '#/components/schemas/User'
+        Bill:
+          type: boolean
+        NonBillable:
+          type: boolean
+        AttendeeName:
+          type: string
+        Contact:
+          type: object
+          $ref: '#/components/schemas/Contact'
+        IsRole:
+          type: boolean
+        Role:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        InviteStatusTypeId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    TriggerMockDeadlineUpdateResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteMatterCourtRuleResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetMatterCourtRulesRequest:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
+    GetMatterCourtRulesResponse:
+      type: object
+      properties:
+        MatterCourtRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterCourtRule'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    User:
+      type: object
+      properties:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    GetCourtRuleRequest:
+      type: object
+      properties:
+        Id:
+          type: string

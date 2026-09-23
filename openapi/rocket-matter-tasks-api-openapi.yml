@@ -1,0 +1,586 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Tasks API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Tasks
+  description: Operations for user tasks. All tasks must be assigned to a user but are not required to be attached to a matter.
+paths:
+  /Tasks.svc/json/GetTasksForMatter:
+    post:
+      tags:
+      - Tasks
+      description: Get all tasks for a matter, based on the task state.
+      operationId: GetTasksForMatter
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTasksForMatterResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTasksForMatterRequest'
+        required: true
+      summary: Get tasks for matter
+      x-summary-source: derived
+  /Tasks.svc/json/GetTasksByFilter:
+    post:
+      tags:
+      - Tasks
+      description: View tasks based on a variety of filter options.
+      operationId: GetTasksByFilter
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTasksByFilterResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTasksByFilterRequest'
+        required: true
+      summary: Get tasks by filter
+      x-summary-source: derived
+  /Tasks.svc/json/GetTaskByActivityId:
+    post:
+      tags:
+      - Tasks
+      description: View a particular task based on ID.
+      operationId: GetTaskByActivityId
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTaskByActivityIdResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTaskByActivityIdRequest'
+        required: true
+      summary: Get task by activity id
+      x-summary-source: derived
+  /Tasks.svc/json/Save:
+    post:
+      tags:
+      - Tasks
+      description: Create a new task, or update an existing task.
+      operationId: Save
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaveTaskResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveTaskRequest'
+        required: true
+      summary: Save
+      x-summary-source: derived
+  /Tasks.svc/json/Delete:
+    post:
+      tags:
+      - Tasks
+      description: Delete a particular task.
+      operationId: Delete
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTaskResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTaskRequest'
+        required: true
+      summary: Delete
+      x-summary-source: derived
+  /Tasks.svc/json/GetCommonTags:
+    post:
+      tags:
+      - Tasks
+      description: Get all tasks with a specific tag.
+      operationId: GetCommonTags
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCommonTagsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get common tags
+      x-summary-source: derived
+components:
+  schemas:
+    GetTaskByActivityIdRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+    GetTasksForMatterRequest:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
+        State:
+          type: string
+          enum:
+          - Pending
+          - Completed
+          - Deleted
+          - All
+          - Due
+        ShowDueDates:
+          type: boolean
+        Offset:
+          type: integer
+          format: int32
+        Fetch:
+          type: integer
+          format: int32
+    SaveTaskRequest:
+      type: object
+      properties:
+        Task:
+          type: object
+          $ref: '#/components/schemas/Task'
+    GetCommonTagsResponse:
+      type: object
+      properties:
+        Tags:
+          type: array
+          items:
+            type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTasksForMatterResponse:
+      type: object
+      properties:
+        Tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SaveTaskResponse:
+      type: object
+      properties:
+        Task:
+          type: object
+          $ref: '#/components/schemas/Task'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteTaskRequest:
+      type: object
+      properties:
+        Id:
+          type: integer
+          format: int32
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    GetTaskByActivityIdResponse:
+      type: object
+      properties:
+        Task:
+          type: object
+          $ref: '#/components/schemas/Task'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    TaskEventMilestone:
+      type: object
+      properties:
+        TaskId:
+          type: integer
+          format: int32
+        EventId:
+          type: integer
+          format: int32
+        MatterTemplateMilestoneId:
+          type: integer
+          format: int32
+        MilestoneDate:
+          type: string
+          format: date-time
+        ID:
+          type: integer
+          format: int32
+    Task:
+      type: object
+      properties:
+        Title:
+          type: string
+        DueDate:
+          type: string
+        OwnerID:
+          type: integer
+          format: int32
+        Owner:
+          type: object
+          $ref: '#/components/schemas/User'
+        AssignedToID:
+          type: integer
+          format: int32
+        AssignTo:
+          type: object
+          $ref: '#/components/schemas/User'
+        Tags:
+          type: array
+          items:
+            type: string
+        Position:
+          type: integer
+          format: int32
+        MatterID:
+          type: integer
+          format: int32
+        MatterPosition:
+          type: integer
+          format: int32
+        Milestones:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskEventMilestone'
+        MatterTemplateMilestoneActionId:
+          type: integer
+          format: int32
+        IsMilestonePending:
+          type: boolean
+        IsComplete:
+          type: boolean
+        ActivityId:
+          type: integer
+          format: int32
+        ClientMatter:
+          type: object
+        IsRead:
+          type: boolean
+        Invoiced:
+          type: boolean
+        PendingInvoicing:
+          type: boolean
+        BillingDate:
+          type: string
+          format: date-time
+        TotalSeconds:
+          type: integer
+          format: int32
+        BillableUnits:
+          type: number
+          format: double
+        Notes:
+          type: string
+        Cost:
+          type: number
+          format: double
+        IsNoCharge:
+          type: boolean
+        IsNonBillable:
+          type: boolean
+        CompletedDate:
+          type: string
+          format: date-time
+        OwnerIsRole:
+          type: boolean
+        AssignedToIsRole:
+          type: boolean
+        OwnerRole:
+          type: string
+        AssignedToRole:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    GetTasksByFilterResponse:
+      type: object
+      properties:
+        Tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        TotalCount:
+          type: integer
+          format: int32
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTasksByFilterRequest:
+      type: object
+      properties:
+        Filter:
+          type: object
+          $ref: '#/components/schemas/TaskFilter'
+        RetrieveCount:
+          type: boolean
+    TaskFilter:
+      type: object
+      properties:
+        UserId:
+          type: integer
+          format: int32
+        CurrentUserId:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        State:
+          type: string
+          enum:
+          - Pending
+          - Completed
+          - Deleted
+          - All
+          - Due
+        Offset:
+          type: integer
+          format: int32
+        Fetch:
+          type: integer
+          format: int32
+        FilterType:
+          type: string
+          enum:
+          - UserTasks
+          - MatterTasks
+          - CreatedByOrAssignedByMe
+          - CreatedByMeNotAssigned
+          - CreatedByMeAssignedToOthers
+          - Custom
+        CreatedByUsers:
+          type: array
+          items:
+            type: integer
+            format: int32
+        AssignedToUsers:
+          type: array
+          items:
+            type: integer
+            format: int32
+        Tags:
+          type: array
+          items:
+            type: string
+        OnlyDueDates:
+          type: boolean
+    DeleteTaskResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    User:
+      type: object
+      properties:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32

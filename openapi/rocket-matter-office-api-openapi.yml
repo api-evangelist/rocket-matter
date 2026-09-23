@@ -1,0 +1,443 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Office API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Office
+  description: Manages Office 365 integration.
+paths:
+  /Office.svc/json/OfficeConfigured:
+    post:
+      tags:
+      - Office
+      description: Checks if the user has an Office 365 integration enabled and configured.
+      operationId: OfficeConfigured
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfficeConfiguredResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Office configured
+      x-summary-source: derived
+  /Office.svc/json/SyncOutlookEmail:
+    post:
+      tags:
+      - Office
+      description: Saves the email from Office 365 into the system.
+      operationId: SyncOutlookEmail
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncOutlookEmailResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyncOutlookEmailRequest'
+        required: true
+      summary: Sync outlook email
+      x-summary-source: derived
+  /Office.svc/json/GetOutlookEmail:
+    post:
+      tags:
+      - Office
+      description: Gets the email by the Office 365 email Id.
+      operationId: GetOutlookEmail
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOutlookEmailResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOutlookEmailRequest'
+        required: true
+      summary: Get outlook email
+      x-summary-source: derived
+  /Office.svc/json/CanSyncEmail:
+    post:
+      tags:
+      - Office
+      description: Checks if an email can be synced from Office 365. This will check if the office 365 account that the user has configured in Rocket Matter has access to the email that they are trying to sync.
+      operationId: CanSyncEmail
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOutlookEmailRequest'
+        required: true
+      summary: Can sync email
+      x-summary-source: derived
+  /Office.svc/json/UpdateOfficeUserSetting:
+    post:
+      tags:
+      - Office
+      description: Updates the settings for the user's office 365 configuration.
+      operationId: UpdateOfficeUserSetting
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateOfficeUserSettingResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOfficeUserSettingRequest'
+        required: true
+      summary: Update office user setting
+      x-summary-source: derived
+  /Office.svc/json/GetOfficeUrl:
+    post:
+      tags:
+      - Office
+      description: Gets the OAuth URL for the user.
+      operationId: GetOfficeUrl
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOfficeUrlResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get office url
+      x-summary-source: derived
+  /Office.svc/json/DisconnectOffice:
+    post:
+      tags:
+      - Office
+      description: Disconnects the users Rocket Matter account from their Office 365 account.
+      operationId: DisconnectOffice
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisconnectOfficeResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Disconnect office
+      x-summary-source: derived
+components:
+  schemas:
+    GetOfficeUrlResponse:
+      type: object
+      properties:
+        Url:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    OfficeConfiguredResponse:
+      type: object
+      properties:
+        IsConfigured:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DisconnectOfficeResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UpdateOfficeUserSettingRequest:
+      type: object
+      properties:
+        SyncContacts:
+          type: boolean
+        SyncCalendar:
+          type: boolean
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    Email:
+      type: object
+      properties:
+        EmailUUId:
+          type: string
+        MatterId:
+          type: integer
+          format: int32
+        MatterName:
+          type: string
+        Attachments:
+          type: array
+          items:
+            type: string
+        BillableUnits:
+          type: number
+          format: double
+        BillingDate:
+          type: string
+          format: date-time
+        BillingUserId:
+          type: integer
+          format: int32
+        BillingUserName:
+          type: string
+        BillingDescription:
+          type: string
+        IsNoCharge:
+          type: boolean
+        IsNonBillable:
+          type: boolean
+        ActivityId:
+          type: integer
+          format: int32
+        Invoiced:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    SyncOutlookEmailResponse:
+      type: object
+      properties:
+        OutlookEmail:
+          type: object
+          $ref: '#/components/schemas/Email'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UpdateOfficeUserSettingResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    BaseResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetOutlookEmailResponse:
+      type: object
+      properties:
+        Email:
+          type: object
+          $ref: '#/components/schemas/Email'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetOutlookEmailRequest:
+      type: object
+      properties:
+        EmailUId:
+          type: string
+    SyncOutlookEmailRequest:
+      type: object
+      properties:
+        OutlookEmail:
+          type: object
+          $ref: '#/components/schemas/Email'

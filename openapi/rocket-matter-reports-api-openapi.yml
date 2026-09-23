@@ -1,0 +1,601 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Reports API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Reports
+  description: Operations for running reports.
+paths:
+  /Reports.svc/json/RunReport:
+    post:
+      tags:
+      - Reports
+      description: Run any report by name. User must have administrative access.
+      operationId: RunReport
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunReportResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunReportRequest'
+        required: true
+      summary: Run report
+      x-summary-source: derived
+  /Reports.svc/json/GetReportSummary:
+    post:
+      tags:
+      - Reports
+      description: View the report summary of a given report (if applicable).
+      operationId: GetReportSummary
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReportSummaryResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetReportSummaryRequest'
+        required: true
+      summary: Get report summary
+      x-summary-source: derived
+  /Reports.svc/json/GetUserReportPreference:
+    post:
+      tags:
+      - Reports
+      description: Get saved user preferences for certain report filters.
+      operationId: GetUserReportPreference
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserReportPreferenceResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetUserReportPreferenceRequest'
+        required: true
+      summary: Get user report preference
+      x-summary-source: derived
+  /Reports.svc/json/SaveUserReportPreference:
+    post:
+      tags:
+      - Reports
+      description: Save new or update user preferences for certain report filters.
+      operationId: SaveUserReportPreference
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaveUserReportPreferenceResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveReportPreferenceRequest'
+        required: true
+      summary: Save user report preference
+      x-summary-source: derived
+  /Reports.svc/json/GetReportMetaData:
+    post:
+      tags:
+      - Reports
+      description: View the metadata for a particular report.
+      operationId: GetReportMetaData
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReportMetaDataResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetReportMedaDataRequest'
+        required: true
+      summary: Get report meta data
+      x-summary-source: derived
+components:
+  schemas:
+    RunReportRequest:
+      type: object
+      properties:
+        Filter:
+          type: object
+          $ref: '#/components/schemas/ReportFilter'
+    GetReportMedaDataRequest:
+      type: object
+      properties:
+        Report:
+          type: string
+        IsCustom:
+          type: boolean
+    GetReportSummaryRequest:
+      type: object
+      properties:
+        Filter:
+          type: object
+          $ref: '#/components/schemas/ReportFilter'
+    ReportFilterState:
+      type: object
+      properties:
+        ShowDateRange:
+          type: boolean
+        DateRangeText:
+          type: string
+        ShowDateRangeWithCalculateHrs:
+          type: boolean
+        SearchClients:
+          type: boolean
+        SearchClientsRequired:
+          type: boolean
+        ClientSearchText:
+          type: string
+        SearchOriginator:
+          type: boolean
+        OriginatorSearchText:
+          type: string
+        SearchMatters:
+          type: boolean
+        SearchMattersRequired:
+          type: boolean
+        MatterSearchText:
+          type: string
+        ShowMatterCustomFields:
+          type: boolean
+        MatterCustomFieldsSearchText:
+          type: string
+        SearchContacts:
+          type: boolean
+        SearchContactsRequired:
+          type: boolean
+        ContactsSearchText:
+          type: string
+        ContactRelationship:
+          type: string
+        ShowContactCustomFields:
+          type: boolean
+        ContactCustomFieldsSearchText:
+          type: string
+        SearchUsers:
+          type: boolean
+        SearchUsersRequired:
+          type: boolean
+        SearchMultipleUsers:
+          type: boolean
+        UserSearchText:
+          type: string
+        SearchTaxRates:
+          type: boolean
+        TaxRateSearchText:
+          type: string
+        SearchTaxRatesRequired:
+          type: boolean
+        SearchSurchargeRates:
+          type: boolean
+        SurchargeRateSearchText:
+          type: string
+        SearchSurchargeRatesRequired:
+          type: boolean
+        FilterVal:
+          type: object
+          $ref: '#/components/schemas/FilterVal'
+        MatterCustomFieldsSearchValueText:
+          type: string
+        ShowMatterCustomFieldsValues:
+          type: boolean
+        AreaOfLawFieldsSearchValueText:
+          type: string
+        ShowAreaOfLawFieldsValueSearch:
+          type: boolean
+        MatterTagsSearchValueText:
+          type: string
+        MatterTagsValueSearch:
+          type: boolean
+    RunReportResponse:
+      type: object
+      properties:
+        ReportData:
+          type: array
+          items:
+            type: object
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    GetReportMetaDataResponse:
+      type: object
+      properties:
+        MetaData:
+          type: object
+          $ref: '#/components/schemas/ReportMetaData'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    UserReportPreference:
+      type: object
+      properties:
+        UserId:
+          type: integer
+          format: int32
+        PreferenceKey:
+          type: string
+        PreferenceValue:
+          type: string
+        Id:
+          type: string
+    ReportMetaData:
+      type: object
+      properties:
+        ColumnWidths:
+          type: object
+        IsPagedReport:
+          type: boolean
+        AggregateKeys:
+          type: array
+          items:
+            type: string
+        FilterState:
+          type: object
+          $ref: '#/components/schemas/ReportFilterState'
+        PageSize:
+          type: integer
+          format: int32
+        ReportDisplayName:
+          type: string
+        HasAccess:
+          type: boolean
+        UseWideScreen:
+          type: boolean
+        RunOnLoad:
+          type: boolean
+        SaveReportState:
+          type: boolean
+        HelpfullTips:
+          type: string
+        LoadSavedReportStateOnlyOnBack:
+          type: boolean
+        BreadCrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/BreadCrumb'
+        DisableSort:
+          type: boolean
+        DisableSummary:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    SaveReportPreferenceRequest:
+      type: object
+      properties:
+        Preference:
+          type: object
+          $ref: '#/components/schemas/UserReportPreference'
+    BreadCrumb:
+      type: object
+      properties:
+        PageTitle:
+          type: string
+        QueryString:
+          type: string
+        Location:
+          type: string
+    GetUserReportPreferenceRequest:
+      type: object
+      properties:
+        Preference:
+          type: string
+    ReportFilter:
+      type: object
+      properties:
+        StartDate:
+          type: string
+          format: date-time
+        EndDate:
+          type: string
+          format: date-time
+        StartDateChange:
+          type: string
+          format: date-time
+        EndDateChange:
+          type: string
+          format: date-time
+        UserId:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        ClientId:
+          type: integer
+          format: int32
+        ContactId:
+          type: integer
+          format: int32
+        Report:
+          type: string
+        IsCustom:
+          type: boolean
+        Offset:
+          type: integer
+          format: int32
+        Fetch:
+          type: integer
+          format: int32
+        Sort:
+          type: string
+        IsDescending:
+          type: boolean
+        CustomFilters:
+          type: object
+        UserIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+        TaxRateId:
+          type: string
+        TaxRateDescription:
+          type: string
+        SurchargeRateId:
+          type: string
+        CustomFieldCollection:
+          type: array
+          items:
+            type: string
+        MatterTagsCollection:
+          type: array
+          items:
+            type: string
+        OriginatorName:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    FilterVal:
+      type: object
+      properties:
+        Report:
+          type: string
+        UserId:
+          type: integer
+          format: int32
+        UserIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+        ClientId:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        ContactId:
+          type: integer
+          format: int32
+        TaxRateId:
+          type: string
+        TaxRateDescription:
+          type: string
+        SurchargeRateId:
+          type: string
+        StartDate:
+          type: string
+        EndDate:
+          type: string
+        StartDateChange:
+          type: string
+        EndDateChange:
+          type: string
+        CustomFilters:
+          type: object
+        CustomFieldCollection:
+          type: array
+          items:
+            type: string
+        MatterTagsCollection:
+          type: array
+          items:
+            type: string
+    GetUserReportPreferenceResponse:
+      type: object
+      properties:
+        Preference:
+          type: object
+          $ref: '#/components/schemas/UserReportPreference'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SaveUserReportPreferenceResponse:
+      type: object
+      properties:
+        Preference:
+          type: object
+          $ref: '#/components/schemas/UserReportPreference'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetReportSummaryResponse:
+      type: object
+      properties:
+        Summary:
+          type: object
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

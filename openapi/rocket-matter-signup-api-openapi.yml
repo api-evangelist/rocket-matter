@@ -1,0 +1,286 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Signup API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Signup
+  description: Operations to create new Rocket Matter accounts.
+paths:
+  /Signup.svc/json/CreateAccount:
+    post:
+      tags:
+      - Signup
+      description: Create a new account based on billing term. Requires credit card information to activate new account.
+      operationId: CreateAccount
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignupCCEntryResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupCCEntryRequest'
+        required: true
+      summary: Create account
+      x-summary-source: derived
+  /Signup.svc/json/RespondToAgreement:
+    post:
+      tags:
+      - Signup
+      description: New users must accept terms of use agreement prior to accessing account.
+      operationId: RespondToAgreement
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionAgreementResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionAgreementRequest'
+        required: true
+      summary: Respond to agreement
+      x-summary-source: derived
+  /Signup.svc/json/FirstTimeUserInfo:
+    post:
+      tags:
+      - Signup
+      description: Basic user information required to create a new account.
+      operationId: FirstTimeUserInfo
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirstTimeUserInfoResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirstTimeUserInfoRequest'
+        required: true
+      summary: First time user info
+      x-summary-source: derived
+components:
+  schemas:
+    SignupCCEntryResponse:
+      type: object
+      properties:
+        CreditCardResponse:
+          type: string
+          enum:
+          - CCError
+          - CCDeclined
+          - CCSuccess
+        InvalidCoupon:
+          type: boolean
+        AccountResponse:
+          type: string
+          enum:
+          - Failure
+          - Success
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    FirstTimeUserInfoRequest:
+      type: object
+      properties:
+        UserInfo:
+          type: object
+          $ref: '#/components/schemas/SignupUserInfo'
+    SignupUserInfo:
+      type: object
+      properties:
+        FirstName:
+          type: string
+        MiddleName:
+          type: string
+        LastName:
+          type: string
+        TimeZoneId:
+          type: string
+        UserRate:
+          type: number
+          format: double
+        Phone:
+          type: string
+        FirmName:
+          type: string
+        Password:
+          type: string
+    SignupCCEntryRequest:
+      type: object
+      properties:
+        CCNumber:
+          type: string
+        ExpMonth:
+          type: string
+        ExpYear:
+          type: string
+        CvvCode:
+          type: string
+        CouponCode:
+          type: string
+        BillingFrequency:
+          type: string
+          enum:
+          - Monthly
+          - Yearly
+          - TriAnnual
+          - Quarterly
+          - Biennial
+        BillingTierId:
+          type: integer
+          format: int32
+    SubscriptionAgreementResponse:
+      type: object
+      properties:
+        HasAgreed:
+          type: boolean
+        RequiresAgreement:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    FirstTimeUserInfoResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    SubscriptionAgreementRequest:
+      type: object
+      properties:
+        UserAgreed:
+          type: boolean

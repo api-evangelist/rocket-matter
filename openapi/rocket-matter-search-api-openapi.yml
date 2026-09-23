@@ -1,0 +1,358 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Search API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Search
+  description: Search for Contacts, Clients, Matters, Activities, Tags, ContactCustomFields, and MatterCustomFields.
+paths:
+  /Search.svc/json/SearchOccurenceForType:
+    post:
+      tags:
+      - Search
+      description: Search for a specific record by type.
+      operationId: SearchOccurenceForType
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchOccurenceForTypeResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchOccurenceForTypeRequest'
+        required: true
+      summary: Search occurence for type
+      x-summary-source: derived
+  /Search.svc/json/GlobalSearch:
+    post:
+      tags:
+      - Search
+      description: Search account based on specific keyword, regardless of type.
+      operationId: GlobalSearch
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalSearchResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalSearchRequest'
+        required: true
+      summary: Global search
+      x-summary-source: derived
+components:
+  schemas:
+    GlobalSearchResultSet:
+      type: object
+      properties:
+        GlobalContactsResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalContactSearchResult'
+        GlobalClientsResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalClientSearchResult'
+        GlobalMattersResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalMatterSearchResult'
+        GlobalActivityResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalActivitySearchResult'
+        GlobalTagsResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalTagSearchResult'
+    SearchOccurenceForTypeRequest:
+      type: object
+      properties:
+        Search:
+          type: string
+        Type:
+          type: string
+          enum:
+          - Contact
+          - Client
+          - Matter
+          - Activity
+          - Tag
+          - ContactCustomField
+          - MatterCustomField
+    SearchResult:
+      type: object
+      properties:
+        ResultText:
+          type: string
+        ResultExtraData:
+          type: string
+        ResultType:
+          type: string
+          enum:
+          - Contact
+          - Client
+          - Matter
+          - Activity
+          - Tag
+          - ContactCustomField
+          - MatterCustomField
+        ResultLocation:
+          type: string
+          enum:
+          - MatterName
+          - MatterDescription
+          - MatterRelatedContact
+          - ContactName
+          - ContactNotes
+          - ContactRelationship
+          - ClientName
+          - BillingDescription
+          - NotesTitle
+          - NotesBody
+          - CalendarEntryTitle
+          - PhoneMessageCaller
+          - PhoneMessageSubject
+          - DocumentTitle
+          - EmailSubject
+          - EmailBody
+          - TaskTitle
+          - DeletedActivity
+          - MatterCustomFieldValue
+          - MatterCustomFieldName
+          - ContactCustomFieldValue
+          - ContactCustomFieldName
+          - EventLocation
+        ResultId:
+          type: integer
+          format: int32
+        MatterContext:
+          type: string
+        MatterContextId:
+          type: integer
+          format: int32
+        ContactContext:
+          type: string
+        ContactContextId:
+          type: integer
+          format: int32
+        ResultLocationDisplay:
+          type: string
+        ResultTypeDisplay:
+          type: string
+    GlobalTagSearchResult:
+      type: object
+      properties:
+        TagId:
+          type: integer
+          format: int32
+        TagName:
+          type: string
+        ResultStrength:
+          type: integer
+          format: int32
+        ResultTokens:
+          type: array
+          items:
+            type: string
+    GlobalSearchRequest:
+      type: object
+      properties:
+        SearchText:
+          type: string
+        IsMobile:
+          type: boolean
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    SearchOccurenceForTypeResponse:
+      type: object
+      properties:
+        Results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GlobalSearchResponse:
+      type: object
+      properties:
+        SearchResults:
+          type: object
+          $ref: '#/components/schemas/GlobalSearchResultSet'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    GlobalClientSearchResult:
+      type: object
+      properties:
+        ClientId:
+          type: integer
+          format: int32
+        ClientName:
+          type: string
+        ResultStrength:
+          type: integer
+          format: int32
+        ResultTokens:
+          type: array
+          items:
+            type: string
+    GlobalContactSearchResult:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+        ContactName:
+          type: string
+        ContactPhone:
+          type: string
+        ResultStrength:
+          type: integer
+          format: int32
+        ResultTokens:
+          type: array
+          items:
+            type: string
+    GlobalMatterSearchResult:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
+        MatterName:
+          type: string
+        ResultStrength:
+          type: integer
+          format: int32
+        ResultTokens:
+          type: array
+          items:
+            type: string
+    GlobalActivitySearchResult:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+        Description:
+          type: string
+        ResultStrength:
+          type: integer
+          format: int32
+        ResultTokens:
+          type: array
+          items:
+            type: string

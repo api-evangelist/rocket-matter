@@ -1,0 +1,626 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Recurring Billing API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: RecurringBilling
+paths:
+  /RecurringBilling.svc/json/cancelPaymentPlan:
+    post:
+      tags:
+      - RecurringBilling
+      description: Stop and cancel currently active payment plan.
+      operationId: cancelPaymentPlan
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelPaymentPlanResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelPaymentPlanRequest'
+        required: true
+      summary: Cancel payment plan
+      x-summary-source: derived
+  /RecurringBilling.svc/json/updatePaymentPlanChargeToken:
+    post:
+      tags:
+      - RecurringBilling
+      description: Update charge token on existing payment plan.
+      operationId: updatePaymentPlanChargeToken
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePaymentPlanTokenResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePaymentPlanTokenRequest'
+        required: true
+      summary: Update payment plan charge token
+      x-summary-source: derived
+  /RecurringBilling.svc/json/getMatterPaymentPlan:
+    post:
+      tags:
+      - RecurringBilling
+      description: Get currently active matter payment plan.
+      operationId: getMatterPaymentPlan
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMatterPaymentPlanResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMatterPaymentPlanRequest'
+        required: true
+      summary: Get matter payment plan
+      x-summary-source: derived
+  /RecurringBilling.svc/json/CommitPlan:
+    post:
+      tags:
+      - RecurringBilling
+      description: Commit payment plan and activate.
+      operationId: CommitPlan
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitPlanResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommitPlanRequest'
+        required: true
+      summary: Commit plan
+      x-summary-source: derived
+  /RecurringBilling.svc/json/GeneratePaymentPlan:
+    post:
+      tags:
+      - RecurringBilling
+      description: Generate payment plan schedule based on the given payment plan configuration.
+      operationId: GeneratePaymentPlan
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneratePaymentPlanResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Generate payment plan
+      x-summary-source: derived
+  /RecurringBilling.svc/json/UpdatePlanNotification:
+    post:
+      tags:
+      - RecurringBilling
+      description: Update payment failure notifications for the payment plan.
+      operationId: UpdatePlanNotification
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePlanNotificationResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePlanNotificationRequest'
+        required: true
+      summary: Update plan notification
+      x-summary-source: derived
+components:
+  schemas:
+    GetMatterPaymentPlanResponse:
+      type: object
+      properties:
+        Plan:
+          type: object
+          $ref: '#/components/schemas/RecurringBillingPlan'
+        MatterBalance:
+          type: object
+          $ref: '#/components/schemas/MatterBalance'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    RecurringBillingPlanFailureNotification:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+        User:
+          type: object
+          $ref: '#/components/schemas/Contact'
+    Contact:
+      type: object
+      properties:
+        Name:
+          type: string
+        MiddleName:
+          type: string
+        FullName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        WorkEmail:
+          type: string
+        WorkPhone:
+          type: string
+        WorkPhoneExt:
+          type: string
+        WorkFax:
+          type: string
+        WorkAddressLine1:
+          type: string
+        WorkAddressLine2:
+          type: string
+        WorkCity:
+          type: string
+        WorkState:
+          type: string
+        WorkPostalCode:
+          type: string
+        WorkCountry:
+          type: string
+        ClientID:
+          type: integer
+          format: int32
+        HomeEmail:
+          type: string
+        HomePhone:
+          type: string
+        HomeAddressLine1:
+          type: string
+        HomeAddressLine2:
+          type: string
+        HomeCity:
+          type: string
+        HomeState:
+          type: string
+        HomePostalCode:
+          type: string
+        HomeCountry:
+          type: string
+        ExternalID2:
+          type: string
+        LastModifiedDate:
+          type: string
+          format: date-time
+        ContactTypeId:
+          type: integer
+          format: int32
+        CompanyId:
+          type: integer
+          format: int32
+        CompanyName:
+          type: string
+        Initials:
+          type: string
+        Notes:
+          type: string
+        UserId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    UpdatePlanNotificationRequest:
+      type: object
+      properties:
+        PlanId:
+          type: string
+        MatterId:
+          type: integer
+          format: int32
+        FailureNotifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecurringBillingPlanFailureNotification'
+        InvoiceShares:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceShare'
+    MatterBalance:
+      type: object
+      properties:
+        CurrentAccountBalance:
+          type: number
+          format: double
+        RetainerDue:
+          type: number
+          format: double
+        LatestInvoiceId:
+          type: integer
+          format: int32
+        Type:
+          type: string
+        PendingTrustAmount:
+          type: number
+          format: double
+        Balance:
+          type: number
+          format: double
+    GeneratePaymentPlanResponse:
+      type: object
+      properties:
+        Plan:
+          type: object
+          $ref: '#/components/schemas/RecurringBillingPlan'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UpdatePaymentPlanTokenResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    RecurringBillingPlan:
+      type: object
+      properties:
+        IsEnabled:
+          type: boolean
+        AccountType:
+          type: string
+        NameOnAccount:
+          type: string
+        PaymentHint:
+          type: string
+        ExpDate:
+          type: string
+        RecurringBillingPlanMethod:
+          type: object
+          $ref: '#/components/schemas/RecurringBillingMethod'
+        RecurringBillingMethodId:
+          type: string
+        AmountToBePaid:
+          type: number
+          format: double
+        DateOfFirstPayment:
+          type: string
+        NumberOfPayments:
+          type: integer
+          format: int32
+        InitialAmount:
+          type: number
+          format: double
+        InterationType:
+          type: string
+        PartialAmount:
+          type: number
+          format: double
+        MatterId:
+          type: integer
+          format: int32
+        AutomaticallyCharge:
+          type: boolean
+        AutoGenerateInvoice:
+          type: boolean
+        ReadOnly_PaymentsMade:
+          type: integer
+          format: int32
+        ReadOnly_PaymentsRemaining:
+          type: integer
+          format: int32
+        ReadOnly_RecurringBillingPlanStatusId:
+          type: string
+        ReadOnly_RecurringBillingPlanStatus:
+          type: string
+        RecurringBillingPlanFailureNotifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecurringBillingPlanFailureNotification'
+        RecurringBillingPlanDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecurringBillingPlanDetail'
+        ChargeToken:
+          type: string
+        ChargeTokenTrust:
+          type: string
+        PlanType:
+          type: string
+        PostPaymentTo:
+          type: string
+        ReadOnly_PaymentAmountRemaining:
+          type: number
+          format: double
+        ReadOnly_PaymentAmountPaid:
+          type: number
+          format: double
+        ReadOnly_TotalPlanAmount:
+          type: number
+          format: double
+        TaxAmountToBePaid:
+          type: number
+          format: double
+        Id:
+          type: string
+    GetMatterPaymentPlanRequest:
+      type: object
+      properties:
+        matterID:
+          type: integer
+          format: int32
+    CancelPaymentPlanResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UpdatePlanNotificationResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CancelPaymentPlanRequest:
+      type: object
+      properties:
+        Id:
+          type: string
+    UpdatePaymentPlanTokenRequest:
+      type: object
+      properties:
+        Id:
+          type: string
+        ChargeToken:
+          type: string
+        PaymentHint:
+          type: string
+    InvoiceShare:
+      type: object
+      properties:
+        ContactID:
+          type: integer
+          format: int32
+        EmailTypeSelected:
+          type: string
+    CommitPlanResponse:
+      type: object
+      properties:
+        Plan:
+          type: object
+          $ref: '#/components/schemas/RecurringBillingPlan'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    RecurringBillingMethod:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+        OrderID:
+          type: integer
+          format: int32
+    CommitPlanRequest:
+      type: object
+      properties:
+        Plan:
+          type: object
+          $ref: '#/components/schemas/RecurringBillingPlan'
+        InvoiceShares:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceShare'
+    RecurringBillingPlanDetail:
+      type: object
+      properties:
+        Date:
+          type: string
+        Amount:
+          type: number
+          format: double
+        Name:
+          type: string
+        Paid:
+          type: boolean
+        OrderId:
+          type: integer
+          format: int32
+        IsBilledFor:
+          type: boolean
+        IsAchFailedPayment:
+          type: boolean
+        Id:
+          type: string

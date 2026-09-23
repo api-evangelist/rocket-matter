@@ -1,0 +1,793 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Quickbooks API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Quickbooks
+  description: Manages the Quickbooks Online integration.
+paths:
+  /Quickbooks.svc/json/Connect:
+    post:
+      tags:
+      - Quickbooks
+      description: Re-Connects Rocket Matter to a Quickbooks Online account given the AuthId. You can only re-connect to the last disconnected Quickbooks Online account. If the account was successfully reconnected Success will be returned as 'true'.
+      operationId: Connect
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectQuickbooksResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectQuickbooksRequest'
+        required: true
+      summary: Connect
+      x-summary-source: derived
+  /Quickbooks.svc/json/Prepared:
+    post:
+      tags:
+      - Quickbooks
+      description: Checks if the Quickbooks Online integration is prepared to do a sync. The integration must be connected and configured.
+      operationId: Prepared
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQuickbooksPreparednessResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Prepared
+      x-summary-source: derived
+  /Quickbooks.svc/json/GetBuckets:
+    post:
+      tags:
+      - Quickbooks
+      description: Gets all available buckets from the Quickbooks Online account that can be synced to from Rocket Matter.
+      operationId: GetBuckets
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQuickbooksBucketsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get buckets
+      x-summary-source: derived
+  /Quickbooks.svc/json/Disconnect:
+    post:
+      tags:
+      - Quickbooks
+      description: Disconnects Rocket Matter from the Quickbooks Online account.
+      operationId: Disconnect
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisconnectQuickbooksResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Disconnect
+      x-summary-source: derived
+  /Quickbooks.svc/json/Configure:
+    post:
+      tags:
+      - Quickbooks
+      description: Configures the Quickbooks Online integration.
+      operationId: Configure
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQuickbooksConnectionStatusResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Configure
+      x-summary-source: derived
+  /Quickbooks.svc/json/Connected:
+    post:
+      tags:
+      - Quickbooks
+      description: Checks if the Quickbooks Online integration is connected, and what settings are currently configured.
+      operationId: Connected
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQuickbooksConnectionStatusResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Connected
+      x-summary-source: derived
+  /Quickbooks.svc/json/Sync:
+    post:
+      tags:
+      - Quickbooks
+      description: Initiates a sync.
+      operationId: Sync
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncQuickbooksResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Sync
+      x-summary-source: derived
+  /Quickbooks.svc/json/RevertLastSync:
+    post:
+      tags:
+      - Quickbooks
+      description: Initiates a reverse sync to undo the last sync.
+      operationId: RevertLastSync
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncQuickbooksResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Revert last sync
+      x-summary-source: derived
+  /Quickbooks.svc/json/GetSyncs:
+    post:
+      tags:
+      - Quickbooks
+      description: Gets a paged list of all syncs attempted for the current Quickbooks Online connection.
+      operationId: GetSyncs
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQuickbooksSyncsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetQuickbooksSyncsRequest'
+        required: true
+      summary: Get syncs
+      x-summary-source: derived
+  /Quickbooks.svc/json/GetSyncInfo:
+    post:
+      tags:
+      - Quickbooks
+      description: Gets a paged list of all items that were synced for the given SyncId, and whether or not they were successful.
+      operationId: GetSyncInfo
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQuickbooksSyncInfoResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetQuickbooksSyncInfoRequest'
+        required: true
+      summary: Get sync info
+      x-summary-source: derived
+  /Quickbooks.svc/json/Disable:
+    post:
+      tags:
+      - Quickbooks
+      description: Disables the current Quickbooks Online integration.
+      operationId: Disable
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisableQuickbooksResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Disable
+      x-summary-source: derived
+  /Quickbooks.svc/json/GetQuickbooksFailedItems:
+    post:
+      tags:
+      - Quickbooks
+      description: Gets all items that failed going over to Quickbooks Online in the last sync.
+      operationId: GetQuickbooksFailedItems
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetQuickbooksFailedItemsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get quickbooks failed items
+      x-summary-source: derived
+  /Quickbooks.svc/json/ExcludeQuickbooksItems:
+    post:
+      tags:
+      - Quickbooks
+      description: Excludes or retry items that failed in the last sync. All items with the ExcludedItemIds will be excluded from the next sync and all items from ResyncItemIds will attempt to be re-created in Quickbooks.
+      operationId: ExcludeQuickbooksItems
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExcludeQuickbooksItemsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExcludeQuickbooksItemsRequest'
+        required: true
+      summary: Exclude quickbooks items
+      x-summary-source: derived
+components:
+  schemas:
+    GetQuickbooksSyncInfoRequest:
+      type: object
+      properties:
+        SyncId:
+          type: string
+        Page:
+          type: integer
+          format: int32
+        PageSize:
+          type: integer
+          format: int32
+        IncludeAll:
+          type: boolean
+        IncludeTotal:
+          type: boolean
+    SyncQuickbooksResponse:
+      type: object
+      properties:
+        SyncStarted:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    ExcludeQuickbooksItemsRequest:
+      type: object
+      properties:
+        ExcludedItemIds:
+          type: array
+          items:
+            type: object
+        ResyncItemIds:
+          type: array
+          items:
+            type: object
+    GetQuickbooksSyncsResponse:
+      type: object
+      properties:
+        Syncs:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuickbooksSync'
+        MorePages:
+          type: boolean
+        TotalSyncs:
+          type: integer
+          format: int32
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetQuickbooksPreparednessResponse:
+      type: object
+      properties:
+        TimezoneSet:
+          type: boolean
+        PaymentsToInvoicesIssues:
+          type: boolean
+        IsValidForIntegration:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ConnectQuickbooksRequest:
+      type: object
+      properties:
+        Request:
+          type: string
+    QuickbooksSync:
+      type: object
+      properties:
+        Id:
+          type: string
+        Description:
+          type: string
+        FullDescription:
+          type: string
+        StepError:
+          type: boolean
+        DateOfSync:
+          type: string
+          format: date-time
+        Successful:
+          type: boolean
+        IsReverting:
+          type: boolean
+    GetQuickbooksSyncInfoResponse:
+      type: object
+      properties:
+        Failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuickbooksSyncItem'
+        AllLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuickbooksSyncItem'
+        MorePages:
+          type: boolean
+        TotalItems:
+          type: integer
+          format: int32
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    QuickbooksBucket:
+      type: object
+      properties:
+        Id:
+          type: string
+        QBOId:
+          type: string
+        Name:
+          type: string
+        BucketType:
+          type: string
+          enum:
+          - Other
+          - AccountsReceivables
+          - CreditAdj
+          - Expense
+          - LegalFeeIncome
+          - OperatingCash
+          - TrustCash
+          - TrustLiability
+        SyncCheckType:
+          type: string
+          enum:
+          - NoneAsCheck
+          - AllChecks
+          - SpecificAsChecks
+        Selected:
+          type: boolean
+        ExcludeFromSync:
+          type: boolean
+    GetQuickbooksConnectionStatusResponse:
+      type: object
+      properties:
+        Connected:
+          type: boolean
+        Configured:
+          type: boolean
+        SyncError:
+          type: boolean
+        BookType:
+          type: object
+        CanSync:
+          type: boolean
+        IsSyncing:
+          type: boolean
+        StepType:
+          type: object
+        ItemsComplete:
+          type: integer
+          format: int32
+        TotalItems:
+          type: integer
+          format: int32
+        ShouldSyncTrustAccounting:
+          type: boolean
+        IsReverting:
+          type: boolean
+        HasFailedItems:
+          type: boolean
+        StartFromDate:
+          type: string
+          format: date-time
+        HasSynced:
+          type: boolean
+        CanSyncPayments:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ExcludeQuickbooksItemsResponse:
+      type: object
+      properties:
+        SyncLogIds:
+          type: array
+          items:
+            type: object
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    QuickbooksSyncItem:
+      type: object
+      properties:
+        DisplayName:
+          type: string
+        EntityId:
+          type: string
+        ItemType:
+          type: string
+          enum:
+          - None
+          - Client
+          - Vendor
+          - Expense
+          - Invoice
+          - Payment
+          - DebitAdjustment
+          - CreditAdjustment
+          - TrustDeposit
+          - TrustDebit
+          - Refund
+          - TaxRate
+          - TaxAgency
+        ErrorMessage:
+          type: string
+        FullErrorMessage:
+          type: string
+        Success:
+          type: boolean
+        EntityDescription:
+          type: string
+        ClientMatter:
+          type: string
+        Name:
+          type: string
+        QboSyncLogId:
+          type: string
+        ExcludeFromSync:
+          type: boolean
+        CanBeResynced:
+          type: boolean
+    ConnectQuickbooksResponse:
+      type: object
+      properties:
+        FailureReason:
+          type: string
+          enum:
+          - None
+          - PreviousAuthWithDifferentCompany
+          - NoCurrentAuth
+          - BucketDoesNotExist
+          - InvalidAuthId
+        BookType:
+          type: string
+          enum:
+          - CashBasis
+          - AccrualBasis
+        MissingBuckets:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuickbooksBucket'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DisableQuickbooksResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetQuickbooksBucketsResponse:
+      type: object
+      properties:
+        Buckets:
+          type: object
+        TaxesEnabled:
+          type: boolean
+        RMTaxesSetUp:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetQuickbooksSyncsRequest:
+      type: object
+      properties:
+        Page:
+          type: integer
+          format: int32
+        PageSize:
+          type: integer
+          format: int32
+    GetQuickbooksFailedItemsResponse:
+      type: object
+      properties:
+        FailedItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuickbooksSyncItem'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DisconnectQuickbooksResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

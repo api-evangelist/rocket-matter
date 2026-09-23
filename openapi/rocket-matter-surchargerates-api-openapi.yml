@@ -1,0 +1,364 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Surcharge Rates API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: SurchargeRates
+paths:
+  /SurchargeRates.svc/json/GetAll:
+    post:
+      tags:
+      - SurchargeRates
+      description: Retrieves all surcharge rates and the history of each.
+      operationId: GetAll
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurchargeRatesGetAllResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get all
+      x-summary-source: derived
+  /SurchargeRates.svc/json/Save:
+    post:
+      tags:
+      - SurchargeRates
+      description: Saves a new surcharge rate. Throws a validation if name already exists.
+      operationId: Save
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurchargeRatesSaveResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SurchargeRatesSaveRequest'
+        required: true
+      summary: Save
+      x-summary-source: derived
+  /SurchargeRates.svc/json/Delete:
+    post:
+      tags:
+      - SurchargeRates
+      description: Deletes a surcharge rate based on SurchargeRateId.
+      operationId: Delete
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurchargeRatesDeleteResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Delete
+      x-summary-source: derived
+  /SurchargeRates.svc/json/Search:
+    post:
+      tags:
+      - SurchargeRates
+      description: Searches surcharge rates based on name of surcharge.
+      operationId: Search
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurchargeRatesSearchResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SurchargeRatesSearchRequest'
+        required: true
+      summary: Search
+      x-summary-source: derived
+  /SurchargeRates.svc/json/Get:
+    post:
+      tags:
+      - SurchargeRates
+      description: Retrieves all surcharge rates and the history of each.
+      operationId: Get
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SurchargeRatesGetResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SurchargeRatesGetRequest'
+        required: true
+      summary: Get
+      x-summary-source: derived
+components:
+  schemas:
+    SurchargeRate:
+      type: object
+      properties:
+        Id:
+          type: string
+        Description:
+          type: string
+        Rate:
+          type: number
+          format: double
+        SurchargeRateType:
+          type: string
+          enum:
+          - FeesAndExpenses
+          - FeesAndSelectedExpenses
+          - Expenses
+          - SelectedExpenses
+          - SelectedFees
+          - SelectedFeesAndSelectedExpenses
+          - Fees
+          - ExpensesAndSelectedFees
+        AppliedToMatter:
+          type: boolean
+        ActivityType:
+          type: string
+          enum:
+          - None
+          - Activity
+          - Timer
+          - TodoItem
+          - CalendarEntry
+          - Expense
+          - BilledTime
+          - PhoneMessage
+          - Document
+          - Note
+          - Email
+          - FlatFee
+    SurchargeRatesGetAllResponse:
+      type: object
+      properties:
+        SurchargeRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SurchargeRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SurchargeRatesSaveRequest:
+      type: object
+      properties:
+        SurchargeRate:
+          type: object
+          $ref: '#/components/schemas/SurchargeRate'
+    SurchargeRatesSearchResponse:
+      type: object
+      properties:
+        SurchargeRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SurchargeRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SurchargeRatesGetResponse:
+      type: object
+      properties:
+        SurchargeRate:
+          type: object
+          $ref: '#/components/schemas/SurchargeRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    SurchargeRatesSaveResponse:
+      type: object
+      properties:
+        SurchargeRate:
+          type: object
+          $ref: '#/components/schemas/SurchargeRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    SurchargeRatesDeleteResponse:
+      type: object
+      properties:
+        SurchargeRate:
+          type: object
+          $ref: '#/components/schemas/SurchargeRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SurchargeRatesSearchRequest:
+      type: object
+      properties:
+        SearchText:
+          type: string
+    SurchargeRatesGetRequest:
+      type: object
+      properties:
+        SurchargeRateId:
+          type: string
+        SurchargeRateDescription:
+          type: string

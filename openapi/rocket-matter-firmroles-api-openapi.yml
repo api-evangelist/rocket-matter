@@ -1,0 +1,480 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Firm Roles API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: FirmRoles
+paths:
+  /FirmRoles.svc/json/GetFirmRoles:
+    post:
+      tags:
+      - FirmRoles
+      description: Retrieves firm roles for users. Requires admin access and is an admin user.
+      operationId: GetFirmRoles
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFirmRolesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetFirmRolesRequest'
+        required: true
+      summary: Get firm roles
+      x-summary-source: derived
+  /FirmRoles.svc/json/SaveFirmRoles:
+    post:
+      tags:
+      - FirmRoles
+      description: Saves firm roles for users. Requires admin access and is an admin user.
+      operationId: SaveFirmRoles
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFirmRolesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetFirmRolesRequest'
+        required: true
+      summary: Save firm roles
+      x-summary-source: derived
+  /FirmRoles.svc/json/SaveFirmRole:
+    post:
+      tags:
+      - FirmRoles
+      description: Saves firm roles for users. Requires admin access and is an admin user.
+      operationId: SaveFirmRole
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaveFirmRoleResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveFirmRoleRequest'
+        required: true
+      summary: Save firm role
+      x-summary-source: derived
+  /FirmRoles.svc/json/DeleteFirmRole:
+    post:
+      tags:
+      - FirmRoles
+      description: Deletes firm role for user. Requires admin access and is an admin user.
+      operationId: DeleteFirmRole
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteFirmRoleResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteFirmRoleRequest'
+        required: true
+      summary: Delete firm role
+      x-summary-source: derived
+  /FirmRoles.svc/json/FirmRolesRatesCanEdit:
+    post:
+      tags:
+      - FirmRoles
+      description: Returns value if user can edit firm role. Requires admin access and is an admin user.
+      operationId: FirmRolesRatesCanEdit
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirmRolesRatesCanEditResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirmRolesRatesCanEditRequest'
+        required: true
+      summary: Firm roles rates can edit
+      x-summary-source: derived
+  /FirmRoles.svc/json/GetClientRoleRates:
+    post:
+      tags:
+      - FirmRoles
+      description: Returns client role rates based on ContactId. Requires admin access and is an admin user.
+      operationId: GetClientRoleRates
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetClientRoleRatesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetClientRoleRatesRequest'
+        required: true
+      summary: Get client role rates
+      x-summary-source: derived
+  /FirmRoles.svc/json/SaveClientRoleRates:
+    post:
+      tags:
+      - FirmRoles
+      description: Saves client role rates based on list of client role rates. Requires admin access and is an admin user.
+      operationId: SaveClientRoleRates
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaveClientRoleRatesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveClientRoleRatesRequest'
+        required: true
+      summary: Save client role rates
+      x-summary-source: derived
+components:
+  schemas:
+    FirmRolesRatesCanEditRequest:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+    GetClientRoleRatesResponse:
+      type: object
+      properties:
+        ClientRoleRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientRoleRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteFirmRoleRequest:
+      type: object
+      properties:
+        FirmRoleId:
+          type: string
+    GetClientRoleRatesRequest:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+    ClientRoleRate:
+      type: object
+      properties:
+        Id:
+          type: string
+        ClientId:
+          type: integer
+          format: int32
+        UserFirmRoleId:
+          type: string
+        Rate:
+          type: number
+          format: double
+        Role:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Enabled:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    SaveClientRoleRatesResponse:
+      type: object
+      properties:
+        ClientRoleRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientRoleRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SaveFirmRoleRequest:
+      type: object
+      properties:
+        Role:
+          type: object
+          $ref: '#/components/schemas/UserFirmRole'
+    UserFirmRole:
+      type: object
+      properties:
+        Name:
+          type: string
+        Users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        Id:
+          type: string
+    DeleteFirmRoleResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetFirmRolesResponse:
+      type: object
+      properties:
+        UserFirmRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserFirmRole'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    GetFirmRolesRequest:
+      type: object
+      properties:
+        UserFirmRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserFirmRole'
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    SaveClientRoleRatesRequest:
+      type: object
+      properties:
+        ClientRoleRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientRoleRate'
+    FirmRolesRatesCanEditResponse:
+      type: object
+      properties:
+        CanEdit:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    User:
+      type: object
+      properties:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    SaveFirmRoleResponse:
+      type: object
+      properties:
+        Role:
+          type: object
+          $ref: '#/components/schemas/UserFirmRole'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

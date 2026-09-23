@@ -1,0 +1,135 @@
+generated: '2026-09-23'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/rocket-matter-openapi.json
+vocabulary:
+  name: Rocket Matter Domain Vocabulary
+  description: 'Terms declared by Rocket Matter''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-09-23'
+  terms:
+  - term: Authentication
+    definition: How to authenticate against Rocket Matter API
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: BillableActivity
+    definition: View, add, edit, and delete billable activities.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: CalendarEntries
+    definition: View, create, and delete calendar events.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Clients
+    definition: View, create, and delete clients.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Contacts
+    definition: View, edit, create, and delete contacts.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Discounts
+    definition: Attorney matter discounts.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: DocumentTemplates
+    definition: Document template operations.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: MatterTemplateDateOptions
+    definition: Manages the date options for a matter template.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: MatterTemplateMilestoneActions
+    definition: Handles cascading milestone dependencies with tasks and events created from matter templates.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: MatterTemplates
+    definition: Manage creating, editing and deleting matter templates.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Messages
+    definition: Phone message operations.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Mobile
+    definition: Manage mobile device-specific actions.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Office
+    definition: Manages Office 365 integration.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Rates
+    definition: Operations for user hourly rates.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Reports
+    definition: Operations for running reports.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Search
+    definition: Search for Contacts, Clients, Matters, Activities, Tags, ContactCustomFields, and MatterCustomFields.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Signup
+    definition: Operations to create new Rocket Matter accounts.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Tags
+    definition: Tags can be attached to contacts, documents, matters and events in order to group, sort, and find related items.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Tasks
+    definition: Operations for user tasks. All tasks must be assigned to a user but are not required to be attached to a matter.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: TaxRates
+    definition: Operations for managing tax rates.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Timer
+    definition: Operations for timer activities to track billable time worked.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Trust
+    definition: Client trust accounts to hold retainer funds.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: TwoFactorAuthentication
+    definition: Operations to configure and manage SMS two-factor authentication for user login security.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Users
+    definition: Operations to manage Rocket Matter users.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json
+  - term: Quickbooks
+    definition: Manages the Quickbooks Online integration.
+    tags:
+    - Resource Group
+    source: openapi/rocket-matter-openapi.json

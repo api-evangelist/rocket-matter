@@ -1,23 +1,536 @@
 aid: rocket-matter
+
 name: Rocket Matter
-description: 'Rocket Matter is a company surfaced via the API Evangelist harvest backlog (source: legal)
-  and added to the network as a stub for full-pipeline profiling.'
+
+image: https://www.rocketmatter.com/wp-content/uploads/2025/03/ABA.png
+
+description: Rocket Matter provides cloud‑based legal practice management software for law firms of all sizes. The platform combines case management,
+  time tracking, billing, document automation, and client collaboration tools into a single, secure solution. Founded in 2008, Rocket Matter helps
+  firms streamline workflows, improve client service, and increase profitability through an intuitive, modern interface and robust integrations.
+
 url: https://raw.githubusercontent.com/api-evangelist/rocket-matter/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:legal
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-09-23 (modular-v1; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-09-23'
+
 modified: '2026-09-23'
+
 tags:
 - Company
-apis: []
+- LegalTech
+- SaaS
+- PracticeManagement
+- Cloud
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
 common:
+- type: TermsOfService
+  url: https://www.rocketmatter.com/terms-and-conditions/
+- type: AgenticAccess
+  url: agentic-access/rocket-matter-agentic-access.yml
+- type: Plans
+  url: plans/rocket-matter-plans-pricing.yml
+- type: Spectral
+  url: rules/rocket-matter-rules.yml
+- type: Vocabulary
+  url: vocabulary/rocket-matter-vocabulary.yml
+- type: DataModel
+  url: data-model/rocket-matter-data-model.yml
+- type: ErrorCatalog
+  url: errors/rocket-matter-problem-types.yml
+- type: Conformance
+  url: conformance/rocket-matter-conformance.yml
+- type: WellKnown
+  url: well-known/rocket-matter-well-known.yml
+- type: Hosts
+  url: hosts/rocket-matter-hosts.yml
+- type: Vendors
+  url: vendors/rocket-matter-vendors.yml
+- type: Security
+  url: https://www.rocketmatter.com/features/security/
+- type: APIReference
+  url: https://developer.rocketmatter.com/
+- type: DomainSecurity
+  url: security/rocket-matter-domain-security.yml
 - type: Website
   url: https://www.rocketmatter.com/
+- type: GettingStarted
+  url: https://www.rocketmatter.com/free-trial/
+- type: Support
+  url: https://support.rocketmatter.com/
+- type: Blog
+  url: https://www.rocketmatter.com/blog/
+- type: Pricing
+  url: https://www.rocketmatter.com/pricing/
+- type: SignUp
+  url: https://www.rocketmatter.com/free-trial/
+- type: PrivacyPolicy
+  url: https://www.rocketmatter.com/privacy-policy/
+
+apis:
+- aid: rocket-matter:rocket-matter-authentication-api
+  name: Rocket Matter Authentication API
+  description: How to authenticate against Rocket Matter API
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-authentication-api-openapi.yml
+- aid: rocket-matter:rocket-matter-badges-api
+  name: Rocket Matter Badges API
+  description: The Badges API from Rocket Matter — 3 operation(s) for badges.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Badges
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-badges-api-openapi.yml
+- aid: rocket-matter:rocket-matter-billableactivity-api
+  name: Rocket Matter Billable Activity API
+  description: View, add, edit, and delete billable activities.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - BillableActivity
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-billableactivity-api-openapi.yml
+- aid: rocket-matter:rocket-matter-billingtiers-api
+  name: Rocket Matter Billing Tiers API
+  description: The BillingTiers API from Rocket Matter — 2 operation(s) for billingtiers.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - BillingTiers
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-billingtiers-api-openapi.yml
+- aid: rocket-matter:rocket-matter-calendarentries-api
+  name: Rocket Matter Calendar Entries API
+  description: View, create, and delete calendar events.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - CalendarEntries
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-calendarentries-api-openapi.yml
+- aid: rocket-matter:rocket-matter-clients-api
+  name: Rocket Matter Clients API
+  description: View, create, and delete clients.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Clients
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-clients-api-openapi.yml
+- aid: rocket-matter:rocket-matter-communicator-api
+  name: Rocket Matter Communicator API
+  description: The Communicator API from Rocket Matter — 18 operation(s) for communicator.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Communicator
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-communicator-api-openapi.yml
+- aid: rocket-matter:rocket-matter-contacts-api
+  name: Rocket Matter Contacts API
+  description: View, edit, create, and delete contacts.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-contacts-api-openapi.yml
+- aid: rocket-matter:rocket-matter-courtrules-api
+  name: Rocket Matter Court Rules API
+  description: The CourtRules API from Rocket Matter — 12 operation(s) for courtrules.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - CourtRules
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-courtrules-api-openapi.yml
+- aid: rocket-matter:rocket-matter-discounts-api
+  name: Rocket Matter Discounts API
+  description: Attorney matter discounts.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Discounts
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-discounts-api-openapi.yml
+- aid: rocket-matter:rocket-matter-documents-api
+  name: Rocket Matter Documents API
+  description: The Documents API from Rocket Matter — 22 operation(s) for documents.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-documents-api-openapi.yml
+- aid: rocket-matter:rocket-matter-documenttemplates-api
+  name: Rocket Matter Document Templates API
+  description: Document template operations.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - DocumentTemplates
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-documenttemplates-api-openapi.yml
+- aid: rocket-matter:rocket-matter-dropbox-api
+  name: Rocket Matter Drop Box API
+  description: The DropBox API from Rocket Matter — 1 operation(s) for dropbox.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - DropBox
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-dropbox-api-openapi.yml
+- aid: rocket-matter:rocket-matter-features-api
+  name: Rocket Matter Features API
+  description: The Features API from Rocket Matter — 2 operation(s) for features.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Features
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-features-api-openapi.yml
+- aid: rocket-matter:rocket-matter-firmroles-api
+  name: Rocket Matter Firm Roles API
+  description: The FirmRoles API from Rocket Matter — 7 operation(s) for firmroles.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - FirmRoles
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-firmroles-api-openapi.yml
+- aid: rocket-matter:rocket-matter-google-api
+  name: Rocket Matter Google API
+  description: The Google API from Rocket Matter — 2 operation(s) for google.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Google
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-google-api-openapi.yml
+- aid: rocket-matter:rocket-matter-interests-api
+  name: Rocket Matter Interests API
+  description: The Interests API from Rocket Matter — 3 operation(s) for interests.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Interests
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-interests-api-openapi.yml
+- aid: rocket-matter:rocket-matter-invoices-api
+  name: Rocket Matter Invoices API
+  description: The Invoices API from Rocket Matter — 28 operation(s) for invoices.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-invoices-api-openapi.yml
+- aid: rocket-matter:rocket-matter-matters-api
+  name: Rocket Matter Matters API
+  description: The Matters API from Rocket Matter — 22 operation(s) for matters.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Matters
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-matters-api-openapi.yml
+- aid: rocket-matter:rocket-matter-mattertemplatedateoptions-api
+  name: Rocket Matter Matter Template Date Options API
+  description: Manages the date options for a matter template.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - MatterTemplateDateOptions
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-mattertemplatedateoptions-api-openapi.yml
+- aid: rocket-matter:rocket-matter-mattertemplatemilestoneactions-api
+  name: Rocket Matter Matter Template Milestone Actions API
+  description: >-
+    Handles cascading milestone dependencies with tasks and events created from matter templates.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - MatterTemplateMilestoneActions
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-mattertemplatemilestoneactions-api-openapi.yml
+- aid: rocket-matter:rocket-matter-mattertemplates-api
+  name: Rocket Matter Matter Templates API
+  description: Manage creating, editing and deleting matter templates.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - MatterTemplates
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-mattertemplates-api-openapi.yml
+- aid: rocket-matter:rocket-matter-mattertypes-api
+  name: Rocket Matter Matter Types API
+  description: The MatterTypes API from Rocket Matter — 1 operation(s) for mattertypes.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - MatterTypes
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-mattertypes-api-openapi.yml
+- aid: rocket-matter:rocket-matter-messages-api
+  name: Rocket Matter Messages API
+  description: Phone message operations.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-messages-api-openapi.yml
+- aid: rocket-matter:rocket-matter-mobile-api
+  name: Rocket Matter Mobile API
+  description: Manage mobile device-specific actions.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Mobile
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-mobile-api-openapi.yml
+- aid: rocket-matter:rocket-matter-office-api
+  name: Rocket Matter Office API
+  description: Manages Office 365 integration.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Office
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-office-api-openapi.yml
+- aid: rocket-matter:rocket-matter-originsystem-api
+  name: Rocket Matter Origin System API
+  description: The OriginSystem API from Rocket Matter — 23 operation(s) for originsystem.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - OriginSystem
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-originsystem-api-openapi.yml
+- aid: rocket-matter:rocket-matter-quickbooks-api
+  name: Rocket Matter Quickbooks API
+  description: Manages the Quickbooks Online integration.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Quickbooks
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-quickbooks-api-openapi.yml
+- aid: rocket-matter:rocket-matter-rates-api
+  name: Rocket Matter Rates API
+  description: Operations for user hourly rates.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Rates
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-rates-api-openapi.yml
+- aid: rocket-matter:rocket-matter-recurringbilling-api
+  name: Rocket Matter Recurring Billing API
+  description: The RecurringBilling API from Rocket Matter — 6 operation(s) for recurringbilling.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - RecurringBilling
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-recurringbilling-api-openapi.yml
+- aid: rocket-matter:rocket-matter-reports-api
+  name: Rocket Matter Reports API
+  description: Operations for running reports.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-reports-api-openapi.yml
+- aid: rocket-matter:rocket-matter-search-api
+  name: Rocket Matter Search API
+  description: >-
+    Search for Contacts, Clients, Matters, Activities, Tags, ContactCustomFields, and MatterCustomFields.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-search-api-openapi.yml
+- aid: rocket-matter:rocket-matter-signup-api
+  name: Rocket Matter Signup API
+  description: Operations to create new Rocket Matter accounts.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Signup
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-signup-api-openapi.yml
+- aid: rocket-matter:rocket-matter-surchargerates-api
+  name: Rocket Matter Surcharge Rates API
+  description: The SurchargeRates API from Rocket Matter — 5 operation(s) for surchargerates.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - SurchargeRates
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-surchargerates-api-openapi.yml
+- aid: rocket-matter:rocket-matter-tags-api
+  name: Rocket Matter Tags API
+  description: >-
+    Tags can be attached to contacts, documents, matters and events in order to group, sort, and find
+    related items.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-tags-api-openapi.yml
+- aid: rocket-matter:rocket-matter-tasks-api
+  name: Rocket Matter Tasks API
+  description: >-
+    Operations for user tasks. All tasks must be assigned to a user but are not required to be attached
+    to a matter.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-tasks-api-openapi.yml
+- aid: rocket-matter:rocket-matter-taxrates-api
+  name: Rocket Matter Tax Rates API
+  description: Operations for managing tax rates.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - TaxRates
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-taxrates-api-openapi.yml
+- aid: rocket-matter:rocket-matter-timeoptions-api
+  name: Rocket Matter Time Options API
+  description: The TimeOptions API from Rocket Matter — 2 operation(s) for timeoptions.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - TimeOptions
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-timeoptions-api-openapi.yml
+- aid: rocket-matter:rocket-matter-timer-api
+  name: Rocket Matter Timer API
+  description: Operations for timer activities to track billable time worked.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Timer
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-timer-api-openapi.yml
+- aid: rocket-matter:rocket-matter-trust-api
+  name: Rocket Matter Trust API
+  description: Client trust accounts to hold retainer funds.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Trust
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-trust-api-openapi.yml
+- aid: rocket-matter:rocket-matter-twofactorauthentication-api
+  name: Rocket Matter Two Factor Authentication API
+  description: >-
+    Operations to configure and manage SMS two-factor authentication for user login security.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - TwoFactorAuthentication
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-twofactorauthentication-api-openapi.yml
+- aid: rocket-matter:rocket-matter-users-api
+  name: Rocket Matter Users API
+  description: Operations to manage Rocket Matter users.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-users-api-openapi.yml
+- aid: rocket-matter:rocket-matter-validations-api
+  name: Rocket Matter Validations API
+  description: The Validations API from Rocket Matter — 1 operation(s) for validations.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - Validations
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-validations-api-openapi.yml
+- aid: rocket-matter:rocket-matter-workflow-api
+  name: Rocket Matter Work Flow API
+  description: The WorkFlow API from Rocket Matter — 4 operation(s) for workflow.
+  humanURL: https://developer.rocketmatter.com/
+  baseURL: https://developer.rocketmatter.com/API_V2
+  tags:
+  - WorkFlow
+  properties:
+  - type: OpenAPI
+    url: openapi/rocket-matter-workflow-api-openapi.yml
+x-enrichment:
+  date: '2026-09-23'
+  status: enriched
+  artifacts_added: 15
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local

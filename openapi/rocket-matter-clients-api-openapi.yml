@@ -1,0 +1,775 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Clients API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Clients
+  description: View, create, and delete clients.
+paths:
+  /Clients.svc/json/Save:
+    post:
+      tags:
+      - Clients
+      description: Create a new client by specifying all attributes.
+      operationId: Save
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSaveResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientSaveRequest'
+        required: true
+      summary: Save
+      x-summary-source: derived
+  /Clients.svc/json/CreateClientFromString:
+    post:
+      tags:
+      - Clients
+      description: Create a new client with only the client name.
+      operationId: CreateClientFromString
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateClientFromStringResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClientFromStringRequest'
+        required: true
+      summary: Create client from string
+      x-summary-source: derived
+  /Clients.svc/json/GetCountries:
+    post:
+      tags:
+      - Clients
+      description: See a list of all available countries.
+      operationId: GetCountries
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCountriesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCountriesRequest'
+        required: true
+      summary: Get countries
+      x-summary-source: derived
+  /Clients.svc/json/GetAllClients:
+    post:
+      tags:
+      - Clients
+      description: See a list of all clients.
+      operationId: GetAllClients
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllClientsReponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get all clients
+      x-summary-source: derived
+  /Clients.svc/json/Search:
+    post:
+      tags:
+      - Clients
+      description: Search through all existing clients by text keyword.
+      operationId: Search
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchClientsReponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchClientsRequest'
+        required: true
+      summary: Search
+      x-summary-source: derived
+  /Clients.svc/json/SearchClientAndPotentialClients:
+    post:
+      tags:
+      - Clients
+      description: Search through existing clients and potential clients by text keyword.
+      operationId: SearchClientAndPotentialClients
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchClientsReponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchClientsRequest'
+        required: true
+      summary: Search client and potential clients
+      x-summary-source: derived
+  /Clients.svc/json/SearchClientIncludePendingClients:
+    post:
+      tags:
+      - Clients
+      description: Search through existing clients and pending clients by text keyword.
+      operationId: SearchClientIncludePendingClients
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchClientsReponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchClientsRequest'
+        required: true
+      summary: Search client include pending clients
+      x-summary-source: derived
+  /Clients.svc/json/GetClientByCode:
+    post:
+      tags:
+      - Clients
+      description: Find a client by name.
+      operationId: GetClientByCode
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetClientByCodeResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetClientByCodeRequest'
+        required: true
+      summary: Get client by code
+      x-summary-source: derived
+  /Clients.svc/json/GetMatterReadOnlyRelationshipsForClient:
+    post:
+      tags:
+      - Clients
+      description: See all relationships for a client.
+      operationId: GetMatterReadOnlyRelationshipsForClient
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMatterReadOnlyRelationshipsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMatterReadOnlyRelationshipsRequest'
+        required: true
+      summary: Get matter read only relationships for client
+      x-summary-source: derived
+  /Clients.svc/json/GetClientsByIds:
+    post:
+      tags:
+      - Clients
+      description: Get specific client(s) by ID.
+      operationId: GetClientsByIds
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetClientsByIdsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetClientsByIdsRequest'
+        required: true
+      summary: Get clients by ids
+      x-summary-source: derived
+components:
+  schemas:
+    GetMatterReadOnlyRelationshipsResponse:
+      type: object
+      properties:
+        RelatedContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterRelatedContact'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SearchClientsRequest:
+      type: object
+      properties:
+        SearchText:
+          type: string
+    ContactRelationship:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+        RelationshipId:
+          type: integer
+          format: int32
+        RelationshipName:
+          type: string
+        Role:
+          type: string
+        Position:
+          type: integer
+          format: int32
+        IsCompany:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    GetCountriesResponse:
+      type: object
+      properties:
+        Countries:
+          type: array
+          items:
+            type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    Contact:
+      type: object
+      properties:
+        Name:
+          type: string
+        MiddleName:
+          type: string
+        FullName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        WorkEmail:
+          type: string
+        WorkPhone:
+          type: string
+        WorkPhoneExt:
+          type: string
+        WorkFax:
+          type: string
+        WorkAddressLine1:
+          type: string
+        WorkAddressLine2:
+          type: string
+        WorkCity:
+          type: string
+        WorkState:
+          type: string
+        WorkPostalCode:
+          type: string
+        WorkCountry:
+          type: string
+        ClientID:
+          type: integer
+          format: int32
+        HomeEmail:
+          type: string
+        HomePhone:
+          type: string
+        HomeAddressLine1:
+          type: string
+        HomeAddressLine2:
+          type: string
+        HomeCity:
+          type: string
+        HomeState:
+          type: string
+        HomePostalCode:
+          type: string
+        HomeCountry:
+          type: string
+        ExternalID2:
+          type: string
+        LastModifiedDate:
+          type: string
+          format: date-time
+        ContactTypeId:
+          type: integer
+          format: int32
+        CompanyId:
+          type: integer
+          format: int32
+        CompanyName:
+          type: string
+        Initials:
+          type: string
+        Notes:
+          type: string
+        UserId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    Client:
+      type: object
+      properties:
+        Name:
+          type: string
+        Code:
+          type: string
+        MiddleName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        ContactID:
+          type: integer
+          format: int32
+        CompanyID:
+          type: integer
+          format: int32
+        CompanyName:
+          type: string
+        WorkEmail:
+          type: string
+        FullName:
+          type: string
+        HomeAddress:
+          type: object
+          $ref: '#/components/schemas/ContactAddress'
+        Relationships:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactRelationship'
+        HomeEmail:
+          type: string
+        MobilePhone:
+          type: string
+        Notes:
+          type: string
+        PreferredDisplayName:
+          type: string
+        PrimaryContact:
+          type: string
+        PrimaryContactId:
+          type: integer
+          format: int32
+        Salutation:
+          type: string
+        SkypeUserName:
+          type: string
+        Suffix:
+          type: string
+        Title:
+          type: string
+        WorkAddress:
+          type: object
+          $ref: '#/components/schemas/ContactAddress'
+        WorkFax:
+          type: string
+        WorkPhone:
+          type: string
+        HomePhone:
+          type: string
+        WorkPhoneExt:
+          type: string
+        Tags:
+          type: array
+          items:
+            type: string
+        ID:
+          type: integer
+          format: int32
+    GetClientsByIdsRequest:
+      type: object
+      properties:
+        ClientIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+    GetMatterReadOnlyRelationshipsRequest:
+      type: object
+      properties:
+        ClientId:
+          type: integer
+          format: int32
+        Relationship:
+          type: string
+    GetClientsByIdsResponse:
+      type: object
+      properties:
+        Clients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Client'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    SearchClientsReponse:
+      type: object
+      properties:
+        Clients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Client'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ClientSaveResponse:
+      type: object
+      properties:
+        Client:
+          type: object
+          $ref: '#/components/schemas/Client'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ClientSaveRequest:
+      type: object
+      properties:
+        Client:
+          type: object
+          $ref: '#/components/schemas/Client'
+    CreateClientFromStringResponse:
+      type: object
+      properties:
+        Client:
+          type: object
+          $ref: '#/components/schemas/Client'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetClientByCodeRequest:
+      type: object
+      properties:
+        ClientCode:
+          type: string
+    GetAllClientsReponse:
+      type: object
+      properties:
+        Clients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Client'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    MatterRelatedContact:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+        Contact:
+          type: object
+          $ref: '#/components/schemas/Contact'
+        MatterID:
+          type: integer
+          format: int32
+        Role:
+          type: string
+        Position:
+          type: integer
+          format: int32
+        RelationshipName:
+          type: string
+        IsDefault:
+          type: boolean
+        IsUser:
+          type: boolean
+        IsAttendeeRole:
+          type: boolean
+        IsEventOwnerRole:
+          type: boolean
+        TaskAssigneeRole:
+          type: boolean
+        TaskOwnerRole:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    GetClientByCodeResponse:
+      type: object
+      properties:
+        Client:
+          type: object
+          $ref: '#/components/schemas/Client'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetCountriesRequest:
+      type: object
+      properties:
+        SearchText:
+          type: string
+    CreateClientFromStringRequest:
+      type: object
+      properties:
+        ClientCode:
+          type: string
+    ContactAddress:
+      type: object
+      properties:
+        AddressLine1:
+          type: string
+        AddressLine2:
+          type: string
+        City:
+          type: string
+        State:
+          type: string
+        PostalCode:
+          type: string
+        Country:
+          type: string
+        IsEmpty:
+          type: boolean
+        ID:
+          type: integer
+          format: int32

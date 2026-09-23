@@ -1,0 +1,222 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Features API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Features
+paths:
+  /Features.svc/json/GetFirmFeatures:
+    post:
+      tags:
+      - Features
+      description: Retrieves features for current firm. Will show if features are enabled or disabled.
+      operationId: GetFirmFeatures
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFirmFeaturesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get firm features
+      x-summary-source: derived
+  /Features.svc/json/SetDocumentVersions:
+    post:
+      tags:
+      - Features
+      description: Enables document versions. Requires admin access and to be an admin user.
+      operationId: SetDocumentVersions
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetDocumentVersionsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetDocumentVersionsRequest'
+        required: true
+      summary: Set document versions
+      x-summary-source: derived
+components:
+  schemas:
+    SetDocumentVersionsResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    GetFirmFeaturesResponse:
+      type: object
+      properties:
+        Features:
+          type: object
+          $ref: '#/components/schemas/FirmFeatures'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    SetDocumentVersionsRequest:
+      type: object
+      properties:
+        IsEnabled:
+          type: boolean
+    FirmFeatures:
+      type: object
+      properties:
+        ProductivityReportEnabled:
+          type: boolean
+        LedesEnabled:
+          type: boolean
+        QBOEnabled:
+          type: boolean
+        ShowMatterTemplates:
+          type: boolean
+        IsOnTiers:
+          type: boolean
+        ShowImportedDataOnOrigination:
+          type: boolean
+        PortalEnabled:
+          type: boolean
+        AdvancedInvoiceSharingEnabled:
+          type: boolean
+        TrustEnabled:
+          type: boolean
+        FirmTimeZone:
+          type: string
+        DocumentVersionsEnabled:
+          type: boolean
+        DeleteTaskDisabled:
+          type: boolean
+        SyncSelectedExpensesAsCheck:
+          type: boolean
+        ShowChatSupport:
+          type: boolean
+        EnableClioImportWizard:
+          type: boolean
+        IsInImportPreview:
+          type: boolean
+        MobileVersion:
+          type: string
+        ShowCommunicator:
+          type: boolean
+        ShowRMPaymentsConfig:
+          type: boolean
+        ShowCourtRules:
+          type: boolean
+        MobileV2Enabled:
+          type: boolean
+        EnableNewCustomFieldGrids:
+          type: boolean
+        HasWorkFlow:
+          type: boolean
+        ID:
+          type: integer
+          format: int32

@@ -1,0 +1,204 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Discounts API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Discounts
+  description: Attorney matter discounts.
+paths:
+  /Discounts.svc/json/Save:
+    post:
+      tags:
+      - Discounts
+      description: Create or update a discount configuration for a matter.
+      operationId: Save
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaveDiscountConfigurationResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveDiscountConfigurationRequest'
+        required: true
+      summary: Save
+      x-summary-source: derived
+  /Discounts.svc/json/GetAll:
+    post:
+      tags:
+      - Discounts
+      description: View all discount configurations.
+      operationId: GetAll
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllDiscountsResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get all
+      x-summary-source: derived
+components:
+  schemas:
+    SaveDiscountConfigurationResponse:
+      type: object
+      properties:
+        DiscountConfiguration:
+          type: object
+          $ref: '#/components/schemas/DiscountConfiguration'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    DiscountConfiguration:
+      type: object
+      properties:
+        Id:
+          type: string
+        DateCreated:
+          type: string
+          format: date-time
+        DateModified:
+          type: string
+          format: date-time
+        TenantId:
+          type: integer
+          format: int32
+        IsDeleted:
+          type: boolean
+        IsEnabled:
+          type: boolean
+        Description:
+          type: string
+        Rate:
+          type: number
+          format: double
+        Term:
+          type: integer
+          format: int32
+        AppliedToMatter:
+          type: boolean
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    SaveDiscountConfigurationRequest:
+      type: object
+      properties:
+        DiscountConfiguration:
+          type: object
+          $ref: '#/components/schemas/DiscountConfiguration'
+    GetAllDiscountsResponse:
+      type: object
+      properties:
+        Discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscountConfiguration'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

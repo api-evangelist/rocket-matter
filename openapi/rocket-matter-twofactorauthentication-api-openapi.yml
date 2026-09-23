@@ -1,0 +1,987 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Two Factor Authentication API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: TwoFactorAuthentication
+  description: Operations to configure and manage SMS two-factor authentication for user login security.
+paths:
+  /TwoFactorAuthentication.svc/json/EnableTwoFactorAuthentication:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Enable two-factor authentication for a user.
+      operationId: EnableTwoFactorAuthentication
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnableTwoFactorAuthenticationResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Enable two factor authentication
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/GenerateTwoFactorAuthenticationQRCode:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Generate a Quick Response Code for two-factor authentication.
+      operationId: GenerateTwoFactorAuthenticationQRCode
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateTwoFactorAuthenticationQRCodeResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Generate two factor authentication QR code
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/GetTwoFactorAuthenticationSecretKey:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Get the secret key for two-factor authentication.
+      operationId: GetTwoFactorAuthenticationSecretKey
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTwoFactorAuthenticationSecretKeyResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get two factor authentication secret key
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/GetTwoFactorAuthenticationCode:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Get authentication code with secret key.
+      operationId: GetTwoFactorAuthenticationCode
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTwoFactorAuthenticationCodeResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTwoFactorAuthenticationCodeRequest'
+        required: true
+      summary: Get two factor authentication code
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/VerifyAndEnableTwoFactorAuthentication:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Verify and enable two-factor based on authentication code.
+      operationId: VerifyAndEnableTwoFactorAuthentication
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyAndEnableTwoFactorAuthenticationResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyAndEnableTwoFactorAuthenticationRequest'
+        required: true
+      summary: Verify and enable two factor authentication
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/VerifyTwoFactorAuthentication:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Verify two-factor based on authentication code.
+      operationId: VerifyTwoFactorAuthentication
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyTwoFactorAuthenticationResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyTwoFactorAuthenticationRequest'
+        required: true
+      summary: Verify two factor authentication
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/VerifyTwoFactorSmsCode:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Verify two-factor authentication based on SMS code.
+      operationId: VerifyTwoFactorSmsCode
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyTwoFactorSmsCodeResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyTwoFactorSmsCodeRequest'
+        required: true
+      summary: Verify two factor sms code
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/GetTwoFactorAuthenticationSetupStatus:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Get the setup status of two-factor authentication.
+      operationId: GetTwoFactorAuthenticationSetupStatus
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTwoFactorAuthenticationSetupStatusResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get two factor authentication setup status
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/AddTwoFactorAuthenticationPhoneNumber:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Add phone number for two-factor authentication.
+      operationId: AddTwoFactorAuthenticationPhoneNumber
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddTwoFactorAuthenticationPhoneNumberResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTwoFactorAuthenticationPhoneNumberRequest'
+        required: true
+      summary: Add two factor authentication phone number
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/GetTwoFactorAuthenticationRecoveryCodes:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Get the multiple recovery codes for two-factor authentication.
+      operationId: GetTwoFactorAuthenticationRecoveryCodes
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTwoFactorAuthenticationRecoveryCodesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get two factor authentication recovery codes
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/GetTwoFactorAuthenticationRecoveryCode:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Get the multiple recovery codes for two-factor authentication.
+      operationId: GetTwoFactorAuthenticationRecoveryCode
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTwoFactorAuthenticationRecoveryCodeResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get two factor authentication recovery code
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/CompleteTwoFactorAuthenticationSetup:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Sets the status to complete for two-factor authentication.
+      operationId: CompleteTwoFactorAuthenticationSetup
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompleteTwoFactorAuthenticationSetupResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Complete two factor authentication setup
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/GetTwoFactorAuthenticationCodeVerification:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Get two-factor authentication verification.
+      operationId: GetTwoFactorAuthenticationCodeVerification
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTwoFactorAuthenticationCodeVerificationResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get two factor authentication code verification
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/VerifyTwoFactorAuthenticationRecoveryCode:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Verify the two-factor authentication based on recovery code.
+      operationId: VerifyTwoFactorAuthenticationRecoveryCode
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyTwoFactorAuthenticationRecoveryCodeResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyTwoFactorAuthenticationRecoveryCodeRequest'
+        required: true
+      summary: Verify two factor authentication recovery code
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/UpdateTwoFactorAuthenticationPhoneNumber:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Updated the SMS phone number for two-factor authentication.
+      operationId: UpdateTwoFactorAuthenticationPhoneNumber
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTwoFactorAuthenticationPhoneNumberResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTwoFactorAuthenticationPhoneNumberRequest'
+        required: true
+      summary: Update two factor authentication phone number
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/GetTwoFactorAuthenticationPhoneNumber:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Get the SMS phone number for two-factor authentication.
+      operationId: GetTwoFactorAuthenticationPhoneNumber
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTwoFactorAuthenticationPhoneNumberResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get two factor authentication phone number
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/SendSMSCode:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Send the SMS code to the user's phone.
+      operationId: SendSMSCode
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendSMSCodeResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Send SMS code
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/DisableTwoFactor:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Disable the two-factor authentication.
+      operationId: DisableTwoFactor
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisableTwoFactorResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Disable two factor
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/GetTwoFactorAuthenticationExistingPhoneNumbers:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Get the existing SMS phone number for two-factor authentication.
+      operationId: GetTwoFactorAuthenticationExistingPhoneNumbers
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTwoFactorAuthenticationExistingPhoneNumbersResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get two factor authentication existing phone numbers
+      x-summary-source: derived
+  /TwoFactorAuthentication.svc/json/GetTwoFactorAuthenticationPreviouslyUsedRecoveryCode:
+    post:
+      tags:
+      - TwoFactorAuthentication
+      description: Get the previously used two-factor recovery code.
+      operationId: GetTwoFactorAuthenticationPreviouslyUsedRecoveryCode
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTwoFactorAuthenticationPreviouslyUsedRecoveryCodeReponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get two factor authentication previously used recovery code
+      x-summary-source: derived
+components:
+  schemas:
+    AddTwoFactorAuthenticationPhoneNumberResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTwoFactorAuthenticationSetupStatusResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    VerifyAndEnableTwoFactorAuthenticationRequest:
+      type: object
+      properties:
+        AuthenticationCode:
+          type: string
+    UpdateTwoFactorAuthenticationPhoneNumberRequest:
+      type: object
+      properties:
+        PhoneNumber:
+          type: string
+        SkipSmsConfirmation:
+          type: boolean
+    VerifyTwoFactorSmsCodeResponse:
+      type: object
+      properties:
+        Verified:
+          type: boolean
+        FailedAttempts:
+          type: integer
+          format: int32
+        IsLockedOut:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    CompleteTwoFactorAuthenticationSetupResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GenerateTwoFactorAuthenticationQRCodeResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTwoFactorAuthenticationPhoneNumberResponse:
+      type: object
+      properties:
+        PhoneNumber:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTwoFactorAuthenticationRecoveryCodesResponse:
+      type: object
+      properties:
+        RecoveryCodes:
+          type: array
+          items:
+            type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTwoFactorAuthenticationCodeResponse:
+      type: object
+      properties:
+        AuthenticationCode:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTwoFactorAuthenticationCodeVerificationResponse:
+      type: object
+      properties:
+        Verified:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTwoFactorAuthenticationSecretKeyResponse:
+      type: object
+      properties:
+        SecretKey:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    VerifyTwoFactorSmsCodeRequest:
+      type: object
+      properties:
+        SmsCode:
+          type: string
+    GetTwoFactorAuthenticationCodeRequest:
+      type: object
+      properties:
+        SecretKey:
+          type: string
+        IsSms:
+          type: boolean
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    GetTwoFactorAuthenticationPreviouslyUsedRecoveryCodeReponse:
+      type: object
+      properties:
+        RecoveryCode:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    VerifyAndEnableTwoFactorAuthenticationResponse:
+      type: object
+      properties:
+        IsVerified:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    AddTwoFactorAuthenticationPhoneNumberRequest:
+      type: object
+      properties:
+        PhoneNumber:
+          type: string
+        SkipSmsConfirmation:
+          type: boolean
+    EnableTwoFactorAuthenticationResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    VerifyTwoFactorAuthenticationResponse:
+      type: object
+      properties:
+        Verified:
+          type: boolean
+        FailedAttemptCount:
+          type: integer
+          format: int32
+        IsLockedOut:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    VerifyTwoFactorAuthenticationRecoveryCodeResponse:
+      type: object
+      properties:
+        Verified:
+          type: boolean
+        FailedAttemptCount:
+          type: integer
+          format: int32
+        IsLockedOut:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTwoFactorAuthenticationExistingPhoneNumbersResponse:
+      type: object
+      properties:
+        PhoneNumbers:
+          type: array
+          items:
+            type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    VerifyTwoFactorAuthenticationRequest:
+      type: object
+      properties:
+        AuthenticationCode:
+          type: string
+    GetTwoFactorAuthenticationRecoveryCodeResponse:
+      type: object
+      properties:
+        RecoveryCode:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UpdateTwoFactorAuthenticationPhoneNumberResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DisableTwoFactorResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    VerifyTwoFactorAuthenticationRecoveryCodeRequest:
+      type: object
+      properties:
+        RecoveryCode:
+          type: string
+    SendSMSCodeResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

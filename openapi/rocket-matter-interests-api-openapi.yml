@@ -1,0 +1,262 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Rocket Matter API.
+  version: '2.0'
+  title: Rocket Matter Interests API
+  termsOfService: www.rocketmatter.com
+  contact:
+    email: developer@rocketmatter.com
+  license:
+    name: Rocket Matter
+    url: www.rocketmatter.com
+  x-logo:
+    url: https://support.rocketmatter.com/wp-content/themes/rm-support/img/rm-logo.png
+servers:
+- url: https://<DOMAIN>/<INSTALL>/API_V2
+tags:
+- name: Interests
+paths:
+  /Interests.svc/json/Save:
+    post:
+      tags:
+      - Interests
+      description: Saves and updates interest configuration for firm.
+      operationId: Save
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaveInterestConfigurationResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaveInterestConfigurationRequest'
+        required: true
+      summary: Save
+      x-summary-source: derived
+  /Interests.svc/json/GetAll:
+    post:
+      tags:
+      - Interests
+      description: Retrieves all interest rate configurations for firm.
+      operationId: GetAll
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllInterestRatesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      summary: Get all
+      x-summary-source: derived
+  /Interests.svc/json/ChargeInterestFees:
+    post:
+      tags:
+      - Interests
+      description: Applies interest charges to all matters up to given date.
+      operationId: ChargeInterestFees
+      responses:
+        '200':
+          description: Successfully processed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeInterestFeesResponse'
+        '400':
+          description: Internal server error
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargeInterestFeesRequest'
+        required: true
+      summary: Charge interest fees
+      x-summary-source: derived
+components:
+  schemas:
+    InterestConfiguration:
+      type: object
+      properties:
+        Id:
+          type: string
+        DateCreated:
+          type: string
+          format: date-time
+        DateModified:
+          type: string
+          format: date-time
+        TenantId:
+          type: integer
+          format: int32
+        IsDeleted:
+          type: boolean
+        IsEnabled:
+          type: boolean
+        Description:
+          type: string
+        Rate:
+          type: number
+          format: double
+        Term:
+          type: integer
+          format: int32
+        MakeRecurring:
+          type: boolean
+        ChargeInterestOnInterest:
+          type: boolean
+        ApplyToAllUnpaid:
+          type: boolean
+        AppliedToMatter:
+          type: boolean
+    ChargeInterestFeesResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ChargeInterestFeesRequest:
+      type: object
+      properties:
+        ChargeInterestFeesCode:
+          type: string
+        Date:
+          type: string
+          format: date-time
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    SaveInterestConfigurationRequest:
+      type: object
+      properties:
+        InterestConfiguration:
+          type: object
+          $ref: '#/components/schemas/InterestConfiguration'
+    SaveInterestConfigurationResponse:
+      type: object
+      properties:
+        InterestConfiguration:
+          type: object
+          $ref: '#/components/schemas/InterestConfiguration'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetAllInterestRatesResponse:
+      type: object
+      properties:
+        Interests:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterestConfiguration'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
