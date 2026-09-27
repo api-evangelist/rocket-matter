@@ -1,7 +1,7 @@
 {
   "provider": "rocket-matter",
   "sources": [
-    "rocket-matter-openapi.json"
+    "_original/rocket-matter-openapi.json"
   ],
   "outputs": [
     "rocket-matter-authentication-api-openapi.yml",
@@ -49,14 +49,58 @@
     "rocket-matter-validations-api-openapi.yml",
     "rocket-matter-workflow-api-openapi.yml"
   ],
-  "archived": [
-    "archived openapi/rocket-matter-openapi.json"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "rocket-matter-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "apis.yml register: written (+44 apis, 44 total)"
+    "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "rocket-matter-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-badges-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-billableactivity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-billingtiers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-calendarentries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-clients-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-communicator-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-contacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-courtrules-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-discounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-documenttemplates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-dropbox-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-features-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-firmroles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-google-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-interests-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-matters-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-mattertemplatedateoptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-mattertemplatemilestoneactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-mattertemplates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-mattertypes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-messages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-mobile-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-office-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-originsystem-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-quickbooks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-rates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-recurringbilling-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-signup-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-surchargerates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-taxrates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-timeoptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-timer-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-trust-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-twofactorauthentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-validations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rocket-matter-workflow-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

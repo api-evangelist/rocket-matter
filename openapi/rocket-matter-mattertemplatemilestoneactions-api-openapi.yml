@@ -144,402 +144,40 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CheckMilestoneUpdateStatusResponse:
+    MilestoneActionItem:
       type: object
       properties:
-        CanUpdate:
-          type: boolean
-        Items:
-          type: array
-          items:
-            $ref: '#/components/schemas/MilestoneActionItem'
-        Success:
-          type: boolean
-        Message:
+        Type:
           type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    MatterTemplateDateOption:
-      type: object
-      properties:
-        Name:
-          type: string
-        ID:
-          type: integer
-          format: int32
-    ValidationResult:
-      type: object
-      properties:
-        MinValue:
-          type: boolean
-        MaxValue:
-          type: boolean
-        MinLength:
-          type: boolean
-        MaxLength:
-          type: boolean
-        Required:
-          type: boolean
-        PropertyDisplayName:
-          type: string
-        Precision:
-          type: boolean
-        ValueEntered:
-          type: object
-        Name:
-          type: string
-        ObjectName:
-          type: string
-        ExternalID:
-          type: string
-        MinValueMessage:
-          type: string
-        MaxValueMessage:
-          type: string
-        MinLengthMessage:
-          type: string
-        MaxLengthMessage:
-          type: string
-        RequiredMessage:
-          type: string
-        RequiredPrecisionMessage:
-          type: string
-        BaseFailureMessage:
-          type: string
-        FailedValidationMessages:
-          type: array
-          items:
-            type: string
-        FailedCharacterValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterValidationRule'
-        IsValid:
-          type: boolean
-    Contact:
-      type: object
-      properties:
-        Name:
-          type: string
-        MiddleName:
-          type: string
-        FullName:
-          type: string
-        LastName:
-          type: string
-        IsCompany:
-          type: boolean
-        WorkEmail:
-          type: string
-        WorkPhone:
-          type: string
-        WorkPhoneExt:
-          type: string
-        WorkFax:
-          type: string
-        WorkAddressLine1:
-          type: string
-        WorkAddressLine2:
-          type: string
-        WorkCity:
-          type: string
-        WorkState:
-          type: string
-        WorkPostalCode:
-          type: string
-        WorkCountry:
-          type: string
-        ClientID:
-          type: integer
-          format: int32
-        HomeEmail:
-          type: string
-        HomePhone:
-          type: string
-        HomeAddressLine1:
-          type: string
-        HomeAddressLine2:
-          type: string
-        HomeCity:
-          type: string
-        HomeState:
-          type: string
-        HomePostalCode:
-          type: string
-        HomeCountry:
-          type: string
-        ExternalID2:
-          type: string
-        LastModifiedDate:
-          type: string
-          format: date-time
-        ContactTypeId:
-          type: integer
-          format: int32
-        CompanyId:
-          type: integer
-          format: int32
-        CompanyName:
-          type: string
-        Initials:
-          type: string
-        Notes:
-          type: string
-        UserId:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
-    Task:
-      type: object
-      properties:
+          enum:
+          - Task
+          - Event
+          - Matter
         Title:
           type: string
-        DueDate:
-          type: string
-        OwnerID:
-          type: integer
-          format: int32
-        Owner:
+        MilestoneAction:
           type: object
-          $ref: '#/components/schemas/User'
-        AssignedToID:
+          $ref: '#/components/schemas/MatterTemplateMilestoneAction'
+        EntityId:
           type: integer
           format: int32
-        AssignTo:
+        StartDateOption:
           type: object
-          $ref: '#/components/schemas/User'
-        Tags:
-          type: array
-          items:
-            type: string
-        Position:
-          type: integer
-          format: int32
-        MatterID:
-          type: integer
-          format: int32
-        MatterPosition:
-          type: integer
-          format: int32
-        Milestones:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaskEventMilestone'
-        MatterTemplateMilestoneActionId:
-          type: integer
-          format: int32
-        IsMilestonePending:
-          type: boolean
-        IsComplete:
-          type: boolean
-        ActivityId:
-          type: integer
-          format: int32
-        ClientMatter:
+          $ref: '#/components/schemas/MatterTemplateEventDateInfo'
+        EndDateOption:
           type: object
-        IsRead:
-          type: boolean
-        Invoiced:
-          type: boolean
-        PendingInvoicing:
-          type: boolean
-        BillingDate:
+          $ref: '#/components/schemas/MatterTemplateEventDateInfo'
+        ParentMilestone:
+          type: object
+          $ref: '#/components/schemas/TaskEventMilestone'
+        StartDateDescription:
           type: string
-          format: date-time
-        TotalSeconds:
-          type: integer
-          format: int32
-        BillableUnits:
-          type: number
-          format: double
-        Notes:
-          type: string
-        Cost:
-          type: number
-          format: double
-        IsNoCharge:
-          type: boolean
-        IsNonBillable:
-          type: boolean
-        CompletedDate:
-          type: string
-          format: date-time
-        OwnerIsRole:
-          type: boolean
-        AssignedToIsRole:
-          type: boolean
-        OwnerRole:
-          type: string
-        AssignedToRole:
-          type: string
-        ID:
-          type: integer
-          format: int32
-    RemoveChildMilestoneActionItemsResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetActionForItemRequest:
-      type: object
-      properties:
-        Type:
-          type: string
-          enum:
-          - Task
-          - Event
-          - Matter
-        ItemId:
-          type: integer
-          format: int32
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    RemoveChildMilestoneActionItemsRequest:
-      type: object
-      properties:
-        ItemId:
-          type: integer
-          format: int32
-        Type:
-          type: string
-          enum:
-          - Task
-          - Event
-          - Matter
-        TriggerType:
-          type: string
-          enum:
-          - MatterOpen
-          - EventDate
-          - TaskDueDate
-          - TaskCompletedDate
-          - StatusDate
-    UpdateChildMilestoneDatesRequest:
-      type: object
-      properties:
-        ItemId:
-          type: integer
-          format: int32
-        Type:
-          type: string
-          enum:
-          - Task
-          - Event
-          - Matter
-        MilestoneDate:
-          type: string
-          format: date-time
-        TriggerType:
-          type: string
-          enum:
-          - MatterOpen
-          - EventDate
-          - TaskDueDate
-          - TaskCompletedDate
-          - StatusDate
-        MilestoneEndDate:
-          type: string
-          format: date-time
-    DetachMilestoneActionRequest:
-      type: object
-      properties:
-        Type:
-          type: string
-          enum:
-          - Task
-          - Event
-          - Matter
-        ItemId:
-          type: integer
-          format: int32
         Event:
           type: object
           $ref: '#/components/schemas/Event'
         Task:
           type: object
           $ref: '#/components/schemas/Task'
-    UpdateChildMilestoneDatesResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    MatterTemplateMilestoneAction:
-      type: object
-      properties:
-        MilestoneId:
-          type: integer
-          format: int32
-        MatterTemplateTaskId:
-          type: integer
-          format: int32
-        MatterTemplateEventId:
-          type: integer
-          format: int32
-        MilestoneOrderId:
-          type: integer
-          format: int32
-        MilestoneOrder:
-          type: string
-          enum:
-          - Before
-          - After
-        MilestoneTempId:
-          type: string
-        HasPendingMilestone:
-          type: boolean
-        MatterTemplateMilestoneTriggerid:
-          type: integer
-          format: int32
         ID:
           type: integer
           format: int32
@@ -682,6 +320,343 @@ components:
         ID:
           type: integer
           format: int32
+    UpdateChildMilestoneDatesRequest:
+      type: object
+      properties:
+        ItemId:
+          type: integer
+          format: int32
+        Type:
+          type: string
+          enum:
+          - Task
+          - Event
+          - Matter
+        MilestoneDate:
+          type: string
+          format: date-time
+        TriggerType:
+          type: string
+          enum:
+          - MatterOpen
+          - EventDate
+          - TaskDueDate
+          - TaskCompletedDate
+          - StatusDate
+        MilestoneEndDate:
+          type: string
+          format: date-time
+    MatterTemplateMilestoneAction:
+      type: object
+      properties:
+        MilestoneId:
+          type: integer
+          format: int32
+        MatterTemplateTaskId:
+          type: integer
+          format: int32
+        MatterTemplateEventId:
+          type: integer
+          format: int32
+        MilestoneOrderId:
+          type: integer
+          format: int32
+        MilestoneOrder:
+          type: string
+          enum:
+          - Before
+          - After
+        MilestoneTempId:
+          type: string
+        HasPendingMilestone:
+          type: boolean
+        MatterTemplateMilestoneTriggerid:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    MatterTemplateEventDateInfo:
+      type: object
+      properties:
+        Interval:
+          type: integer
+          format: int32
+        Time:
+          type: string
+        Date:
+          type: string
+        DateOption:
+          type: object
+          $ref: '#/components/schemas/MatterTemplateDateOption'
+        MatterTemplateDateOptionID:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    CheckMilestoneUpdateStatusResponse:
+      type: object
+      properties:
+        CanUpdate:
+          type: boolean
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MilestoneActionItem'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UpdateChildMilestoneDatesResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    GetActionForItemResponse:
+      type: object
+      properties:
+        ActionItem:
+          type: object
+          $ref: '#/components/schemas/MilestoneActionItem'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CheckMilestoneUpdateStatusRequest:
+      type: object
+      properties:
+        ItemId:
+          type: integer
+          format: int32
+        Type:
+          type: string
+          enum:
+          - Task
+          - Event
+          - Matter
+        MilestoneDate:
+          type: string
+          format: date-time
+        TriggerType:
+          type: string
+          enum:
+          - MatterOpen
+          - EventDate
+          - TaskDueDate
+          - TaskCompletedDate
+          - StatusDate
+    Task:
+      type: object
+      properties:
+        Title:
+          type: string
+        DueDate:
+          type: string
+        OwnerID:
+          type: integer
+          format: int32
+        Owner:
+          type: object
+          $ref: '#/components/schemas/User'
+        AssignedToID:
+          type: integer
+          format: int32
+        AssignTo:
+          type: object
+          $ref: '#/components/schemas/User'
+        Tags:
+          type: array
+          items:
+            type: string
+        Position:
+          type: integer
+          format: int32
+        MatterID:
+          type: integer
+          format: int32
+        MatterPosition:
+          type: integer
+          format: int32
+        Milestones:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskEventMilestone'
+        MatterTemplateMilestoneActionId:
+          type: integer
+          format: int32
+        IsMilestonePending:
+          type: boolean
+        IsComplete:
+          type: boolean
+        ActivityId:
+          type: integer
+          format: int32
+        ClientMatter:
+          type: object
+        IsRead:
+          type: boolean
+        Invoiced:
+          type: boolean
+        PendingInvoicing:
+          type: boolean
+        BillingDate:
+          type: string
+          format: date-time
+        TotalSeconds:
+          type: integer
+          format: int32
+        BillableUnits:
+          type: number
+          format: double
+        Notes:
+          type: string
+        Cost:
+          type: number
+          format: double
+        IsNoCharge:
+          type: boolean
+        IsNonBillable:
+          type: boolean
+        CompletedDate:
+          type: string
+          format: date-time
+        OwnerIsRole:
+          type: boolean
+        AssignedToIsRole:
+          type: boolean
+        OwnerRole:
+          type: string
+        AssignedToRole:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    DetachMilestoneActionResponse:
+      type: object
+      properties:
+        Event:
+          type: object
+          $ref: '#/components/schemas/Event'
+        Task:
+          type: object
+          $ref: '#/components/schemas/Task'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     TaskEventMilestone:
       type: object
       properties:
@@ -700,6 +675,113 @@ components:
         ID:
           type: integer
           format: int32
+    GetActionForItemRequest:
+      type: object
+      properties:
+        Type:
+          type: string
+          enum:
+          - Task
+          - Event
+          - Matter
+        ItemId:
+          type: integer
+          format: int32
+    Contact:
+      type: object
+      properties:
+        Name:
+          type: string
+        MiddleName:
+          type: string
+        FullName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        WorkEmail:
+          type: string
+        WorkPhone:
+          type: string
+        WorkPhoneExt:
+          type: string
+        WorkFax:
+          type: string
+        WorkAddressLine1:
+          type: string
+        WorkAddressLine2:
+          type: string
+        WorkCity:
+          type: string
+        WorkState:
+          type: string
+        WorkPostalCode:
+          type: string
+        WorkCountry:
+          type: string
+        ClientID:
+          type: integer
+          format: int32
+        HomeEmail:
+          type: string
+        HomePhone:
+          type: string
+        HomeAddressLine1:
+          type: string
+        HomeAddressLine2:
+          type: string
+        HomeCity:
+          type: string
+        HomeState:
+          type: string
+        HomePostalCode:
+          type: string
+        HomeCountry:
+          type: string
+        ExternalID2:
+          type: string
+        LastModifiedDate:
+          type: string
+          format: date-time
+        ContactTypeId:
+          type: integer
+          format: int32
+        CompanyId:
+          type: integer
+          format: int32
+        CompanyName:
+          type: string
+        Initials:
+          type: string
+        Notes:
+          type: string
+        UserId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    RemoveChildMilestoneActionItemsRequest:
+      type: object
+      properties:
+        ItemId:
+          type: integer
+          format: int32
+        Type:
+          type: string
+          enum:
+          - Task
+          - Event
+          - Matter
+        TriggerType:
+          type: string
+          enum:
+          - MatterOpen
+          - EventDate
+          - TaskDueDate
+          - TaskCompletedDate
+          - StatusDate
     EventAttendee:
       type: object
       properties:
@@ -734,30 +816,7 @@ components:
         ID:
           type: integer
           format: int32
-    GetActionForItemResponse:
-      type: object
-      properties:
-        ActionItem:
-          type: object
-          $ref: '#/components/schemas/MilestoneActionItem'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    MilestoneActionItem:
+    DetachMilestoneActionRequest:
       type: object
       properties:
         Type:
@@ -766,66 +825,26 @@ components:
           - Task
           - Event
           - Matter
-        Title:
-          type: string
-        MilestoneAction:
-          type: object
-          $ref: '#/components/schemas/MatterTemplateMilestoneAction'
-        EntityId:
-          type: integer
-          format: int32
-        StartDateOption:
-          type: object
-          $ref: '#/components/schemas/MatterTemplateEventDateInfo'
-        EndDateOption:
-          type: object
-          $ref: '#/components/schemas/MatterTemplateEventDateInfo'
-        ParentMilestone:
-          type: object
-          $ref: '#/components/schemas/TaskEventMilestone'
-        StartDateDescription:
-          type: string
-        Event:
-          type: object
-          $ref: '#/components/schemas/Event'
-        Task:
-          type: object
-          $ref: '#/components/schemas/Task'
-        ID:
-          type: integer
-          format: int32
-    CheckMilestoneUpdateStatusRequest:
-      type: object
-      properties:
         ItemId:
           type: integer
           format: int32
-        Type:
-          type: string
-          enum:
-          - Task
-          - Event
-          - Matter
-        MilestoneDate:
-          type: string
-          format: date-time
-        TriggerType:
-          type: string
-          enum:
-          - MatterOpen
-          - EventDate
-          - TaskDueDate
-          - TaskCompletedDate
-          - StatusDate
-    DetachMilestoneActionResponse:
-      type: object
-      properties:
         Event:
           type: object
           $ref: '#/components/schemas/Event'
         Task:
           type: object
           $ref: '#/components/schemas/Task'
+    MatterTemplateDateOption:
+      type: object
+      properties:
+        Name:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    RemoveChildMilestoneActionItemsResponse:
+      type: object
+      properties:
         Success:
           type: boolean
         Message:
@@ -843,25 +862,6 @@ components:
           type: array
           items:
             type: string
-    MatterTemplateEventDateInfo:
-      type: object
-      properties:
-        Interval:
-          type: integer
-          format: int32
-        Time:
-          type: string
-        Date:
-          type: string
-        DateOption:
-          type: object
-          $ref: '#/components/schemas/MatterTemplateDateOption'
-        MatterTemplateDateOptionID:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
     User:
       type: object
       properties:

@@ -121,26 +121,6 @@ components:
           type: boolean
         AppliedToMatter:
           type: boolean
-    ChargeInterestFeesResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     ChargeInterestFeesRequest:
       type: object
       properties:
@@ -213,12 +193,9 @@ components:
         InterestConfiguration:
           type: object
           $ref: '#/components/schemas/InterestConfiguration'
-    SaveInterestConfigurationResponse:
+    ChargeInterestFeesResponse:
       type: object
       properties:
-        InterestConfiguration:
-          type: object
-          $ref: '#/components/schemas/InterestConfiguration'
         Success:
           type: boolean
         Message:
@@ -243,6 +220,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InterestConfiguration'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SaveInterestConfigurationResponse:
+      type: object
+      properties:
+        InterestConfiguration:
+          type: object
+          $ref: '#/components/schemas/InterestConfiguration'
         Success:
           type: boolean
         Message:

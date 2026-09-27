@@ -94,14 +94,20 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Tag:
+    SearchTagsRequest:
       type: object
       properties:
-        Name:
+        SearchText:
           type: string
-        ID:
-          type: integer
-          format: int32
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
     AddRemoveTagResponse:
       type: object
       properties:
@@ -122,15 +128,6 @@ components:
           type: array
           items:
             type: string
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
     ValidationResult:
       type: object
       properties:
@@ -180,30 +177,6 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    SearchTagsResponse:
-      type: object
-      properties:
-        Tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     AddRemoveTagRequest:
       type: object
       properties:
@@ -237,8 +210,35 @@ components:
         EntityId:
           type: integer
           format: int32
-    SearchTagsRequest:
+    SearchTagsResponse:
       type: object
       properties:
-        SearchText:
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        Success:
+          type: boolean
+        Message:
           type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    Tag:
+      type: object
+      properties:
+        Name:
+          type: string
+        ID:
+          type: integer
+          format: int32

@@ -194,46 +194,43 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SetUserMobilePinResponse:
+    GetUserNotificationsRequest:
       type: object
       properties:
-        Success:
+        DeviceId:
+          type: string
+        GetCount:
           type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
+        Offset:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    DeleteUserNotificationResponse:
+        Fetch:
+          type: integer
+          format: int32
+    UserMobileNotification:
       type: object
       properties:
-        Success:
-          type: boolean
+        Title:
+          type: string
         Message:
           type: string
-        ErrorMessage:
+        DateSent:
           type: string
-        ErrorNumber:
+          format: date-time
+        MatterId:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
+        EntityNameId:
+          type: integer
+          format: int32
+        EntityId:
+          type: string
+        MatterName:
+          type: string
+        IsRead:
+          type: boolean
+        Id:
+          type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -248,28 +245,6 @@ components:
       properties:
         DeviceId:
           type: string
-    GetAuthenticationTokenResponse:
-      type: object
-      properties:
-        AuthenticationToken:
-          type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     ValidationResult:
       type: object
       properties:
@@ -319,6 +294,33 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
+    SetUserMobilePinResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SetUserMobilePinRequest:
+      type: object
+      properties:
+        DeviceId:
+          type: string
+        Pin:
+          type: string
     SaveUserTokenResponse:
       type: object
       properties:
@@ -339,30 +341,48 @@ components:
           type: array
           items:
             type: string
-    UserMobileNotification:
+    DeleteUserNotificationResponse:
       type: object
       properties:
-        Title:
-          type: string
+        Success:
+          type: boolean
         Message:
           type: string
-        DateSent:
+        ErrorMessage:
           type: string
-          format: date-time
-        MatterId:
+        ErrorNumber:
           type: integer
           format: int32
-        EntityNameId:
-          type: integer
-          format: int32
-        EntityId:
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetAuthenticationTokenResponse:
+      type: object
+      properties:
+        AuthenticationToken:
           type: string
-        MatterName:
-          type: string
-        IsRead:
+        Success:
           type: boolean
-        Id:
+        Message:
           type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     DeleteUserNotificationRequest:
       type: object
       properties:
@@ -375,26 +395,6 @@ components:
           type: string
         DeviceId:
           type: string
-    SetUserMobilePinRequest:
-      type: object
-      properties:
-        DeviceId:
-          type: string
-        Pin:
-          type: string
-    GetUserNotificationsRequest:
-      type: object
-      properties:
-        DeviceId:
-          type: string
-        GetCount:
-          type: boolean
-        Offset:
-          type: integer
-          format: int32
-        Fetch:
-          type: integer
-          format: int32
     GetUserNotificationsResponse:
       type: object
       properties:

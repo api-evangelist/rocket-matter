@@ -93,6 +93,32 @@ components:
         ID:
           type: integer
           format: int32
+    DeleteDocumentTemplateRequest:
+      type: object
+      properties:
+        DocumentTemplateId:
+          type: integer
+          format: int32
+    DeleteDocumentTemplateResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -102,6 +128,33 @@ components:
           type: string
         Regex:
           type: string
+    GetDocumentTemplatesRequest:
+      type: object
+      properties:
+        Offset:
+          type: integer
+          format: int32
+        Fetch:
+          type: integer
+          format: int32
+        Tags:
+          type: array
+          items:
+            type: string
+        Search:
+          type: string
+        SortByTitle:
+          type: boolean
+        SortDescending:
+          type: boolean
+        GetCount:
+          type: boolean
+        State:
+          type: string
+          enum:
+          - None
+          - Valid
+          - NotValid
     ValidationResult:
       type: object
       properties:
@@ -151,32 +204,6 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    DeleteDocumentTemplateRequest:
-      type: object
-      properties:
-        DocumentTemplateId:
-          type: integer
-          format: int32
-    DeleteDocumentTemplateResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     GetDocumentTemplatesResponse:
       type: object
       properties:
@@ -204,30 +231,3 @@ components:
           type: array
           items:
             type: string
-    GetDocumentTemplatesRequest:
-      type: object
-      properties:
-        Offset:
-          type: integer
-          format: int32
-        Fetch:
-          type: integer
-          format: int32
-        Tags:
-          type: array
-          items:
-            type: string
-        Search:
-          type: string
-        SortByTitle:
-          type: boolean
-        SortDescending:
-          type: boolean
-        GetCount:
-          type: boolean
-        State:
-          type: string
-          enum:
-          - None
-          - Valid
-          - NotValid

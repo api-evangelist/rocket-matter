@@ -441,7 +441,36 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    AddTwoFactorAuthenticationPhoneNumberResponse:
+    UpdateTwoFactorAuthenticationPhoneNumberRequest:
+      type: object
+      properties:
+        PhoneNumber:
+          type: string
+        SkipSmsConfirmation:
+          type: boolean
+    GetTwoFactorAuthenticationSecretKeyResponse:
+      type: object
+      properties:
+        SecretKey:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GenerateTwoFactorAuthenticationQRCodeResponse:
       type: object
       properties:
         Success:
@@ -461,10 +490,15 @@ components:
           type: array
           items:
             type: string
-    GetTwoFactorAuthenticationSetupStatusResponse:
+    VerifyTwoFactorAuthenticationRecoveryCodeRequest:
       type: object
       properties:
-        Status:
+        RecoveryCode:
+          type: string
+    GetTwoFactorAuthenticationCodeResponse:
+      type: object
+      properties:
+        AuthenticationCode:
           type: string
         Success:
           type: boolean
@@ -488,19 +522,12 @@ components:
       properties:
         AuthenticationCode:
           type: string
-    UpdateTwoFactorAuthenticationPhoneNumberRequest:
-      type: object
-      properties:
-        PhoneNumber:
-          type: string
-        SkipSmsConfirmation:
-          type: boolean
-    VerifyTwoFactorSmsCodeResponse:
+    VerifyTwoFactorAuthenticationRecoveryCodeResponse:
       type: object
       properties:
         Verified:
           type: boolean
-        FailedAttempts:
+        FailedAttemptCount:
           type: integer
           format: int32
         IsLockedOut:
@@ -522,6 +549,59 @@ components:
           type: array
           items:
             type: string
+    GetTwoFactorAuthenticationPreviouslyUsedRecoveryCodeReponse:
+      type: object
+      properties:
+        RecoveryCode:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTwoFactorAuthenticationRecoveryCodeResponse:
+      type: object
+      properties:
+        RecoveryCode:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
     ValidationResult:
       type: object
       properties:
@@ -591,164 +671,9 @@ components:
           type: array
           items:
             type: string
-    GenerateTwoFactorAuthenticationQRCodeResponse:
+    AddTwoFactorAuthenticationPhoneNumberResponse:
       type: object
       properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetTwoFactorAuthenticationPhoneNumberResponse:
-      type: object
-      properties:
-        PhoneNumber:
-          type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetTwoFactorAuthenticationRecoveryCodesResponse:
-      type: object
-      properties:
-        RecoveryCodes:
-          type: array
-          items:
-            type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetTwoFactorAuthenticationCodeResponse:
-      type: object
-      properties:
-        AuthenticationCode:
-          type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetTwoFactorAuthenticationCodeVerificationResponse:
-      type: object
-      properties:
-        Verified:
-          type: boolean
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetTwoFactorAuthenticationSecretKeyResponse:
-      type: object
-      properties:
-        SecretKey:
-          type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    VerifyTwoFactorSmsCodeRequest:
-      type: object
-      properties:
-        SmsCode:
-          type: string
-    GetTwoFactorAuthenticationCodeRequest:
-      type: object
-      properties:
-        SecretKey:
-          type: string
-        IsSms:
-          type: boolean
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    GetTwoFactorAuthenticationPreviouslyUsedRecoveryCodeReponse:
-      type: object
-      properties:
-        RecoveryCode:
-          type: string
         Success:
           type: boolean
         Message:
@@ -788,14 +713,12 @@ components:
           type: array
           items:
             type: string
-    AddTwoFactorAuthenticationPhoneNumberRequest:
+    VerifyTwoFactorSmsCodeRequest:
       type: object
       properties:
-        PhoneNumber:
+        SmsCode:
           type: string
-        SkipSmsConfirmation:
-          type: boolean
-    EnableTwoFactorAuthenticationResponse:
+    SendSMSCodeResponse:
       type: object
       properties:
         Success:
@@ -842,12 +765,103 @@ components:
           type: array
           items:
             type: string
-    VerifyTwoFactorAuthenticationRecoveryCodeResponse:
+    UpdateTwoFactorAuthenticationPhoneNumberResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    VerifyTwoFactorAuthenticationRequest:
+      type: object
+      properties:
+        AuthenticationCode:
+          type: string
+    DisableTwoFactorResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTwoFactorAuthenticationRecoveryCodesResponse:
+      type: object
+      properties:
+        RecoveryCodes:
+          type: array
+          items:
+            type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTwoFactorAuthenticationSetupStatusResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    VerifyTwoFactorSmsCodeResponse:
       type: object
       properties:
         Verified:
           type: boolean
-        FailedAttemptCount:
+        FailedAttempts:
           type: integer
           format: int32
         IsLockedOut:
@@ -893,16 +907,18 @@ components:
           type: array
           items:
             type: string
-    VerifyTwoFactorAuthenticationRequest:
+    GetTwoFactorAuthenticationCodeRequest:
       type: object
       properties:
-        AuthenticationCode:
+        SecretKey:
           type: string
-    GetTwoFactorAuthenticationRecoveryCodeResponse:
+        IsSms:
+          type: boolean
+    GetTwoFactorAuthenticationCodeVerificationResponse:
       type: object
       properties:
-        RecoveryCode:
-          type: string
+        Verified:
+          type: boolean
         Success:
           type: boolean
         Message:
@@ -920,27 +936,7 @@ components:
           type: array
           items:
             type: string
-    UpdateTwoFactorAuthenticationPhoneNumberResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    DisableTwoFactorResponse:
+    EnableTwoFactorAuthenticationResponse:
       type: object
       properties:
         Success:
@@ -960,14 +956,18 @@ components:
           type: array
           items:
             type: string
-    VerifyTwoFactorAuthenticationRecoveryCodeRequest:
+    AddTwoFactorAuthenticationPhoneNumberRequest:
       type: object
       properties:
-        RecoveryCode:
+        PhoneNumber:
           type: string
-    SendSMSCodeResponse:
+        SkipSmsConfirmation:
+          type: boolean
+    GetTwoFactorAuthenticationPhoneNumberResponse:
       type: object
       properties:
+        PhoneNumber:
+          type: string
         Success:
           type: boolean
         Message:

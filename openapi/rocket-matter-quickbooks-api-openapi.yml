@@ -290,141 +290,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GetQuickbooksSyncInfoRequest:
-      type: object
-      properties:
-        SyncId:
-          type: string
-        Page:
-          type: integer
-          format: int32
-        PageSize:
-          type: integer
-          format: int32
-        IncludeAll:
-          type: boolean
-        IncludeTotal:
-          type: boolean
-    SyncQuickbooksResponse:
-      type: object
-      properties:
-        SyncStarted:
-          type: boolean
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    ValidationResult:
-      type: object
-      properties:
-        MinValue:
-          type: boolean
-        MaxValue:
-          type: boolean
-        MinLength:
-          type: boolean
-        MaxLength:
-          type: boolean
-        Required:
-          type: boolean
-        PropertyDisplayName:
-          type: string
-        Precision:
-          type: boolean
-        ValueEntered:
-          type: object
-        Name:
-          type: string
-        ObjectName:
-          type: string
-        ExternalID:
-          type: string
-        MinValueMessage:
-          type: string
-        MaxValueMessage:
-          type: string
-        MinLengthMessage:
-          type: string
-        MaxLengthMessage:
-          type: string
-        RequiredMessage:
-          type: string
-        RequiredPrecisionMessage:
-          type: string
-        BaseFailureMessage:
-          type: string
-        FailedValidationMessages:
-          type: array
-          items:
-            type: string
-        FailedCharacterValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterValidationRule'
-        IsValid:
-          type: boolean
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    ExcludeQuickbooksItemsRequest:
-      type: object
-      properties:
-        ExcludedItemIds:
-          type: array
-          items:
-            type: object
-        ResyncItemIds:
-          type: array
-          items:
-            type: object
-    GetQuickbooksSyncsResponse:
-      type: object
-      properties:
-        Syncs:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuickbooksSync'
-        MorePages:
-          type: boolean
-        TotalSyncs:
-          type: integer
-          format: int32
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     GetQuickbooksPreparednessResponse:
       type: object
       properties:
@@ -451,92 +316,6 @@ components:
           type: array
           items:
             type: string
-    ConnectQuickbooksRequest:
-      type: object
-      properties:
-        Request:
-          type: string
-    QuickbooksSync:
-      type: object
-      properties:
-        Id:
-          type: string
-        Description:
-          type: string
-        FullDescription:
-          type: string
-        StepError:
-          type: boolean
-        DateOfSync:
-          type: string
-          format: date-time
-        Successful:
-          type: boolean
-        IsReverting:
-          type: boolean
-    GetQuickbooksSyncInfoResponse:
-      type: object
-      properties:
-        Failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuickbooksSyncItem'
-        AllLogs:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuickbooksSyncItem'
-        MorePages:
-          type: boolean
-        TotalItems:
-          type: integer
-          format: int32
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    QuickbooksBucket:
-      type: object
-      properties:
-        Id:
-          type: string
-        QBOId:
-          type: string
-        Name:
-          type: string
-        BucketType:
-          type: string
-          enum:
-          - Other
-          - AccountsReceivables
-          - CreditAdj
-          - Expense
-          - LegalFeeIncome
-          - OperatingCash
-          - TrustCash
-          - TrustLiability
-        SyncCheckType:
-          type: string
-          enum:
-          - NoneAsCheck
-          - AllChecks
-          - SpecificAsChecks
-        Selected:
-          type: boolean
-        ExcludeFromSync:
-          type: boolean
     GetQuickbooksConnectionStatusResponse:
       type: object
       properties:
@@ -614,47 +393,6 @@ components:
           type: array
           items:
             type: string
-    QuickbooksSyncItem:
-      type: object
-      properties:
-        DisplayName:
-          type: string
-        EntityId:
-          type: string
-        ItemType:
-          type: string
-          enum:
-          - None
-          - Client
-          - Vendor
-          - Expense
-          - Invoice
-          - Payment
-          - DebitAdjustment
-          - CreditAdjustment
-          - TrustDeposit
-          - TrustDebit
-          - Refund
-          - TaxRate
-          - TaxAgency
-        ErrorMessage:
-          type: string
-        FullErrorMessage:
-          type: string
-        Success:
-          type: boolean
-        EntityDescription:
-          type: string
-        ClientMatter:
-          type: string
-        Name:
-          type: string
-        QboSyncLogId:
-          type: string
-        ExcludeFromSync:
-          type: boolean
-        CanBeResynced:
-          type: boolean
     ConnectQuickbooksResponse:
       type: object
       properties:
@@ -692,9 +430,168 @@ components:
           type: array
           items:
             type: string
+    DisconnectQuickbooksResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetQuickbooksFailedItemsResponse:
+      type: object
+      properties:
+        FailedItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuickbooksSyncItem'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    GetQuickbooksSyncInfoRequest:
+      type: object
+      properties:
+        SyncId:
+          type: string
+        Page:
+          type: integer
+          format: int32
+        PageSize:
+          type: integer
+          format: int32
+        IncludeAll:
+          type: boolean
+        IncludeTotal:
+          type: boolean
     DisableQuickbooksResponse:
       type: object
       properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetQuickbooksSyncsRequest:
+      type: object
+      properties:
+        Page:
+          type: integer
+          format: int32
+        PageSize:
+          type: integer
+          format: int32
+    GetQuickbooksSyncInfoResponse:
+      type: object
+      properties:
+        Failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuickbooksSyncItem'
+        AllLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuickbooksSyncItem'
+        MorePages:
+          type: boolean
+        TotalItems:
+          type: integer
+          format: int32
         Success:
           type: boolean
         Message:
@@ -738,22 +635,82 @@ components:
           type: array
           items:
             type: string
-    GetQuickbooksSyncsRequest:
+    QuickbooksBucket:
       type: object
       properties:
-        Page:
-          type: integer
-          format: int32
-        PageSize:
-          type: integer
-          format: int32
-    GetQuickbooksFailedItemsResponse:
+        Id:
+          type: string
+        QBOId:
+          type: string
+        Name:
+          type: string
+        BucketType:
+          type: string
+          enum:
+          - Other
+          - AccountsReceivables
+          - CreditAdj
+          - Expense
+          - LegalFeeIncome
+          - OperatingCash
+          - TrustCash
+          - TrustLiability
+        SyncCheckType:
+          type: string
+          enum:
+          - NoneAsCheck
+          - AllChecks
+          - SpecificAsChecks
+        Selected:
+          type: boolean
+        ExcludeFromSync:
+          type: boolean
+    QuickbooksSyncItem:
       type: object
       properties:
-        FailedItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuickbooksSyncItem'
+        DisplayName:
+          type: string
+        EntityId:
+          type: string
+        ItemType:
+          type: string
+          enum:
+          - None
+          - Client
+          - Vendor
+          - Expense
+          - Invoice
+          - Payment
+          - DebitAdjustment
+          - CreditAdjustment
+          - TrustDeposit
+          - TrustDebit
+          - Refund
+          - TaxRate
+          - TaxAgency
+        ErrorMessage:
+          type: string
+        FullErrorMessage:
+          type: string
+        Success:
+          type: boolean
+        EntityDescription:
+          type: string
+        ClientMatter:
+          type: string
+        Name:
+          type: string
+        QboSyncLogId:
+          type: string
+        ExcludeFromSync:
+          type: boolean
+        CanBeResynced:
+          type: boolean
+    SyncQuickbooksResponse:
+      type: object
+      properties:
+        SyncStarted:
+          type: boolean
         Success:
           type: boolean
         Message:
@@ -771,9 +728,36 @@ components:
           type: array
           items:
             type: string
-    DisconnectQuickbooksResponse:
+    QuickbooksSync:
       type: object
       properties:
+        Id:
+          type: string
+        Description:
+          type: string
+        FullDescription:
+          type: string
+        StepError:
+          type: boolean
+        DateOfSync:
+          type: string
+          format: date-time
+        Successful:
+          type: boolean
+        IsReverting:
+          type: boolean
+    GetQuickbooksSyncsResponse:
+      type: object
+      properties:
+        Syncs:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuickbooksSync'
+        MorePages:
+          type: boolean
+        TotalSyncs:
+          type: integer
+          format: int32
         Success:
           type: boolean
         Message:
@@ -791,3 +775,19 @@ components:
           type: array
           items:
             type: string
+    ExcludeQuickbooksItemsRequest:
+      type: object
+      properties:
+        ExcludedItemIds:
+          type: array
+          items:
+            type: object
+        ResyncItemIds:
+          type: array
+          items:
+            type: object
+    ConnectQuickbooksRequest:
+      type: object
+      properties:
+        Request:
+          type: string

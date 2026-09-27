@@ -94,45 +94,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SignupCCEntryResponse:
-      type: object
-      properties:
-        CreditCardResponse:
-          type: string
-          enum:
-          - CCError
-          - CCDeclined
-          - CCSuccess
-        InvalidCoupon:
-          type: boolean
-        AccountResponse:
-          type: string
-          enum:
-          - Failure
-          - Success
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    FirstTimeUserInfoRequest:
-      type: object
-      properties:
-        UserInfo:
-          type: object
-          $ref: '#/components/schemas/SignupUserInfo'
     SignupUserInfo:
       type: object
       properties:
@@ -153,74 +114,6 @@ components:
           type: string
         Password:
           type: string
-    SignupCCEntryRequest:
-      type: object
-      properties:
-        CCNumber:
-          type: string
-        ExpMonth:
-          type: string
-        ExpYear:
-          type: string
-        CvvCode:
-          type: string
-        CouponCode:
-          type: string
-        BillingFrequency:
-          type: string
-          enum:
-          - Monthly
-          - Yearly
-          - TriAnnual
-          - Quarterly
-          - Biennial
-        BillingTierId:
-          type: integer
-          format: int32
-    SubscriptionAgreementResponse:
-      type: object
-      properties:
-        HasAgreed:
-          type: boolean
-        RequiresAgreement:
-          type: boolean
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    FirstTimeUserInfoResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -279,8 +172,115 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
+    FirstTimeUserInfoRequest:
+      type: object
+      properties:
+        UserInfo:
+          type: object
+          $ref: '#/components/schemas/SignupUserInfo'
+    FirstTimeUserInfoResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     SubscriptionAgreementRequest:
       type: object
       properties:
         UserAgreed:
           type: boolean
+    SignupCCEntryRequest:
+      type: object
+      properties:
+        CCNumber:
+          type: string
+        ExpMonth:
+          type: string
+        ExpYear:
+          type: string
+        CvvCode:
+          type: string
+        CouponCode:
+          type: string
+        BillingFrequency:
+          type: string
+          enum:
+          - Monthly
+          - Yearly
+          - TriAnnual
+          - Quarterly
+          - Biennial
+        BillingTierId:
+          type: integer
+          format: int32
+    SubscriptionAgreementResponse:
+      type: object
+      properties:
+        HasAgreed:
+          type: boolean
+        RequiresAgreement:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SignupCCEntryResponse:
+      type: object
+      properties:
+        CreditCardResponse:
+          type: string
+          enum:
+          - CCError
+          - CCDeclined
+          - CCSuccess
+        InvalidCoupon:
+          type: boolean
+        AccountResponse:
+          type: string
+          enum:
+          - Failure
+          - Success
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

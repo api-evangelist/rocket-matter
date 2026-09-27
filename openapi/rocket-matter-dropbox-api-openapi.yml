@@ -43,28 +43,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GetDropBoxUriResponse:
-      type: object
-      properties:
-        uri:
-          type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     ValidationResult:
       type: object
       properties:
@@ -114,6 +92,28 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
+    GetDropBoxUriResponse:
+      type: object
+      properties:
+        uri:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     GetDropBoxUriRequest:
       type: object
       properties:

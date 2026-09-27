@@ -132,7 +132,7 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TaxRatesSaveResponse:
+    TaxRatesGetResponse:
       type: object
       properties:
         TaxRate:
@@ -155,13 +155,6 @@ components:
           type: array
           items:
             type: string
-    TaxRatesGetRequest:
-      type: object
-      properties:
-        TaxRateId:
-          type: string
-        TaxRateDescription:
-          type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -171,17 +164,27 @@ components:
           type: string
         Regex:
           type: string
-    TaxRatesSaveRequest:
+    TaxRate:
       type: object
       properties:
-        TaxRate:
-          type: object
-          $ref: '#/components/schemas/TaxRate'
-    TaxRatesSearchRequest:
-      type: object
-      properties:
-        SearchText:
+        Id:
           type: string
+        Description:
+          type: string
+        Rate:
+          type: number
+          format: double
+        TaxRateType:
+          type: string
+          enum:
+          - FeesAndExpenses
+          - FeesAndSelectedExpenses
+          - Expenses
+          - SelectedExpenses
+          - SelectedFees
+          - SelectedFeesAndSelectedExpenses
+        AppliedToMatter:
+          type: boolean
     ValidationResult:
       type: object
       properties:
@@ -231,27 +234,13 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    TaxRate:
+    TaxRatesGetRequest:
       type: object
       properties:
-        Id:
+        TaxRateId:
           type: string
-        Description:
+        TaxRateDescription:
           type: string
-        Rate:
-          type: number
-          format: double
-        TaxRateType:
-          type: string
-          enum:
-          - FeesAndExpenses
-          - FeesAndSelectedExpenses
-          - Expenses
-          - SelectedExpenses
-          - SelectedFees
-          - SelectedFeesAndSelectedExpenses
-        AppliedToMatter:
-          type: boolean
     TaxRatesGetAllResponse:
       type: object
       properties:
@@ -276,7 +265,18 @@ components:
           type: array
           items:
             type: string
-    TaxRatesGetResponse:
+    TaxRatesSaveRequest:
+      type: object
+      properties:
+        TaxRate:
+          type: object
+          $ref: '#/components/schemas/TaxRate'
+    TaxRatesSearchRequest:
+      type: object
+      properties:
+        SearchText:
+          type: string
+    TaxRatesDeleteResponse:
       type: object
       properties:
         TaxRate:
@@ -299,7 +299,7 @@ components:
           type: array
           items:
             type: string
-    TaxRatesDeleteResponse:
+    TaxRatesSaveResponse:
       type: object
       properties:
         TaxRate:

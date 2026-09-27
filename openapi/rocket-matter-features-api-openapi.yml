@@ -62,26 +62,11 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SetDocumentVersionsResponse:
+    SetDocumentVersionsRequest:
       type: object
       properties:
-        Success:
+        IsEnabled:
           type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -91,12 +76,9 @@ components:
           type: string
         Regex:
           type: string
-    GetFirmFeaturesResponse:
+    SetDocumentVersionsResponse:
       type: object
       properties:
-        Features:
-          type: object
-          $ref: '#/components/schemas/FirmFeatures'
         Success:
           type: boolean
         Message:
@@ -163,11 +145,29 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    SetDocumentVersionsRequest:
+    GetFirmFeaturesResponse:
       type: object
       properties:
-        IsEnabled:
+        Features:
+          type: object
+          $ref: '#/components/schemas/FirmFeatures'
+        Success:
           type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     FirmFeatures:
       type: object
       properties:

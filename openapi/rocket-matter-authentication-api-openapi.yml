@@ -163,21 +163,9 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GrantTokenResponse:
+    BaseResponse:
       type: object
       properties:
-        expires_at:
-          type: string
-          format: date-time
-        access_token:
-          type: string
-        refresh_token:
-          type: string
-        expires_in:
-          type: integer
-          format: int32
-        error:
-          type: string
         Success:
           type: boolean
         Message:
@@ -195,33 +183,33 @@ components:
           type: array
           items:
             type: string
-    RevokeTokenRequest:
+    GetMobileAuthenticationCodeRequest:
       type: object
       properties:
-        token:
+        DeviceId:
           type: string
-    GrantTokenRequest:
+        AuthenticationToken:
+          type: string
+    RevokeTokenResponse:
       type: object
       properties:
-        grant_type:
+        Success:
+          type: boolean
+        Message:
           type: string
-        code:
+        ErrorMessage:
           type: string
-        client_id:
-          type: string
-        client_secret:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
-        token:
-          type: string
-    RefreshTokenRequest:
-      type: object
-      properties:
-        refresh_token:
-          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -231,9 +219,21 @@ components:
           type: string
         Regex:
           type: string
-    RevokeTokenResponse:
+    GrantTokenResponse:
       type: object
       properties:
+        expires_at:
+          type: string
+          format: date-time
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        expires_in:
+          type: integer
+          format: int32
+        error:
+          type: string
         Success:
           type: boolean
         Message:
@@ -324,30 +324,30 @@ components:
           type: array
           items:
             type: string
-    BaseResponse:
+    RefreshTokenRequest:
       type: object
       properties:
-        Success:
-          type: boolean
-        Message:
+        refresh_token:
           type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetMobileAuthenticationCodeRequest:
+    RevokeTokenRequest:
       type: object
       properties:
-        DeviceId:
+        token:
           type: string
-        AuthenticationToken:
+    GrantTokenRequest:
+      type: object
+      properties:
+        grant_type:
+          type: string
+        code:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        token:
           type: string

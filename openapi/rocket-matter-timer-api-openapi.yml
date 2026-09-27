@@ -213,17 +213,9 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DeleteTimerRequest:
+    BaseResponse:
       type: object
       properties:
-        Id:
-          type: string
-    TimerResponse:
-      type: object
-      properties:
-        ActiveTimer:
-          type: object
-          $ref: '#/components/schemas/ActiveTimer'
         Success:
           type: boolean
         Message:
@@ -246,23 +238,14 @@ components:
       properties:
         Id:
           type: string
-    BillTimerRequest:
+    DeleteTimerRequest:
       type: object
       properties:
-        PausedAt:
+        Id:
           type: string
-          format: date-time
-        ActiveTimer:
-          type: object
-          $ref: '#/components/schemas/ActiveTimer'
-        BrowserSession:
-          type: string
-    StartTimerRequest:
+    TimerRequest:
       type: object
       properties:
-        StartedAt:
-          type: string
-          format: date-time
         ActiveTimer:
           type: object
           $ref: '#/components/schemas/ActiveTimer'
@@ -276,65 +259,6 @@ components:
         Message:
           type: string
         Regex:
-          type: string
-    GetEvenIfDeletedResponse:
-      type: object
-      properties:
-        ActiveTimer:
-          type: object
-          $ref: '#/components/schemas/ActiveTimer'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    ActiveTimer:
-      type: object
-      properties:
-        TimerStart:
-          type: string
-          format: date-time
-        AccumulatedTime:
-          type: integer
-          format: int32
-        UserId:
-          type: integer
-          format: int32
-        BillingDate:
-          type: string
-          format: date-time
-        ClientMatter:
-          type: string
-        MatterId:
-          type: integer
-          format: int32
-        Description:
-          type: string
-        NoCharge:
-          type: boolean
-        NonBillable:
-          type: boolean
-        BilledActivityId:
-          type: integer
-          format: int32
-        BillableUnits:
-          type: number
-          format: double
-        IsDeleted:
-          type: boolean
-        Id:
           type: string
     ValidationResult:
       type: object
@@ -385,19 +309,29 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    GetTimerRequest:
-      type: object
-      properties:
-        Id:
-          type: string
-    TimerRequest:
+    GetEvenIfDeletedResponse:
       type: object
       properties:
         ActiveTimer:
           type: object
           $ref: '#/components/schemas/ActiveTimer'
-        BrowserSession:
+        Success:
+          type: boolean
+        Message:
           type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     TimersResponse:
       type: object
       properties:
@@ -422,9 +356,75 @@ components:
           type: array
           items:
             type: string
-    BaseResponse:
+    StartTimerRequest:
       type: object
       properties:
+        StartedAt:
+          type: string
+          format: date-time
+        ActiveTimer:
+          type: object
+          $ref: '#/components/schemas/ActiveTimer'
+        BrowserSession:
+          type: string
+    PauseTimerRequest:
+      type: object
+      properties:
+        PausedAt:
+          type: string
+          format: date-time
+        ActiveTimer:
+          type: object
+          $ref: '#/components/schemas/ActiveTimer'
+        BrowserSession:
+          type: string
+    ActiveTimer:
+      type: object
+      properties:
+        TimerStart:
+          type: string
+          format: date-time
+        AccumulatedTime:
+          type: integer
+          format: int32
+        UserId:
+          type: integer
+          format: int32
+        BillingDate:
+          type: string
+          format: date-time
+        ClientMatter:
+          type: string
+        MatterId:
+          type: integer
+          format: int32
+        Description:
+          type: string
+        NoCharge:
+          type: boolean
+        NonBillable:
+          type: boolean
+        BilledActivityId:
+          type: integer
+          format: int32
+        BillableUnits:
+          type: number
+          format: double
+        IsDeleted:
+          type: boolean
+        Id:
+          type: string
+    GetTimerRequest:
+      type: object
+      properties:
+        Id:
+          type: string
+    TimerResponse:
+      type: object
+      properties:
+        ActiveTimer:
+          type: object
+          $ref: '#/components/schemas/ActiveTimer'
         Success:
           type: boolean
         Message:
@@ -442,7 +442,7 @@ components:
           type: array
           items:
             type: string
-    PauseTimerRequest:
+    BillTimerRequest:
       type: object
       properties:
         PausedAt:

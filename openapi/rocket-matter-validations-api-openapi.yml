@@ -37,13 +37,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ValidationMappingRef:
-      type: object
-      properties:
-        Name:
-          type: string
-        Rules:
-          type: object
     CharacterValidationRule:
       type: object
       properties:
@@ -53,6 +46,13 @@ components:
           type: string
         Regex:
           type: string
+    ValidationMappingRef:
+      type: object
+      properties:
+        Name:
+          type: string
+        Rules:
+          type: object
     ValidationResult:
       type: object
       properties:

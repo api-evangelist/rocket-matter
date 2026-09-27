@@ -244,310 +244,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    User:
-      type: object
-      properties:
-        FullName:
-          type: string
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        MiddleName:
-          type: string
-        ContactId:
-          type: integer
-          format: int32
-        Initials:
-          type: string
-        ID:
-          type: integer
-          format: int32
     GetCalendarEntryResponse:
       type: object
       properties:
         CalendarEntry:
           type: object
           $ref: '#/components/schemas/Event'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetCalendarEntriesForDateRangeRequest:
-      type: object
-      properties:
-        UserIds:
-          type: array
-          items:
-            type: integer
-            format: int32
-        FromDate:
-          type: string
-          format: date-time
-        ToDate:
-          type: string
-          format: date-time
-        MatterId:
-          type: integer
-          format: int32
-    SyncEventsResponse:
-      type: object
-      properties:
-        Events:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-        CurrentUserContactId:
-          type: integer
-          format: int32
-        IsOutlookCalendarSyncEnabled:
-          type: boolean
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    ValidationResult:
-      type: object
-      properties:
-        MinValue:
-          type: boolean
-        MaxValue:
-          type: boolean
-        MinLength:
-          type: boolean
-        MaxLength:
-          type: boolean
-        Required:
-          type: boolean
-        PropertyDisplayName:
-          type: string
-        Precision:
-          type: boolean
-        ValueEntered:
-          type: object
-        Name:
-          type: string
-        ObjectName:
-          type: string
-        ExternalID:
-          type: string
-        MinValueMessage:
-          type: string
-        MaxValueMessage:
-          type: string
-        MinLengthMessage:
-          type: string
-        MaxLengthMessage:
-          type: string
-        RequiredMessage:
-          type: string
-        RequiredPrecisionMessage:
-          type: string
-        BaseFailureMessage:
-          type: string
-        FailedValidationMessages:
-          type: array
-          items:
-            type: string
-        FailedCharacterValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterValidationRule'
-        IsValid:
-          type: boolean
-    GetCalendarEntryRequest:
-      type: object
-      properties:
-        ActivityId:
-          type: integer
-          format: int32
-    Contact:
-      type: object
-      properties:
-        Name:
-          type: string
-        MiddleName:
-          type: string
-        FullName:
-          type: string
-        LastName:
-          type: string
-        IsCompany:
-          type: boolean
-        WorkEmail:
-          type: string
-        WorkPhone:
-          type: string
-        WorkPhoneExt:
-          type: string
-        WorkFax:
-          type: string
-        WorkAddressLine1:
-          type: string
-        WorkAddressLine2:
-          type: string
-        WorkCity:
-          type: string
-        WorkState:
-          type: string
-        WorkPostalCode:
-          type: string
-        WorkCountry:
-          type: string
-        ClientID:
-          type: integer
-          format: int32
-        HomeEmail:
-          type: string
-        HomePhone:
-          type: string
-        HomeAddressLine1:
-          type: string
-        HomeAddressLine2:
-          type: string
-        HomeCity:
-          type: string
-        HomeState:
-          type: string
-        HomePostalCode:
-          type: string
-        HomeCountry:
-          type: string
-        ExternalID2:
-          type: string
-        LastModifiedDate:
-          type: string
-          format: date-time
-        ContactTypeId:
-          type: integer
-          format: int32
-        CompanyId:
-          type: integer
-          format: int32
-        CompanyName:
-          type: string
-        Initials:
-          type: string
-        Notes:
-          type: string
-        UserId:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
-    CheckContactAvailabilityRequest:
-      type: object
-      properties:
-        ActivityId:
-          type: integer
-          format: int32
-        StartDate:
-          type: string
-          format: date-time
-        EndDate:
-          type: string
-          format: date-time
-        ContactIds:
-          type: array
-          items:
-            type: integer
-            format: int32
-    DeleteCalendarEntryResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetUpcomingEventsForMatterRequest:
-      type: object
-      properties:
-        MatterId:
-          type: integer
-          format: int32
-        GetFlagged:
-          type: boolean
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    CheckContactAvailabilityResponse:
-      type: object
-      properties:
-        ContactIds:
-          type: array
-          items:
-            type: integer
-            format: int32
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetCalendarEntriesDatesResponse:
-      type: object
-      properties:
-        Dates:
-          type: array
-          items:
-            type: string
         Success:
           type: boolean
         Message:
@@ -704,6 +406,225 @@ components:
         ID:
           type: integer
           format: int32
+    CheckContactAvailabilityRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+        StartDate:
+          type: string
+          format: date-time
+        EndDate:
+          type: string
+          format: date-time
+        ContactIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+    GetCalendarEntryRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+    GetUpcomingEventsResponse:
+      type: object
+      properties:
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        MatterNameLookup:
+          type: object
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    GetUpcomingEventsForMatterRequest:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
+        GetFlagged:
+          type: boolean
+    GetCalendarEntriesForDateRangeRequest:
+      type: object
+      properties:
+        UserIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+        FromDate:
+          type: string
+          format: date-time
+        ToDate:
+          type: string
+          format: date-time
+        MatterId:
+          type: integer
+          format: int32
+    GetUpcomingEventsForUserRequest:
+      type: object
+      properties:
+        Date:
+          type: string
+          format: date-time
+        GetFlagged:
+          type: boolean
+    SyncEventsRequest:
+      type: object
+      properties:
+        ShouldCreateContactAttendees:
+          type: boolean
+        StartUTC:
+          type: string
+          format: date-time
+        EndUTC:
+          type: string
+          format: date-time
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        IsInitialSync:
+          type: boolean
+    DeleteCalendarEntryRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+        DeleteFutureEvents:
+          type: boolean
+    CheckContactAvailabilityResponse:
+      type: object
+      properties:
+        ContactIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SyncEventsResponse:
+      type: object
+      properties:
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        CurrentUserContactId:
+          type: integer
+          format: int32
+        IsOutlookCalendarSyncEnabled:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     TaskEventMilestone:
       type: object
       properties:
@@ -719,6 +640,128 @@ components:
         MilestoneDate:
           type: string
           format: date-time
+        ID:
+          type: integer
+          format: int32
+    GetCalendarEntriesForDateRangeResponse:
+      type: object
+      properties:
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SaveCalendarEntryResponse:
+      type: object
+      properties:
+        CalendarEntry:
+          type: object
+          $ref: '#/components/schemas/Event'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    Contact:
+      type: object
+      properties:
+        Name:
+          type: string
+        MiddleName:
+          type: string
+        FullName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        WorkEmail:
+          type: string
+        WorkPhone:
+          type: string
+        WorkPhoneExt:
+          type: string
+        WorkFax:
+          type: string
+        WorkAddressLine1:
+          type: string
+        WorkAddressLine2:
+          type: string
+        WorkCity:
+          type: string
+        WorkState:
+          type: string
+        WorkPostalCode:
+          type: string
+        WorkCountry:
+          type: string
+        ClientID:
+          type: integer
+          format: int32
+        HomeEmail:
+          type: string
+        HomePhone:
+          type: string
+        HomeAddressLine1:
+          type: string
+        HomeAddressLine2:
+          type: string
+        HomeCity:
+          type: string
+        HomeState:
+          type: string
+        HomePostalCode:
+          type: string
+        HomeCountry:
+          type: string
+        ExternalID2:
+          type: string
+        LastModifiedDate:
+          type: string
+          format: date-time
+        ContactTypeId:
+          type: integer
+          format: int32
+        CompanyId:
+          type: integer
+          format: int32
+        CompanyName:
+          type: string
+        Initials:
+          type: string
+        Notes:
+          type: string
+        UserId:
+          type: integer
+          format: int32
         ID:
           type: integer
           format: int32
@@ -756,6 +799,30 @@ components:
         ID:
           type: integer
           format: int32
+    GetCalendarEntriesDatesResponse:
+      type: object
+      properties:
+        Dates:
+          type: array
+          items:
+            type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     SaveCalendarEntryRequest:
       type: object
       properties:
@@ -764,30 +831,9 @@ components:
           $ref: '#/components/schemas/Event'
         UpdateFutureEvents:
           type: boolean
-    SyncEventsRequest:
+    DeleteCalendarEntryResponse:
       type: object
       properties:
-        ShouldCreateContactAttendees:
-          type: boolean
-        StartUTC:
-          type: string
-          format: date-time
-        EndUTC:
-          type: string
-          format: date-time
-        Events:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-        IsInitialSync:
-          type: boolean
-    GetCalendarEntriesForDateRangeResponse:
-      type: object
-      properties:
-        Events:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
         Success:
           type: boolean
         Message:
@@ -805,68 +851,22 @@ components:
           type: array
           items:
             type: string
-    GetUpcomingEventsResponse:
+    User:
       type: object
       properties:
-        Events:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-        MatterNameLookup:
-          type: object
-        Success:
-          type: boolean
-        Message:
+        FullName:
           type: string
-        ErrorMessage:
+        FirstName:
           type: string
-        ErrorNumber:
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetUpcomingEventsForUserRequest:
-      type: object
-      properties:
-        Date:
+        Initials:
           type: string
-          format: date-time
-        GetFlagged:
-          type: boolean
-    DeleteCalendarEntryRequest:
-      type: object
-      properties:
-        ActivityId:
+        ID:
           type: integer
           format: int32
-        DeleteFutureEvents:
-          type: boolean
-    SaveCalendarEntryResponse:
-      type: object
-      properties:
-        CalendarEntry:
-          type: object
-          $ref: '#/components/schemas/Event'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string

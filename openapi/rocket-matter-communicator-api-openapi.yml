@@ -456,65 +456,229 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    RMFile:
+    ReadAllMessagesFromSomeoneRequest:
       type: object
       properties:
-        ContentType:
-          type: string
-        FileName:
-          type: string
-        FileContents:
-          type: object
-        ParentDirectory:
-          type: string
-        ParentPath:
-          type: string
-        FullPath:
-          type: string
-        FileUUId:
-          type: string
-    RMDirectory:
-      type: object
-      properties:
-        Name:
-          type: string
-        ParentDirectory:
-          type: string
-        ParentPath:
-          type: string
-        FullPath:
-          type: string
-        Files:
-          type: array
-          items:
-            $ref: '#/components/schemas/RMFile'
-        Directories:
-          type: array
-          items:
-            $ref: '#/components/schemas/RMDirectory'
-        FileUUId:
-          type: string
-    GeFileUploadUrlRequest:
-      type: object
-      properties:
-        Files:
-          type: array
-          items:
-            $ref: '#/components/schemas/RMFile'
-        Directories:
-          type: array
-          items:
-            $ref: '#/components/schemas/RMDirectory'
-        ToUserID:
+        FromUserID:
           type: integer
           format: int32
-        ToChannelId:
-          type: string
-        PostToMatterDocuments:
+    GeFileUploadUrlResponse:
+      type: object
+      properties:
+        UploadUrls:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentUploadUrl'
+        Success:
           type: boolean
-        MatterId:
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
           type: integer
           format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetChannelsIBelongToResponse:
+      type: object
+      properties:
+        Channels:
+          type: array
+          items:
+            $ref: '#/components/schemas/Channel'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetUnreadChannelMessagesResponse:
+      type: object
+      properties:
+        UnreadMessageInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/UnreadChannelMessageInfo'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ChannelMember:
+      type: object
+      properties:
+        Id:
+          type: string
+        ChannelId:
+          type: object
+        DateCreated:
+          type: string
+          format: date-time
+        DateModified:
+          type: string
+          format: date-time
+        FullName:
+          type: string
+        IsAdmin:
+          type: boolean
+        SecondSinceLastActive:
+          type: number
+          format: double
+        UserId:
+          type: integer
+          format: int32
+        ProfileImage:
+          type: string
+    SendDirectMessageRequest:
+      type: object
+      properties:
+        UserId:
+          type: integer
+          format: int32
+        Message:
+          type: string
+    DocumentUploadUrl:
+      type: object
+      properties:
+        Url:
+          type: string
+        FileUUId:
+          type: string
+        FullPath:
+          type: string
+        SourceFileUUId:
+          type: string
+    GetChannelChatResponse:
+      type: object
+      properties:
+        ChatLog:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatLog'
+        ChatLogGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatLogGroup'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    GetUsersRequest:
+      type: object
+      properties:
+        Filter:
+          type: string
+    GetDirectChatRequest:
+      type: object
+      properties:
+        UserId:
+          type: integer
+          format: int32
+        BeforeDate:
+          type: string
+          format: date-time
+        AfterDate:
+          type: string
+          format: date-time
+    GetChannelInfoResponse:
+      type: object
+      properties:
+        Channel:
+          type: object
+          $ref: '#/components/schemas/Channel'
+        IsRequestorChannelAdmin:
+          type: boolean
+        IsMember:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ReadAllMessagesFromSomeoneResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     ValidationResult:
       type: object
       properties:
@@ -564,69 +728,6 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    GetUnreadChannelMessagesResponse:
-      type: object
-      properties:
-        UnreadMessageInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/UnreadChannelMessageInfo'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetUsersRequest:
-      type: object
-      properties:
-        Filter:
-          type: string
-    DeleteMessageRequest:
-      type: object
-      properties:
-        Id:
-          type: string
-        IsDirectMessage:
-          type: boolean
-    SendChannelMessageRequest:
-      type: object
-      properties:
-        Id:
-          type: string
-        Message:
-          type: string
-    SendChannelMessageResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     GetDirectChatResponse:
       type: object
       properties:
@@ -655,56 +756,21 @@ components:
           type: array
           items:
             type: string
-    DeleteChannelRequest:
+    MatterChannelSubscriptionRequest:
       type: object
       properties:
-        Id:
-          type: string
-    SendDirectMessageRequest:
-      type: object
-      properties:
-        UserId:
+        MatterId:
           type: integer
           format: int32
-        Message:
-          type: string
-    ReadAllMessagesFromSomeoneRequest:
-      type: object
-      properties:
-        FromUserID:
-          type: integer
-          format: int32
-    ChannelMember:
-      type: object
-      properties:
-        Id:
-          type: string
-        ChannelId:
-          type: object
-        DateCreated:
-          type: string
-          format: date-time
-        DateModified:
-          type: string
-          format: date-time
-        FullName:
-          type: string
-        IsAdmin:
+        Remove:
           type: boolean
-        SecondSinceLastActive:
-          type: number
-          format: double
-        UserId:
-          type: integer
-          format: int32
-        ProfileImage:
-          type: string
-    SaveChannelRequest:
+    DeleteMessageRequest:
       type: object
       properties:
-        Channel:
-          type: object
-          $ref: '#/components/schemas/Channel'
+        Id:
+          type: string
+        IsDirectMessage:
+          type: boolean
     GetChannelChatRequest:
       type: object
       properties:
@@ -721,13 +787,22 @@ components:
           format: int32
         FeedType:
           type: string
-    GeFileUploadUrlResponse:
+    ChatLogGroup:
       type: object
       properties:
-        UploadUrls:
+        Date:
+          type: string
+          format: date-time
+        ChatLog:
           type: array
           items:
-            $ref: '#/components/schemas/DocumentUploadUrl'
+            $ref: '#/components/schemas/ChatLog'
+    SaveChannelResponse:
+      type: object
+      properties:
+        Channel:
+          type: object
+          $ref: '#/components/schemas/Channel'
         Success:
           type: boolean
         Message:
@@ -745,41 +820,72 @@ components:
           type: array
           items:
             type: string
-    UnreadDirectMessageInfo:
+    SaveChannelRequest:
       type: object
       properties:
-        FromUserId:
+        Channel:
+          type: object
+          $ref: '#/components/schemas/Channel'
+    SendChannelMessageRequest:
+      type: object
+      properties:
+        Id:
+          type: string
+        Message:
+          type: string
+    ReadAllMessagesFromChannelResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
           type: integer
           format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    Channel:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+        Members:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChannelMember'
+        DateCreated:
+          type: string
+          format: date-time
+        DateModified:
+          type: string
+          format: date-time
+        IsMatterChannel:
+          type: boolean
+        MatterId:
+          type: integer
+          format: int32
+    UnreadChannelMessageInfo:
+      type: object
+      properties:
+        ChannelId:
+          type: string
         Count:
           type: integer
           format: int32
-    SetEmailAlertReminderRequest:
-      type: object
-      properties:
-        Value:
-          type: boolean
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    DocumentUploadUrl:
-      type: object
-      properties:
-        Url:
-          type: string
-        FileUUId:
-          type: string
-        FullPath:
-          type: string
-        SourceFileUUId:
-          type: string
-    BaseResponse:
+    SendDirectMessageResponse:
       type: object
       properties:
         Success:
@@ -799,6 +905,41 @@ components:
           type: array
           items:
             type: string
+    GeFileUploadUrlRequest:
+      type: object
+      properties:
+        Files:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMFile'
+        Directories:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMDirectory'
+        ToUserID:
+          type: integer
+          format: int32
+        ToChannelId:
+          type: string
+        PostToMatterDocuments:
+          type: boolean
+        MatterId:
+          type: integer
+          format: int32
+    DeleteChannelRequest:
+      type: object
+      properties:
+        Id:
+          type: string
+    EditMessageRequest:
+      type: object
+      properties:
+        Id:
+          type: string
+        NewMessage:
+          type: string
+        IsDirectMessage:
+          type: boolean
     ChatLog:
       type: object
       properties:
@@ -826,45 +967,48 @@ components:
           type: boolean
         IsActivity:
           type: boolean
-    EditMessageRequest:
+    GetChannelsIBelongToRequest:
       type: object
       properties:
-        Id:
+        Filter:
           type: string
-        NewMessage:
-          type: string
-        IsDirectMessage:
-          type: boolean
     ReadAllMessagesFromChannelRequest:
       type: object
       properties:
         Id:
           type: string
-    Channel:
+    SetEmailAlertReminderRequest:
       type: object
       properties:
-        Id:
-          type: string
-        Name:
-          type: string
-        Description:
-          type: string
-        Members:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChannelMember'
-        DateCreated:
-          type: string
-          format: date-time
-        DateModified:
-          type: string
-          format: date-time
-        IsMatterChannel:
+        Value:
           type: boolean
-        MatterId:
+    UnreadDirectMessageInfo:
+      type: object
+      properties:
+        FromUserId:
           type: integer
           format: int32
-    ReadAllMessagesFromSomeoneResponse:
+        Count:
+          type: integer
+          format: int32
+    RMFile:
+      type: object
+      properties:
+        ContentType:
+          type: string
+        FileName:
+          type: string
+        FileContents:
+          type: object
+        ParentDirectory:
+          type: string
+        ParentPath:
+          type: string
+        FullPath:
+          type: string
+        FileUUId:
+          type: string
+    BaseResponse:
       type: object
       properties:
         Success:
@@ -892,78 +1036,27 @@ components:
         MatterId:
           type: integer
           format: int32
-    GetDirectChatRequest:
+    RMDirectory:
       type: object
       properties:
-        UserId:
-          type: integer
-          format: int32
-        BeforeDate:
+        Name:
           type: string
-          format: date-time
-        AfterDate:
+        ParentDirectory:
           type: string
-          format: date-time
-    SaveChannelResponse:
-      type: object
-      properties:
-        Channel:
-          type: object
-          $ref: '#/components/schemas/Channel'
-        Success:
-          type: boolean
-        Message:
+        ParentPath:
           type: string
-        ErrorMessage:
+        FullPath:
           type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
+        Files:
           type: array
           items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
+            $ref: '#/components/schemas/RMFile'
+        Directories:
           type: array
           items:
-            type: string
-    GetChannelInfoResponse:
-      type: object
-      properties:
-        Channel:
-          type: object
-          $ref: '#/components/schemas/Channel'
-        IsRequestorChannelAdmin:
-          type: boolean
-        IsMember:
-          type: boolean
-        Success:
-          type: boolean
-        Message:
+            $ref: '#/components/schemas/RMDirectory'
+        FileUUId:
           type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    ChatLogGroup:
-      type: object
-      properties:
-        Date:
-          type: string
-          format: date-time
-        ChatLog:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatLog'
     GetUnreadDirectMessagesResponse:
       type: object
       properties:
@@ -988,21 +1081,9 @@ components:
           type: array
           items:
             type: string
-    UnreadChannelMessageInfo:
+    SendChannelMessageResponse:
       type: object
       properties:
-        ChannelId:
-          type: string
-        Count:
-          type: integer
-          format: int32
-    GetChannelsIBelongToResponse:
-      type: object
-      properties:
-        Channels:
-          type: array
-          items:
-            $ref: '#/components/schemas/Channel'
         Success:
           type: boolean
         Message:
@@ -1047,39 +1128,6 @@ components:
           type: array
           items:
             type: string
-    SendDirectMessageResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    MatterChannelSubscriptionRequest:
-      type: object
-      properties:
-        MatterId:
-          type: integer
-          format: int32
-        Remove:
-          type: boolean
-    GetChannelsIBelongToRequest:
-      type: object
-      properties:
-        Filter:
-          type: string
     User:
       type: object
       properties:
@@ -1099,51 +1147,3 @@ components:
         ID:
           type: integer
           format: int32
-    ReadAllMessagesFromChannelResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetChannelChatResponse:
-      type: object
-      properties:
-        ChatLog:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatLog'
-        ChatLogGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatLogGroup'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string

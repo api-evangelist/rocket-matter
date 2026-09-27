@@ -69,29 +69,30 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GlobalSearchResultSet:
+    GlobalClientSearchResult:
       type: object
       properties:
-        GlobalContactsResults:
+        ClientId:
+          type: integer
+          format: int32
+        ClientName:
+          type: string
+        ResultStrength:
+          type: integer
+          format: int32
+        ResultTokens:
           type: array
           items:
-            $ref: '#/components/schemas/GlobalContactSearchResult'
-        GlobalClientsResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalClientSearchResult'
-        GlobalMattersResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalMatterSearchResult'
-        GlobalActivityResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalActivitySearchResult'
-        GlobalTagsResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalTagSearchResult'
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
     SearchOccurenceForTypeRequest:
       type: object
       properties:
@@ -167,84 +168,6 @@ components:
           type: string
         ResultTypeDisplay:
           type: string
-    GlobalTagSearchResult:
-      type: object
-      properties:
-        TagId:
-          type: integer
-          format: int32
-        TagName:
-          type: string
-        ResultStrength:
-          type: integer
-          format: int32
-        ResultTokens:
-          type: array
-          items:
-            type: string
-    GlobalSearchRequest:
-      type: object
-      properties:
-        SearchText:
-          type: string
-        IsMobile:
-          type: boolean
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    SearchOccurenceForTypeResponse:
-      type: object
-      properties:
-        Results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchResult'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GlobalSearchResponse:
-      type: object
-      properties:
-        SearchResults:
-          type: object
-          $ref: '#/components/schemas/GlobalSearchResultSet'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     ValidationResult:
       type: object
       properties:
@@ -294,13 +217,83 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    GlobalClientSearchResult:
+    SearchOccurenceForTypeResponse:
       type: object
       properties:
-        ClientId:
+        Results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
           type: integer
           format: int32
-        ClientName:
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GlobalSearchResponse:
+      type: object
+      properties:
+        SearchResults:
+          type: object
+          $ref: '#/components/schemas/GlobalSearchResultSet'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GlobalSearchResultSet:
+      type: object
+      properties:
+        GlobalContactsResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalContactSearchResult'
+        GlobalClientsResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalClientSearchResult'
+        GlobalMattersResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalMatterSearchResult'
+        GlobalActivityResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalActivitySearchResult'
+        GlobalTagsResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalTagSearchResult'
+    GlobalActivitySearchResult:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+        Description:
           type: string
         ResultStrength:
           type: integer
@@ -326,13 +319,20 @@ components:
           type: array
           items:
             type: string
-    GlobalMatterSearchResult:
+    GlobalSearchRequest:
       type: object
       properties:
-        MatterId:
+        SearchText:
+          type: string
+        IsMobile:
+          type: boolean
+    GlobalTagSearchResult:
+      type: object
+      properties:
+        TagId:
           type: integer
           format: int32
-        MatterName:
+        TagName:
           type: string
         ResultStrength:
           type: integer
@@ -341,13 +341,13 @@ components:
           type: array
           items:
             type: string
-    GlobalActivitySearchResult:
+    GlobalMatterSearchResult:
       type: object
       properties:
-        ActivityId:
+        MatterId:
           type: integer
           format: int32
-        Description:
+        MatterName:
           type: string
         ResultStrength:
           type: integer

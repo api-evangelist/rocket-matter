@@ -144,25 +144,259 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SaveReportPreferenceRequest:
+      type: object
+      properties:
+        Preference:
+          type: object
+          $ref: '#/components/schemas/UserReportPreference'
+    GetUserReportPreferenceResponse:
+      type: object
+      properties:
+        Preference:
+          type: object
+          $ref: '#/components/schemas/UserReportPreference'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    BreadCrumb:
+      type: object
+      properties:
+        PageTitle:
+          type: string
+        QueryString:
+          type: string
+        Location:
+          type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    RunReportResponse:
+      type: object
+      properties:
+        ReportData:
+          type: array
+          items:
+            type: object
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    GetUserReportPreferenceRequest:
+      type: object
+      properties:
+        Preference:
+          type: string
+    FilterVal:
+      type: object
+      properties:
+        Report:
+          type: string
+        UserId:
+          type: integer
+          format: int32
+        UserIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+        ClientId:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        ContactId:
+          type: integer
+          format: int32
+        TaxRateId:
+          type: string
+        TaxRateDescription:
+          type: string
+        SurchargeRateId:
+          type: string
+        StartDate:
+          type: string
+        EndDate:
+          type: string
+        StartDateChange:
+          type: string
+        EndDateChange:
+          type: string
+        CustomFilters:
+          type: object
+        CustomFieldCollection:
+          type: array
+          items:
+            type: string
+        MatterTagsCollection:
+          type: array
+          items:
+            type: string
     RunReportRequest:
       type: object
       properties:
         Filter:
           type: object
           $ref: '#/components/schemas/ReportFilter'
-    GetReportMedaDataRequest:
+    GetReportSummaryResponse:
       type: object
       properties:
-        Report:
-          type: string
-        IsCustom:
-          type: boolean
-    GetReportSummaryRequest:
-      type: object
-      properties:
-        Filter:
+        Summary:
           type: object
-          $ref: '#/components/schemas/ReportFilter'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ReportMetaData:
+      type: object
+      properties:
+        ColumnWidths:
+          type: object
+        IsPagedReport:
+          type: boolean
+        AggregateKeys:
+          type: array
+          items:
+            type: string
+        FilterState:
+          type: object
+          $ref: '#/components/schemas/ReportFilterState'
+        PageSize:
+          type: integer
+          format: int32
+        ReportDisplayName:
+          type: string
+        HasAccess:
+          type: boolean
+        UseWideScreen:
+          type: boolean
+        RunOnLoad:
+          type: boolean
+        SaveReportState:
+          type: boolean
+        HelpfullTips:
+          type: string
+        LoadSavedReportStateOnlyOnBack:
+          type: boolean
+        BreadCrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/BreadCrumb'
+        DisableSort:
+          type: boolean
+        DisableSummary:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    UserReportPreference:
+      type: object
+      properties:
+        UserId:
+          type: integer
+          format: int32
+        PreferenceKey:
+          type: string
+        PreferenceValue:
+          type: string
+        Id:
+          type: string
     ReportFilterState:
       type: object
       properties:
@@ -239,39 +473,6 @@ components:
           type: string
         MatterTagsValueSearch:
           type: boolean
-    RunReportResponse:
-      type: object
-      properties:
-        ReportData:
-          type: array
-          items:
-            type: object
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
     GetReportMetaDataResponse:
       type: object
       properties:
@@ -295,129 +496,35 @@ components:
           type: array
           items:
             type: string
-    ValidationResult:
+    GetReportSummaryRequest:
       type: object
       properties:
-        MinValue:
-          type: boolean
-        MaxValue:
-          type: boolean
-        MinLength:
-          type: boolean
-        MaxLength:
-          type: boolean
-        Required:
-          type: boolean
-        PropertyDisplayName:
-          type: string
-        Precision:
-          type: boolean
-        ValueEntered:
+        Filter:
           type: object
-        Name:
-          type: string
-        ObjectName:
-          type: string
-        ExternalID:
-          type: string
-        MinValueMessage:
-          type: string
-        MaxValueMessage:
-          type: string
-        MinLengthMessage:
-          type: string
-        MaxLengthMessage:
-          type: string
-        RequiredMessage:
-          type: string
-        RequiredPrecisionMessage:
-          type: string
-        BaseFailureMessage:
-          type: string
-        FailedValidationMessages:
-          type: array
-          items:
-            type: string
-        FailedCharacterValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterValidationRule'
-        IsValid:
-          type: boolean
-    UserReportPreference:
-      type: object
-      properties:
-        UserId:
-          type: integer
-          format: int32
-        PreferenceKey:
-          type: string
-        PreferenceValue:
-          type: string
-        Id:
-          type: string
-    ReportMetaData:
-      type: object
-      properties:
-        ColumnWidths:
-          type: object
-        IsPagedReport:
-          type: boolean
-        AggregateKeys:
-          type: array
-          items:
-            type: string
-        FilterState:
-          type: object
-          $ref: '#/components/schemas/ReportFilterState'
-        PageSize:
-          type: integer
-          format: int32
-        ReportDisplayName:
-          type: string
-        HasAccess:
-          type: boolean
-        UseWideScreen:
-          type: boolean
-        RunOnLoad:
-          type: boolean
-        SaveReportState:
-          type: boolean
-        HelpfullTips:
-          type: string
-        LoadSavedReportStateOnlyOnBack:
-          type: boolean
-        BreadCrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/BreadCrumb'
-        DisableSort:
-          type: boolean
-        DisableSummary:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
-    SaveReportPreferenceRequest:
+          $ref: '#/components/schemas/ReportFilter'
+    SaveUserReportPreferenceResponse:
       type: object
       properties:
         Preference:
           type: object
           $ref: '#/components/schemas/UserReportPreference'
-    BreadCrumb:
-      type: object
-      properties:
-        PageTitle:
+        Success:
+          type: boolean
+        Message:
           type: string
-        QueryString:
+        ErrorMessage:
           type: string
-        Location:
-          type: string
-    GetUserReportPreferenceRequest:
-      type: object
-      properties:
-        Preference:
-          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     ReportFilter:
       type: object
       properties:
@@ -485,117 +592,10 @@ components:
         ID:
           type: integer
           format: int32
-    FilterVal:
+    GetReportMedaDataRequest:
       type: object
       properties:
         Report:
           type: string
-        UserId:
-          type: integer
-          format: int32
-        UserIds:
-          type: array
-          items:
-            type: integer
-            format: int32
-        ClientId:
-          type: integer
-          format: int32
-        MatterId:
-          type: integer
-          format: int32
-        ContactId:
-          type: integer
-          format: int32
-        TaxRateId:
-          type: string
-        TaxRateDescription:
-          type: string
-        SurchargeRateId:
-          type: string
-        StartDate:
-          type: string
-        EndDate:
-          type: string
-        StartDateChange:
-          type: string
-        EndDateChange:
-          type: string
-        CustomFilters:
-          type: object
-        CustomFieldCollection:
-          type: array
-          items:
-            type: string
-        MatterTagsCollection:
-          type: array
-          items:
-            type: string
-    GetUserReportPreferenceResponse:
-      type: object
-      properties:
-        Preference:
-          type: object
-          $ref: '#/components/schemas/UserReportPreference'
-        Success:
+        IsCustom:
           type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SaveUserReportPreferenceResponse:
-      type: object
-      properties:
-        Preference:
-          type: object
-          $ref: '#/components/schemas/UserReportPreference'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetReportSummaryResponse:
-      type: object
-      properties:
-        Summary:
-          type: object
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
