@@ -94,11 +94,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SearchTagsRequest:
-      type: object
-      properties:
-        SearchText:
-          type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -111,6 +106,76 @@ components:
     AddRemoveTagResponse:
       type: object
       properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SearchTagsRequest:
+      type: object
+      properties:
+        SearchText:
+          type: string
+    Tag:
+      type: object
+      properties:
+        Name:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    AddRemoveTagRequest:
+      type: object
+      properties:
+        Tag:
+          type: object
+          $ref: '#/components/schemas/Tag'
+        EntityTypeId:
+          type: string
+          enum:
+          - None
+          - Contact
+          - User
+          - Matter
+          - Document
+          - Note
+          - Activity
+          - CalendarEntry
+          - TodoItem
+          - LedgerEntry
+          - Expense
+          - BilledTime
+          - Timer
+          - PhoneMessage
+          - MatterTrustLedgerEntry
+          - ClientTrustLedgerEntry
+          - DocumentTemplate
+          - Email
+          - Portal
+          - FlatFee
+          - ChatMessage
+        EntityId:
+          type: integer
+          format: int32
+    SearchTagsResponse:
+      type: object
+      properties:
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
         Success:
           type: boolean
         Message:
@@ -177,68 +242,3 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    AddRemoveTagRequest:
-      type: object
-      properties:
-        Tag:
-          type: object
-          $ref: '#/components/schemas/Tag'
-        EntityTypeId:
-          type: string
-          enum:
-          - None
-          - Contact
-          - User
-          - Matter
-          - Document
-          - Note
-          - Activity
-          - CalendarEntry
-          - TodoItem
-          - LedgerEntry
-          - Expense
-          - BilledTime
-          - Timer
-          - PhoneMessage
-          - MatterTrustLedgerEntry
-          - ClientTrustLedgerEntry
-          - DocumentTemplate
-          - Email
-          - Portal
-          - FlatFee
-          - ChatMessage
-        EntityId:
-          type: integer
-          format: int32
-    SearchTagsResponse:
-      type: object
-      properties:
-        Tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    Tag:
-      type: object
-      properties:
-        Name:
-          type: string
-        ID:
-          type: integer
-          format: int32

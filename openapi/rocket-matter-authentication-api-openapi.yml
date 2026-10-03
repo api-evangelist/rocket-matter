@@ -163,33 +163,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    BaseResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetMobileAuthenticationCodeRequest:
-      type: object
-      properties:
-        DeviceId:
-          type: string
-        AuthenticationToken:
-          type: string
     RevokeTokenResponse:
       type: object
       properties:
@@ -210,15 +183,6 @@ components:
           type: array
           items:
             type: string
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
     GrantTokenResponse:
       type: object
       properties:
@@ -300,6 +264,52 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    BaseResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetMobileAuthenticationCodeRequest:
+      type: object
+      properties:
+        DeviceId:
+          type: string
+        AuthenticationToken:
+          type: string
+    RevokeTokenRequest:
+      type: object
+      properties:
+        token:
+          type: string
+    RefreshTokenRequest:
+      type: object
+      properties:
+        refresh_token:
+          type: string
     GetMobileAuthenticationCodeResponse:
       type: object
       properties:
@@ -324,16 +334,6 @@ components:
           type: array
           items:
             type: string
-    RefreshTokenRequest:
-      type: object
-      properties:
-        refresh_token:
-          type: string
-    RevokeTokenRequest:
-      type: object
-      properties:
-        token:
-          type: string
     GrantTokenRequest:
       type: object
       properties:

@@ -56,9 +56,40 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
     BaseResponse:
       type: object
       properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetGoogleConnectionStatusResponse:
+      type: object
+      properties:
+        CalendarConnected:
+          type: boolean
         Success:
           type: boolean
         Message:
@@ -125,34 +156,3 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    GetGoogleConnectionStatusResponse:
-      type: object
-      properties:
-        CalendarConnected:
-          type: boolean
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string

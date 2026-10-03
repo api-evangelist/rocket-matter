@@ -37,6 +37,41 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    AllValidationsResponse:
+      type: object
+      properties:
+        Rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationRule'
+        Mappings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationMappingRef'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ValidationMappingRef:
+      type: object
+      properties:
+        Name:
+          type: string
+        Rules:
+          type: object
     CharacterValidationRule:
       type: object
       properties:
@@ -46,13 +81,54 @@ components:
           type: string
         Regex:
           type: string
-    ValidationMappingRef:
+    ValidationRule:
       type: object
       properties:
         Name:
           type: string
-        Rules:
+        MinValue:
+          type: number
+          format: double
+        MinValueMessage:
+          type: string
+        MaxValue:
+          type: number
+          format: double
+        MaxValueMessage:
+          type: string
+        MinLength:
+          type: integer
+          format: int32
+        MinLengthMessage:
+          type: string
+        MaxLength:
+          type: integer
+          format: int32
+        MaxLengthMessage:
+          type: string
+        Required:
+          type: boolean
+        RequiredMessage:
+          type: string
+        DisplayName:
+          type: string
+        Extend:
+          type: string
+        Overrides:
           type: object
+        Precision:
+          type: integer
+          format: int32
+        RequiresPrecision:
+          type: boolean
+        RequiresPrecisionMessage:
+          type: string
+        FormatMessage:
+          type: string
+        CharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
     ValidationResult:
       type: object
       properties:
@@ -102,79 +178,3 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    ValidationRule:
-      type: object
-      properties:
-        Name:
-          type: string
-        MinValue:
-          type: number
-          format: double
-        MinValueMessage:
-          type: string
-        MaxValue:
-          type: number
-          format: double
-        MaxValueMessage:
-          type: string
-        MinLength:
-          type: integer
-          format: int32
-        MinLengthMessage:
-          type: string
-        MaxLength:
-          type: integer
-          format: int32
-        MaxLengthMessage:
-          type: string
-        Required:
-          type: boolean
-        RequiredMessage:
-          type: string
-        DisplayName:
-          type: string
-        Extend:
-          type: string
-        Overrides:
-          type: object
-        Precision:
-          type: integer
-          format: int32
-        RequiresPrecision:
-          type: boolean
-        RequiresPrecisionMessage:
-          type: string
-        FormatMessage:
-          type: string
-        CharacterValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterValidationRule'
-    AllValidationsResponse:
-      type: object
-      properties:
-        Rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationRule'
-        Mappings:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationMappingRef'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string

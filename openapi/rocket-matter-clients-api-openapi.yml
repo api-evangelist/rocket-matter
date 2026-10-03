@@ -263,64 +263,43 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MatterRelatedContact:
+    GetClientsByIdsRequest:
+      type: object
+      properties:
+        ClientIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+    GetMatterReadOnlyRelationshipsRequest:
+      type: object
+      properties:
+        ClientId:
+          type: integer
+          format: int32
+        Relationship:
+          type: string
+    ContactRelationship:
       type: object
       properties:
         ContactId:
           type: integer
           format: int32
-        Contact:
-          type: object
-          $ref: '#/components/schemas/Contact'
-        MatterID:
+        RelationshipId:
           type: integer
           format: int32
+        RelationshipName:
+          type: string
         Role:
           type: string
         Position:
           type: integer
           format: int32
-        RelationshipName:
-          type: string
-        IsDefault:
-          type: boolean
-        IsUser:
-          type: boolean
-        IsAttendeeRole:
-          type: boolean
-        IsEventOwnerRole:
-          type: boolean
-        TaskAssigneeRole:
-          type: boolean
-        TaskOwnerRole:
+        IsCompany:
           type: boolean
         ID:
           type: integer
           format: int32
-    GetCountriesResponse:
-      type: object
-      properties:
-        Countries:
-          type: array
-          items:
-            type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     SearchClientsReponse:
       type: object
       properties:
@@ -345,126 +324,23 @@ components:
           type: array
           items:
             type: string
-    GetMatterReadOnlyRelationshipsResponse:
+    SearchClientsRequest:
       type: object
       properties:
-        RelatedContacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterRelatedContact'
-        Success:
-          type: boolean
-        Message:
+        SearchText:
           type: string
-        ErrorMessage:
+    CreateClientFromStringRequest:
+      type: object
+      properties:
+        ClientCode:
           type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
+    GetCountriesResponse:
+      type: object
+      properties:
+        Countries:
           type: array
           items:
             type: string
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    ValidationResult:
-      type: object
-      properties:
-        MinValue:
-          type: boolean
-        MaxValue:
-          type: boolean
-        MinLength:
-          type: boolean
-        MaxLength:
-          type: boolean
-        Required:
-          type: boolean
-        PropertyDisplayName:
-          type: string
-        Precision:
-          type: boolean
-        ValueEntered:
-          type: object
-        Name:
-          type: string
-        ObjectName:
-          type: string
-        ExternalID:
-          type: string
-        MinValueMessage:
-          type: string
-        MaxValueMessage:
-          type: string
-        MinLengthMessage:
-          type: string
-        MaxLengthMessage:
-          type: string
-        RequiredMessage:
-          type: string
-        RequiredPrecisionMessage:
-          type: string
-        BaseFailureMessage:
-          type: string
-        FailedValidationMessages:
-          type: array
-          items:
-            type: string
-        FailedCharacterValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterValidationRule'
-        IsValid:
-          type: boolean
-    CreateClientFromStringResponse:
-      type: object
-      properties:
-        Client:
-          type: object
-          $ref: '#/components/schemas/Client'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetMatterReadOnlyRelationshipsRequest:
-      type: object
-      properties:
-        ClientId:
-          type: integer
-          format: int32
-        Relationship:
-          type: string
-    GetClientsByIdsResponse:
-      type: object
-      properties:
-        Clients:
-          type: array
-          items:
-            $ref: '#/components/schemas/Client'
         Success:
           type: boolean
         Message:
@@ -511,27 +387,91 @@ components:
           type: array
           items:
             type: string
-    ContactRelationship:
+    MatterRelatedContact:
       type: object
       properties:
         ContactId:
           type: integer
           format: int32
-        RelationshipId:
+        Contact:
+          type: object
+          $ref: '#/components/schemas/Contact'
+        MatterID:
           type: integer
           format: int32
-        RelationshipName:
-          type: string
         Role:
           type: string
         Position:
           type: integer
           format: int32
-        IsCompany:
+        RelationshipName:
+          type: string
+        IsDefault:
+          type: boolean
+        IsUser:
+          type: boolean
+        IsAttendeeRole:
+          type: boolean
+        IsEventOwnerRole:
+          type: boolean
+        TaskAssigneeRole:
+          type: boolean
+        TaskOwnerRole:
           type: boolean
         ID:
           type: integer
           format: int32
+    GetCountriesRequest:
+      type: object
+      properties:
+        SearchText:
+          type: string
+    GetClientByCodeResponse:
+      type: object
+      properties:
+        Client:
+          type: object
+          $ref: '#/components/schemas/Client'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CreateClientFromStringResponse:
+      type: object
+      properties:
+        Client:
+          type: object
+          $ref: '#/components/schemas/Client'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     Client:
       type: object
       properties:
@@ -608,6 +548,112 @@ components:
       properties:
         ClientCode:
           type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    GetAllClientsReponse:
+      type: object
+      properties:
+        Clients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Client'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetClientsByIdsResponse:
+      type: object
+      properties:
+        Clients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Client'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     Contact:
       type: object
       properties:
@@ -683,6 +729,30 @@ components:
         ID:
           type: integer
           format: int32
+    GetMatterReadOnlyRelationshipsResponse:
+      type: object
+      properties:
+        RelatedContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterRelatedContact'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     ContactAddress:
       type: object
       properties:
@@ -703,73 +773,3 @@ components:
         ID:
           type: integer
           format: int32
-    GetCountriesRequest:
-      type: object
-      properties:
-        SearchText:
-          type: string
-    CreateClientFromStringRequest:
-      type: object
-      properties:
-        ClientCode:
-          type: string
-    GetClientsByIdsRequest:
-      type: object
-      properties:
-        ClientIds:
-          type: array
-          items:
-            type: integer
-            format: int32
-    GetAllClientsReponse:
-      type: object
-      properties:
-        Clients:
-          type: array
-          items:
-            $ref: '#/components/schemas/Client'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SearchClientsRequest:
-      type: object
-      properties:
-        SearchText:
-          type: string
-    GetClientByCodeResponse:
-      type: object
-      properties:
-        Client:
-          type: object
-          $ref: '#/components/schemas/Client'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string

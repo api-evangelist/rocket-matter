@@ -43,6 +43,14 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    MatterType:
+      type: object
+      properties:
+        Name:
+          type: string
+        ID:
+          type: integer
+          format: int32
     CharacterValidationRule:
       type: object
       properties:
@@ -130,11 +138,3 @@ components:
           type: array
           items:
             type: string
-    MatterType:
-      type: object
-      properties:
-        Name:
-          type: string
-        ID:
-          type: integer
-          format: int32

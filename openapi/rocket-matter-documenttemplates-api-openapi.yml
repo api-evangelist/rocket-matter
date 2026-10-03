@@ -69,39 +69,16 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DocumentTemplate:
+    GetDocumentTemplatesResponse:
       type: object
       properties:
-        Title:
-          type: string
-        UploadedByUserId:
-          type: integer
-          format: int32
-        UploadedByUserName:
-          type: string
-        FileUrl:
-          type: string
-        IsValidated:
-          type: boolean
-        Size:
-          type: integer
-          format: int32
-        Tags:
+        DocumentTemplates:
           type: array
           items:
-            type: string
-        ID:
+            $ref: '#/components/schemas/DocumentTemplate'
+        Count:
           type: integer
           format: int32
-    DeleteDocumentTemplateRequest:
-      type: object
-      properties:
-        DocumentTemplateId:
-          type: integer
-          format: int32
-    DeleteDocumentTemplateResponse:
-      type: object
-      properties:
         Success:
           type: boolean
         Message:
@@ -128,33 +105,56 @@ components:
           type: string
         Regex:
           type: string
-    GetDocumentTemplatesRequest:
+    DocumentTemplate:
       type: object
       properties:
-        Offset:
+        Title:
+          type: string
+        UploadedByUserId:
           type: integer
           format: int32
-        Fetch:
+        UploadedByUserName:
+          type: string
+        FileUrl:
+          type: string
+        IsValidated:
+          type: boolean
+        Size:
           type: integer
           format: int32
         Tags:
           type: array
           items:
             type: string
-        Search:
+        ID:
+          type: integer
+          format: int32
+    DeleteDocumentTemplateResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
           type: string
-        SortByTitle:
-          type: boolean
-        SortDescending:
-          type: boolean
-        GetCount:
-          type: boolean
-        State:
+        ErrorMessage:
           type: string
-          enum:
-          - None
-          - Valid
-          - NotValid
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteDocumentTemplateRequest:
+      type: object
+      properties:
+        DocumentTemplateId:
+          type: integer
+          format: int32
     ValidationResult:
       type: object
       properties:
@@ -204,30 +204,30 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    GetDocumentTemplatesResponse:
+    GetDocumentTemplatesRequest:
       type: object
       properties:
-        DocumentTemplates:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentTemplate'
-        Count:
+        Offset:
           type: integer
           format: int32
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
+        Fetch:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
+        Tags:
           type: array
           items:
             type: string
+        Search:
+          type: string
+        SortByTitle:
+          type: boolean
+        SortDescending:
+          type: boolean
+        GetCount:
+          type: boolean
+        State:
+          type: string
+          enum:
+          - None
+          - Valid
+          - NotValid

@@ -682,18 +682,38 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GetMattersForInvoiceTemplateRequest:
+    ProcessRefundRequest:
+      type: object
+      properties:
+        TransactionId:
+          type: string
+    CustomRequestRetainerEmail:
+      type: object
+      properties:
+        Id:
+          type: string
+        Subject:
+          type: string
+        FromEmail:
+          type: string
+        PaymentLinkText:
+          type: string
+        Body:
+          type: string
+    ValidateInvoiceTemplateRequest:
       type: object
       properties:
         InvoiceTemplateId:
           type: integer
           format: int32
-    GetCustomRefundEmailResponse:
+        IsSummary:
+          type: boolean
+    GetMostRecentInvoiceInfoByClientResponse:
       type: object
       properties:
-        CustomRefundEmail:
+        Invoice:
           type: object
-          $ref: '#/components/schemas/CustomRefundEmail'
+          $ref: '#/components/schemas/Invoice'
         Success:
           type: boolean
         Message:
@@ -711,101 +731,15 @@ components:
           type: array
           items:
             type: string
-    deleteInvoiceTemplateResponse:
+    DeletePaymentRequest:
       type: object
       properties:
-        id:
+        LedgerId:
           type: integer
           format: int32
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
+        MatterId:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SaveInvoiceTemplateResponse:
-      type: object
-      properties:
-        InvoiceTemplate:
-          type: object
-          $ref: '#/components/schemas/invoiceTemplate'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SetPaymentProcessorResponse:
-      type: object
-      properties:
-        PaymentProcessor:
-          type: object
-          $ref: '#/components/schemas/PaymentProcessor'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    RecordPaymentsToInvoicesResponse:
-      type: object
-      properties:
-        PaymentSuccess:
-          type: boolean
-        PaymentMessage:
-          type: string
-        HasUnpaidInvoices:
-          type: boolean
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     InvoicePayment:
       type: object
       properties:
@@ -837,107 +771,13 @@ components:
         ID:
           type: integer
           format: int32
-    ValidateInvoiceTemplateResponse:
+    GetMattersForInvoiceTemplateResponse:
       type: object
       properties:
-        Results:
+        MatterInvoiceTemplates:
           type: array
           items:
-            $ref: '#/components/schemas/TemplateFieldValidation'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetTransactionInfoResponse:
-      type: object
-      properties:
-        ClientName:
-          type: string
-        TransactionId:
-          type: string
-        OriginalPaymentDate:
-          type: string
-        Amount:
-          type: number
-          format: double
-        ExternalTransactionID:
-          type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    DestoryPaymentPlanChargetokenRequest:
-      type: object
-      properties:
-        PlanId:
-          type: string
-    SetCustomRefundEmailResquest:
-      type: object
-      properties:
-        CustomRefundEmail:
-          type: object
-          $ref: '#/components/schemas/CustomRefundEmail'
-    SetRequestRetainerPaymentmailResquest:
-      type: object
-      properties:
-        CustomRequestRetainerEmail:
-          type: object
-          $ref: '#/components/schemas/CustomRequestRetainerEmail'
-    GetMostRecentInvoiceInfoByClientResponse:
-      type: object
-      properties:
-        Invoice:
-          type: object
-          $ref: '#/components/schemas/Invoice'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SetRequestRetainerPaymentEmailResponse:
-      type: object
-      properties:
-        CustomRequestRetainerEmail:
-          type: object
-          $ref: '#/components/schemas/CustomRequestRetainerEmail'
+            $ref: '#/components/schemas/MatterInvoiceTemplate'
         Success:
           type: boolean
         Message:
@@ -979,15 +819,257 @@ components:
           type: array
           items:
             type: string
-    DeletePaymentRequest:
+    DeletePaymentResponse:
       type: object
       properties:
-        LedgerId:
+        DeleteSuccessful:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
           type: integer
           format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTransactionInfoRequest:
+      type: object
+      properties:
+        TransactionId:
+          type: string
+    CustomInvoicePaymentEmail:
+      type: object
+      properties:
+        Id:
+          type: string
+        Subject:
+          type: string
+        FromEmail:
+          type: string
+        PaymentLinkText:
+          type: string
+        Body:
+          type: string
+    ValidateInvoiceTemplateNameResponse:
+      type: object
+      properties:
+        IsValid:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SetPaymentProcessorResponse:
+      type: object
+      properties:
+        PaymentProcessor:
+          type: object
+          $ref: '#/components/schemas/PaymentProcessor'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    deleteInvoiceTemplateRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+    RMDirectory:
+      type: object
+      properties:
+        Name:
+          type: string
+        ParentDirectory:
+          type: string
+        ParentPath:
+          type: string
+        FullPath:
+          type: string
+        Files:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMFile'
+        Directories:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMDirectory'
+        FileUUId:
+          type: string
+    MatterInvoicePayments:
+      type: object
+      properties:
+        Payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoicePayment'
+        TotalInvoiced:
+          type: number
+          format: double
+        TotalPaid:
+          type: number
+          format: double
+        TotalDue:
+          type: number
+          format: double
+        TotalPaymentAmount:
+          type: number
+          format: double
         MatterId:
           type: integer
           format: int32
+        HasInvoices:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    ValidateInvoiceTemplateResponse:
+      type: object
+      properties:
+        Results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateFieldValidation'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    deleteInvoiceTemplateResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    Invoice:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
+        Date:
+          type: string
+          format: date-time
+        DateString:
+          type: string
+        BatchId:
+          type: integer
+          format: int32
+        InvoiceTemplateId:
+          type: integer
+          format: int32
+        Amount:
+          type: number
+          format: double
+        Balance:
+          type: number
+          format: double
+        Description:
+          type: string
+        IsPaid:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    GetInvoicePaymentsForMatterRequest:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
+    SaveInvoiceTemplateRequest:
+      type: object
+      properties:
+        Files:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMFile'
+        Directories:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMDirectory'
+        Type:
+          type: string
+          enum:
+          - Default
+          - Custom
+          - ClassicBlue
+          - ClassicGreen
+          - LuxuryBrown
+          - ModernBlack
+          - ModernBlue
+        IsSummary:
+          type: boolean
+    SetPaymentProcessorRequest:
+      type: object
+      properties:
+        PaymentProcessor:
+          type: object
+          $ref: '#/components/schemas/PaymentProcessor'
     getAvailableInvoiceTemplatesResponse:
       type: object
       properties:
@@ -1012,9 +1094,12 @@ components:
           type: array
           items:
             type: string
-    DestoryPaymentPlanChargetokenResponse:
+    GetRequestRetainerPaymentEmailResponse:
       type: object
       properties:
+        CustomRequestRetainerEmail:
+          type: object
+          $ref: '#/components/schemas/CustomRequestRetainerEmail'
         Success:
           type: boolean
         Message:
@@ -1044,39 +1129,12 @@ components:
           type: string
         EmptyRow:
           type: boolean
-    GetTransactionInfoRequest:
+    GetInvoicePaymentsForMatterResponse:
       type: object
       properties:
-        TransactionId:
-          type: string
-    CustomRequestRetainerEmail:
-      type: object
-      properties:
-        Id:
-          type: string
-        Subject:
-          type: string
-        FromEmail:
-          type: string
-        PaymentLinkText:
-          type: string
-        Body:
-          type: string
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    GetCustomInvoicePaymentReceiptEmailResponse:
-      type: object
-      properties:
-        CustomInvoicePaymentReceiptEmail:
+        InvoicePayments:
           type: object
-          $ref: '#/components/schemas/CustomInvoicePaymentReceiptEmail'
+          $ref: '#/components/schemas/MatterInvoicePayments'
         Success:
           type: boolean
         Message:
@@ -1094,55 +1152,154 @@ components:
           type: array
           items:
             type: string
-    ValidationResult:
+    getAvailableInvoiceTemplatesRequest:
       type: object
       properties:
-        MinValue:
+        IsSummary:
           type: boolean
-        MaxValue:
-          type: boolean
-        MinLength:
-          type: boolean
-        MaxLength:
-          type: boolean
-        Required:
-          type: boolean
-        PropertyDisplayName:
+    CustomPaymentPlanReceiptEmail:
+      type: object
+      properties:
+        Id:
           type: string
-        Precision:
-          type: boolean
-        ValueEntered:
+        Subject:
+          type: string
+        FromEmail:
+          type: string
+        Body:
+          type: string
+        BccEmails:
+          type: string
+    SetCustomRefundEmailResponse:
+      type: object
+      properties:
+        CustomRefundEmail:
           type: object
-        Name:
+          $ref: '#/components/schemas/CustomRefundEmail'
+        Success:
+          type: boolean
+        Message:
           type: string
-        ObjectName:
+        ErrorMessage:
           type: string
-        ExternalID:
-          type: string
-        MinValueMessage:
-          type: string
-        MaxValueMessage:
-          type: string
-        MinLengthMessage:
-          type: string
-        MaxLengthMessage:
-          type: string
-        RequiredMessage:
-          type: string
-        RequiredPrecisionMessage:
-          type: string
-        BaseFailureMessage:
-          type: string
-        FailedValidationMessages:
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
           type: array
           items:
             type: string
-        FailedCharacterValidations:
+    invoiceTemplate:
+      type: object
+      properties:
+        isInValid:
+          type: boolean
+        id:
+          type: integer
+          format: int32
+        invoiceTemplateURL:
+          type: string
+        isActive:
+          type: boolean
+    CustomRefundEmail:
+      type: object
+      properties:
+        Id:
+          type: string
+        Subject:
+          type: string
+        FromEmail:
+          type: string
+        Body:
+          type: string
+    GetMostRecentInvoiceInfoByClientRequest:
+      type: object
+      properties:
+        ClientID:
+          type: integer
+          format: int32
+    SetCustomPaymentPlanReceiptEmailResponse:
+      type: object
+      properties:
+        CustomPaymentPlanReceiptEmail:
+          type: object
+          $ref: '#/components/schemas/CustomPaymentPlanReceiptEmail'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
           type: array
           items:
-            $ref: '#/components/schemas/CharacterValidationRule'
-        IsValid:
-          type: boolean
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetMattersForInvoiceTemplateRequest:
+      type: object
+      properties:
+        InvoiceTemplateId:
+          type: integer
+          format: int32
+    SetCustomRefundEmailResquest:
+      type: object
+      properties:
+        CustomRefundEmail:
+          type: object
+          $ref: '#/components/schemas/CustomRefundEmail'
+    RMFile:
+      type: object
+      properties:
+        ContentType:
+          type: string
+        FileName:
+          type: string
+        FileContents:
+          type: object
+        ParentDirectory:
+          type: string
+        ParentPath:
+          type: string
+        FullPath:
+          type: string
+        FileUUId:
+          type: string
+    MatterInvoiceTemplate:
+      type: object
+      properties:
+        InvoiceTemplateId:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        ClientMatter:
+          type: string
+        Id:
+          type: string
+    CustomInvoicePaymentReceiptEmail:
+      type: object
+      properties:
+        Id:
+          type: string
+        Subject:
+          type: string
+        FromEmail:
+          type: string
+        Body:
+          type: string
+        BccEmails:
+          type: string
     Payment:
       type: object
       properties:
@@ -1178,20 +1335,12 @@ components:
         ID:
           type: integer
           format: int32
-    ValidateInvoiceTemplateRequest:
+    SaveInvoiceTemplateResponse:
       type: object
       properties:
-        InvoiceTemplateId:
-          type: integer
-          format: int32
-        IsSummary:
-          type: boolean
-    SetCustomPaymentPlanReceiptEmailResponse:
-      type: object
-      properties:
-        CustomPaymentPlanReceiptEmail:
+        InvoiceTemplate:
           type: object
-          $ref: '#/components/schemas/CustomPaymentPlanReceiptEmail'
+          $ref: '#/components/schemas/invoiceTemplate'
         Success:
           type: boolean
         Message:
@@ -1209,6 +1358,81 @@ components:
           type: array
           items:
             type: string
+    GetPaymentProcessorResponse:
+      type: object
+      properties:
+        PaymentProcessor:
+          type: object
+          $ref: '#/components/schemas/PaymentProcessor'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SetRequestRetainerPaymentmailResquest:
+      type: object
+      properties:
+        CustomRequestRetainerEmail:
+          type: object
+          $ref: '#/components/schemas/CustomRequestRetainerEmail'
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    SetRequestRetainerPaymentEmailResponse:
+      type: object
+      properties:
+        CustomRequestRetainerEmail:
+          type: object
+          $ref: '#/components/schemas/CustomRequestRetainerEmail'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    TemplateFieldValidation:
+      type: object
+      properties:
+        Name:
+          type: string
+        IsValid:
+          type: boolean
+        IsColumn:
+          type: boolean
+        Field:
+          type: object
+          $ref: '#/components/schemas/BaseField'
+        ParentTable:
+          type: string
     PaymentProcessor:
       type: object
       properties:
@@ -1300,53 +1524,12 @@ components:
         FDTrustPopTerminalID:
           type: integer
           format: int32
-    RunInvoiceRequest:
+    SetCustomInvoicePaymentEmailResponse:
       type: object
       properties:
-        BillingParams:
+        CustomInvoicePaymentEmail:
           type: object
-          $ref: '#/components/schemas/BillingParams'
-    deleteInvoiceTemplateRequest:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-    SetCustomPaymentPlanReceiptEmailResquest:
-      type: object
-      properties:
-        CustomPaymentPlanReceiptEmail:
-          type: object
-          $ref: '#/components/schemas/CustomPaymentPlanReceiptEmail'
-    SaveInvoiceTemplateRequest:
-      type: object
-      properties:
-        Files:
-          type: array
-          items:
-            $ref: '#/components/schemas/RMFile'
-        Directories:
-          type: array
-          items:
-            $ref: '#/components/schemas/RMDirectory'
-        Type:
-          type: string
-          enum:
-          - Default
-          - Custom
-          - ClassicBlue
-          - ClassicGreen
-          - LuxuryBrown
-          - ModernBlack
-          - ModernBlue
-        IsSummary:
-          type: boolean
-    GetPaymentProcessorResponse:
-      type: object
-      properties:
-        PaymentProcessor:
-          type: object
-          $ref: '#/components/schemas/PaymentProcessor'
+          $ref: '#/components/schemas/CustomInvoicePaymentEmail'
         Success:
           type: boolean
         Message:
@@ -1364,27 +1547,27 @@ components:
           type: array
           items:
             type: string
-    TemplateFieldValidation:
+    SaveRetainerRequest:
       type: object
       properties:
-        Name:
-          type: string
-        IsValid:
-          type: boolean
-        IsColumn:
-          type: boolean
-        Field:
-          type: object
-          $ref: '#/components/schemas/BaseField'
-        ParentTable:
-          type: string
-    GetPaymentsForMatterRequest:
-      type: object
-      properties:
+        ContactId:
+          type: integer
+          format: int32
         MatterId:
           type: integer
           format: int32
-    SetCustomRefundEmailResponse:
+        Amount:
+          type: number
+          format: double
+        Email:
+          type: string
+    SetCustomPaymentPlanReceiptEmailResquest:
+      type: object
+      properties:
+        CustomPaymentPlanReceiptEmail:
+          type: object
+          $ref: '#/components/schemas/CustomPaymentPlanReceiptEmail'
+    GetCustomRefundEmailResponse:
       type: object
       properties:
         CustomRefundEmail:
@@ -1407,10 +1590,63 @@ components:
           type: array
           items:
             type: string
-    ValidateInvoiceTemplateNameResponse:
+    ValidationResult:
       type: object
       properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
+          type: boolean
+    RecordPaymentsToInvoicesResponse:
+      type: object
+      properties:
+        PaymentSuccess:
+          type: boolean
+        PaymentMessage:
+          type: string
+        HasUnpaidInvoices:
           type: boolean
         Success:
           type: boolean
@@ -1429,6 +1665,55 @@ components:
           type: array
           items:
             type: string
+    GetCustomInvoicePaymentReceiptEmailResponse:
+      type: object
+      properties:
+        CustomInvoicePaymentReceiptEmail:
+          type: object
+          $ref: '#/components/schemas/CustomInvoicePaymentReceiptEmail'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DestoryPaymentPlanChargetokenResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetPaymentsForMatterRequest:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
     RunInvoiceResponse:
       type: object
       properties:
@@ -1454,186 +1739,6 @@ components:
           type: array
           items:
             type: string
-    getAvailableInvoiceTemplatesRequest:
-      type: object
-      properties:
-        IsSummary:
-          type: boolean
-    GetRequestRetainerPaymentEmailResponse:
-      type: object
-      properties:
-        CustomRequestRetainerEmail:
-          type: object
-          $ref: '#/components/schemas/CustomRequestRetainerEmail'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetCustomInvoicePaymentEmailResponse:
-      type: object
-      properties:
-        CustomInvoicePaymentEmail:
-          type: object
-          $ref: '#/components/schemas/CustomInvoicePaymentEmail'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    CustomInvoicePaymentEmail:
-      type: object
-      properties:
-        Id:
-          type: string
-        Subject:
-          type: string
-        FromEmail:
-          type: string
-        PaymentLinkText:
-          type: string
-        Body:
-          type: string
-    DeletePaymentResponse:
-      type: object
-      properties:
-        DeleteSuccessful:
-          type: boolean
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    RMFile:
-      type: object
-      properties:
-        ContentType:
-          type: string
-        FileName:
-          type: string
-        FileContents:
-          type: object
-        ParentDirectory:
-          type: string
-        ParentPath:
-          type: string
-        FullPath:
-          type: string
-        FileUUId:
-          type: string
-    SaveRetainerRequestResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    invoiceTemplate:
-      type: object
-      properties:
-        isInValid:
-          type: boolean
-        id:
-          type: integer
-          format: int32
-        invoiceTemplateURL:
-          type: string
-        isActive:
-          type: boolean
-    CustomPaymentPlanReceiptEmail:
-      type: object
-      properties:
-        Id:
-          type: string
-        Subject:
-          type: string
-        FromEmail:
-          type: string
-        Body:
-          type: string
-        BccEmails:
-          type: string
-    ValidateInvoiceTemplateNameRequest:
-      type: object
-      properties:
-        FileUrl:
-          type: string
-    MatterInvoicePayments:
-      type: object
-      properties:
-        Payments:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoicePayment'
-        TotalInvoiced:
-          type: number
-          format: double
-        TotalPaid:
-          type: number
-          format: double
-        TotalDue:
-          type: number
-          format: double
-        TotalPaymentAmount:
-          type: number
-          format: double
-        MatterId:
-          type: integer
-          format: int32
-        HasInvoices:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
     SetCustomInvoicePaymentReceiptEmailResponse:
       type: object
       properties:
@@ -1681,93 +1786,7 @@ components:
           type: array
           items:
             type: string
-    GetCustomPaymentPlanReceiptEmailResponse:
-      type: object
-      properties:
-        CustomPaymentPlanReceiptEmail:
-          type: object
-          $ref: '#/components/schemas/CustomPaymentPlanReceiptEmail'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SaveRetainerRequest:
-      type: object
-      properties:
-        ContactId:
-          type: integer
-          format: int32
-        MatterId:
-          type: integer
-          format: int32
-        Amount:
-          type: number
-          format: double
-        Email:
-          type: string
-    GetMostRecentInvoiceInfoByClientRequest:
-      type: object
-      properties:
-        ClientID:
-          type: integer
-          format: int32
-    CustomInvoicePaymentReceiptEmail:
-      type: object
-      properties:
-        Id:
-          type: string
-        Subject:
-          type: string
-        FromEmail:
-          type: string
-        Body:
-          type: string
-        BccEmails:
-          type: string
-    Invoice:
-      type: object
-      properties:
-        MatterId:
-          type: integer
-          format: int32
-        Date:
-          type: string
-          format: date-time
-        DateString:
-          type: string
-        BatchId:
-          type: integer
-          format: int32
-        InvoiceTemplateId:
-          type: integer
-          format: int32
-        Amount:
-          type: number
-          format: double
-        Balance:
-          type: number
-          format: double
-        Description:
-          type: string
-        IsPaid:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
-    SetCustomInvoicePaymentEmailResponse:
+    GetCustomInvoicePaymentEmailResponse:
       type: object
       properties:
         CustomInvoicePaymentEmail:
@@ -1790,60 +1809,6 @@ components:
           type: array
           items:
             type: string
-    GetInvoicePaymentsForMatterResponse:
-      type: object
-      properties:
-        InvoicePayments:
-          type: object
-          $ref: '#/components/schemas/MatterInvoicePayments'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SetCustomInvoicePaymentEmailResquest:
-      type: object
-      properties:
-        CustomInvoicePaymentEmail:
-          type: object
-          $ref: '#/components/schemas/CustomInvoicePaymentEmail'
-    SetPaymentProcessorRequest:
-      type: object
-      properties:
-        PaymentProcessor:
-          type: object
-          $ref: '#/components/schemas/PaymentProcessor'
-    GetInvoicePaymentsForMatterRequest:
-      type: object
-      properties:
-        MatterId:
-          type: integer
-          format: int32
-    RecordPaymentsToInvoicesRequest:
-      type: object
-      properties:
-        InvoicePayments:
-          type: object
-          $ref: '#/components/schemas/MatterInvoicePayments'
-        Date:
-          type: string
-          format: date-time
-        Description:
-          type: string
-        IsAdjustment:
-          type: boolean
     BillingParams:
       type: object
       properties:
@@ -1877,13 +1842,44 @@ components:
         ID:
           type: integer
           format: int32
-    GetMattersForInvoiceTemplateResponse:
+    DestoryPaymentPlanChargetokenRequest:
       type: object
       properties:
-        MatterInvoiceTemplates:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterInvoiceTemplate'
+        PlanId:
+          type: string
+    RecordPaymentsToInvoicesRequest:
+      type: object
+      properties:
+        InvoicePayments:
+          type: object
+          $ref: '#/components/schemas/MatterInvoicePayments'
+        Date:
+          type: string
+          format: date-time
+        Description:
+          type: string
+        IsAdjustment:
+          type: boolean
+    RunInvoiceRequest:
+      type: object
+      properties:
+        BillingParams:
+          type: object
+          $ref: '#/components/schemas/BillingParams'
+    GetTransactionInfoResponse:
+      type: object
+      properties:
+        ClientName:
+          type: string
+        TransactionId:
+          type: string
+        OriginalPaymentDate:
+          type: string
+        Amount:
+          type: number
+          format: double
+        ExternalTransactionID:
+          type: string
         Success:
           type: boolean
         Message:
@@ -1901,26 +1897,36 @@ components:
           type: array
           items:
             type: string
-    RMDirectory:
+    SaveRetainerRequestResponse:
       type: object
       properties:
-        Name:
+        Success:
+          type: boolean
+        Message:
           type: string
-        ParentDirectory:
+        ErrorMessage:
           type: string
-        ParentPath:
-          type: string
-        FullPath:
-          type: string
-        Files:
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
           type: array
           items:
-            $ref: '#/components/schemas/RMFile'
-        Directories:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
           type: array
           items:
-            $ref: '#/components/schemas/RMDirectory'
-        FileUUId:
+            type: string
+    SetCustomInvoicePaymentEmailResquest:
+      type: object
+      properties:
+        CustomInvoicePaymentEmail:
+          type: object
+          $ref: '#/components/schemas/CustomInvoicePaymentEmail'
+    ValidateInvoiceTemplateNameRequest:
+      type: object
+      properties:
+        FileUrl:
           type: string
     SetCustomInvoicePaymentReceiptEmailResquest:
       type: object
@@ -1928,32 +1934,26 @@ components:
         CustomInvoicePaymentReceiptEmail:
           type: object
           $ref: '#/components/schemas/CustomInvoicePaymentReceiptEmail'
-    CustomRefundEmail:
+    GetCustomPaymentPlanReceiptEmailResponse:
       type: object
       properties:
-        Id:
+        CustomPaymentPlanReceiptEmail:
+          type: object
+          $ref: '#/components/schemas/CustomPaymentPlanReceiptEmail'
+        Success:
+          type: boolean
+        Message:
           type: string
-        Subject:
+        ErrorMessage:
           type: string
-        FromEmail:
-          type: string
-        Body:
-          type: string
-    ProcessRefundRequest:
-      type: object
-      properties:
-        TransactionId:
-          type: string
-    MatterInvoiceTemplate:
-      type: object
-      properties:
-        InvoiceTemplateId:
+        ErrorNumber:
           type: integer
           format: int32
-        MatterId:
-          type: integer
-          format: int32
-        ClientMatter:
-          type: string
-        Id:
-          type: string
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

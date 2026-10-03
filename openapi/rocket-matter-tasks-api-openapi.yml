@@ -163,322 +163,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SaveTaskResponse:
-      type: object
-      properties:
-        Task:
-          type: object
-          $ref: '#/components/schemas/Task'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetTasksByFilterRequest:
-      type: object
-      properties:
-        Filter:
-          type: object
-          $ref: '#/components/schemas/TaskFilter'
-        RetrieveCount:
-          type: boolean
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    DeleteTaskResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetTaskByActivityIdResponse:
-      type: object
-      properties:
-        Task:
-          type: object
-          $ref: '#/components/schemas/Task'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    TaskEventMilestone:
-      type: object
-      properties:
-        TaskId:
-          type: integer
-          format: int32
-        EventId:
-          type: integer
-          format: int32
-        MatterTemplateMilestoneId:
-          type: integer
-          format: int32
-        MilestoneDate:
-          type: string
-          format: date-time
-        ID:
-          type: integer
-          format: int32
-    ValidationResult:
-      type: object
-      properties:
-        MinValue:
-          type: boolean
-        MaxValue:
-          type: boolean
-        MinLength:
-          type: boolean
-        MaxLength:
-          type: boolean
-        Required:
-          type: boolean
-        PropertyDisplayName:
-          type: string
-        Precision:
-          type: boolean
-        ValueEntered:
-          type: object
-        Name:
-          type: string
-        ObjectName:
-          type: string
-        ExternalID:
-          type: string
-        MinValueMessage:
-          type: string
-        MaxValueMessage:
-          type: string
-        MinLengthMessage:
-          type: string
-        MaxLengthMessage:
-          type: string
-        RequiredMessage:
-          type: string
-        RequiredPrecisionMessage:
-          type: string
-        BaseFailureMessage:
-          type: string
-        FailedValidationMessages:
-          type: array
-          items:
-            type: string
-        FailedCharacterValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterValidationRule'
-        IsValid:
-          type: boolean
-    SaveTaskRequest:
-      type: object
-      properties:
-        Task:
-          type: object
-          $ref: '#/components/schemas/Task'
-    GetTasksByFilterResponse:
-      type: object
-      properties:
-        Tasks:
-          type: array
-          items:
-            $ref: '#/components/schemas/Task'
-        TotalCount:
-          type: integer
-          format: int32
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetTaskByActivityIdRequest:
-      type: object
-      properties:
-        ActivityId:
-          type: integer
-          format: int32
-    GetTasksForMatterRequest:
-      type: object
-      properties:
-        MatterId:
-          type: integer
-          format: int32
-        State:
-          type: string
-          enum:
-          - Pending
-          - Completed
-          - Deleted
-          - All
-          - Due
-        ShowDueDates:
-          type: boolean
-        Offset:
-          type: integer
-          format: int32
-        Fetch:
-          type: integer
-          format: int32
-    GetCommonTagsResponse:
-      type: object
-      properties:
-        Tags:
-          type: array
-          items:
-            type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    TaskFilter:
-      type: object
-      properties:
-        UserId:
-          type: integer
-          format: int32
-        CurrentUserId:
-          type: integer
-          format: int32
-        MatterId:
-          type: integer
-          format: int32
-        State:
-          type: string
-          enum:
-          - Pending
-          - Completed
-          - Deleted
-          - All
-          - Due
-        Offset:
-          type: integer
-          format: int32
-        Fetch:
-          type: integer
-          format: int32
-        FilterType:
-          type: string
-          enum:
-          - UserTasks
-          - MatterTasks
-          - CreatedByOrAssignedByMe
-          - CreatedByMeNotAssigned
-          - CreatedByMeAssignedToOthers
-          - Custom
-        CreatedByUsers:
-          type: array
-          items:
-            type: integer
-            format: int32
-        AssignedToUsers:
-          type: array
-          items:
-            type: integer
-            format: int32
-        Tags:
-          type: array
-          items:
-            type: string
-        OnlyDueDates:
-          type: boolean
-    GetTasksForMatterResponse:
-      type: object
-      properties:
-        Tasks:
-          type: array
-          items:
-            $ref: '#/components/schemas/Task'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    DeleteTaskRequest:
-      type: object
-      properties:
-        Id:
-          type: integer
-          format: int32
     Task:
       type: object
       properties:
@@ -565,6 +249,209 @@ components:
         ID:
           type: integer
           format: int32
+    GetTasksByFilterResponse:
+      type: object
+      properties:
+        Tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        TotalCount:
+          type: integer
+          format: int32
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    GetTaskByActivityIdResponse:
+      type: object
+      properties:
+        Task:
+          type: object
+          $ref: '#/components/schemas/Task'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTasksForMatterResponse:
+      type: object
+      properties:
+        Tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTasksForMatterRequest:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
+        State:
+          type: string
+          enum:
+          - Pending
+          - Completed
+          - Deleted
+          - All
+          - Due
+        ShowDueDates:
+          type: boolean
+        Offset:
+          type: integer
+          format: int32
+        Fetch:
+          type: integer
+          format: int32
+    TaskFilter:
+      type: object
+      properties:
+        UserId:
+          type: integer
+          format: int32
+        CurrentUserId:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        State:
+          type: string
+          enum:
+          - Pending
+          - Completed
+          - Deleted
+          - All
+          - Due
+        Offset:
+          type: integer
+          format: int32
+        Fetch:
+          type: integer
+          format: int32
+        FilterType:
+          type: string
+          enum:
+          - UserTasks
+          - MatterTasks
+          - CreatedByOrAssignedByMe
+          - CreatedByMeNotAssigned
+          - CreatedByMeAssignedToOthers
+          - Custom
+        CreatedByUsers:
+          type: array
+          items:
+            type: integer
+            format: int32
+        AssignedToUsers:
+          type: array
+          items:
+            type: integer
+            format: int32
+        Tags:
+          type: array
+          items:
+            type: string
+        OnlyDueDates:
+          type: boolean
+    TaskEventMilestone:
+      type: object
+      properties:
+        TaskId:
+          type: integer
+          format: int32
+        EventId:
+          type: integer
+          format: int32
+        MatterTemplateMilestoneId:
+          type: integer
+          format: int32
+        MilestoneDate:
+          type: string
+          format: date-time
+        ID:
+          type: integer
+          format: int32
+    SaveTaskRequest:
+      type: object
+      properties:
+        Task:
+          type: object
+          $ref: '#/components/schemas/Task'
+    SaveTaskResponse:
+      type: object
+      properties:
+        Task:
+          type: object
+          $ref: '#/components/schemas/Task'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     User:
       type: object
       properties:
@@ -584,3 +471,116 @@ components:
         ID:
           type: integer
           format: int32
+    GetTaskByActivityIdRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    DeleteTaskResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteTaskRequest:
+      type: object
+      properties:
+        Id:
+          type: integer
+          format: int32
+    GetTasksByFilterRequest:
+      type: object
+      properties:
+        Filter:
+          type: object
+          $ref: '#/components/schemas/TaskFilter'
+        RetrieveCount:
+          type: boolean
+    GetCommonTagsResponse:
+      type: object
+      properties:
+        Tags:
+          type: array
+          items:
+            type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

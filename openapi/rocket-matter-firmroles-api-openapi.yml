@@ -193,6 +193,28 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    FirmRolesRatesCanEditResponse:
+      type: object
+      properties:
+        CanEdit:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     SaveClientRoleRatesResponse:
       type: object
       properties:
@@ -217,35 +239,13 @@ components:
           type: array
           items:
             type: string
-    GetClientRoleRatesRequest:
+    SaveClientRoleRatesRequest:
       type: object
       properties:
-        ContactId:
-          type: integer
-          format: int32
-    SaveFirmRoleResponse:
-      type: object
-      properties:
-        Role:
-          type: object
-          $ref: '#/components/schemas/UserFirmRole'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
+        ClientRoleRates:
           type: array
           items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
+            $ref: '#/components/schemas/ClientRoleRate'
     GetFirmRolesRequest:
       type: object
       properties:
@@ -262,24 +262,40 @@ components:
           type: string
         Regex:
           type: string
-    SaveClientRoleRatesRequest:
+    DeleteFirmRoleRequest:
       type: object
       properties:
-        ClientRoleRates:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClientRoleRate'
-    UserFirmRole:
-      type: object
-      properties:
-        Name:
+        FirmRoleId:
           type: string
-        Users:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
+    SaveFirmRoleRequest:
+      type: object
+      properties:
+        Role:
+          type: object
+          $ref: '#/components/schemas/UserFirmRole'
+    ClientRoleRate:
+      type: object
+      properties:
         Id:
           type: string
+        ClientId:
+          type: integer
+          format: int32
+        UserFirmRoleId:
+          type: string
+        Rate:
+          type: number
+          format: double
+        Role:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Enabled:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
     GetClientRoleRatesResponse:
       type: object
       properties:
@@ -304,6 +320,68 @@ components:
           type: array
           items:
             type: string
+    UserFirmRole:
+      type: object
+      properties:
+        Name:
+          type: string
+        Users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        Id:
+          type: string
+    User:
+      type: object
+      properties:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    GetClientRoleRatesRequest:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+    DeleteFirmRoleResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    FirmRolesRatesCanEditRequest:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
     ValidationResult:
       type: object
       properties:
@@ -353,65 +431,12 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    DeleteFirmRoleRequest:
-      type: object
-      properties:
-        FirmRoleId:
-          type: string
-    DeleteFirmRoleResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    ClientRoleRate:
-      type: object
-      properties:
-        Id:
-          type: string
-        ClientId:
-          type: integer
-          format: int32
-        UserFirmRoleId:
-          type: string
-        Rate:
-          type: number
-          format: double
-        Role:
-          type: string
-        ContactId:
-          type: integer
-          format: int32
-        Enabled:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
-    SaveFirmRoleRequest:
+    SaveFirmRoleResponse:
       type: object
       properties:
         Role:
           type: object
           $ref: '#/components/schemas/UserFirmRole'
-    FirmRolesRatesCanEditResponse:
-      type: object
-      properties:
-        CanEdit:
-          type: boolean
         Success:
           type: boolean
         Message:
@@ -453,28 +478,3 @@ components:
           type: array
           items:
             type: string
-    FirmRolesRatesCanEditRequest:
-      type: object
-      properties:
-        ContactId:
-          type: integer
-          format: int32
-    User:
-      type: object
-      properties:
-        FullName:
-          type: string
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        MiddleName:
-          type: string
-        ContactId:
-          type: integer
-          format: int32
-        Initials:
-          type: string
-        ID:
-          type: integer
-          format: int32

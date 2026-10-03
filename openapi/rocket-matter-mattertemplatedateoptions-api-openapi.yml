@@ -107,6 +107,44 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    MatterTemplateDateOption:
+      type: object
+      properties:
+        Name:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    LookupItem:
+      type: object
+      properties:
+        ID:
+          type: integer
+          format: int32
+        Name:
+          type: string
+        EnumName:
+          type: string
+    MatterTemplateDateOptionsGetByDisplayGroupRequest:
+      type: object
+      properties:
+        Group:
+          type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    MatterTemplateDateOptionGetRequest:
+      type: object
+      properties:
+        ID:
+          type: integer
+          format: int32
     MatterTemplateDateOptionGetResponse:
       type: object
       properties:
@@ -130,21 +168,30 @@ components:
           type: array
           items:
             type: string
-    CharacterValidationRule:
+    MatterTemplateDateOptionsGetResponse:
       type: object
       properties:
-        ShouldMatch:
+        MatterTemplateDateOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateDateOption'
+        Success:
           type: boolean
         Message:
           type: string
-        Regex:
+        ErrorMessage:
           type: string
-    MatterTemplateDateOptionGetRequest:
-      type: object
-      properties:
-        ID:
+        ErrorNumber:
           type: integer
           format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     MatterTemplateMilestone:
       type: object
       properties:
@@ -177,6 +224,46 @@ components:
         ID:
           type: integer
           format: int32
+    GetMatterTemplateDateOptionDetailsResponse:
+      type: object
+      properties:
+        TaskDateOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateDateOption'
+        EventDateOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateDateOption'
+        MatterDetailDateOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateDateOption'
+        MilestoneOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/LookupItem'
+        DefaultMilestones:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateMilestone'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     ValidationResult:
       type: object
       properties:
@@ -233,93 +320,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MatterTemplateDateOption'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    MatterTemplateDateOption:
-      type: object
-      properties:
-        Name:
-          type: string
-        ID:
-          type: integer
-          format: int32
-    MatterTemplateDateOptionsGetResponse:
-      type: object
-      properties:
-        MatterTemplateDateOptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateDateOption'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    MatterTemplateDateOptionsGetByDisplayGroupRequest:
-      type: object
-      properties:
-        Group:
-          type: string
-    LookupItem:
-      type: object
-      properties:
-        ID:
-          type: integer
-          format: int32
-        Name:
-          type: string
-        EnumName:
-          type: string
-    GetMatterTemplateDateOptionDetailsResponse:
-      type: object
-      properties:
-        TaskDateOptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateDateOption'
-        EventDateOptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateDateOption'
-        MatterDetailDateOptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateDateOption'
-        MilestoneOrders:
-          type: array
-          items:
-            $ref: '#/components/schemas/LookupItem'
-        DefaultMilestones:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateMilestone'
         Success:
           type: boolean
         Message:

@@ -562,17 +562,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GetDocumentsInPathRequest:
-      type: object
-      properties:
-        Filter:
-          type: object
-          $ref: '#/components/schemas/DocumentPageFilter'
-        MatterId:
-          type: integer
-          format: int32
-        ReturnCount:
-          type: boolean
     SaveDocumentResponse:
       type: object
       properties:
@@ -596,21 +585,7 @@ components:
           type: array
           items:
             type: string
-    MoveDocumentsToFolderRequest:
-      type: object
-      properties:
-        DirectoryId:
-          type: integer
-          format: int32
-        MatterId:
-          type: integer
-          format: int32
-        DocumentIds:
-          type: array
-          items:
-            type: integer
-            format: int32
-    RenameFolderResponse:
+    SetDocumentIntegrationFolderResponse:
       type: object
       properties:
         Success:
@@ -630,89 +605,202 @@ components:
           type: array
           items:
             type: string
-    GetDocumentFileInfoRequest:
+    GetInvoicedDocumentsRequest:
       type: object
       properties:
+        DocumentId:
+          type: integer
+          format: int32
+    SavePortalDocumentContactsResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetDocumentFileInfoResponse:
+      type: object
+      properties:
+        File:
+          type: object
+          $ref: '#/components/schemas/RMFile'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteDocumentResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    RMDirectory:
+      type: object
+      properties:
+        Name:
+          type: string
+        ParentDirectory:
+          type: string
+        ParentPath:
+          type: string
+        FullPath:
+          type: string
         Files:
           type: array
           items:
             $ref: '#/components/schemas/RMFile'
-        DocumentId:
+        Directories:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMDirectory'
+        FileUUId:
+          type: string
+    DeleteDocumentsInPathRequest:
+      type: object
+      properties:
+        DocumentPaths:
+          type: array
+          items:
+            type: string
+        MatterId:
           type: integer
           format: int32
-    DownloadDocumentRequest:
+    GetDocumentVersionsResponse:
+      type: object
+      properties:
+        Versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentVersion'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteDocumentsInPathResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SetDocumentIntegrationFolderRequest:
       type: object
       properties:
         Type:
           type: string
           enum:
-          - None
-          - Note
-          - UploadedDocument
-          - WebAddress
-          - DropboxFile
-          - DropboxDirectory
-          - EvernoteNote
-          - EvernoteNotebook
-          - MergedDocument
-          - BoxFile
-          - BoxDirectory
-          - UploadedDirectory
-          - Invoice
-          - DocumentTemplate
-          - InvoiceTemplate
-          - DefaultInvoiceTemplate
-          - ImportDocument
+          - Dropbox
+          - Evernote
+          - Box
         MatterId:
           type: integer
           format: int32
+        Folder:
+          type: string
+    DeleteNoteRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+    GetDocumentVersionsRequest:
+      type: object
+      properties:
         DocumentId:
           type: integer
           format: int32
-        Path:
-          type: string
-        DocumentUUId:
-          type: string
-        VersionId:
-          type: string
-    DocumentUploadUrl:
+    PortalDocumentContact:
       type: object
       properties:
-        Url:
+        ContactFullName:
           type: string
-        FileUUId:
-          type: string
-        FullPath:
-          type: string
-        SourceFileUUId:
-          type: string
-    SaveDocumentsForMatterResponse:
-      type: object
-      properties:
-        Documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/Document'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
+        Position:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    DeleteNoteResponse:
+        PortalId:
+          type: integer
+          format: int32
+        ContactId:
+          type: integer
+          format: int32
+        SendNotification:
+          type: boolean
+    GetDocumentResponse:
       type: object
       properties:
+        Document:
+          type: object
+          $ref: '#/components/schemas/Document'
+        PortalContacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortalDocumentContact'
         Success:
           type: boolean
         Message:
@@ -747,22 +835,37 @@ components:
           type: array
           items:
             type: string
-    DeleteNoteRequest:
+    User:
       type: object
       properties:
-        ActivityId:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
           type: integer
           format: int32
-    CharacterValidationRule:
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    DocumentUploadUrl:
       type: object
       properties:
-        ShouldMatch:
-          type: boolean
-        Message:
+        Url:
           type: string
-        Regex:
+        FileUUId:
           type: string
-    GetDocumentUploadUrlRequest:
+        FullPath:
+          type: string
+        SourceFileUUId:
+          type: string
+    SaveDocumentsForMatterRequest:
       type: object
       properties:
         Files:
@@ -779,20 +882,295 @@ components:
         MatterId:
           type: integer
           format: int32
-        UseTemp:
-          type: boolean
-    GetPortalDocumentContactsRequest:
+    DeleteNoteResponse:
       type: object
       properties:
-        ActivityId:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
           type: integer
           format: int32
-    GetDocumentFileInfoResponse:
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    RMFile:
       type: object
       properties:
-        File:
+        ContentType:
+          type: string
+        FileName:
+          type: string
+        FileContents:
           type: object
-          $ref: '#/components/schemas/RMFile'
+        ParentDirectory:
+          type: string
+        ParentPath:
+          type: string
+        FullPath:
+          type: string
+        FileUUId:
+          type: string
+    DocumentItem:
+      type: object
+      properties:
+        Name:
+          type: string
+        Path:
+          type: string
+        IsFolder:
+          type: boolean
+        Ext:
+          type: string
+        DocumentTypeId:
+          type: integer
+          format: int32
+        NestedPath:
+          type: array
+          items:
+            type: string
+        DocumentId:
+          type: integer
+          format: int32
+        DocumentUId:
+          type: string
+        PendingInvoicing:
+          type: boolean
+        Invoiced:
+          type: boolean
+        MatterId:
+          type: integer
+          format: int32
+        User:
+          type: object
+          $ref: '#/components/schemas/User'
+        Tags:
+          type: array
+          items:
+            type: string
+        CreatedDate:
+          type: string
+          format: date-time
+        ClientMatter:
+          type: string
+        DocumentItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentItem'
+        PortalShared:
+          type: boolean
+        IsInvoice:
+          type: boolean
+        BillingDate:
+          type: string
+          format: date-time
+        FutureBilling:
+          type: boolean
+        DisplayOnly:
+          type: boolean
+        ClosedMatter:
+          type: boolean
+        SystemMatter:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    GetDocumentUploadUrlResponse:
+      type: object
+      properties:
+        UploadUrls:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentUploadUrl'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    RenameFolderResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteDocumentRequest:
+      type: object
+      properties:
+        DocumentId:
+          type: integer
+          format: int32
+    RenameFolderRequest:
+      type: object
+      properties:
+        DocumentId:
+          type: integer
+          format: int32
+        NewName:
+          type: string
+    DocumentContentsChangedRequest:
+      type: object
+      properties:
+        DocumentId:
+          type: integer
+          format: int32
+        Base64Contents:
+          type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    GetDocumentIntegrationRequest:
+      type: object
+      properties:
+        Type:
+          type: string
+          enum:
+          - Dropbox
+          - Evernote
+          - Box
+        MatterId:
+          type: integer
+          format: int32
+    DocumentVersion:
+      type: object
+      properties:
+        VersionId:
+          type: string
+        VersionDate:
+          type: string
+          format: date-time
+        UserId:
+          type: integer
+          format: int32
+        Comment:
+          type: string
+        UserName:
+          type: string
+    GetInvoicedDocumentsResponse:
+      type: object
+      properties:
+        Documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UploadDocumentResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetDocumentsInPathRequest:
+      type: object
+      properties:
+        Filter:
+          type: object
+          $ref: '#/components/schemas/DocumentPageFilter'
+        MatterId:
+          type: integer
+          format: int32
+        ReturnCount:
+          type: boolean
+    SaveDocumentsForMatterResponse:
+      type: object
+      properties:
+        Documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetDownloadKeyResponse:
+      type: object
+      properties:
+        Url:
+          type: string
+        FileName:
+          type: string
         Success:
           type: boolean
         Message:
@@ -869,220 +1247,30 @@ components:
         ActivityId:
           type: integer
           format: int32
-    DeleteDocumentResponse:
+    GetPortalDocumentContactsRequest:
       type: object
       properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
+        ActivityId:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetInvoicedDocumentsRequest:
+    MoveDocumentsToFolderRequest:
       type: object
       properties:
-        DocumentId:
-          type: integer
-          format: int32
-    DeleteDocumentsInPathResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SaveDocumentsForMatterRequest:
-      type: object
-      properties:
-        Files:
-          type: array
-          items:
-            $ref: '#/components/schemas/RMFile'
-        Directories:
-          type: array
-          items:
-            $ref: '#/components/schemas/RMDirectory'
         DirectoryId:
           type: integer
           format: int32
         MatterId:
           type: integer
           format: int32
-    UploadDocumentResponse:
+        DocumentIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+    DownloadDocumentRequest:
       type: object
       properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SetDocumentIntegrationFolderResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetDocumentRequest:
-      type: object
-      properties:
-        ActivityId:
-          type: integer
-          format: int32
-        IsNote:
-          type: boolean
-        DocumentUId:
-          type: string
-    DocumentItem:
-      type: object
-      properties:
-        Name:
-          type: string
-        Path:
-          type: string
-        IsFolder:
-          type: boolean
-        Ext:
-          type: string
-        DocumentTypeId:
-          type: integer
-          format: int32
-        NestedPath:
-          type: array
-          items:
-            type: string
-        DocumentId:
-          type: integer
-          format: int32
-        DocumentUId:
-          type: string
-        PendingInvoicing:
-          type: boolean
-        Invoiced:
-          type: boolean
-        MatterId:
-          type: integer
-          format: int32
-        User:
-          type: object
-          $ref: '#/components/schemas/User'
-        Tags:
-          type: array
-          items:
-            type: string
-        CreatedDate:
-          type: string
-          format: date-time
-        ClientMatter:
-          type: string
-        DocumentItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentItem'
-        PortalShared:
-          type: boolean
-        IsInvoice:
-          type: boolean
-        BillingDate:
-          type: string
-          format: date-time
-        FutureBilling:
-          type: boolean
-        DisplayOnly:
-          type: boolean
-        ClosedMatter:
-          type: boolean
-        SystemMatter:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
-    GetDocumentsInPathResponse:
-      type: object
-      properties:
-        Documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentItem'
-        ItemsCount:
-          type: integer
-          format: int32
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetDirectoriesRequest:
-      type: object
-      properties:
-        MatterId:
-          type: integer
-          format: int32
-    DocumentPageFilter:
-      type: object
-      properties:
-        DocumentType:
+        Type:
           type: string
           enum:
           - None
@@ -1102,193 +1290,37 @@ components:
           - InvoiceTemplate
           - DefaultInvoiceTemplate
           - ImportDocument
-        RootDirectory:
-          type: string
-        DocumentPath:
-          type: string
-        DirectoryId:
+        MatterId:
           type: integer
           format: int32
-        Search:
-          type: string
-        SortExpression:
-          type: string
-        SortDescending:
-          type: boolean
-        Offset:
-          type: integer
-          format: int32
-        Fetch:
-          type: integer
-          format: int32
-        DocumentUId:
-          type: string
-        UserId:
-          type: integer
-          format: int32
-        ExcludeChildren:
-          type: boolean
-        Tags:
-          type: array
-          items:
-            type: string
-    DocumentContentsChangedRequest:
-      type: object
-      properties:
         DocumentId:
           type: integer
           format: int32
-        Base64Contents:
-          type: string
-    DocumentContentsChangedResponse:
-      type: object
-      properties:
-        HasChanged:
-          type: boolean
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetDownloadKeyResponse:
-      type: object
-      properties:
-        Url:
-          type: string
-        FileName:
-          type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    RMFile:
-      type: object
-      properties:
-        ContentType:
-          type: string
-        FileName:
-          type: string
-        FileContents:
-          type: object
-        ParentDirectory:
-          type: string
-        ParentPath:
-          type: string
-        FullPath:
-          type: string
-        FileUUId:
-          type: string
-    MoveDocumentsToFolderResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetDirectoriesResponse:
-      type: object
-      properties:
-        Documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentItem'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SavePortalDocumentContactsResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetDocumentIntegrationResponse:
-      type: object
-      properties:
         Path:
           type: string
-        Success:
-          type: boolean
-        Message:
+        DocumentUUId:
           type: string
-        ErrorMessage:
+        VersionId:
           type: string
-        ErrorNumber:
+    GetDocumentUploadUrlRequest:
+      type: object
+      properties:
+        Files:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMFile'
+        Directories:
+          type: array
+          items:
+            $ref: '#/components/schemas/RMDirectory'
+        DirectoryId:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
+        MatterId:
+          type: integer
+          format: int32
+        UseTemp:
+          type: boolean
     GetPortalDocumentContactsResponse:
       type: object
       properties:
@@ -1313,60 +1345,26 @@ components:
           type: array
           items:
             type: string
-    GetDocumentUploadUrlResponse:
+    GetDocumentFileInfoRequest:
       type: object
       properties:
-        UploadUrls:
+        Files:
           type: array
           items:
-            $ref: '#/components/schemas/DocumentUploadUrl'
-        Success:
+            $ref: '#/components/schemas/RMFile'
+        DocumentId:
+          type: integer
+          format: int32
+    GetDocumentRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+        IsNote:
           type: boolean
-        Message:
+        DocumentUId:
           type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SetDocumentIntegrationFolderRequest:
-      type: object
-      properties:
-        Type:
-          type: string
-          enum:
-          - Dropbox
-          - Evernote
-          - Box
-        MatterId:
-          type: integer
-          format: int32
-        Folder:
-          type: string
-    PortalDocumentContact:
-      type: object
-      properties:
-        ContactFullName:
-          type: string
-        Position:
-          type: integer
-          format: int32
-        PortalId:
-          type: integer
-          format: int32
-        ContactId:
-          type: integer
-          format: int32
-        SendNotification:
-          type: boolean
     Document:
       type: object
       properties:
@@ -1472,13 +1470,35 @@ components:
         ID:
           type: integer
           format: int32
-    GetInvoicedDocumentsResponse:
+    DocumentContentsChangedResponse:
+      type: object
+      properties:
+        HasChanged:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetDirectoriesResponse:
       type: object
       properties:
         Documents:
           type: array
           items:
-            $ref: '#/components/schemas/Document'
+            $ref: '#/components/schemas/DocumentItem'
         Success:
           type: boolean
         Message:
@@ -1496,151 +1516,131 @@ components:
           type: array
           items:
             type: string
-    DeleteDocumentRequest:
+    GetDocumentsInPathResponse:
       type: object
       properties:
-        DocumentId:
+        Documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentItem'
+        ItemsCount:
           type: integer
           format: int32
-    GetDocumentVersionsRequest:
-      type: object
-      properties:
-        DocumentId:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
           type: integer
           format: int32
-    RenameFolderRequest:
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetDocumentIntegrationResponse:
       type: object
       properties:
-        DocumentId:
+        Path:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
           type: integer
           format: int32
-        NewName:
-          type: string
-    DocumentVersion:
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetDirectoriesRequest:
       type: object
       properties:
-        VersionId:
+        MatterId:
+          type: integer
+          format: int32
+    MoveDocumentsToFolderResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
           type: string
-        VersionDate:
+        ErrorMessage:
           type: string
-          format: date-time
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DocumentPageFilter:
+      type: object
+      properties:
+        DocumentType:
+          type: string
+          enum:
+          - None
+          - Note
+          - UploadedDocument
+          - WebAddress
+          - DropboxFile
+          - DropboxDirectory
+          - EvernoteNote
+          - EvernoteNotebook
+          - MergedDocument
+          - BoxFile
+          - BoxDirectory
+          - UploadedDirectory
+          - Invoice
+          - DocumentTemplate
+          - InvoiceTemplate
+          - DefaultInvoiceTemplate
+          - ImportDocument
+        RootDirectory:
+          type: string
+        DocumentPath:
+          type: string
+        DirectoryId:
+          type: integer
+          format: int32
+        Search:
+          type: string
+        SortExpression:
+          type: string
+        SortDescending:
+          type: boolean
+        Offset:
+          type: integer
+          format: int32
+        Fetch:
+          type: integer
+          format: int32
+        DocumentUId:
+          type: string
         UserId:
           type: integer
           format: int32
-        Comment:
-          type: string
-        UserName:
-          type: string
-    RMDirectory:
-      type: object
-      properties:
-        Name:
-          type: string
-        ParentDirectory:
-          type: string
-        ParentPath:
-          type: string
-        FullPath:
-          type: string
-        Files:
-          type: array
-          items:
-            $ref: '#/components/schemas/RMFile'
-        Directories:
-          type: array
-          items:
-            $ref: '#/components/schemas/RMDirectory'
-        FileUUId:
-          type: string
-    DeleteDocumentsInPathRequest:
-      type: object
-      properties:
-        DocumentPaths:
-          type: array
-          items:
-            type: string
-        MatterId:
-          type: integer
-          format: int32
-    GetDocumentVersionsResponse:
-      type: object
-      properties:
-        Versions:
-          type: array
-          items:
-            $ref: '#/components/schemas/DocumentVersion'
-        Success:
+        ExcludeChildren:
           type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
+        Tags:
           type: array
           items:
             type: string
-    GetDocumentIntegrationRequest:
-      type: object
-      properties:
-        Type:
-          type: string
-          enum:
-          - Dropbox
-          - Evernote
-          - Box
-        MatterId:
-          type: integer
-          format: int32
-    GetDocumentResponse:
-      type: object
-      properties:
-        Document:
-          type: object
-          $ref: '#/components/schemas/Document'
-        PortalContacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/PortalDocumentContact'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    User:
-      type: object
-      properties:
-        FullName:
-          type: string
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        MiddleName:
-          type: string
-        ContactId:
-          type: integer
-          format: int32
-        Initials:
-          type: string
-        ID:
-          type: integer
-          format: int32

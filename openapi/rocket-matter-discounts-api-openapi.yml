@@ -63,6 +63,58 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    DiscountConfiguration:
+      type: object
+      properties:
+        Id:
+          type: string
+        DateCreated:
+          type: string
+          format: date-time
+        DateModified:
+          type: string
+          format: date-time
+        TenantId:
+          type: integer
+          format: int32
+        IsDeleted:
+          type: boolean
+        IsEnabled:
+          type: boolean
+        Description:
+          type: string
+        Rate:
+          type: number
+          format: double
+        Term:
+          type: integer
+          format: int32
+        AppliedToMatter:
+          type: boolean
+    GetAllDiscountsResponse:
+      type: object
+      properties:
+        Discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscountConfiguration'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -72,12 +124,6 @@ components:
           type: string
         Regex:
           type: string
-    SaveDiscountConfigurationRequest:
-      type: object
-      properties:
-        DiscountConfiguration:
-          type: object
-          $ref: '#/components/schemas/DiscountConfiguration'
     ValidationResult:
       type: object
       properties:
@@ -127,30 +173,6 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    GetAllDiscountsResponse:
-      type: object
-      properties:
-        Discounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/DiscountConfiguration'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     SaveDiscountConfigurationResponse:
       type: object
       properties:
@@ -174,31 +196,9 @@ components:
           type: array
           items:
             type: string
-    DiscountConfiguration:
+    SaveDiscountConfigurationRequest:
       type: object
       properties:
-        Id:
-          type: string
-        DateCreated:
-          type: string
-          format: date-time
-        DateModified:
-          type: string
-          format: date-time
-        TenantId:
-          type: integer
-          format: int32
-        IsDeleted:
-          type: boolean
-        IsEnabled:
-          type: boolean
-        Description:
-          type: string
-        Rate:
-          type: number
-          format: double
-        Term:
-          type: integer
-          format: int32
-        AppliedToMatter:
-          type: boolean
+        DiscountConfiguration:
+          type: object
+          $ref: '#/components/schemas/DiscountConfiguration'

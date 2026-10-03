@@ -81,6 +81,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    UserViewBadgeRequest:
+      type: object
+      properties:
+        BadgeName:
+          type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    BadgeHistory:
+      type: object
+      properties:
+        Name:
+          type: string
+        DateCompleted:
+          type: string
+          format: date-time
+        ID:
+          type: integer
+          format: int32
     GetUserBadgeHistoryResponse:
       type: object
       properties:
@@ -105,46 +130,6 @@ components:
           type: array
           items:
             type: string
-    GetCurrentBadgeResponse:
-      type: object
-      properties:
-        CurrentBadge:
-          type: string
-        CurrentBadgeViewed:
-          type: boolean
-        NextBadge:
-          type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    UserViewBadgeRequest:
-      type: object
-      properties:
-        BadgeName:
-          type: string
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
     ValidationResult:
       type: object
       properties:
@@ -194,6 +179,32 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
+    GetCurrentBadgeResponse:
+      type: object
+      properties:
+        CurrentBadge:
+          type: string
+        CurrentBadgeViewed:
+          type: boolean
+        NextBadge:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     UserViewBadgeResponse:
       type: object
       properties:
@@ -214,14 +225,3 @@ components:
           type: array
           items:
             type: string
-    BadgeHistory:
-      type: object
-      properties:
-        Name:
-          type: string
-        DateCompleted:
-          type: string
-          format: date-time
-        ID:
-          type: integer
-          format: int32

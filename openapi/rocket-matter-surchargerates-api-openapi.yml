@@ -137,6 +137,72 @@ components:
         SurchargeRate:
           type: object
           $ref: '#/components/schemas/SurchargeRate'
+    SurchargeRate:
+      type: object
+      properties:
+        Id:
+          type: string
+        Description:
+          type: string
+        Rate:
+          type: number
+          format: double
+        SurchargeRateType:
+          type: string
+          enum:
+          - FeesAndExpenses
+          - FeesAndSelectedExpenses
+          - Expenses
+          - SelectedExpenses
+          - SelectedFees
+          - SelectedFeesAndSelectedExpenses
+          - Fees
+          - ExpensesAndSelectedFees
+        AppliedToMatter:
+          type: boolean
+        ActivityType:
+          type: string
+          enum:
+          - None
+          - Activity
+          - Timer
+          - TodoItem
+          - CalendarEntry
+          - Expense
+          - BilledTime
+          - PhoneMessage
+          - Document
+          - Note
+          - Email
+          - FlatFee
+    SurchargeRatesSearchRequest:
+      type: object
+      properties:
+        SearchText:
+          type: string
+    SurchargeRatesGetResponse:
+      type: object
+      properties:
+        SurchargeRate:
+          type: object
+          $ref: '#/components/schemas/SurchargeRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -171,6 +237,53 @@ components:
           items:
             type: string
     SurchargeRatesDeleteResponse:
+      type: object
+      properties:
+        SurchargeRate:
+          type: object
+          $ref: '#/components/schemas/SurchargeRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SurchargeRatesSearchResponse:
+      type: object
+      properties:
+        SurchargeRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SurchargeRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SurchargeRatesSaveResponse:
       type: object
       properties:
         SurchargeRate:
@@ -249,116 +362,3 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    SurchargeRatesSearchResponse:
-      type: object
-      properties:
-        SurchargeRates:
-          type: array
-          items:
-            $ref: '#/components/schemas/SurchargeRate'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SurchargeRate:
-      type: object
-      properties:
-        Id:
-          type: string
-        Description:
-          type: string
-        Rate:
-          type: number
-          format: double
-        SurchargeRateType:
-          type: string
-          enum:
-          - FeesAndExpenses
-          - FeesAndSelectedExpenses
-          - Expenses
-          - SelectedExpenses
-          - SelectedFees
-          - SelectedFeesAndSelectedExpenses
-          - Fees
-          - ExpensesAndSelectedFees
-        AppliedToMatter:
-          type: boolean
-        ActivityType:
-          type: string
-          enum:
-          - None
-          - Activity
-          - Timer
-          - TodoItem
-          - CalendarEntry
-          - Expense
-          - BilledTime
-          - PhoneMessage
-          - Document
-          - Note
-          - Email
-          - FlatFee
-    SurchargeRatesSearchRequest:
-      type: object
-      properties:
-        SearchText:
-          type: string
-    SurchargeRatesGetResponse:
-      type: object
-      properties:
-        SurchargeRate:
-          type: object
-          $ref: '#/components/schemas/SurchargeRate'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SurchargeRatesSaveResponse:
-      type: object
-      properties:
-        SurchargeRate:
-          type: object
-          $ref: '#/components/schemas/SurchargeRate'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string

@@ -62,6 +62,57 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    BillingFeature:
+      type: object
+      properties:
+        Name:
+          type: string
+        Description:
+          type: string
+        Identifier:
+          type: string
+        BillingModuleFeatures:
+          type: object
+        BillingFeatureInterests:
+          type: object
+        BillingTierIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+        Id:
+          type: integer
+          format: int32
+        CreatedDate:
+          type: string
+          format: date-time
+        LastModifiedDate:
+          type: string
+          format: date-time
+        IsDeleted:
+          type: boolean
+        IsSaved:
+          type: boolean
+    SaveBillingFeatureInterestResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     Install:
       type: object
       properties:
@@ -121,50 +172,30 @@ components:
           format: date-time
         IsSaved:
           type: boolean
-    BillingFeatureInterest:
+    GetDefaultBillingTiersResponse:
       type: object
       properties:
-        InstallationId:
-          type: integer
-          format: int32
-        FeatureId:
-          type: integer
-          format: int32
-        InterestTypeId:
-          type: integer
-          format: int32
-        Date:
-          type: string
-          format: date-time
-        UserId:
-          type: string
-        BillingFeatureInterestType:
-          type: object
-          $ref: '#/components/schemas/BillingFeatureInterestType'
-        BillingFeature:
-          type: object
-          $ref: '#/components/schemas/BillingFeature'
-        Installation:
-          type: object
-          $ref: '#/components/schemas/Install'
-        aspnet_Users:
-          type: object
-          $ref: '#/components/schemas/aspnet_Users'
-        FeatureIdentifier:
-          type: string
-        Id:
-          type: integer
-          format: int32
-        CreatedDate:
-          type: string
-          format: date-time
-        LastModifiedDate:
-          type: string
-          format: date-time
-        IsDeleted:
+        Tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillingTier'
+        Success:
           type: boolean
-        IsSaved:
-          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     aspnet_Membership:
       type: object
       properties:
@@ -235,6 +266,26 @@ components:
           type: boolean
         IsSaved:
           type: boolean
+    BillingFeatureInterestType:
+      type: object
+      properties:
+        Name:
+          type: string
+        BillingFeatureInterests:
+          type: object
+        Id:
+          type: integer
+          format: int32
+        CreatedDate:
+          type: string
+          format: date-time
+        LastModifiedDate:
+          type: string
+          format: date-time
+        IsDeleted:
+          type: boolean
+        IsSaved:
+          type: boolean
     CharacterValidationRule:
       type: object
       properties:
@@ -244,6 +295,12 @@ components:
           type: string
         Regex:
           type: string
+    SaveBillingFeatureInterestRequest:
+      type: object
+      properties:
+        FeatureInterest:
+          type: object
+          $ref: '#/components/schemas/BillingFeatureInterest'
     BillingTier:
       type: object
       properties:
@@ -345,36 +402,6 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    GetDefaultBillingTiersResponse:
-      type: object
-      properties:
-        Tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillingTier'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SaveBillingFeatureInterestRequest:
-      type: object
-      properties:
-        FeatureInterest:
-          type: object
-          $ref: '#/components/schemas/BillingFeatureInterest'
     InstallationsBilling:
       type: object
       properties:
@@ -411,6 +438,50 @@ components:
         Installation:
           type: object
           $ref: '#/components/schemas/Install'
+        Id:
+          type: integer
+          format: int32
+        CreatedDate:
+          type: string
+          format: date-time
+        LastModifiedDate:
+          type: string
+          format: date-time
+        IsDeleted:
+          type: boolean
+        IsSaved:
+          type: boolean
+    BillingFeatureInterest:
+      type: object
+      properties:
+        InstallationId:
+          type: integer
+          format: int32
+        FeatureId:
+          type: integer
+          format: int32
+        InterestTypeId:
+          type: integer
+          format: int32
+        Date:
+          type: string
+          format: date-time
+        UserId:
+          type: string
+        BillingFeatureInterestType:
+          type: object
+          $ref: '#/components/schemas/BillingFeatureInterestType'
+        BillingFeature:
+          type: object
+          $ref: '#/components/schemas/BillingFeature'
+        Installation:
+          type: object
+          $ref: '#/components/schemas/Install'
+        aspnet_Users:
+          type: object
+          $ref: '#/components/schemas/aspnet_Users'
+        FeatureIdentifier:
+          type: string
         Id:
           type: integer
           format: int32
@@ -474,74 +545,3 @@ components:
           type: boolean
         IsSaved:
           type: boolean
-    BillingFeatureInterestType:
-      type: object
-      properties:
-        Name:
-          type: string
-        BillingFeatureInterests:
-          type: object
-        Id:
-          type: integer
-          format: int32
-        CreatedDate:
-          type: string
-          format: date-time
-        LastModifiedDate:
-          type: string
-          format: date-time
-        IsDeleted:
-          type: boolean
-        IsSaved:
-          type: boolean
-    BillingFeature:
-      type: object
-      properties:
-        Name:
-          type: string
-        Description:
-          type: string
-        Identifier:
-          type: string
-        BillingModuleFeatures:
-          type: object
-        BillingFeatureInterests:
-          type: object
-        BillingTierIds:
-          type: array
-          items:
-            type: integer
-            format: int32
-        Id:
-          type: integer
-          format: int32
-        CreatedDate:
-          type: string
-          format: date-time
-        LastModifiedDate:
-          type: string
-          format: date-time
-        IsDeleted:
-          type: boolean
-        IsSaved:
-          type: boolean
-    SaveBillingFeatureInterestResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string

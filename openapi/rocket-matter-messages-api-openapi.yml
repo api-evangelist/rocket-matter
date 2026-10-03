@@ -69,6 +69,21 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GetPhoneMessageRequest:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
     PhoneMessage:
       type: object
       properties:
@@ -127,6 +142,12 @@ components:
         ID:
           type: integer
           format: int32
+    SavePhoneMessageRequest:
+      type: object
+      properties:
+        PhoneMessage:
+          type: object
+          $ref: '#/components/schemas/PhoneMessage'
     GetPhoneMessageResponse:
       type: object
       properties:
@@ -150,21 +171,6 @@ components:
           type: array
           items:
             type: string
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    GetPhoneMessageRequest:
-      type: object
-      properties:
-        ActivityId:
-          type: integer
-          format: int32
     ValidationResult:
       type: object
       properties:
@@ -237,9 +243,3 @@ components:
           type: array
           items:
             type: string
-    SavePhoneMessageRequest:
-      type: object
-      properties:
-        PhoneMessage:
-          type: object
-          $ref: '#/components/schemas/PhoneMessage'

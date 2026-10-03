@@ -87,40 +87,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    InterestConfiguration:
-      type: object
-      properties:
-        Id:
-          type: string
-        DateCreated:
-          type: string
-          format: date-time
-        DateModified:
-          type: string
-          format: date-time
-        TenantId:
-          type: integer
-          format: int32
-        IsDeleted:
-          type: boolean
-        IsEnabled:
-          type: boolean
-        Description:
-          type: string
-        Rate:
-          type: number
-          format: double
-        Term:
-          type: integer
-          format: int32
-        MakeRecurring:
-          type: boolean
-        ChargeInterestOnInterest:
-          type: boolean
-        ApplyToAllUnpaid:
-          type: boolean
-        AppliedToMatter:
-          type: boolean
     ChargeInterestFeesRequest:
       type: object
       properties:
@@ -138,6 +104,59 @@ components:
           type: string
         Regex:
           type: string
+    SaveInterestConfigurationRequest:
+      type: object
+      properties:
+        InterestConfiguration:
+          type: object
+          $ref: '#/components/schemas/InterestConfiguration'
+    SaveInterestConfigurationResponse:
+      type: object
+      properties:
+        InterestConfiguration:
+          type: object
+          $ref: '#/components/schemas/InterestConfiguration'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetAllInterestRatesResponse:
+      type: object
+      properties:
+        Interests:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterestConfiguration'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     ValidationResult:
       type: object
       properties:
@@ -187,62 +206,43 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    SaveInterestConfigurationRequest:
+    InterestConfiguration:
       type: object
       properties:
-        InterestConfiguration:
-          type: object
-          $ref: '#/components/schemas/InterestConfiguration'
+        Id:
+          type: string
+        DateCreated:
+          type: string
+          format: date-time
+        DateModified:
+          type: string
+          format: date-time
+        TenantId:
+          type: integer
+          format: int32
+        IsDeleted:
+          type: boolean
+        IsEnabled:
+          type: boolean
+        Description:
+          type: string
+        Rate:
+          type: number
+          format: double
+        Term:
+          type: integer
+          format: int32
+        MakeRecurring:
+          type: boolean
+        ChargeInterestOnInterest:
+          type: boolean
+        ApplyToAllUnpaid:
+          type: boolean
+        AppliedToMatter:
+          type: boolean
     ChargeInterestFeesResponse:
       type: object
       properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetAllInterestRatesResponse:
-      type: object
-      properties:
-        Interests:
-          type: array
-          items:
-            $ref: '#/components/schemas/InterestConfiguration'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SaveInterestConfigurationResponse:
-      type: object
-      properties:
-        InterestConfiguration:
-          type: object
-          $ref: '#/components/schemas/InterestConfiguration'
         Success:
           type: boolean
         Message:

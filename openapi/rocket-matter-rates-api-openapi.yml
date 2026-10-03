@@ -94,91 +94,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    DeleteMatterRatesResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    DeleteMatterRatesRequest:
-      type: object
-      properties:
-        RateIds:
-          type: array
-          items:
-            type: integer
-            format: int32
-    MatterCustomRateFilter:
-      type: object
-      properties:
-        ClientIds:
-          type: array
-          items:
-            type: integer
-            format: int32
-        ExcludeClients:
-          type: boolean
-        MatterIds:
-          type: array
-          items:
-            type: integer
-            format: int32
-        ExcludeMatters:
-          type: boolean
-        UserIds:
-          type: array
-          items:
-            type: integer
-            format: int32
-        ExcludeUsers:
-          type: boolean
-        RoleIds:
-          type: array
-          items:
-            type: object
-        StartDate:
-          type: string
-          format: date-time
-        EndDate:
-          type: string
-          format: date-time
-        IncludeMattersWitoutRate:
-          type: boolean
-        ExcludeMattersWithRate:
-          type: boolean
-        Offset:
-          type: integer
-          format: int32
-        Fetch:
-          type: integer
-          format: int32
-        Sort:
-          type: string
-        SortDescending:
-          type: boolean
     ValidationResult:
       type: object
       properties:
@@ -228,34 +143,76 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    CustomRateConfig:
+    SaveCustomRateConfigResponse:
       type: object
       properties:
-        UserMatters:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetMatterCustomRatesResponse:
+      type: object
+      properties:
+        Rates:
           type: array
           items:
             $ref: '#/components/schemas/UserCustomMatterRate'
-        Rate:
-          type: number
-          format: double
-        EffectiveDate:
-          type: string
-          format: date-time
-        ID:
+        TotalCount:
           type: integer
           format: int32
-    GetMatterCustomRatesRequest:
-      type: object
-      properties:
-        Filter:
-          type: object
-          $ref: '#/components/schemas/MatterCustomRateFilter'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     SaveCustomRateConfigRequest:
       type: object
       properties:
         RateConfig:
           type: object
           $ref: '#/components/schemas/CustomRateConfig'
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    DeleteMatterRatesRequest:
+      type: object
+      properties:
+        RateIds:
+          type: array
+          items:
+            type: integer
+            format: int32
     UserCustomMatterRate:
       type: object
       properties:
@@ -295,50 +252,93 @@ components:
         ID:
           type: integer
           format: int32
-    GetMatterCustomRatesResponse:
+    GetMatterCustomRatesRequest:
       type: object
       properties:
-        Rates:
+        Filter:
+          type: object
+          $ref: '#/components/schemas/MatterCustomRateFilter'
+    MatterCustomRateFilter:
+      type: object
+      properties:
+        ClientIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+        ExcludeClients:
+          type: boolean
+        MatterIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+        ExcludeMatters:
+          type: boolean
+        UserIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+        ExcludeUsers:
+          type: boolean
+        RoleIds:
+          type: array
+          items:
+            type: object
+        StartDate:
+          type: string
+          format: date-time
+        EndDate:
+          type: string
+          format: date-time
+        IncludeMattersWitoutRate:
+          type: boolean
+        ExcludeMattersWithRate:
+          type: boolean
+        Offset:
+          type: integer
+          format: int32
+        Fetch:
+          type: integer
+          format: int32
+        Sort:
+          type: string
+        SortDescending:
+          type: boolean
+    DeleteMatterRatesResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    CustomRateConfig:
+      type: object
+      properties:
+        UserMatters:
           type: array
           items:
             $ref: '#/components/schemas/UserCustomMatterRate'
-        TotalCount:
+        Rate:
+          type: number
+          format: double
+        EffectiveDate:
+          type: string
+          format: date-time
+        ID:
           type: integer
           format: int32
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SaveCustomRateConfigResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string

@@ -306,13 +306,9 @@ components:
       properties:
         Initials:
           type: string
-    GetActiveUsersResponse:
+    SetUserPreferenceResponse:
       type: object
       properties:
-        Users:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
         Success:
           type: boolean
         Message:
@@ -330,6 +326,22 @@ components:
           type: array
           items:
             type: string
+    SetUserPreferenceRequest:
+      type: object
+      properties:
+        Preference:
+          type: object
+          $ref: '#/components/schemas/UserPreference'
+    GetByFullNameRequest:
+      type: object
+      properties:
+        FullName:
+          type: string
+    SearchUsersRequest:
+      type: object
+      properties:
+        SearchText:
+          type: string
     GetUsersAccessResponse:
       type: object
       properties:
@@ -356,25 +368,60 @@ components:
           type: array
           items:
             type: string
+    GetUserPreferenceResponse:
+      type: object
+      properties:
+        Value:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    User:
+      type: object
+      properties:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32
     UserGetRequest:
       type: object
       properties:
         ID:
           type: integer
           format: int32
-    GetUserNavigationPreferencesResponse:
+    SearchUsersResponse:
       type: object
       properties:
-        EmbeddedHelpEnabled:
-          type: boolean
-        MatterTemplatesEnabled:
-          type: boolean
-        CurrentInstall:
-          type: string
-        InstallsAccess:
+        Users:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/User'
         Success:
           type: boolean
         Message:
@@ -392,34 +439,13 @@ components:
           type: array
           items:
             type: string
-    GetByFullNameRequest:
+    GetUserPreferenceRequest:
       type: object
       properties:
-        FullName:
+        Preference:
           type: string
-    UserGetResponse:
-      type: object
-      properties:
-        User:
-          type: object
-          $ref: '#/components/schemas/User'
-        Success:
-          type: boolean
-        Message:
+        DefaultValue:
           type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -429,26 +455,36 @@ components:
           type: string
         Regex:
           type: string
-    UserRate:
+    GetActiveUsersResponse:
       type: object
       properties:
-        UserId:
+        Users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
           type: integer
           format: int32
-        EffectiveDate:
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetEffectiveUserRatesRequest:
+      type: object
+      properties:
+        BillingDate:
           type: string
           format: date-time
-        Rate:
-          type: number
-          format: double
-        ID:
-          type: integer
-          format: int32
-    SearchUsersRequest:
-      type: object
-      properties:
-        SearchText:
-          type: string
     ValidationResult:
       type: object
       properties:
@@ -498,84 +534,6 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    SetUserPreferenceResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetUserPreferenceResponse:
-      type: object
-      properties:
-        Value:
-          type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SearchUsersResponse:
-      type: object
-      properties:
-        Users:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetEffectiveUserRatesRequest:
-      type: object
-      properties:
-        BillingDate:
-          type: string
-          format: date-time
-    SetUserPreferenceRequest:
-      type: object
-      properties:
-        Preference:
-          type: object
-          $ref: '#/components/schemas/UserPreference'
     GetEffectiveUserRatesResponse:
       type: object
       properties:
@@ -600,38 +558,80 @@ components:
           type: array
           items:
             type: string
-    GetUserPreferenceRequest:
+    GetUserNavigationPreferencesResponse:
       type: object
       properties:
-        Preference:
+        EmbeddedHelpEnabled:
+          type: boolean
+        MatterTemplatesEnabled:
+          type: boolean
+        CurrentInstall:
           type: string
-        DefaultValue:
+        InstallsAccess:
+          type: array
+          items:
+            type: string
+        Success:
+          type: boolean
+        Message:
           type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UserRate:
+      type: object
+      properties:
+        UserId:
+          type: integer
+          format: int32
+        EffectiveDate:
+          type: string
+          format: date-time
+        Rate:
+          type: number
+          format: double
+        ID:
+          type: integer
+          format: int32
+    UserGetResponse:
+      type: object
+      properties:
+        User:
+          type: object
+          $ref: '#/components/schemas/User'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     UserPreference:
       type: object
       properties:
         Preference:
           type: string
         Value:
-          type: string
-        ID:
-          type: integer
-          format: int32
-    User:
-      type: object
-      properties:
-        FullName:
-          type: string
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        MiddleName:
-          type: string
-        ContactId:
-          type: integer
-          format: int32
-        Initials:
           type: string
         ID:
           type: integer

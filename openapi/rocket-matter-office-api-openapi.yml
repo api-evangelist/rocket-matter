@@ -176,9 +176,11 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    BaseResponse:
+    OfficeConfiguredResponse:
       type: object
       properties:
+        IsConfigured:
+          type: boolean
         Success:
           type: boolean
         Message:
@@ -196,13 +198,6 @@ components:
           type: array
           items:
             type: string
-    UpdateOfficeUserSettingRequest:
-      type: object
-      properties:
-        SyncContacts:
-          type: boolean
-        SyncCalendar:
-          type: boolean
     CharacterValidationRule:
       type: object
       properties:
@@ -212,6 +207,13 @@ components:
           type: string
         Regex:
           type: string
+    UpdateOfficeUserSettingRequest:
+      type: object
+      properties:
+        SyncContacts:
+          type: boolean
+        SyncCalendar:
+          type: boolean
     Email:
       type: object
       properties:
@@ -251,15 +253,43 @@ components:
         ID:
           type: integer
           format: int32
+    BaseResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetOutlookEmailRequest:
+      type: object
+      properties:
+        EmailUId:
+          type: string
     SyncOutlookEmailRequest:
       type: object
       properties:
         OutlookEmail:
           type: object
           $ref: '#/components/schemas/Email'
-    DisconnectOfficeResponse:
+    SyncOutlookEmailResponse:
       type: object
       properties:
+        OutlookEmail:
+          type: object
+          $ref: '#/components/schemas/Email'
         Success:
           type: boolean
         Message:
@@ -326,59 +356,29 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
+    DisconnectOfficeResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     UpdateOfficeUserSettingResponse:
       type: object
       properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetOutlookEmailResponse:
-      type: object
-      properties:
-        Email:
-          type: object
-          $ref: '#/components/schemas/Email'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetOutlookEmailRequest:
-      type: object
-      properties:
-        EmailUId:
-          type: string
-    OfficeConfiguredResponse:
-      type: object
-      properties:
-        IsConfigured:
-          type: boolean
         Success:
           type: boolean
         Message:
@@ -418,10 +418,10 @@ components:
           type: array
           items:
             type: string
-    SyncOutlookEmailResponse:
+    GetOutlookEmailResponse:
       type: object
       properties:
-        OutlookEmail:
+        Email:
           type: object
           $ref: '#/components/schemas/Email'
         Success:
