@@ -43,6 +43,9 @@ maintainers:
   email: info@apis.io
 
 common:
+- type: CapabilityMap
+  url: capabilities/rocket-matter-capability-edges.yml
+  name: Rocket Matter Business Capability Map
 - type: TermsOfService
   url: https://www.rocketmatter.com/terms-and-conditions/
 - type: AgenticAccess

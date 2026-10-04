@@ -1,0 +1,89 @@
+slug: rocket-matter
+provider: Rocket Matter
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 7
+edges:
+- tag: Matters
+  spec_file: rocket-matter-matters-api-openapi.yml
+  capability_id: BC-150.50
+  capability_id_l1: BC-150
+  capability_name: Legal Operations Management
+  confidence: 0.85
+  evidence: '"Get matters by search", "Does client matter exists", "Get matter billing info"; schemas
+    BaseMatter, MatterCustomField, MatterBudget'
+  reason: Core CRUD and search over legal matters (cases) with custom fields, budgets and billing settings
+    — the matter-management core of legal practice management, i.e. Legal Operations Management.
+- tag: Clients
+  spec_file: rocket-matter-clients-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.8
+  evidence: POST /Clients.svc/json/Save; GetAllClients Get all clients; SearchClientAndPotentialClients;
+    GetClientByCode Get client by code; schemas Client, Contact, ContactRelationship
+  reason: Create, search and retrieve client master records including contacts and relationships for a
+    law firm — this is customer data mastering; the inclusion of potential/pending clients adds slight
+    ambiguity toward lifecycle, but the operations are predominantly record management.
+- tag: Contacts
+  spec_file: rocket-matter-contacts-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.8
+  evidence: GetContactByID, SearchContacts, GetClientByCode, schemas ContactFull, ContactRelationship,
+    GetContactCustomFieldsResponse
+  reason: Operations create, search and enrich contact/client master records including custom fields and
+    relationships — customer data management. Sub-capability is clear; slight ambiguity as some operations
+    touch invoice-delivery preferences.
+- tag: Invoices
+  spec_file: rocket-matter-invoices-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.8
+  evidence: GetMostRecentInvoiceInfoByClient, ProcessRefund, GetPaymentsForMatterResponse, SaveRetainerRequest,
+    schema InvoicePayment
+  reason: Operations generate and manage client invoices, retainer requests, payments, refunds and payment
+    processors — customer invoicing and cash application. Not subscription billing (no plans/usage metering),
+    so cross-industry AR is the honest fit.
+- tag: MatterTemplates
+  spec_file: rocket-matter-mattertemplates-api-openapi.yml
+  capability_id: BC-150.50
+  capability_id_l1: BC-150
+  capability_name: Legal Operations Management
+  confidence: 0.75
+  evidence: '"Get new matter from template"; schemas MatterTemplate, MatterStatueOfLimitation, MatterTemplateRole,
+    Matter'
+  reason: Creates and maintains templates used to open new legal matters, including statute-of-limitation
+    and role defaults. This is matter management tooling for a law firm, mapped to Legal Operations Management.
+- tag: MatterTemplateMilestoneActions
+  spec_file: rocket-matter-mattertemplatemilestoneactions-api-openapi.yml
+  capability_id: BC-150.50
+  capability_id_l1: BC-150
+  capability_name: Legal Operations Management
+  confidence: 0.7
+  evidence: '"Detach milestone action", "Update child milestone dates"; schemas TaskEventMilestone, MilestoneActionItem,
+    Task, Event'
+  reason: Operations manage milestone-driven tasks/events on legal matter templates — workflow mechanics
+    of matter management in a legal practice management system, i.e. Legal Operations Management.
+- tag: RecurringBilling
+  spec_file: rocket-matter-recurringbilling-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.7
+  evidence: '"Cancel payment plan", "Generate payment plan", "Update payment plan charge token"; schemas
+    MatterBalance, InvoiceShare, RecurringBillingPlanFailureNotification'
+  reason: Creates and administers client payment plans against matter balances and invoices, including
+    charge tokens and failure notifications — client invoicing and collections, i.e. Accounts Receivable
+    Management for the law firm, not SaaS subscription billing.
