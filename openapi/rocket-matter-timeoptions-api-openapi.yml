@@ -62,62 +62,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TimeOptionsGetAllResponse:
-      type: object
-      properties:
-        Times:
-          type: array
-          items:
-            $ref: '#/components/schemas/TimeOption'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    TimeOption:
-      type: object
-      properties:
-        Time:
-          type: string
-        ID:
-          type: integer
-          format: int32
-    TimeOptionsGetNextTimesResponse:
-      type: object
-      properties:
-        Times:
-          type: array
-          items:
-            $ref: '#/components/schemas/TimeOption'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -176,8 +120,64 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
+    TimeOption:
+      type: object
+      properties:
+        Time:
+          type: string
+        ID:
+          type: integer
+          format: int32
     TimeOptionsGetNextTimesRequest:
       type: object
       properties:
         CurrentTime:
           type: string
+    TimeOptionsGetNextTimesResponse:
+      type: object
+      properties:
+        Times:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeOption'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    TimeOptionsGetAllResponse:
+      type: object
+      properties:
+        Times:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeOption'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

@@ -132,20 +132,7 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TaxRatesGetRequest:
-      type: object
-      properties:
-        TaxRateId:
-          type: string
-        TaxRateDescription:
-          type: string
-    TaxRatesSaveRequest:
-      type: object
-      properties:
-        TaxRate:
-          type: object
-          $ref: '#/components/schemas/TaxRate'
-    TaxRatesGetAllResponse:
+    TaxRatesSearchResponse:
       type: object
       properties:
         TaxRates:
@@ -169,12 +156,19 @@ components:
           type: array
           items:
             type: string
-    TaxRatesDeleteResponse:
+    TaxRatesSaveRequest:
       type: object
       properties:
         TaxRate:
           type: object
           $ref: '#/components/schemas/TaxRate'
+    TaxRatesGetAllResponse:
+      type: object
+      properties:
+        TaxRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxRate'
         Success:
           type: boolean
         Message:
@@ -206,97 +200,6 @@ components:
       properties:
         SearchText:
           type: string
-    TaxRatesSaveResponse:
-      type: object
-      properties:
-        TaxRate:
-          type: object
-          $ref: '#/components/schemas/TaxRate'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    TaxRatesGetResponse:
-      type: object
-      properties:
-        TaxRate:
-          type: object
-          $ref: '#/components/schemas/TaxRate'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    TaxRate:
-      type: object
-      properties:
-        Id:
-          type: string
-        Description:
-          type: string
-        Rate:
-          type: number
-          format: double
-        TaxRateType:
-          type: string
-          enum:
-          - FeesAndExpenses
-          - FeesAndSelectedExpenses
-          - Expenses
-          - SelectedExpenses
-          - SelectedFees
-          - SelectedFeesAndSelectedExpenses
-        AppliedToMatter:
-          type: boolean
-    TaxRatesSearchResponse:
-      type: object
-      properties:
-        TaxRates:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaxRate'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     ValidationResult:
       type: object
       properties:
@@ -346,3 +249,100 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
+    TaxRatesDeleteResponse:
+      type: object
+      properties:
+        TaxRate:
+          type: object
+          $ref: '#/components/schemas/TaxRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    TaxRatesSaveResponse:
+      type: object
+      properties:
+        TaxRate:
+          type: object
+          $ref: '#/components/schemas/TaxRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    TaxRate:
+      type: object
+      properties:
+        Id:
+          type: string
+        Description:
+          type: string
+        Rate:
+          type: number
+          format: double
+        TaxRateType:
+          type: string
+          enum:
+          - FeesAndExpenses
+          - FeesAndSelectedExpenses
+          - Expenses
+          - SelectedExpenses
+          - SelectedFees
+          - SelectedFeesAndSelectedExpenses
+        AppliedToMatter:
+          type: boolean
+    TaxRatesGetRequest:
+      type: object
+      properties:
+        TaxRateId:
+          type: string
+        TaxRateDescription:
+          type: string
+    TaxRatesGetResponse:
+      type: object
+      properties:
+        TaxRate:
+          type: object
+          $ref: '#/components/schemas/TaxRate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

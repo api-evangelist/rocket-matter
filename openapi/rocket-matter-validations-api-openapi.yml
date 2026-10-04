@@ -81,54 +81,6 @@ components:
           type: string
         Regex:
           type: string
-    ValidationRule:
-      type: object
-      properties:
-        Name:
-          type: string
-        MinValue:
-          type: number
-          format: double
-        MinValueMessage:
-          type: string
-        MaxValue:
-          type: number
-          format: double
-        MaxValueMessage:
-          type: string
-        MinLength:
-          type: integer
-          format: int32
-        MinLengthMessage:
-          type: string
-        MaxLength:
-          type: integer
-          format: int32
-        MaxLengthMessage:
-          type: string
-        Required:
-          type: boolean
-        RequiredMessage:
-          type: string
-        DisplayName:
-          type: string
-        Extend:
-          type: string
-        Overrides:
-          type: object
-        Precision:
-          type: integer
-          format: int32
-        RequiresPrecision:
-          type: boolean
-        RequiresPrecisionMessage:
-          type: string
-        FormatMessage:
-          type: string
-        CharacterValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterValidationRule'
     ValidationResult:
       type: object
       properties:
@@ -178,3 +130,51 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
+    ValidationRule:
+      type: object
+      properties:
+        Name:
+          type: string
+        MinValue:
+          type: number
+          format: double
+        MinValueMessage:
+          type: string
+        MaxValue:
+          type: number
+          format: double
+        MaxValueMessage:
+          type: string
+        MinLength:
+          type: integer
+          format: int32
+        MinLengthMessage:
+          type: string
+        MaxLength:
+          type: integer
+          format: int32
+        MaxLengthMessage:
+          type: string
+        Required:
+          type: boolean
+        RequiredMessage:
+          type: string
+        DisplayName:
+          type: string
+        Extend:
+          type: string
+        Overrides:
+          type: object
+        Precision:
+          type: integer
+          format: int32
+        RequiresPrecision:
+          type: boolean
+        RequiresPrecisionMessage:
+          type: string
+        FormatMessage:
+          type: string
+        CharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'

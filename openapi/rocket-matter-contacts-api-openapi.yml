@@ -507,9 +507,157 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SearchCustomFieldsRequest:
+      type: object
+      properties:
+        SearchText:
+          type: string
+    SaveContactRequest:
+      type: object
+      properties:
+        Contact:
+          type: object
+          $ref: '#/components/schemas/ContactFull'
+    GetContactByIDResponse:
+      type: object
+      properties:
+        Contact:
+          type: object
+          $ref: '#/components/schemas/ContactFull'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     SaveContactCustomFieldsResponse:
       type: object
       properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    BaseMatter:
+      type: object
+      properties:
+        Client:
+          type: object
+          $ref: '#/components/schemas/Client'
+        Name:
+          type: string
+        ClientMatter:
+          type: string
+        MatterTypeID:
+          type: integer
+          format: int32
+        MatterStatusTypeId:
+          type: integer
+          format: int32
+        TaxRateId:
+          type: string
+        DiscountRateId:
+          type: string
+        InterestRateId:
+          type: string
+        SurchargeRateId:
+          type: string
+        DefaultBillingTypeId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    DeleteContactRequest:
+      type: object
+      properties:
+        Id:
+          type: integer
+          format: int32
+    ContactRelationship:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+        RelationshipId:
+          type: integer
+          format: int32
+        RelationshipName:
+          type: string
+        Role:
+          type: string
+        Position:
+          type: integer
+          format: int32
+        IsCompany:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    ContactAddress:
+      type: object
+      properties:
+        AddressLine1:
+          type: string
+        AddressLine2:
+          type: string
+        City:
+          type: string
+        State:
+          type: string
+        PostalCode:
+          type: string
+        Country:
+          type: string
+        IsEmpty:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    GetContactByFullNameRequest:
+      type: object
+      properties:
+        FullName:
+          type: string
+        Relationship:
+          type: string
+        PortalContact:
+          type: boolean
+        FullNames:
+          type: array
+          items:
+            type: string
+    SearchCustomFieldsResponse:
+      type: object
+      properties:
+        MatterCustomFields:
+          type: array
+          items:
+            type: string
         Success:
           type: boolean
         Message:
@@ -547,173 +695,6 @@ components:
           type: array
           items:
             type: string
-    OriginContactCustomField:
-      type: object
-      properties:
-        ID:
-          type: integer
-          format: int32
-        Name:
-          type: string
-        Value:
-          type: string
-        Position:
-          type: integer
-          format: int32
-    UpdateShareInvoiceSettingsToOtherEmailResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetContactsResponse:
-      type: object
-      properties:
-        Contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    IsReceivingInvoicesBySpecifiedEmailTypeRequest:
-      type: object
-      properties:
-        ContactID:
-          type: integer
-          format: int32
-        Type:
-          type: string
-    GetContactDataResponse:
-      type: object
-      properties:
-        Relationships:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactRelationship'
-        CustomFields:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactCustomField'
-        Contact:
-          type: object
-          $ref: '#/components/schemas/Contact'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    BaseResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    ContactRelationship:
-      type: object
-      properties:
-        ContactId:
-          type: integer
-          format: int32
-        RelationshipId:
-          type: integer
-          format: int32
-        RelationshipName:
-          type: string
-        Role:
-          type: string
-        Position:
-          type: integer
-          format: int32
-        IsCompany:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
-    GetContactDataRequest:
-      type: object
-      properties:
-        ContactId:
-          type: integer
-          format: int32
-    SearchPersonContactsResponse:
-      type: object
-      properties:
-        Contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     GetContactCustomFieldsRequest:
       type: object
       properties:
@@ -729,32 +710,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OriginContactCustomField'
-    DeleteContactCustomFieldRequest:
+    CharacterValidationRule:
       type: object
       properties:
-        ContactId:
-          type: integer
-          format: int32
-        MatterId:
-          type: integer
-          format: int32
-        FieldNames:
-          type: array
-          items:
-            type: string
-    GetDefaultContactDataResponse:
-      type: object
-      properties:
-        Relationships:
-          type: array
-          items:
-            type: string
-        CustomFields:
-          type: array
-          items:
-            type: string
-        AlphabetisizeFields:
+        ShouldMatch:
           type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    GetContactByFullNameResponse:
+      type: object
+      properties:
+        Contact:
+          type: object
+          $ref: '#/components/schemas/Contact'
+        Contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
         Success:
           type: boolean
         Message:
@@ -772,15 +746,55 @@ components:
           type: array
           items:
             type: string
-    UpdateShareInvoiceSettingsToOtherEmailRequest:
+    GetPersonContactsResponse:
       type: object
       properties:
-        ContactID:
+        Contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
           type: integer
           format: int32
-        NewPreference:
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SearchOriginatorResponse:
+      type: object
+      properties:
+        OriginatorNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactFull'
+        Success:
+          type: boolean
+        Message:
           type: string
-    SaveContactDataResponse:
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SaveContactDataRequest:
       type: object
       properties:
         Relationships:
@@ -791,47 +805,141 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ContactCustomField'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
+        ContactId:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetContactCustomFieldsResponse:
+    SearchContactsRequest:
       type: object
       properties:
-        CustomFields:
-          type: array
-          items:
-            $ref: '#/components/schemas/OriginContactCustomField'
-        Success:
-          type: boolean
-        Message:
+        SearchText:
           type: string
-        ErrorMessage:
+        Relationship:
           type: string
-        ErrorNumber:
+        ContactType:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
+        RestrictUsers:
+          type: boolean
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
           type: array
           items:
             type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    Client:
+      type: object
+      properties:
+        Name:
+          type: string
+        Code:
+          type: string
+        MiddleName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        ContactID:
+          type: integer
+          format: int32
+        CompanyID:
+          type: integer
+          format: int32
+        CompanyName:
+          type: string
+        WorkEmail:
+          type: string
+        FullName:
+          type: string
+        HomeAddress:
+          type: object
+          $ref: '#/components/schemas/ContactAddress'
+        Relationships:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactRelationship'
+        HomeEmail:
+          type: string
+        MobilePhone:
+          type: string
+        Notes:
+          type: string
+        PreferredDisplayName:
+          type: string
+        PrimaryContact:
+          type: string
+        PrimaryContactId:
+          type: integer
+          format: int32
+        Salutation:
+          type: string
+        SkypeUserName:
+          type: string
+        Suffix:
+          type: string
+        Title:
+          type: string
+        WorkAddress:
+          type: object
+          $ref: '#/components/schemas/ContactAddress'
+        WorkFax:
+          type: string
+        WorkPhone:
+          type: string
+        HomePhone:
+          type: string
+        WorkPhoneExt:
+          type: string
+        Tags:
+          type: array
+          items:
+            type: string
+        ID:
+          type: integer
+          format: int32
     ContactFull:
       type: object
       properties:
@@ -947,12 +1055,12 @@ components:
         ID:
           type: integer
           format: int32
-    GetClientByCodeResponse:
+    SaveContactResponse:
       type: object
       properties:
-        Client:
+        Contact:
           type: object
-          $ref: '#/components/schemas/Client'
+          $ref: '#/components/schemas/ContactFull'
         Success:
           type: boolean
         Message:
@@ -976,18 +1084,12 @@ components:
         ID:
           type: integer
           format: int32
-    SearchContactsRequest:
+    GetContactDataRequest:
       type: object
       properties:
-        SearchText:
-          type: string
-        Relationship:
-          type: string
-        ContactType:
+        ContactId:
           type: integer
           format: int32
-        RestrictUsers:
-          type: boolean
     SearchContactsResponse:
       type: object
       properties:
@@ -995,6 +1097,98 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ContactFull'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SearchOriginatorRequest:
+      type: object
+      properties:
+        SearchText:
+          type: string
+    SaveContactCustomFieldsRequest:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        CustomFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/OriginContactCustomField'
+    GetDefaultContactDataResponse:
+      type: object
+      properties:
+        Relationships:
+          type: array
+          items:
+            type: string
+        CustomFields:
+          type: array
+          items:
+            type: string
+        AlphabetisizeFields:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetContactCustomFieldsResponse:
+      type: object
+      properties:
+        CustomFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/OriginContactCustomField'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    BaseResponse:
+      type: object
+      properties:
         Success:
           type: boolean
         Message:
@@ -1028,88 +1222,113 @@ components:
         ID:
           type: integer
           format: int32
-    Client:
+    OriginContactCustomField:
       type: object
       properties:
+        ID:
+          type: integer
+          format: int32
         Name:
           type: string
-        Code:
+        Value:
           type: string
-        MiddleName:
-          type: string
-        LastName:
-          type: string
-        IsCompany:
+        Position:
+          type: integer
+          format: int32
+    IsReceivingInvoicesBySpecifiedEmailTypeResponse:
+      type: object
+      properties:
+        IsReceiving:
           type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    IsReceivingInvoicesBySpecifiedEmailTypeRequest:
+      type: object
+      properties:
         ContactID:
           type: integer
           format: int32
-        CompanyID:
+        Type:
+          type: string
+    SearchPersonContactsResponse:
+      type: object
+      properties:
+        Contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
           type: integer
           format: int32
-        CompanyName:
-          type: string
-        WorkEmail:
-          type: string
-        FullName:
-          type: string
-        HomeAddress:
-          type: object
-          $ref: '#/components/schemas/ContactAddress'
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SaveContactDataResponse:
+      type: object
+      properties:
         Relationships:
           type: array
           items:
             $ref: '#/components/schemas/ContactRelationship'
-        HomeEmail:
+        CustomFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactCustomField'
+        Success:
+          type: boolean
+        Message:
           type: string
-        MobilePhone:
+        ErrorMessage:
           type: string
-        Notes:
-          type: string
-        PreferredDisplayName:
-          type: string
-        PrimaryContact:
-          type: string
-        PrimaryContactId:
+        ErrorNumber:
           type: integer
           format: int32
-        Salutation:
-          type: string
-        SkypeUserName:
-          type: string
-        Suffix:
-          type: string
-        Title:
-          type: string
-        WorkAddress:
-          type: object
-          $ref: '#/components/schemas/ContactAddress'
-        WorkFax:
-          type: string
-        WorkPhone:
-          type: string
-        HomePhone:
-          type: string
-        WorkPhoneExt:
-          type: string
-        Tags:
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
           type: array
           items:
             type: string
-        ID:
-          type: integer
-          format: int32
     GetClientByCodeRequest:
       type: object
       properties:
         ClientCode:
           type: string
-    SaveContactResponse:
+    GetContactsResponse:
       type: object
       properties:
-        Contact:
-          type: object
-          $ref: '#/components/schemas/ContactFull'
+        Contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
         Success:
           type: boolean
         Message:
@@ -1127,16 +1346,40 @@ components:
           type: array
           items:
             type: string
-    GetContactByFullNameResponse:
+    UpdateShareInvoiceSettingsToOtherEmailResponse:
       type: object
       properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetContactDataResponse:
+      type: object
+      properties:
+        Relationships:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactRelationship'
+        CustomFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactCustomField'
         Contact:
           type: object
           $ref: '#/components/schemas/Contact'
-        Contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact'
         Success:
           type: boolean
         Message:
@@ -1154,126 +1397,50 @@ components:
           type: array
           items:
             type: string
-    GetContactsRequest:
+    GetClientByCodeResponse:
       type: object
       properties:
-        Letter:
-          type: string
-        Offset:
-          type: integer
-          format: int32
-        Fetch:
-          type: integer
-          format: int32
-        Search:
-          type: string
-        Sort:
-          type: string
-          enum:
-          - FirstName
-          - LastName
-        IsDescending:
-          type: boolean
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    GetContactByFullNameRequest:
-      type: object
-      properties:
-        FullName:
-          type: string
-        Relationship:
-          type: string
-        PortalContact:
-          type: boolean
-        FullNames:
-          type: array
-          items:
-            type: string
-    SearchCustomFieldsRequest:
-      type: object
-      properties:
-        SearchText:
-          type: string
-    GetPersonContactsResponse:
-      type: object
-      properties:
-        Contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    ValidationResult:
-      type: object
-      properties:
-        MinValue:
-          type: boolean
-        MaxValue:
-          type: boolean
-        MinLength:
-          type: boolean
-        MaxLength:
-          type: boolean
-        Required:
-          type: boolean
-        PropertyDisplayName:
-          type: string
-        Precision:
-          type: boolean
-        ValueEntered:
+        Client:
           type: object
-        Name:
+          $ref: '#/components/schemas/Client'
+        Success:
+          type: boolean
+        Message:
           type: string
-        ObjectName:
+        ErrorMessage:
           type: string
-        ExternalID:
-          type: string
-        MinValueMessage:
-          type: string
-        MaxValueMessage:
-          type: string
-        MinLengthMessage:
-          type: string
-        MaxLengthMessage:
-          type: string
-        RequiredMessage:
-          type: string
-        RequiredPrecisionMessage:
-          type: string
-        BaseFailureMessage:
-          type: string
-        FailedValidationMessages:
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
           type: array
           items:
             type: string
-        FailedCharacterValidations:
+    DeleteContactCustomFieldRequest:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        FieldNames:
           type: array
           items:
-            $ref: '#/components/schemas/CharacterValidationRule'
-        IsValid:
-          type: boolean
+            type: string
+    UpdateShareInvoiceSettingsToOtherEmailRequest:
+      type: object
+      properties:
+        ContactID:
+          type: integer
+          format: int32
+        NewPreference:
+          type: string
     Contact:
       type: object
       properties:
@@ -1349,195 +1516,28 @@ components:
         ID:
           type: integer
           format: int32
-    SearchCustomFieldsResponse:
+    GetContactsRequest:
       type: object
       properties:
-        MatterCustomFields:
-          type: array
-          items:
-            type: string
-        Success:
-          type: boolean
-        Message:
+        Letter:
           type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
+        Offset:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetContactByIDResponse:
-      type: object
-      properties:
-        Contact:
-          type: object
-          $ref: '#/components/schemas/ContactFull'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
+        Fetch:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
+        Search:
+          type: string
+        Sort:
+          type: string
+          enum:
+          - FirstName
+          - LastName
+        IsDescending:
+          type: boolean
     SearchPersonContactsRequest:
       type: object
       properties:
         SearchText:
           type: string
-    ContactAddress:
-      type: object
-      properties:
-        AddressLine1:
-          type: string
-        AddressLine2:
-          type: string
-        City:
-          type: string
-        State:
-          type: string
-        PostalCode:
-          type: string
-        Country:
-          type: string
-        IsEmpty:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
-    DeleteContactRequest:
-      type: object
-      properties:
-        Id:
-          type: integer
-          format: int32
-    BaseMatter:
-      type: object
-      properties:
-        Client:
-          type: object
-          $ref: '#/components/schemas/Client'
-        Name:
-          type: string
-        ClientMatter:
-          type: string
-        MatterTypeID:
-          type: integer
-          format: int32
-        MatterStatusTypeId:
-          type: integer
-          format: int32
-        TaxRateId:
-          type: string
-        DiscountRateId:
-          type: string
-        InterestRateId:
-          type: string
-        SurchargeRateId:
-          type: string
-        DefaultBillingTypeId:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
-    IsReceivingInvoicesBySpecifiedEmailTypeResponse:
-      type: object
-      properties:
-        IsReceiving:
-          type: boolean
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SearchOriginatorResponse:
-      type: object
-      properties:
-        OriginatorNames:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactFull'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SaveContactCustomFieldsRequest:
-      type: object
-      properties:
-        ContactId:
-          type: integer
-          format: int32
-        MatterId:
-          type: integer
-          format: int32
-        CustomFields:
-          type: array
-          items:
-            $ref: '#/components/schemas/OriginContactCustomField'
-    SaveContactRequest:
-      type: object
-      properties:
-        Contact:
-          type: object
-          $ref: '#/components/schemas/ContactFull'
-    SearchOriginatorRequest:
-      type: object
-      properties:
-        SearchText:
-          type: string
-    SaveContactDataRequest:
-      type: object
-      properties:
-        Relationships:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactRelationship'
-        CustomFields:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactCustomField'
-        ContactId:
-          type: integer
-          format: int32

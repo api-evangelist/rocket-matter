@@ -162,12 +162,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GetMatterPaymentPlanRequest:
-      type: object
-      properties:
-        matterID:
-          type: integer
-          format: int32
     CancelPaymentPlanRequest:
       type: object
       properties:
@@ -181,42 +175,6 @@ components:
           format: int32
         EmailTypeSelected:
           type: string
-    UpdatePlanNotificationRequest:
-      type: object
-      properties:
-        PlanId:
-          type: string
-        MatterId:
-          type: integer
-          format: int32
-        FailureNotifications:
-          type: array
-          items:
-            $ref: '#/components/schemas/RecurringBillingPlanFailureNotification'
-        InvoiceShares:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceShare'
-    CancelPaymentPlanResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     RecurringBillingPlanFailureNotification:
       type: object
       properties:
@@ -226,32 +184,9 @@ components:
         User:
           type: object
           $ref: '#/components/schemas/Contact'
-    MatterBalance:
+    UpdatePaymentPlanTokenResponse:
       type: object
       properties:
-        CurrentAccountBalance:
-          type: number
-          format: double
-        RetainerDue:
-          type: number
-          format: double
-        LatestInvoiceId:
-          type: integer
-          format: int32
-        Type:
-          type: string
-        PendingTrustAmount:
-          type: number
-          format: double
-        Balance:
-          type: number
-          format: double
-    GeneratePaymentPlanResponse:
-      type: object
-      properties:
-        Plan:
-          type: object
-          $ref: '#/components/schemas/RecurringBillingPlan'
         Success:
           type: boolean
         Message:
@@ -269,6 +204,31 @@ components:
           type: array
           items:
             type: string
+    GetMatterPaymentPlanRequest:
+      type: object
+      properties:
+        matterID:
+          type: integer
+          format: int32
+    CommitPlanRequest:
+      type: object
+      properties:
+        Plan:
+          type: object
+          $ref: '#/components/schemas/RecurringBillingPlan'
+        InvoiceShares:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceShare'
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
     RecurringBillingMethod:
       type: object
       properties:
@@ -281,48 +241,6 @@ components:
         OrderID:
           type: integer
           format: int32
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    CommitPlanRequest:
-      type: object
-      properties:
-        Plan:
-          type: object
-          $ref: '#/components/schemas/RecurringBillingPlan'
-        InvoiceShares:
-          type: array
-          items:
-            $ref: '#/components/schemas/InvoiceShare'
-    CommitPlanResponse:
-      type: object
-      properties:
-        Plan:
-          type: object
-          $ref: '#/components/schemas/RecurringBillingPlan'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     ValidationResult:
       type: object
       properties:
@@ -372,110 +290,6 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    Contact:
-      type: object
-      properties:
-        Name:
-          type: string
-        MiddleName:
-          type: string
-        FullName:
-          type: string
-        LastName:
-          type: string
-        IsCompany:
-          type: boolean
-        WorkEmail:
-          type: string
-        WorkPhone:
-          type: string
-        WorkPhoneExt:
-          type: string
-        WorkFax:
-          type: string
-        WorkAddressLine1:
-          type: string
-        WorkAddressLine2:
-          type: string
-        WorkCity:
-          type: string
-        WorkState:
-          type: string
-        WorkPostalCode:
-          type: string
-        WorkCountry:
-          type: string
-        ClientID:
-          type: integer
-          format: int32
-        HomeEmail:
-          type: string
-        HomePhone:
-          type: string
-        HomeAddressLine1:
-          type: string
-        HomeAddressLine2:
-          type: string
-        HomeCity:
-          type: string
-        HomeState:
-          type: string
-        HomePostalCode:
-          type: string
-        HomeCountry:
-          type: string
-        ExternalID2:
-          type: string
-        LastModifiedDate:
-          type: string
-          format: date-time
-        ContactTypeId:
-          type: integer
-          format: int32
-        CompanyId:
-          type: integer
-          format: int32
-        CompanyName:
-          type: string
-        Initials:
-          type: string
-        Notes:
-          type: string
-        UserId:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
-    UpdatePaymentPlanTokenRequest:
-      type: object
-      properties:
-        Id:
-          type: string
-        ChargeToken:
-          type: string
-        PaymentHint:
-          type: string
-    UpdatePlanNotificationResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     GetMatterPaymentPlanResponse:
       type: object
       properties:
@@ -502,27 +316,6 @@ components:
           type: array
           items:
             type: string
-    RecurringBillingPlanDetail:
-      type: object
-      properties:
-        Date:
-          type: string
-        Amount:
-          type: number
-          format: double
-        Name:
-          type: string
-        Paid:
-          type: boolean
-        OrderId:
-          type: integer
-          format: int32
-        IsBilledFor:
-          type: boolean
-        IsAchFailedPayment:
-          type: boolean
-        Id:
-          type: string
     RecurringBillingPlan:
       type: object
       properties:
@@ -604,7 +397,28 @@ components:
           format: double
         Id:
           type: string
-    UpdatePaymentPlanTokenResponse:
+    RecurringBillingPlanDetail:
+      type: object
+      properties:
+        Date:
+          type: string
+        Amount:
+          type: number
+          format: double
+        Name:
+          type: string
+        Paid:
+          type: boolean
+        OrderId:
+          type: integer
+          format: int32
+        IsBilledFor:
+          type: boolean
+        IsAchFailedPayment:
+          type: boolean
+        Id:
+          type: string
+    CancelPaymentPlanResponse:
       type: object
       properties:
         Success:
@@ -624,3 +438,189 @@ components:
           type: array
           items:
             type: string
+    GeneratePaymentPlanResponse:
+      type: object
+      properties:
+        Plan:
+          type: object
+          $ref: '#/components/schemas/RecurringBillingPlan'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    MatterBalance:
+      type: object
+      properties:
+        CurrentAccountBalance:
+          type: number
+          format: double
+        RetainerDue:
+          type: number
+          format: double
+        LatestInvoiceId:
+          type: integer
+          format: int32
+        Type:
+          type: string
+        PendingTrustAmount:
+          type: number
+          format: double
+        Balance:
+          type: number
+          format: double
+    UpdatePlanNotificationRequest:
+      type: object
+      properties:
+        PlanId:
+          type: string
+        MatterId:
+          type: integer
+          format: int32
+        FailureNotifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecurringBillingPlanFailureNotification'
+        InvoiceShares:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceShare'
+    UpdatePaymentPlanTokenRequest:
+      type: object
+      properties:
+        Id:
+          type: string
+        ChargeToken:
+          type: string
+        PaymentHint:
+          type: string
+    CommitPlanResponse:
+      type: object
+      properties:
+        Plan:
+          type: object
+          $ref: '#/components/schemas/RecurringBillingPlan'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UpdatePlanNotificationResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    Contact:
+      type: object
+      properties:
+        Name:
+          type: string
+        MiddleName:
+          type: string
+        FullName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        WorkEmail:
+          type: string
+        WorkPhone:
+          type: string
+        WorkPhoneExt:
+          type: string
+        WorkFax:
+          type: string
+        WorkAddressLine1:
+          type: string
+        WorkAddressLine2:
+          type: string
+        WorkCity:
+          type: string
+        WorkState:
+          type: string
+        WorkPostalCode:
+          type: string
+        WorkCountry:
+          type: string
+        ClientID:
+          type: integer
+          format: int32
+        HomeEmail:
+          type: string
+        HomePhone:
+          type: string
+        HomeAddressLine1:
+          type: string
+        HomeAddressLine2:
+          type: string
+        HomeCity:
+          type: string
+        HomeState:
+          type: string
+        HomePostalCode:
+          type: string
+        HomeCountry:
+          type: string
+        ExternalID2:
+          type: string
+        LastModifiedDate:
+          type: string
+          format: date-time
+        ContactTypeId:
+          type: integer
+          format: int32
+        CompanyId:
+          type: integer
+          format: int32
+        CompanyName:
+          type: string
+        Initials:
+          type: string
+        Notes:
+          type: string
+        UserId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32

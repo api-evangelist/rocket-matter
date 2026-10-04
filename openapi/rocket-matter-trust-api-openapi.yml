@@ -44,15 +44,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CharacterValidationRule:
+    TrustDetailsRequest:
       type: object
       properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
+        MatterId:
+          type: integer
+          format: int32
+        ClientId:
+          type: integer
+          format: int32
     TrustDetailsResponse:
       type: object
       properties:
@@ -81,15 +81,6 @@ components:
           type: array
           items:
             type: string
-    TrustDetailsRequest:
-      type: object
-      properties:
-        MatterId:
-          type: integer
-          format: int32
-        ClientId:
-          type: integer
-          format: int32
     ValidationResult:
       type: object
       properties:
@@ -139,3 +130,12 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string

@@ -183,21 +183,29 @@ components:
           type: array
           items:
             type: string
-    GrantTokenResponse:
+    GetMobileAuthenticationCodeRequest:
       type: object
       properties:
-        expires_at:
+        DeviceId:
           type: string
-          format: date-time
-        access_token:
+        AuthenticationToken:
           type: string
-        refresh_token:
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
           type: string
-        expires_in:
-          type: integer
-          format: int32
-        error:
+        Regex:
           type: string
+    GetMobileAuthenticationCodeResponse:
+      type: object
+      properties:
+        AuthenticationCode:
+          type: string
+        IsValid:
+          type: boolean
         Success:
           type: boolean
         Message:
@@ -215,6 +223,23 @@ components:
           type: array
           items:
             type: string
+    GrantTokenRequest:
+      type: object
+      properties:
+        grant_type:
+          type: string
+        code:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        token:
+          type: string
     ValidationResult:
       type: object
       properties:
@@ -264,15 +289,6 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
     BaseResponse:
       type: object
       properties:
@@ -293,30 +309,21 @@ components:
           type: array
           items:
             type: string
-    GetMobileAuthenticationCodeRequest:
+    GrantTokenResponse:
       type: object
       properties:
-        DeviceId:
+        expires_at:
           type: string
-        AuthenticationToken:
+          format: date-time
+        access_token:
           type: string
-    RevokeTokenRequest:
-      type: object
-      properties:
-        token:
-          type: string
-    RefreshTokenRequest:
-      type: object
-      properties:
         refresh_token:
           type: string
-    GetMobileAuthenticationCodeResponse:
-      type: object
-      properties:
-        AuthenticationCode:
+        expires_in:
+          type: integer
+          format: int32
+        error:
           type: string
-        IsValid:
-          type: boolean
         Success:
           type: boolean
         Message:
@@ -334,20 +341,13 @@ components:
           type: array
           items:
             type: string
-    GrantTokenRequest:
+    RevokeTokenRequest:
       type: object
       properties:
-        grant_type:
-          type: string
-        code:
-          type: string
-        client_id:
-          type: string
-        client_secret:
-          type: string
-        username:
-          type: string
-        password:
-          type: string
         token:
+          type: string
+    RefreshTokenRequest:
+      type: object
+      properties:
+        refresh_token:
           type: string

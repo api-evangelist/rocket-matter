@@ -294,53 +294,38 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GetMatterCourtRulesRequest:
+    GetAvailableCourtRulesRequest:
       type: object
       properties:
-        MatterId:
-          type: integer
-          format: int32
-    EventAttendee:
-      type: object
-      properties:
-        EventID:
-          type: integer
-          format: int32
-        UserID:
-          type: integer
-          format: int32
-        User:
-          type: object
-          $ref: '#/components/schemas/User'
-        Bill:
-          type: boolean
-        NonBillable:
-          type: boolean
-        AttendeeName:
+        Filter:
           type: string
-        Contact:
-          type: object
-          $ref: '#/components/schemas/Contact'
-        IsRole:
-          type: boolean
-        Role:
-          type: string
-        ContactId:
-          type: integer
-          format: int32
-        InviteStatusTypeId:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
-    SaveCourtRulesResponse:
+    ToggleOption:
       type: object
       properties:
-        CourtRules:
-          type: array
-          items:
-            $ref: '#/components/schemas/CourtRule'
+        ToggleOptionID:
+          type: integer
+          format: int32
+        ToggleDescription:
+          type: string
+    TriggerDate:
+      type: object
+      properties:
+        TriggerID:
+          type: string
+        Name:
+          type: string
+        NoOfDeadlines:
+          type: integer
+          format: int32
+        ToggleID:
+          type: integer
+          format: int32
+        ToggleDetails:
+          type: object
+          $ref: '#/components/schemas/ToggleDetails'
+    GetAvailableCourtRulesResponse:
+      type: object
+      properties:
         Success:
           type: boolean
         Message:
@@ -358,41 +343,17 @@ components:
           type: array
           items:
             type: string
-    AddMatterCourtRuleRequest:
+    CourtRule:
       type: object
       properties:
-        CalendarEntries:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-        MatterId:
-          type: integer
-          format: int32
-        ToolSetId:
-          type: integer
-          format: int32
-        ToggleID:
+        ExternalId:
           type: string
-        ToggleOptionID:
+        Name:
           type: string
-        Description:
+        Value:
           type: string
-        HearingNote:
-          type: string
-        TriggerID:
-          type: string
-        TriggerDate:
-          type: string
-        EditMatterCourtRuleId:
-          type: string
-        DeadLines:
-          type: array
-          items:
-            $ref: '#/components/schemas/Deadline'
-        UpdateNotifications:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterCourtRuleUpdateNotification'
+        IsDefault:
+          type: boolean
     MatterCourtRule:
       type: object
       properties:
@@ -440,152 +401,15 @@ components:
         ID:
           type: integer
           format: int32
-    User:
+    TriggerMockDeadlineUpdateRequest:
       type: object
       properties:
-        FullName:
-          type: string
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        MiddleName:
-          type: string
-        ContactId:
+        EventId:
           type: integer
           format: int32
-        Initials:
+        DeadlineUpdateText:
           type: string
-        ID:
-          type: integer
-          format: int32
-    MatterCourtRuleUpdateNotification:
-      type: object
-      properties:
-        ContactId:
-          type: integer
-          format: int32
-        User:
-          type: object
-          $ref: '#/components/schemas/Contact'
-    CalculateDeadlinesResponse:
-      type: object
-      properties:
-        Deadlines:
-          type: array
-          items:
-            $ref: '#/components/schemas/Deadline'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetMatterCourtRulesResponse:
-      type: object
-      properties:
-        MatterCourtRules:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterCourtRule'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    ToggleOption:
-      type: object
-      properties:
-        ToggleOptionID:
-          type: integer
-          format: int32
-        ToggleDescription:
-          type: string
-    GetCourtRulesResponse:
-      type: object
-      properties:
-        CourtRules:
-          type: array
-          items:
-            $ref: '#/components/schemas/CourtRule'
-        Enable:
-          type: boolean
-        PaidEndDate:
-          type: string
-          format: date-time
-        PaidStartDate:
-          type: string
-          format: date-time
-        PricePerUser:
-          type: string
-        SubscriptionRenewDate:
-          type: string
-        TotalPrice:
-          type: string
-        TotalUsers:
-          type: integer
-          format: int32
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    AddMatterCourtRuleReponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetCourtRuleResponse:
+    GetCourtRuleDefaultResponse:
       type: object
       properties:
         CourtRule:
@@ -617,104 +441,15 @@ components:
           type: string
         Regex:
           type: string
-    TriggerMockDeadlineUpdateRequest:
+    DeleteMatterCourtRuleRequest:
       type: object
       properties:
-        EventId:
-          type: integer
-          format: int32
-        DeadlineUpdateText:
+        MatterCourtRuleId:
           type: string
-    TriggerMockDeadlineUpdateResponse:
+    GetCourtRuleRequest:
       type: object
       properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    Deadline:
-      type: object
-      properties:
-        DeadlineNumber:
-          type: string
-        DeadlineID:
-          type: string
-        DeadlineType:
-          type: string
-        Location:
-          type: object
-        Description_Short:
-          type: string
-        Description_Long:
-          type: string
-        Link_1:
-          type: string
-        Link_Description_1:
-          type: string
-        Link_2:
-          type: string
-        Link_Description_2:
-          type: string
-        StartDate:
-          type: string
-        EndDate:
-          type: object
-        StartDateTime:
-          type: object
-        EndDateTime:
-          type: object
-        StartTime:
-          type: object
-        EndTime:
-          type: object
-        TimeZone:
-          type: object
-        ReportCode:
-          type: string
-    DeleteMatterCourtRuleResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    MatterCourtRuleEvent:
-      type: object
-      properties:
-        EventId:
-          type: integer
-          format: int32
-        Description:
-          type: string
-        Date:
-          type: string
-        UpdateDescription:
+        Id:
           type: string
     ValidationResult:
       type: object
@@ -765,164 +500,47 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    CourtRule:
+    MatterCourtRuleUpdateNotification:
       type: object
       properties:
-        ExternalId:
-          type: string
-        Name:
-          type: string
-        Value:
-          type: string
-        IsDefault:
-          type: boolean
-    DeleteMatterCourtRuleRequest:
-      type: object
-      properties:
-        MatterCourtRuleId:
-          type: string
-    Contact:
-      type: object
-      properties:
-        Name:
-          type: string
-        MiddleName:
-          type: string
-        FullName:
-          type: string
-        LastName:
-          type: string
-        IsCompany:
-          type: boolean
-        WorkEmail:
-          type: string
-        WorkPhone:
-          type: string
-        WorkPhoneExt:
-          type: string
-        WorkFax:
-          type: string
-        WorkAddressLine1:
-          type: string
-        WorkAddressLine2:
-          type: string
-        WorkCity:
-          type: string
-        WorkState:
-          type: string
-        WorkPostalCode:
-          type: string
-        WorkCountry:
-          type: string
-        ClientID:
+        ContactId:
           type: integer
           format: int32
-        HomeEmail:
-          type: string
-        HomePhone:
-          type: string
-        HomeAddressLine1:
-          type: string
-        HomeAddressLine2:
-          type: string
-        HomeCity:
-          type: string
-        HomeState:
-          type: string
-        HomePostalCode:
-          type: string
-        HomeCountry:
-          type: string
-        ExternalID2:
-          type: string
-        LastModifiedDate:
-          type: string
-          format: date-time
-        ContactTypeId:
-          type: integer
-          format: int32
-        CompanyId:
-          type: integer
-          format: int32
-        CompanyName:
-          type: string
-        Initials:
-          type: string
-        Notes:
-          type: string
-        UserId:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
-    GetTriggerEventsResponse:
-      type: object
-      properties:
-        Triggers:
-          type: array
-          items:
-            $ref: '#/components/schemas/TriggerDate'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    ToggleDetails:
-      type: object
-      properties:
-        ToggleIntro:
-          type: string
-        ToggleOptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ToggleOption'
-    GetAvailableCourtRulesRequest:
-      type: object
-      properties:
-        Filter:
-          type: string
+        User:
+          type: object
+          $ref: '#/components/schemas/Contact'
     GetMatterCourtRuleEventsRequest:
       type: object
       properties:
         Id:
           type: string
-    GetMatterCourtRuleEventsResponse:
+    CalculateDeadlinesRequest:
       type: object
       properties:
-        Events:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterCourtRuleEvent'
-        Success:
-          type: boolean
-        Message:
+        TriggerID:
           type: string
-        ErrorMessage:
+        TriggerDate:
           type: string
-        ErrorNumber:
+        ToggleID:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
+        ToggleOptionID:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        ToolSetId:
+          type: integer
+          format: int32
+        HearingNote:
+          type: string
+    GetMatterCourtRulesRequest:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
     Event:
       type: object
       properties:
@@ -1062,28 +680,173 @@ components:
         ID:
           type: integer
           format: int32
-    TriggerDate:
+    GetTriggerEventsResponse:
       type: object
       properties:
-        TriggerID:
+        Triggers:
+          type: array
+          items:
+            $ref: '#/components/schemas/TriggerDate'
+        Success:
+          type: boolean
+        Message:
           type: string
-        Name:
+        ErrorMessage:
           type: string
-        NoOfDeadlines:
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    TriggerMockDeadlineUpdateResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    AddMatterCourtRuleRequest:
+      type: object
+      properties:
+        CalendarEntries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        MatterId:
+          type: integer
+          format: int32
+        ToolSetId:
           type: integer
           format: int32
         ToggleID:
-          type: integer
-          format: int32
-        ToggleDetails:
-          type: object
-          $ref: '#/components/schemas/ToggleDetails'
-    GetCourtRuleRequest:
+          type: string
+        ToggleOptionID:
+          type: string
+        Description:
+          type: string
+        HearingNote:
+          type: string
+        TriggerID:
+          type: string
+        TriggerDate:
+          type: string
+        EditMatterCourtRuleId:
+          type: string
+        DeadLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/Deadline'
+        UpdateNotifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterCourtRuleUpdateNotification'
+    SaveCourtRulesResponse:
       type: object
       properties:
-        Id:
+        CourtRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourtRule'
+        Success:
+          type: boolean
+        Message:
           type: string
-    GetCourtRuleDefaultResponse:
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    User:
+      type: object
+      properties:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    AddMatterCourtRuleReponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetMatterCourtRulesResponse:
+      type: object
+      properties:
+        MatterCourtRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterCourtRule'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetCourtRuleResponse:
       type: object
       properties:
         CourtRule:
@@ -1106,7 +869,65 @@ components:
           type: array
           items:
             type: string
-    GetAvailableCourtRulesResponse:
+    EventAttendee:
+      type: object
+      properties:
+        EventID:
+          type: integer
+          format: int32
+        UserID:
+          type: integer
+          format: int32
+        User:
+          type: object
+          $ref: '#/components/schemas/User'
+        Bill:
+          type: boolean
+        NonBillable:
+          type: boolean
+        AttendeeName:
+          type: string
+        Contact:
+          type: object
+          $ref: '#/components/schemas/Contact'
+        IsRole:
+          type: boolean
+        Role:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        InviteStatusTypeId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    CalculateDeadlinesResponse:
+      type: object
+      properties:
+        Deadlines:
+          type: array
+          items:
+            $ref: '#/components/schemas/Deadline'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteMatterCourtRuleResponse:
       type: object
       properties:
         Success:
@@ -1126,24 +947,203 @@ components:
           type: array
           items:
             type: string
-    CalculateDeadlinesRequest:
+    MatterCourtRuleEvent:
       type: object
       properties:
-        TriggerID:
+        EventId:
+          type: integer
+          format: int32
+        Description:
           type: string
-        TriggerDate:
+        Date:
           type: string
-        ToggleID:
-          type: integer
-          format: int32
-        ToggleOptionID:
-          type: integer
-          format: int32
-        MatterId:
-          type: integer
-          format: int32
-        ToolSetId:
-          type: integer
-          format: int32
-        HearingNote:
+        UpdateDescription:
           type: string
+    GetMatterCourtRuleEventsResponse:
+      type: object
+      properties:
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterCourtRuleEvent'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetCourtRulesResponse:
+      type: object
+      properties:
+        CourtRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CourtRule'
+        Enable:
+          type: boolean
+        PaidEndDate:
+          type: string
+          format: date-time
+        PaidStartDate:
+          type: string
+          format: date-time
+        PricePerUser:
+          type: string
+        SubscriptionRenewDate:
+          type: string
+        TotalPrice:
+          type: string
+        TotalUsers:
+          type: integer
+          format: int32
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    Deadline:
+      type: object
+      properties:
+        DeadlineNumber:
+          type: string
+        DeadlineID:
+          type: string
+        DeadlineType:
+          type: string
+        Location:
+          type: object
+        Description_Short:
+          type: string
+        Description_Long:
+          type: string
+        Link_1:
+          type: string
+        Link_Description_1:
+          type: string
+        Link_2:
+          type: string
+        Link_Description_2:
+          type: string
+        StartDate:
+          type: string
+        EndDate:
+          type: object
+        StartDateTime:
+          type: object
+        EndDateTime:
+          type: object
+        StartTime:
+          type: object
+        EndTime:
+          type: object
+        TimeZone:
+          type: object
+        ReportCode:
+          type: string
+    Contact:
+      type: object
+      properties:
+        Name:
+          type: string
+        MiddleName:
+          type: string
+        FullName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        WorkEmail:
+          type: string
+        WorkPhone:
+          type: string
+        WorkPhoneExt:
+          type: string
+        WorkFax:
+          type: string
+        WorkAddressLine1:
+          type: string
+        WorkAddressLine2:
+          type: string
+        WorkCity:
+          type: string
+        WorkState:
+          type: string
+        WorkPostalCode:
+          type: string
+        WorkCountry:
+          type: string
+        ClientID:
+          type: integer
+          format: int32
+        HomeEmail:
+          type: string
+        HomePhone:
+          type: string
+        HomeAddressLine1:
+          type: string
+        HomeAddressLine2:
+          type: string
+        HomeCity:
+          type: string
+        HomeState:
+          type: string
+        HomePostalCode:
+          type: string
+        HomeCountry:
+          type: string
+        ExternalID2:
+          type: string
+        LastModifiedDate:
+          type: string
+          format: date-time
+        ContactTypeId:
+          type: integer
+          format: int32
+        CompanyId:
+          type: integer
+          format: int32
+        CompanyName:
+          type: string
+        Initials:
+          type: string
+        Notes:
+          type: string
+        UserId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    ToggleDetails:
+      type: object
+      properties:
+        ToggleIntro:
+          type: string
+        ToggleOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToggleOption'

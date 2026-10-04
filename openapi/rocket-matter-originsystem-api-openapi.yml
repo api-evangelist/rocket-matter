@@ -532,241 +532,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GetUserOperationsResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     CancellationSurveyItem:
       type: object
       properties:
         Question:
           type: string
         Answer:
-          type: string
-    CancelSubscriptionResponse:
-      type: object
-      properties:
-        CancellationDate:
-          type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetRoleResponse:
-      type: object
-      properties:
-        Role:
-          type: object
-          $ref: '#/components/schemas/Role'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    BaseResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SaveRoleResponse:
-      type: object
-      properties:
-        Role:
-          type: object
-          $ref: '#/components/schemas/Role'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetCopy2ContactsJavaScriptResponse:
-      type: object
-      properties:
-        ScriptText:
-          type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetRoleUsersForPermissionsRequest:
-      type: object
-      properties:
-        RoleId:
-          type: string
-    GetTimeZoneOptionsResponse:
-      type: object
-      properties:
-        Timezones:
-          type: object
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SaveRoleRequest:
-      type: object
-      properties:
-        Role:
-          type: object
-          $ref: '#/components/schemas/Role'
-    Script:
-      type: object
-      properties:
-        Id:
-          type: integer
-          format: int32
-        Name:
-          type: string
-        ScriptText:
-          type: string
-        ApplyToTrialsAccounts:
-          type: boolean
-        ApplyToPaidAccounts:
-          type: boolean
-        InstallScripts:
-          type: object
-        LastModifiedDate:
-          type: string
-          format: date-time
-        CreatedDate:
-          type: string
-          format: date-time
-    DeleteRoleResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    User:
-      type: object
-      properties:
-        FullName:
-          type: string
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        MiddleName:
-          type: string
-        ContactId:
-          type: integer
-          format: int32
-        Initials:
-          type: string
-        ID:
-          type: integer
-          format: int32
-    GetCopy2ContactsJavaScriptRequest:
-      type: object
-      properties:
-        Form:
           type: string
     GetRolesResponse:
       type: object
@@ -792,30 +563,49 @@ components:
           type: array
           items:
             type: string
-    InstallScript:
+    DeleteRoleRequest:
       type: object
       properties:
-        Id:
+        RoleId:
+          type: string
+    GetInstallScriptsResponse:
+      type: object
+      properties:
+        InstallScripts:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallScript'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
           type: integer
           format: int32
-        ScriptID:
-          type: integer
-          format: int32
-        InstallationID:
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SetInstallScriptStateRequest:
+      type: object
+      properties:
+        InstallScriptID:
           type: integer
           format: int32
         Enabled:
           type: boolean
-        Script:
-          type: object
-          $ref: '#/components/schemas/Script'
-    GetPermissionsResponse:
+    GetRoleResponse:
       type: object
       properties:
-        Permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
+        Role:
+          type: object
+          $ref: '#/components/schemas/Role'
         Success:
           type: boolean
         Message:
@@ -853,33 +643,6 @@ components:
           type: array
           items:
             type: string
-    CancellationSurvey:
-      type: object
-      properties:
-        QuestionAnswers:
-          type: array
-          items:
-            $ref: '#/components/schemas/CancellationSurveyItem'
-    SetInstallScriptStateResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -889,7 +652,7 @@ components:
           type: string
         Regex:
           type: string
-    Role:
+    Permission:
       type: object
       properties:
         Id:
@@ -898,20 +661,7 @@ components:
           type: string
         Description:
           type: string
-        Permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        Users:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-    GetSessionCancellationInfoRequest:
-      type: object
-      properties:
-        NotifySlack:
-          type: boolean
-    GetUsersForPermissionsResponse:
+    GetRoleUsersForPermissionsResponse:
       type: object
       properties:
         Users:
@@ -935,12 +685,27 @@ components:
           type: array
           items:
             type: string
-    checkIfFeatureIsEnabledRequest:
+    UpdateFedACHDirectoryResponse:
       type: object
       properties:
-        FeatureName:
+        Success:
+          type: boolean
+        Message:
           type: string
-    UpdateFedACHDirectoryResponse:
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SetInstallScriptStateResponse:
       type: object
       properties:
         Success:
@@ -983,11 +748,6 @@ components:
           type: array
           items:
             type: string
-    DeleteRoleRequest:
-      type: object
-      properties:
-        RoleId:
-          type: string
     ValidationResult:
       type: object
       properties:
@@ -1037,16 +797,156 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    UpdateFedWireDirectoryRequest:
+    GetCopy2ContactsJavaScriptResponse:
       type: object
       properties:
-        TextBlob:
+        ScriptText:
           type: string
-    UpdateFedACHDirectoryRequest:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    DeleteRoleResponse:
       type: object
       properties:
-        TextBlob:
+        Success:
+          type: boolean
+        Message:
           type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetRolePermissionsRequest:
+      type: object
+      properties:
+        RoleId:
+          type: string
+    GetSessionCancellationInfoRequest:
+      type: object
+      properties:
+        NotifySlack:
+          type: boolean
+    CancelSubscriptionRequest:
+      type: object
+      properties:
+        CancellationSurvey:
+          type: object
+          $ref: '#/components/schemas/CancellationSurvey'
+    CancelSubscriptionResponse:
+      type: object
+      properties:
+        CancellationDate:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetRoleUsersForPermissionsRequest:
+      type: object
+      properties:
+        RoleId:
+          type: string
+    GetTimeZoneOptionsResponse:
+      type: object
+      properties:
+        Timezones:
+          type: object
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetUserOperationsResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SaveRoleRequest:
+      type: object
+      properties:
+        Role:
+          type: object
+          $ref: '#/components/schemas/Role'
+    InstallScript:
+      type: object
+      properties:
+        Id:
+          type: integer
+          format: int32
+        ScriptID:
+          type: integer
+          format: int32
+        InstallationID:
+          type: integer
+          format: int32
+        Enabled:
+          type: boolean
+        Script:
+          type: object
+          $ref: '#/components/schemas/Script'
     checkIfFeatureIsEnabledResponse:
       type: object
       properties:
@@ -1069,36 +969,9 @@ components:
           type: array
           items:
             type: string
-    SetInstallScriptStateRequest:
+    BaseResponse:
       type: object
       properties:
-        InstallScriptID:
-          type: integer
-          format: int32
-        Enabled:
-          type: boolean
-    GetRolePermissionsRequest:
-      type: object
-      properties:
-        RoleId:
-          type: string
-    SetPaymentProcessingFeeDefaultRequest:
-      type: object
-      properties:
-        Value:
-          type: number
-          format: double
-    GetSessionCancellationInfoResponse:
-      type: object
-      properties:
-        Email:
-          type: string
-        Tenant:
-          type: string
-        CancellationDate:
-          type: string
-        User:
-          type: string
         Success:
           type: boolean
         Message:
@@ -1136,7 +1009,161 @@ components:
           type: array
           items:
             type: string
-    Permission:
+    SetPaymentProcessingFeeDefaultRequest:
+      type: object
+      properties:
+        Value:
+          type: number
+          format: double
+    GetSessionCancellationInfoResponse:
+      type: object
+      properties:
+        Email:
+          type: string
+        Tenant:
+          type: string
+        CancellationDate:
+          type: string
+        User:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UpdateFedWireDirectoryRequest:
+      type: object
+      properties:
+        TextBlob:
+          type: string
+    User:
+      type: object
+      properties:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    CancellationSurvey:
+      type: object
+      properties:
+        QuestionAnswers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CancellationSurveyItem'
+    SetPaymentProcessingFeeDefaultResponse:
+      type: object
+      properties:
+        Value:
+          type: number
+          format: double
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UpdateFedACHDirectoryRequest:
+      type: object
+      properties:
+        TextBlob:
+          type: string
+    GetCopy2ContactsJavaScriptRequest:
+      type: object
+      properties:
+        Form:
+          type: string
+    GetRoleRequest:
+      type: object
+      properties:
+        RoleId:
+          type: string
+    GetPermissionsResponse:
+      type: object
+      properties:
+        Permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    Script:
+      type: object
+      properties:
+        Id:
+          type: integer
+          format: int32
+        Name:
+          type: string
+        ScriptText:
+          type: string
+        ApplyToTrialsAccounts:
+          type: boolean
+        ApplyToPaidAccounts:
+          type: boolean
+        InstallScripts:
+          type: object
+        LastModifiedDate:
+          type: string
+          format: date-time
+        CreatedDate:
+          type: string
+          format: date-time
+    checkIfFeatureIsEnabledRequest:
+      type: object
+      properties:
+        FeatureName:
+          type: string
+    Role:
       type: object
       properties:
         Id:
@@ -1145,60 +1172,20 @@ components:
           type: string
         Description:
           type: string
-    GetInstallScriptsResponse:
-      type: object
-      properties:
-        InstallScripts:
+        Permissions:
           type: array
           items:
-            $ref: '#/components/schemas/InstallScript'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetRoleUsersForPermissionsResponse:
-      type: object
-      properties:
+            $ref: '#/components/schemas/Permission'
         Users:
           type: array
           items:
             $ref: '#/components/schemas/User'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SetPaymentProcessingFeeDefaultResponse:
+    SaveRoleResponse:
       type: object
       properties:
-        Value:
-          type: number
-          format: double
+        Role:
+          type: object
+          $ref: '#/components/schemas/Role'
         Success:
           type: boolean
         Message:
@@ -1240,14 +1227,27 @@ components:
           type: array
           items:
             type: string
-    CancelSubscriptionRequest:
+    GetUsersForPermissionsResponse:
       type: object
       properties:
-        CancellationSurvey:
-          type: object
-          $ref: '#/components/schemas/CancellationSurvey'
-    GetRoleRequest:
-      type: object
-      properties:
-        RoleId:
+        Users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        Success:
+          type: boolean
+        Message:
           type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

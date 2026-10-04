@@ -280,353 +280,21 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MatterCustomField:
+    TaskEventInfoAttendeeDetail:
+      type: object
+      properties:
+        NameInfo:
+          type: string
+        BillingInfo:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    MatterTemplateDateOption:
       type: object
       properties:
         Name:
           type: string
-        Value:
-          type: string
-        Position:
-          type: integer
-          format: int32
-        MatterID:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
-    GetNewMatterFromTemplateRequest:
-      type: object
-      properties:
-        MatterTemplateID:
-          type: integer
-          format: int32
-        OptionalBaseDate:
-          type: string
-        MatterId:
-          type: integer
-          format: int32
-    MatterBudget:
-      type: object
-      properties:
-        Id:
-          type: integer
-          format: int32
-        MatterID:
-          type: integer
-          format: int32
-        Budget:
-          type: number
-          format: double
-        IsEnabled:
-          type: boolean
-        IncludeTimeEntries:
-          type: boolean
-        IncludeFlatFeeEntries:
-          type: boolean
-        IncludeCosts:
-          type: boolean
-        UseUserDefaultRate:
-          type: boolean
-        ExcludeInvoiced:
-          type: boolean
-    ContactRelationship:
-      type: object
-      properties:
-        ContactId:
-          type: integer
-          format: int32
-        RelationshipId:
-          type: integer
-          format: int32
-        RelationshipName:
-          type: string
-        Role:
-          type: string
-        Position:
-          type: integer
-          format: int32
-        IsCompany:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
-    EventAttendee:
-      type: object
-      properties:
-        EventID:
-          type: integer
-          format: int32
-        UserID:
-          type: integer
-          format: int32
-        User:
-          type: object
-          $ref: '#/components/schemas/User'
-        Bill:
-          type: boolean
-        NonBillable:
-          type: boolean
-        AttendeeName:
-          type: string
-        Contact:
-          type: object
-          $ref: '#/components/schemas/Contact'
-        IsRole:
-          type: boolean
-        Role:
-          type: string
-        ContactId:
-          type: integer
-          format: int32
-        InviteStatusTypeId:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
-    GetSortedTaskAndEventSummaryInfoResponse:
-      type: object
-      properties:
-        TaskEventSummary:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaskEventInfo'
-        Milestones:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateMilestone'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    MatterStatueOfLimitation:
-      type: object
-      properties:
-        DoesNotExpire:
-          type: boolean
-        ExpirationDate:
-          type: string
-    MatterTemplatePermission:
-      type: object
-      properties:
-        MatterTemplateId:
-          type: integer
-          format: int32
-        UserID:
-          type: integer
-          format: int32
-        User:
-          type: object
-          $ref: '#/components/schemas/User'
-        ID:
-          type: integer
-          format: int32
-    GetFutureDateRequest:
-      type: object
-      properties:
-        Amount:
-          type: integer
-          format: int32
-        Period:
-          type: string
-          enum:
-          - Days
-          - Weeks
-          - Months
-          - Years
-        AfterDate:
-          type: string
-        NextBusinessDay:
-          type: boolean
-    MatterTemplateEventDateInfo:
-      type: object
-      properties:
-        Interval:
-          type: integer
-          format: int32
-        Time:
-          type: string
-        Date:
-          type: string
-        DateOption:
-          type: object
-          $ref: '#/components/schemas/MatterTemplateDateOption'
-        MatterTemplateDateOptionID:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
-    MatterTemplate:
-      type: object
-      properties:
-        Name:
-          type: string
-        Description:
-          type: string
-        MatterName:
-          type: string
-        MatterType:
-          type: object
-          $ref: '#/components/schemas/MatterType'
-        MatterTypeID:
-          type: integer
-          format: int32
-        FlatFeeOf:
-          type: number
-          format: double
-        StatueOfLimitation:
-          type: object
-          $ref: '#/components/schemas/MatterTemplateStatueOfLimitation'
-        MatterTemplatePermissionType:
-          type: object
-          $ref: '#/components/schemas/MatterTemplatePermissionType'
-        MatterPermissionTypeID:
-          type: integer
-          format: int32
-        CustomFields:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateCustomField'
-        Permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplatePermission'
-        Events:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateEvent'
-        Tasks:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateTask'
-        Roles:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateRole'
-        Tags:
-          type: array
-          items:
-            type: string
-        DefaultMilestones:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateMilestone'
-        MatterWorkFlowStatusId:
-          type: string
-        IsWorkflowTemplate:
-          type: string
-        ID:
-          type: integer
-          format: int32
-    MatterTemplateSaveRequest:
-      type: object
-      properties:
-        MatterTemplate:
-          type: object
-          $ref: '#/components/schemas/MatterTemplate'
-        ReturnNavigationData:
-          type: boolean
-    GetMatterTemplateRequest:
-      type: object
-      properties:
-        ID:
-          type: integer
-          format: int32
-    GetMilestoneForItemResponse:
-      type: object
-      properties:
-        Milestones:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateMilestone'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    DeleteMatterTemplateRequest:
-      type: object
-      properties:
-        ID:
-          type: integer
-          format: int32
-    MatterRelatedContact:
-      type: object
-      properties:
-        ContactId:
-          type: integer
-          format: int32
-        Contact:
-          type: object
-          $ref: '#/components/schemas/Contact'
-        MatterID:
-          type: integer
-          format: int32
-        Role:
-          type: string
-        Position:
-          type: integer
-          format: int32
-        RelationshipName:
-          type: string
-        IsDefault:
-          type: boolean
-        IsUser:
-          type: boolean
-        IsAttendeeRole:
-          type: boolean
-        IsEventOwnerRole:
-          type: boolean
-        TaskAssigneeRole:
-          type: boolean
-        TaskOwnerRole:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
-    TaskEventMilestone:
-      type: object
-      properties:
-        TaskId:
-          type: integer
-          format: int32
-        EventId:
-          type: integer
-          format: int32
-        MatterTemplateMilestoneId:
-          type: integer
-          format: int32
-        MilestoneDate:
-          type: string
-          format: date-time
         ID:
           type: integer
           format: int32
@@ -753,132 +421,82 @@ components:
         ID:
           type: integer
           format: int32
-    MatterTemplateExistsRequest:
+    MatterTemplatePermission:
       type: object
       properties:
-        Name:
-          type: string
-        CurrentID:
+        MatterTemplateId:
           type: integer
           format: int32
-    User:
-      type: object
-      properties:
-        FullName:
-          type: string
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        MiddleName:
-          type: string
-        ContactId:
+        UserID:
           type: integer
           format: int32
-        Initials:
-          type: string
+        User:
+          type: object
+          $ref: '#/components/schemas/User'
         ID:
           type: integer
           format: int32
-    ShareInvoiceSetting:
+    GetMilestoneForItemResponse:
       type: object
       properties:
-        Contact:
-          type: object
-          $ref: '#/components/schemas/Contact'
-        ContactID:
-          type: integer
-          format: int32
-        FullName:
-          type: string
-        ShareByPortal:
-          type: boolean
-        ShareByEmail:
-          type: boolean
-        EmailTypeSelected:
-          type: string
-        ID:
-          type: integer
-          format: int32
-    MatterEverGreenInfo:
-      type: object
-      properties:
-        IsOn:
-          type: boolean
-        MinimumRequiredRetainer:
-          type: number
-          format: double
-        ReplenishWhenBelow:
-          type: number
-          format: double
-    Client:
-      type: object
-      properties:
-        Name:
-          type: string
-        Code:
-          type: string
-        MiddleName:
-          type: string
-        LastName:
-          type: string
-        IsCompany:
-          type: boolean
-        ContactID:
-          type: integer
-          format: int32
-        CompanyID:
-          type: integer
-          format: int32
-        CompanyName:
-          type: string
-        WorkEmail:
-          type: string
-        FullName:
-          type: string
-        HomeAddress:
-          type: object
-          $ref: '#/components/schemas/ContactAddress'
-        Relationships:
+        Milestones:
           type: array
           items:
-            $ref: '#/components/schemas/ContactRelationship'
-        HomeEmail:
+            $ref: '#/components/schemas/MatterTemplateMilestone'
+        Success:
+          type: boolean
+        Message:
           type: string
-        MobilePhone:
+        ErrorMessage:
           type: string
-        Notes:
-          type: string
-        PreferredDisplayName:
-          type: string
-        PrimaryContact:
-          type: string
-        PrimaryContactId:
+        ErrorNumber:
           type: integer
           format: int32
-        Salutation:
-          type: string
-        SkypeUserName:
-          type: string
-        Suffix:
-          type: string
-        Title:
-          type: string
-        WorkAddress:
-          type: object
-          $ref: '#/components/schemas/ContactAddress'
-        WorkFax:
-          type: string
-        WorkPhone:
-          type: string
-        HomePhone:
-          type: string
-        WorkPhoneExt:
-          type: string
-        Tags:
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
           type: array
           items:
             type: string
+    GetFutureDateResponse:
+      type: object
+      properties:
+        Date:
+          type: string
+        DateLong:
+          type: string
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    MatterTemplatePermissionType:
+      type: object
+      properties:
+        Name:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    MatterType:
+      type: object
+      properties:
+        Name:
+          type: string
         ID:
           type: integer
           format: int32
@@ -905,34 +523,96 @@ components:
           type: array
           items:
             type: string
-    MatterTemplateStatueOfLimitation:
+    ContactRelationship:
       type: object
       properties:
-        DoesNotExpire:
-          type: boolean
-        ExpiresInterval:
+        ContactId:
           type: integer
           format: int32
-        MatterTemplateDateOption:
+        RelationshipId:
+          type: integer
+          format: int32
+        RelationshipName:
+          type: string
+        Role:
+          type: string
+        Position:
+          type: integer
+          format: int32
+        IsCompany:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    ContactAddress:
+      type: object
+      properties:
+        AddressLine1:
+          type: string
+        AddressLine2:
+          type: string
+        City:
+          type: string
+        State:
+          type: string
+        PostalCode:
+          type: string
+        Country:
+          type: string
+        IsEmpty:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    DeleteMatterTemplateRequest:
+      type: object
+      properties:
+        ID:
+          type: integer
+          format: int32
+    TaskEventMilestone:
+      type: object
+      properties:
+        TaskId:
+          type: integer
+          format: int32
+        EventId:
+          type: integer
+          format: int32
+        MatterTemplateMilestoneId:
+          type: integer
+          format: int32
+        MilestoneDate:
+          type: string
+          format: date-time
+        ID:
+          type: integer
+          format: int32
+    GetMilestonesForItemRequest:
+      type: object
+      properties:
+        Task:
+          type: object
+          $ref: '#/components/schemas/MatterTemplateTask'
+        Event:
+          type: object
+          $ref: '#/components/schemas/MatterTemplateEvent'
+    MatterTemplateEventDateInfo:
+      type: object
+      properties:
+        Interval:
+          type: integer
+          format: int32
+        Time:
+          type: string
+        Date:
+          type: string
+        DateOption:
           type: object
           $ref: '#/components/schemas/MatterTemplateDateOption'
         MatterTemplateDateOptionID:
           type: integer
           format: int32
-        StatuteType:
-          type: string
-          enum:
-          - Default
-          - DoesNotExpire
-          - Expires
-        ID:
-          type: integer
-          format: int32
-    MatterTemplateDateOption:
-      type: object
-      properties:
-        Name:
-          type: string
         ID:
           type: integer
           format: int32
@@ -993,30 +673,6 @@ components:
         ID:
           type: integer
           format: int32
-    MatterTemplateCustomField:
-      type: object
-      properties:
-        Name:
-          type: string
-        Value:
-          type: string
-        Position:
-          type: integer
-          format: int32
-        MatterTemplateID:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
-    MatterType:
-      type: object
-      properties:
-        Name:
-          type: string
-        ID:
-          type: integer
-          format: int32
     CharacterValidationRule:
       type: object
       properties:
@@ -1026,277 +682,6 @@ components:
           type: string
         Regex:
           type: string
-    DeleteMatterTemplateResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    TaskEventInfo:
-      type: object
-      properties:
-        Title:
-          type: string
-        Type:
-          type: string
-        TaskDueDateInfo:
-          type: string
-        TaskOwnerInfo:
-          type: string
-        TaskDueDate:
-          type: string
-        MatterTaskDueDateInfo:
-          type: string
-        MatterTaskOwnerInfo:
-          type: string
-        MatterTaskAssignToInfo:
-          type: string
-        EventStartTimeInfo:
-          type: string
-        EventLocation:
-          type: string
-        EventOwnerNameInfo:
-          type: string
-        EventOwnerBillingInfo:
-          type: string
-        AttendeeInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaskEventInfoAttendeeDetail'
-        EventFromInfo:
-          type: string
-        EventToInfo:
-          type: string
-        EventStartDate:
-          type: string
-        EventEndDate:
-          type: string
-        SortDate:
-          type: string
-        OrderID:
-          type: integer
-          format: int32
-        tmpInfoID:
-          type: string
-        Milestones:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateMilestone'
-        MilestoneAction:
-          type: object
-          $ref: '#/components/schemas/MatterTemplateMilestoneAction'
-        IsMilestone:
-          type: boolean
-    GetNewMatterFromTemplateResponse:
-      type: object
-      properties:
-        Matter:
-          type: object
-          $ref: '#/components/schemas/Matter'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetSortedTaskAndEventSummaryInfoRequest:
-      type: object
-      properties:
-        Events:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateEvent'
-        Tasks:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateTask'
-        DefaultMilestones:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateMilestone'
-    DefaultContactRelationship:
-      type: object
-      properties:
-        Role:
-          type: string
-        IsUser:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
-    GetFutureDateResponse:
-      type: object
-      properties:
-        Date:
-          type: string
-        DateLong:
-          type: string
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    ValidationResult:
-      type: object
-      properties:
-        MinValue:
-          type: boolean
-        MaxValue:
-          type: boolean
-        MinLength:
-          type: boolean
-        MaxLength:
-          type: boolean
-        Required:
-          type: boolean
-        PropertyDisplayName:
-          type: string
-        Precision:
-          type: boolean
-        ValueEntered:
-          type: object
-        Name:
-          type: string
-        ObjectName:
-          type: string
-        ExternalID:
-          type: string
-        MinValueMessage:
-          type: string
-        MaxValueMessage:
-          type: string
-        MinLengthMessage:
-          type: string
-        MaxLengthMessage:
-          type: string
-        RequiredMessage:
-          type: string
-        RequiredPrecisionMessage:
-          type: string
-        BaseFailureMessage:
-          type: string
-        FailedValidationMessages:
-          type: array
-          items:
-            type: string
-        FailedCharacterValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterValidationRule'
-        IsValid:
-          type: boolean
-    Contact:
-      type: object
-      properties:
-        Name:
-          type: string
-        MiddleName:
-          type: string
-        FullName:
-          type: string
-        LastName:
-          type: string
-        IsCompany:
-          type: boolean
-        WorkEmail:
-          type: string
-        WorkPhone:
-          type: string
-        WorkPhoneExt:
-          type: string
-        WorkFax:
-          type: string
-        WorkAddressLine1:
-          type: string
-        WorkAddressLine2:
-          type: string
-        WorkCity:
-          type: string
-        WorkState:
-          type: string
-        WorkPostalCode:
-          type: string
-        WorkCountry:
-          type: string
-        ClientID:
-          type: integer
-          format: int32
-        HomeEmail:
-          type: string
-        HomePhone:
-          type: string
-        HomeAddressLine1:
-          type: string
-        HomeAddressLine2:
-          type: string
-        HomeCity:
-          type: string
-        HomeState:
-          type: string
-        HomePostalCode:
-          type: string
-        HomeCountry:
-          type: string
-        ExternalID2:
-          type: string
-        LastModifiedDate:
-          type: string
-          format: date-time
-        ContactTypeId:
-          type: integer
-          format: int32
-        CompanyId:
-          type: integer
-          format: int32
-        CompanyName:
-          type: string
-        Initials:
-          type: string
-        Notes:
-          type: string
-        UserId:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
     MatterPermission:
       type: object
       properties:
@@ -1400,204 +785,158 @@ components:
         ID:
           type: integer
           format: int32
-    MatterTemplatesGetAllResponse:
+    ValidationResult:
       type: object
       properties:
-        MatterTemplates:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplate'
-        Success:
+        MinValue:
           type: boolean
-        Message:
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
           type: string
-        ErrorMessage:
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
           type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
           type: array
           items:
             type: string
-    MatterPermissionType:
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    Client:
       type: object
       properties:
         Name:
           type: string
-        ID:
+        Code:
+          type: string
+        MiddleName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        ContactID:
           type: integer
           format: int32
-    MatterTemplateEvent:
-      type: object
-      properties:
-        Title:
-          type: string
-        StartDateInfo:
-          type: object
-          $ref: '#/components/schemas/MatterTemplateEventDateInfo'
-        EndDateInfo:
-          type: object
-          $ref: '#/components/schemas/MatterTemplateEventDateInfo'
-        OwnerID:
+        CompanyID:
           type: integer
           format: int32
-        Owner:
-          type: object
-          $ref: '#/components/schemas/User'
-        OwnerIsRole:
-          type: boolean
-        OwnerRole:
+        CompanyName:
           type: string
-        Bill:
-          type: boolean
-        Attendees:
+        WorkEmail:
+          type: string
+        FullName:
+          type: string
+        HomeAddress:
+          type: object
+          $ref: '#/components/schemas/ContactAddress'
+        Relationships:
           type: array
           items:
-            $ref: '#/components/schemas/MatterTemplateEventAttendee'
+            $ref: '#/components/schemas/ContactRelationship'
+        HomeEmail:
+          type: string
+        MobilePhone:
+          type: string
+        Notes:
+          type: string
+        PreferredDisplayName:
+          type: string
+        PrimaryContact:
+          type: string
+        PrimaryContactId:
+          type: integer
+          format: int32
+        Salutation:
+          type: string
+        SkypeUserName:
+          type: string
+        Suffix:
+          type: string
+        Title:
+          type: string
+        WorkAddress:
+          type: object
+          $ref: '#/components/schemas/ContactAddress'
+        WorkFax:
+          type: string
+        WorkPhone:
+          type: string
+        HomePhone:
+          type: string
+        WorkPhoneExt:
+          type: string
         Tags:
           type: array
           items:
             type: string
-        tmpInfoID:
-          type: string
-        Location:
-          type: string
-        Notes:
-          type: string
-        IsMilestone:
-          type: boolean
-        MilestoneAction:
-          type: object
-          $ref: '#/components/schemas/MatterTemplateMilestoneAction'
-        Milestones:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateMilestone'
         ID:
           type: integer
           format: int32
-    ContactAddress:
+    MatterTemplateMilestone:
       type: object
       properties:
-        AddressLine1:
+        MatterTemplateId:
+          type: integer
+          format: int32
+        MatterTemplateTaskId:
+          type: integer
+          format: int32
+        MatterTemplateEventId:
+          type: integer
+          format: int32
+        MatterTemplateMilestoneTriggerId:
+          type: integer
+          format: int32
+        MatterTemplateMilestoneTrigger:
           type: string
-        AddressLine2:
+          enum:
+          - MatterOpen
+          - EventDate
+          - TaskDueDate
+          - TaskCompletedDate
+          - StatusDate
+        Name:
           type: string
-        City:
+        TempId:
           type: string
-        State:
-          type: string
-        PostalCode:
-          type: string
-        Country:
-          type: string
-        IsEmpty:
+        IsPending:
           type: boolean
         ID:
           type: integer
           format: int32
-    GetMatterTemplateResponse:
-      type: object
-      properties:
-        MatterTemplate:
-          type: object
-          $ref: '#/components/schemas/MatterTemplate'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    MatterTemplateRole:
-      type: object
-      properties:
-        MatterTemplateID:
-          type: integer
-          format: int32
-        Role:
-          type: string
-        ContactId:
-          type: integer
-          format: int32
-        Contact:
-          type: object
-          $ref: '#/components/schemas/Contact'
-        Position:
-          type: integer
-          format: int32
-        RelationshipName:
-          type: string
-        ID:
-          type: integer
-          format: int32
-    MatterTemplateEventAttendee:
-      type: object
-      properties:
-        MatterTemplateEventID:
-          type: integer
-          format: int32
-        UserID:
-          type: integer
-          format: int32
-        User:
-          type: object
-          $ref: '#/components/schemas/User'
-        Bill:
-          type: boolean
-        IsRole:
-          type: boolean
-        Role:
-          type: string
-        ID:
-          type: integer
-          format: int32
-    MatterTemplateExistsResponse:
-      type: object
-      properties:
-        Exists:
-          type: boolean
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetMilestonesForItemRequest:
-      type: object
-      properties:
-        Task:
-          type: object
-          $ref: '#/components/schemas/MatterTemplateTask'
-        Event:
-          type: object
-          $ref: '#/components/schemas/MatterTemplateEvent'
     MatterTemplateMilestoneAction:
       type: object
       properties:
@@ -1628,6 +967,123 @@ components:
         ID:
           type: integer
           format: int32
+    DefaultContactRelationship:
+      type: object
+      properties:
+        Role:
+          type: string
+        IsUser:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    MatterTemplateCustomField:
+      type: object
+      properties:
+        Name:
+          type: string
+        Value:
+          type: string
+        Position:
+          type: integer
+          format: int32
+        MatterTemplateID:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    GetSortedTaskAndEventSummaryInfoRequest:
+      type: object
+      properties:
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateEvent'
+        Tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateTask'
+        DefaultMilestones:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateMilestone'
+    ShareInvoiceSetting:
+      type: object
+      properties:
+        Contact:
+          type: object
+          $ref: '#/components/schemas/Contact'
+        ContactID:
+          type: integer
+          format: int32
+        FullName:
+          type: string
+        ShareByPortal:
+          type: boolean
+        ShareByEmail:
+          type: boolean
+        EmailTypeSelected:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    MatterRelatedContact:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+        Contact:
+          type: object
+          $ref: '#/components/schemas/Contact'
+        MatterID:
+          type: integer
+          format: int32
+        Role:
+          type: string
+        Position:
+          type: integer
+          format: int32
+        RelationshipName:
+          type: string
+        IsDefault:
+          type: boolean
+        IsUser:
+          type: boolean
+        IsAttendeeRole:
+          type: boolean
+        IsEventOwnerRole:
+          type: boolean
+        TaskAssigneeRole:
+          type: boolean
+        TaskOwnerRole:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    MatterTemplateExistsResponse:
+      type: object
+      properties:
+        Exists:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     Event:
       type: object
       properties:
@@ -1767,39 +1223,290 @@ components:
         ID:
           type: integer
           format: int32
-    MatterTemplateMilestone:
+    GetNewMatterFromTemplateResponse:
       type: object
       properties:
-        MatterTemplateId:
+        Matter:
+          type: object
+          $ref: '#/components/schemas/Matter'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
           type: integer
           format: int32
-        MatterTemplateTaskId:
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetFutureDateRequest:
+      type: object
+      properties:
+        Amount:
           type: integer
           format: int32
-        MatterTemplateEventId:
-          type: integer
-          format: int32
-        MatterTemplateMilestoneTriggerId:
-          type: integer
-          format: int32
-        MatterTemplateMilestoneTrigger:
+        Period:
           type: string
           enum:
-          - MatterOpen
-          - EventDate
-          - TaskDueDate
-          - TaskCompletedDate
-          - StatusDate
-        Name:
+          - Days
+          - Weeks
+          - Months
+          - Years
+        AfterDate:
           type: string
-        TempId:
-          type: string
-        IsPending:
+        NextBusinessDay:
           type: boolean
+    MatterTemplateEvent:
+      type: object
+      properties:
+        Title:
+          type: string
+        StartDateInfo:
+          type: object
+          $ref: '#/components/schemas/MatterTemplateEventDateInfo'
+        EndDateInfo:
+          type: object
+          $ref: '#/components/schemas/MatterTemplateEventDateInfo'
+        OwnerID:
+          type: integer
+          format: int32
+        Owner:
+          type: object
+          $ref: '#/components/schemas/User'
+        OwnerIsRole:
+          type: boolean
+        OwnerRole:
+          type: string
+        Bill:
+          type: boolean
+        Attendees:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateEventAttendee'
+        Tags:
+          type: array
+          items:
+            type: string
+        tmpInfoID:
+          type: string
+        Location:
+          type: string
+        Notes:
+          type: string
+        IsMilestone:
+          type: boolean
+        MilestoneAction:
+          type: object
+          $ref: '#/components/schemas/MatterTemplateMilestoneAction'
+        Milestones:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateMilestone'
         ID:
           type: integer
           format: int32
-    MatterTemplatePermissionType:
+    MatterTemplateExistsRequest:
+      type: object
+      properties:
+        Name:
+          type: string
+        CurrentID:
+          type: integer
+          format: int32
+    MatterTemplateRole:
+      type: object
+      properties:
+        MatterTemplateID:
+          type: integer
+          format: int32
+        Role:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Contact:
+          type: object
+          $ref: '#/components/schemas/Contact'
+        Position:
+          type: integer
+          format: int32
+        RelationshipName:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    MatterCustomField:
+      type: object
+      properties:
+        Name:
+          type: string
+        Value:
+          type: string
+        Position:
+          type: integer
+          format: int32
+        MatterID:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    MatterTemplateEventAttendee:
+      type: object
+      properties:
+        MatterTemplateEventID:
+          type: integer
+          format: int32
+        UserID:
+          type: integer
+          format: int32
+        User:
+          type: object
+          $ref: '#/components/schemas/User'
+        Bill:
+          type: boolean
+        IsRole:
+          type: boolean
+        Role:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    MatterTemplateStatueOfLimitation:
+      type: object
+      properties:
+        DoesNotExpire:
+          type: boolean
+        ExpiresInterval:
+          type: integer
+          format: int32
+        MatterTemplateDateOption:
+          type: object
+          $ref: '#/components/schemas/MatterTemplateDateOption'
+        MatterTemplateDateOptionID:
+          type: integer
+          format: int32
+        StatuteType:
+          type: string
+          enum:
+          - Default
+          - DoesNotExpire
+          - Expires
+        ID:
+          type: integer
+          format: int32
+    User:
+      type: object
+      properties:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    DeleteMatterTemplateResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetMatterTemplateResponse:
+      type: object
+      properties:
+        MatterTemplate:
+          type: object
+          $ref: '#/components/schemas/MatterTemplate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    MatterTemplateSaveRequest:
+      type: object
+      properties:
+        MatterTemplate:
+          type: object
+          $ref: '#/components/schemas/MatterTemplate'
+        ReturnNavigationData:
+          type: boolean
+    EventAttendee:
+      type: object
+      properties:
+        EventID:
+          type: integer
+          format: int32
+        UserID:
+          type: integer
+          format: int32
+        User:
+          type: object
+          $ref: '#/components/schemas/User'
+        Bill:
+          type: boolean
+        NonBillable:
+          type: boolean
+        AttendeeName:
+          type: string
+        Contact:
+          type: object
+          $ref: '#/components/schemas/Contact'
+        IsRole:
+          type: boolean
+        Role:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        InviteStatusTypeId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    MatterPermissionType:
       type: object
       properties:
         Name:
@@ -1807,6 +1514,140 @@ components:
         ID:
           type: integer
           format: int32
+    GetMatterTemplateRequest:
+      type: object
+      properties:
+        ID:
+          type: integer
+          format: int32
+    TaskEventInfo:
+      type: object
+      properties:
+        Title:
+          type: string
+        Type:
+          type: string
+        TaskDueDateInfo:
+          type: string
+        TaskOwnerInfo:
+          type: string
+        TaskDueDate:
+          type: string
+        MatterTaskDueDateInfo:
+          type: string
+        MatterTaskOwnerInfo:
+          type: string
+        MatterTaskAssignToInfo:
+          type: string
+        EventStartTimeInfo:
+          type: string
+        EventLocation:
+          type: string
+        EventOwnerNameInfo:
+          type: string
+        EventOwnerBillingInfo:
+          type: string
+        AttendeeInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskEventInfoAttendeeDetail'
+        EventFromInfo:
+          type: string
+        EventToInfo:
+          type: string
+        EventStartDate:
+          type: string
+        EventEndDate:
+          type: string
+        SortDate:
+          type: string
+        OrderID:
+          type: integer
+          format: int32
+        tmpInfoID:
+          type: string
+        Milestones:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateMilestone'
+        MilestoneAction:
+          type: object
+          $ref: '#/components/schemas/MatterTemplateMilestoneAction'
+        IsMilestone:
+          type: boolean
+    MatterTemplate:
+      type: object
+      properties:
+        Name:
+          type: string
+        Description:
+          type: string
+        MatterName:
+          type: string
+        MatterType:
+          type: object
+          $ref: '#/components/schemas/MatterType'
+        MatterTypeID:
+          type: integer
+          format: int32
+        FlatFeeOf:
+          type: number
+          format: double
+        StatueOfLimitation:
+          type: object
+          $ref: '#/components/schemas/MatterTemplateStatueOfLimitation'
+        MatterTemplatePermissionType:
+          type: object
+          $ref: '#/components/schemas/MatterTemplatePermissionType'
+        MatterPermissionTypeID:
+          type: integer
+          format: int32
+        CustomFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateCustomField'
+        Permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplatePermission'
+        Events:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateEvent'
+        Tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateTask'
+        Roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateRole'
+        Tags:
+          type: array
+          items:
+            type: string
+        DefaultMilestones:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateMilestone'
+        MatterWorkFlowStatusId:
+          type: string
+        IsWorkflowTemplate:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    MatterEverGreenInfo:
+      type: object
+      properties:
+        IsOn:
+          type: boolean
+        MinimumRequiredRetainer:
+          type: number
+          format: double
+        ReplenishWhenBelow:
+          type: number
+          format: double
     GetDefaultMatterTemplateRolesResponse:
       type: object
       properties:
@@ -1831,13 +1672,172 @@ components:
           type: array
           items:
             type: string
-    TaskEventInfoAttendeeDetail:
+    GetSortedTaskAndEventSummaryInfoResponse:
       type: object
       properties:
-        NameInfo:
+        TaskEventSummary:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskEventInfo'
+        Milestones:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateMilestone'
+        Success:
+          type: boolean
+        Message:
           type: string
-        BillingInfo:
+        ErrorMessage:
           type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    Contact:
+      type: object
+      properties:
+        Name:
+          type: string
+        MiddleName:
+          type: string
+        FullName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        WorkEmail:
+          type: string
+        WorkPhone:
+          type: string
+        WorkPhoneExt:
+          type: string
+        WorkFax:
+          type: string
+        WorkAddressLine1:
+          type: string
+        WorkAddressLine2:
+          type: string
+        WorkCity:
+          type: string
+        WorkState:
+          type: string
+        WorkPostalCode:
+          type: string
+        WorkCountry:
+          type: string
+        ClientID:
+          type: integer
+          format: int32
+        HomeEmail:
+          type: string
+        HomePhone:
+          type: string
+        HomeAddressLine1:
+          type: string
+        HomeAddressLine2:
+          type: string
+        HomeCity:
+          type: string
+        HomeState:
+          type: string
+        HomePostalCode:
+          type: string
+        HomeCountry:
+          type: string
+        ExternalID2:
+          type: string
+        LastModifiedDate:
+          type: string
+          format: date-time
+        ContactTypeId:
+          type: integer
+          format: int32
+        CompanyId:
+          type: integer
+          format: int32
+        CompanyName:
+          type: string
+        Initials:
+          type: string
+        Notes:
+          type: string
+        UserId:
+          type: integer
+          format: int32
         ID:
+          type: integer
+          format: int32
+    MatterTemplatesGetAllResponse:
+      type: object
+      properties:
+        MatterTemplates:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplate'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    MatterBudget:
+      type: object
+      properties:
+        Id:
+          type: integer
+          format: int32
+        MatterID:
+          type: integer
+          format: int32
+        Budget:
+          type: number
+          format: double
+        IsEnabled:
+          type: boolean
+        IncludeTimeEntries:
+          type: boolean
+        IncludeFlatFeeEntries:
+          type: boolean
+        IncludeCosts:
+          type: boolean
+        UseUserDefaultRate:
+          type: boolean
+        ExcludeInvoiced:
+          type: boolean
+    MatterStatueOfLimitation:
+      type: object
+      properties:
+        DoesNotExpire:
+          type: boolean
+        ExpirationDate:
+          type: string
+    GetNewMatterFromTemplateRequest:
+      type: object
+      properties:
+        MatterTemplateID:
+          type: integer
+          format: int32
+        OptionalBaseDate:
+          type: string
+        MatterId:
           type: integer
           format: int32

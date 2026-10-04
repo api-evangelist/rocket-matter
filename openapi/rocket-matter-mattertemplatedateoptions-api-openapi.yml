@@ -107,123 +107,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MatterTemplateDateOption:
-      type: object
-      properties:
-        Name:
-          type: string
-        ID:
-          type: integer
-          format: int32
-    LookupItem:
-      type: object
-      properties:
-        ID:
-          type: integer
-          format: int32
-        Name:
-          type: string
-        EnumName:
-          type: string
-    MatterTemplateDateOptionsGetByDisplayGroupRequest:
-      type: object
-      properties:
-        Group:
-          type: string
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    MatterTemplateDateOptionGetRequest:
-      type: object
-      properties:
-        ID:
-          type: integer
-          format: int32
-    MatterTemplateDateOptionGetResponse:
-      type: object
-      properties:
-        MatterTemplateDateOption:
-          type: object
-          $ref: '#/components/schemas/MatterTemplateDateOption'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    MatterTemplateDateOptionsGetResponse:
-      type: object
-      properties:
-        MatterTemplateDateOptions:
-          type: array
-          items:
-            $ref: '#/components/schemas/MatterTemplateDateOption'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    MatterTemplateMilestone:
-      type: object
-      properties:
-        MatterTemplateId:
-          type: integer
-          format: int32
-        MatterTemplateTaskId:
-          type: integer
-          format: int32
-        MatterTemplateEventId:
-          type: integer
-          format: int32
-        MatterTemplateMilestoneTriggerId:
-          type: integer
-          format: int32
-        MatterTemplateMilestoneTrigger:
-          type: string
-          enum:
-          - MatterOpen
-          - EventDate
-          - TaskDueDate
-          - TaskCompletedDate
-          - StatusDate
-        Name:
-          type: string
-        TempId:
-          type: string
-        IsPending:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
     GetMatterTemplateDateOptionDetailsResponse:
       type: object
       properties:
@@ -264,6 +147,91 @@ components:
           type: array
           items:
             type: string
+    MatterTemplateDateOptionsGetByDisplayGroupRequest:
+      type: object
+      properties:
+        Group:
+          type: string
+    MatterTemplateDateOptionGetResponse:
+      type: object
+      properties:
+        MatterTemplateDateOption:
+          type: object
+          $ref: '#/components/schemas/MatterTemplateDateOption'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    LookupItem:
+      type: object
+      properties:
+        ID:
+          type: integer
+          format: int32
+        Name:
+          type: string
+        EnumName:
+          type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    MatterTemplateDateOptionsGetResponse:
+      type: object
+      properties:
+        MatterTemplateDateOptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatterTemplateDateOption'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    MatterTemplateDateOption:
+      type: object
+      properties:
+        Name:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    MatterTemplateDateOptionGetRequest:
+      type: object
+      properties:
+        ID:
+          type: integer
+          format: int32
     ValidationResult:
       type: object
       properties:
@@ -337,3 +305,35 @@ components:
           type: array
           items:
             type: string
+    MatterTemplateMilestone:
+      type: object
+      properties:
+        MatterTemplateId:
+          type: integer
+          format: int32
+        MatterTemplateTaskId:
+          type: integer
+          format: int32
+        MatterTemplateEventId:
+          type: integer
+          format: int32
+        MatterTemplateMilestoneTriggerId:
+          type: integer
+          format: int32
+        MatterTemplateMilestoneTrigger:
+          type: string
+          enum:
+          - MatterOpen
+          - EventDate
+          - TaskDueDate
+          - TaskCompletedDate
+          - StatusDate
+        Name:
+          type: string
+        TempId:
+          type: string
+        IsPending:
+          type: boolean
+        ID:
+          type: integer
+          format: int32

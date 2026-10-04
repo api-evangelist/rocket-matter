@@ -81,20 +81,30 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UserViewBadgeRequest:
+    GetUserBadgeHistoryResponse:
       type: object
       properties:
-        BadgeName:
-          type: string
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
+        BadgeHistories:
+          type: array
+          items:
+            $ref: '#/components/schemas/BadgeHistory'
+        Success:
           type: boolean
         Message:
           type: string
-        Regex:
+        ErrorMessage:
           type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     BadgeHistory:
       type: object
       properties:
@@ -106,13 +116,18 @@ components:
         ID:
           type: integer
           format: int32
-    GetUserBadgeHistoryResponse:
+    CharacterValidationRule:
       type: object
       properties:
-        BadgeHistories:
-          type: array
-          items:
-            $ref: '#/components/schemas/BadgeHistory'
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    UserViewBadgeResponse:
+      type: object
+      properties:
         Success:
           type: boolean
         Message:
@@ -205,23 +220,8 @@ components:
           type: array
           items:
             type: string
-    UserViewBadgeResponse:
+    UserViewBadgeRequest:
       type: object
       properties:
-        Success:
-          type: boolean
-        Message:
+        BadgeName:
           type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string

@@ -62,6 +62,175 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    BillingFeatureInterestType:
+      type: object
+      properties:
+        Name:
+          type: string
+        BillingFeatureInterests:
+          type: object
+        Id:
+          type: integer
+          format: int32
+        CreatedDate:
+          type: string
+          format: date-time
+        LastModifiedDate:
+          type: string
+          format: date-time
+        IsDeleted:
+          type: boolean
+        IsSaved:
+          type: boolean
+    SaveBillingFeatureInterestResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    aspnet_Users:
+      type: object
+      properties:
+        ApplicationId:
+          type: string
+        UserId:
+          type: string
+        UserName:
+          type: string
+        LoweredUserName:
+          type: string
+        MobileAlias:
+          type: string
+        IsAnonymous:
+          type: boolean
+        LastActivityDate:
+          type: string
+          format: date-time
+        AccessTokens:
+          type: object
+        BillingFeatureInterests:
+          type: object
+        BillingTierAudits:
+          type: object
+        TwoFactorAuthenticationRecoveryCodes:
+          type: object
+        TwoFactorAuthenticationUsers:
+          type: object
+        UserRoles:
+          type: object
+        UsersAccesses:
+          type: object
+        aspnet_Membership:
+          type: object
+          $ref: '#/components/schemas/aspnet_Membership'
+        TenantContracts:
+          type: object
+        Id:
+          type: integer
+          format: int32
+        CreatedDate:
+          type: string
+          format: date-time
+        LastModifiedDate:
+          type: string
+          format: date-time
+        IsDeleted:
+          type: boolean
+        IsSaved:
+          type: boolean
+    aspnet_Membership:
+      type: object
+      properties:
+        ApplicationId:
+          type: string
+        UserId:
+          type: string
+        Password:
+          type: string
+        PasswordFormat:
+          type: integer
+          format: int32
+        PasswordSalt:
+          type: string
+        MobilePIN:
+          type: string
+        Email:
+          type: string
+        LoweredEmail:
+          type: string
+        PasswordQuestion:
+          type: string
+        PasswordAnswer:
+          type: string
+        IsApproved:
+          type: boolean
+        IsLockedOut:
+          type: boolean
+        CreateDate:
+          type: string
+          format: date-time
+        LastLoginDate:
+          type: string
+          format: date-time
+        LastPasswordChangedDate:
+          type: string
+          format: date-time
+        LastLockoutDate:
+          type: string
+          format: date-time
+        FailedPasswordAttemptCount:
+          type: integer
+          format: int32
+        FailedPasswordAttemptWindowStart:
+          type: string
+          format: date-time
+        FailedPasswordAnswerAttemptCount:
+          type: integer
+          format: int32
+        FailedPasswordAnswerAttemptWindowStart:
+          type: string
+          format: date-time
+        Comment:
+          type: string
+        aspnet_Users:
+          type: object
+          $ref: '#/components/schemas/aspnet_Users'
+        Id:
+          type: integer
+          format: int32
+        CreatedDate:
+          type: string
+          format: date-time
+        LastModifiedDate:
+          type: string
+          format: date-time
+        IsDeleted:
+          type: boolean
+        IsSaved:
+          type: boolean
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
     BillingFeature:
       type: object
       properties:
@@ -93,9 +262,112 @@ components:
           type: boolean
         IsSaved:
           type: boolean
-    SaveBillingFeatureInterestResponse:
+    ValidationResult:
       type: object
       properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    SaveBillingFeatureInterestRequest:
+      type: object
+      properties:
+        FeatureInterest:
+          type: object
+          $ref: '#/components/schemas/BillingFeatureInterest'
+    BillingFeatureInterest:
+      type: object
+      properties:
+        InstallationId:
+          type: integer
+          format: int32
+        FeatureId:
+          type: integer
+          format: int32
+        InterestTypeId:
+          type: integer
+          format: int32
+        Date:
+          type: string
+          format: date-time
+        UserId:
+          type: string
+        BillingFeatureInterestType:
+          type: object
+          $ref: '#/components/schemas/BillingFeatureInterestType'
+        BillingFeature:
+          type: object
+          $ref: '#/components/schemas/BillingFeature'
+        Installation:
+          type: object
+          $ref: '#/components/schemas/Install'
+        aspnet_Users:
+          type: object
+          $ref: '#/components/schemas/aspnet_Users'
+        FeatureIdentifier:
+          type: string
+        Id:
+          type: integer
+          format: int32
+        CreatedDate:
+          type: string
+          format: date-time
+        LastModifiedDate:
+          type: string
+          format: date-time
+        IsDeleted:
+          type: boolean
+        IsSaved:
+          type: boolean
+    GetDefaultBillingTiersResponse:
+      type: object
+      properties:
+        Tiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillingTier'
         Success:
           type: boolean
         Message:
@@ -172,87 +444,42 @@ components:
           format: date-time
         IsSaved:
           type: boolean
-    GetDefaultBillingTiersResponse:
+    InstallationsBilling:
       type: object
       properties:
-        Tiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillingTier'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
+        InstallationId:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    aspnet_Membership:
-      type: object
-      properties:
-        ApplicationId:
+        LastInvoiceDate:
           type: string
-        UserId:
+          format: date-time
+        LastPaymentReceived:
           type: string
-        Password:
-          type: string
-        PasswordFormat:
+          format: date-time
+        Balance:
+          type: number
+          format: double
+        Charge:
+          type: number
+          format: double
+        BillingFrequency:
           type: integer
           format: int32
-        PasswordSalt:
-          type: string
-        MobilePIN:
-          type: string
-        Email:
-          type: string
-        LoweredEmail:
-          type: string
-        PasswordQuestion:
-          type: string
-        PasswordAnswer:
-          type: string
-        IsApproved:
-          type: boolean
-        IsLockedOut:
-          type: boolean
-        CreateDate:
-          type: string
-          format: date-time
-        LastLoginDate:
-          type: string
-          format: date-time
-        LastPasswordChangedDate:
-          type: string
-          format: date-time
-        LastLockoutDate:
-          type: string
-          format: date-time
-        FailedPasswordAttemptCount:
+        StoreCreditBalance:
+          type: number
+          format: double
+        SubscriptionPriceId:
           type: integer
           format: int32
-        FailedPasswordAttemptWindowStart:
-          type: string
-          format: date-time
-        FailedPasswordAnswerAttemptCount:
+        BillingTierId:
           type: integer
           format: int32
-        FailedPasswordAnswerAttemptWindowStart:
-          type: string
-          format: date-time
-        Comment:
-          type: string
-        aspnet_Users:
+        BillingTier:
           type: object
-          $ref: '#/components/schemas/aspnet_Users'
+          $ref: '#/components/schemas/BillingTier'
+        Installation:
+          type: object
+          $ref: '#/components/schemas/Install'
         Id:
           type: integer
           format: int32
@@ -266,41 +493,6 @@ components:
           type: boolean
         IsSaved:
           type: boolean
-    BillingFeatureInterestType:
-      type: object
-      properties:
-        Name:
-          type: string
-        BillingFeatureInterests:
-          type: object
-        Id:
-          type: integer
-          format: int32
-        CreatedDate:
-          type: string
-          format: date-time
-        LastModifiedDate:
-          type: string
-          format: date-time
-        IsDeleted:
-          type: boolean
-        IsSaved:
-          type: boolean
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    SaveBillingFeatureInterestRequest:
-      type: object
-      properties:
-        FeatureInterest:
-          type: object
-          $ref: '#/components/schemas/BillingFeatureInterest'
     BillingTier:
       type: object
       properties:
@@ -353,195 +545,3 @@ components:
           - TriAnnual
           - Quarterly
           - Biennial
-    ValidationResult:
-      type: object
-      properties:
-        MinValue:
-          type: boolean
-        MaxValue:
-          type: boolean
-        MinLength:
-          type: boolean
-        MaxLength:
-          type: boolean
-        Required:
-          type: boolean
-        PropertyDisplayName:
-          type: string
-        Precision:
-          type: boolean
-        ValueEntered:
-          type: object
-        Name:
-          type: string
-        ObjectName:
-          type: string
-        ExternalID:
-          type: string
-        MinValueMessage:
-          type: string
-        MaxValueMessage:
-          type: string
-        MinLengthMessage:
-          type: string
-        MaxLengthMessage:
-          type: string
-        RequiredMessage:
-          type: string
-        RequiredPrecisionMessage:
-          type: string
-        BaseFailureMessage:
-          type: string
-        FailedValidationMessages:
-          type: array
-          items:
-            type: string
-        FailedCharacterValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterValidationRule'
-        IsValid:
-          type: boolean
-    InstallationsBilling:
-      type: object
-      properties:
-        InstallationId:
-          type: integer
-          format: int32
-        LastInvoiceDate:
-          type: string
-          format: date-time
-        LastPaymentReceived:
-          type: string
-          format: date-time
-        Balance:
-          type: number
-          format: double
-        Charge:
-          type: number
-          format: double
-        BillingFrequency:
-          type: integer
-          format: int32
-        StoreCreditBalance:
-          type: number
-          format: double
-        SubscriptionPriceId:
-          type: integer
-          format: int32
-        BillingTierId:
-          type: integer
-          format: int32
-        BillingTier:
-          type: object
-          $ref: '#/components/schemas/BillingTier'
-        Installation:
-          type: object
-          $ref: '#/components/schemas/Install'
-        Id:
-          type: integer
-          format: int32
-        CreatedDate:
-          type: string
-          format: date-time
-        LastModifiedDate:
-          type: string
-          format: date-time
-        IsDeleted:
-          type: boolean
-        IsSaved:
-          type: boolean
-    BillingFeatureInterest:
-      type: object
-      properties:
-        InstallationId:
-          type: integer
-          format: int32
-        FeatureId:
-          type: integer
-          format: int32
-        InterestTypeId:
-          type: integer
-          format: int32
-        Date:
-          type: string
-          format: date-time
-        UserId:
-          type: string
-        BillingFeatureInterestType:
-          type: object
-          $ref: '#/components/schemas/BillingFeatureInterestType'
-        BillingFeature:
-          type: object
-          $ref: '#/components/schemas/BillingFeature'
-        Installation:
-          type: object
-          $ref: '#/components/schemas/Install'
-        aspnet_Users:
-          type: object
-          $ref: '#/components/schemas/aspnet_Users'
-        FeatureIdentifier:
-          type: string
-        Id:
-          type: integer
-          format: int32
-        CreatedDate:
-          type: string
-          format: date-time
-        LastModifiedDate:
-          type: string
-          format: date-time
-        IsDeleted:
-          type: boolean
-        IsSaved:
-          type: boolean
-    aspnet_Users:
-      type: object
-      properties:
-        ApplicationId:
-          type: string
-        UserId:
-          type: string
-        UserName:
-          type: string
-        LoweredUserName:
-          type: string
-        MobileAlias:
-          type: string
-        IsAnonymous:
-          type: boolean
-        LastActivityDate:
-          type: string
-          format: date-time
-        AccessTokens:
-          type: object
-        BillingFeatureInterests:
-          type: object
-        BillingTierAudits:
-          type: object
-        TwoFactorAuthenticationRecoveryCodes:
-          type: object
-        TwoFactorAuthenticationUsers:
-          type: object
-        UserRoles:
-          type: object
-        UsersAccesses:
-          type: object
-        aspnet_Membership:
-          type: object
-          $ref: '#/components/schemas/aspnet_Membership'
-        TenantContracts:
-          type: object
-        Id:
-          type: integer
-          format: int32
-        CreatedDate:
-          type: string
-          format: date-time
-        LastModifiedDate:
-          type: string
-          format: date-time
-        IsDeleted:
-          type: boolean
-        IsSaved:
-          type: boolean

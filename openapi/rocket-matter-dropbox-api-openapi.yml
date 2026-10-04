@@ -74,11 +74,6 @@ components:
           type: string
         Regex:
           type: string
-    GetDropBoxUriRequest:
-      type: object
-      properties:
-        redirectUrl:
-          type: string
     ValidationResult:
       type: object
       properties:
@@ -128,3 +123,8 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
+    GetDropBoxUriRequest:
+      type: object
+      properties:
+        redirectUrl:
+          type: string

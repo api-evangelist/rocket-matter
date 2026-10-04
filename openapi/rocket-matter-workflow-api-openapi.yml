@@ -111,6 +111,44 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GetMatterCurrentWorkFlowStatusRequest:
+      type: object
+      properties:
+        MatterId:
+          type: integer
+          format: int32
+    MatterWorkFlowStatus:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+    AddEditWorkflowStatusResponse:
+      type: object
+      properties:
+        MatterWorkFlowStatus:
+          type: object
+          $ref: '#/components/schemas/MatterWorkFlowStatus'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -128,69 +166,11 @@ components:
           format: int32
         MatterWorkFlowStatusId:
           type: string
-    ApplyNewMatterWorkFlowStatusResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     GetMatterWorkFLowStatusesResponse:
       type: object
       properties:
         MatterWorkFlowStatuses:
           type: object
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetMatterCurrentWorkFlowStatusRequest:
-      type: object
-      properties:
-        MatterId:
-          type: integer
-          format: int32
-    MatterWorkFlowStatus:
-      type: object
-      properties:
-        Id:
-          type: string
-        Name:
-          type: string
-        Description:
-          type: string
-    GetMatterCurrentWorkFlowStatusResponse:
-      type: object
-      properties:
-        MatterWorkFlowStatus:
-          type: object
-          $ref: '#/components/schemas/MatterWorkFlowStatus'
         Success:
           type: boolean
         Message:
@@ -257,7 +237,7 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    AddEditWorkflowStatusResponse:
+    GetMatterCurrentWorkFlowStatusResponse:
       type: object
       properties:
         MatterWorkFlowStatus:
@@ -286,3 +266,23 @@ components:
         MatterWorkFlowStatus:
           type: object
           $ref: '#/components/schemas/MatterWorkFlowStatus'
+    ApplyNewMatterWorkFlowStatusResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

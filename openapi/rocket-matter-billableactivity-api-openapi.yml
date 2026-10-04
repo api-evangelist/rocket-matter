@@ -288,322 +288,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MatterCustomField:
-      type: object
-      properties:
-        Name:
-          type: string
-        Value:
-          type: string
-        Position:
-          type: integer
-          format: int32
-        MatterID:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
-    SaveExpenseRequest:
-      type: object
-      properties:
-        Expense:
-          type: object
-          $ref: '#/components/schemas/Expense'
-    MatterBudget:
-      type: object
-      properties:
-        Id:
-          type: integer
-          format: int32
-        MatterID:
-          type: integer
-          format: int32
-        Budget:
-          type: number
-          format: double
-        IsEnabled:
-          type: boolean
-        IncludeTimeEntries:
-          type: boolean
-        IncludeFlatFeeEntries:
-          type: boolean
-        IncludeCosts:
-          type: boolean
-        UseUserDefaultRate:
-          type: boolean
-        ExcludeInvoiced:
-          type: boolean
-    ContactRelationship:
-      type: object
-      properties:
-        ContactId:
-          type: integer
-          format: int32
-        RelationshipId:
-          type: integer
-          format: int32
-        RelationshipName:
-          type: string
-        Role:
-          type: string
-        Position:
-          type: integer
-          format: int32
-        IsCompany:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
-    EventAttendee:
-      type: object
-      properties:
-        EventID:
-          type: integer
-          format: int32
-        UserID:
-          type: integer
-          format: int32
-        User:
-          type: object
-          $ref: '#/components/schemas/User'
-        Bill:
-          type: boolean
-        NonBillable:
-          type: boolean
-        AttendeeName:
-          type: string
-        Contact:
-          type: object
-          $ref: '#/components/schemas/Contact'
-        IsRole:
-          type: boolean
-        Role:
-          type: string
-        ContactId:
-          type: integer
-          format: int32
-        InviteStatusTypeId:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
-    BillableTime:
-      type: object
-      properties:
-        Description:
-          type: string
-        MatterId:
-          type: integer
-          format: int32
-        ClientId:
-          type: integer
-          format: int32
-        Tags:
-          type: array
-          items:
-            type: string
-        Matter:
-          type: object
-          $ref: '#/components/schemas/Matter'
-        UserId:
-          type: integer
-          format: int32
-        User:
-          type: object
-          $ref: '#/components/schemas/User'
-        BillingDate:
-          type: string
-          format: date-time
-        BillableUnits:
-          type: number
-          format: double
-        CostOverride:
-          type: number
-          format: double
-        IsLineItemOverride:
-          type: boolean
-        IsNoCharge:
-          type: boolean
-        NonBillable:
-          type: boolean
-        LEDESTaskCode:
-          type: string
-        LEDESActivityCode:
-          type: string
-        IsTaxable:
-          type: boolean
-        IsSurchargeable:
-          type: boolean
-        MatterName:
-          type: string
-        UserFullName:
-          type: string
-        IsInvoiced:
-          type: boolean
-        MatterClosed:
-          type: boolean
-        ActivityTypeId:
-          type: integer
-          format: int32
-        ActivityCodeDescription:
-          type: string
-        TaskCodeDescription:
-          type: string
-        TotalSeconds:
-          type: integer
-          format: int32
-        ID:
-          type: integer
-          format: int32
-    GetTimeExpenseRequest:
-      type: object
-      properties:
-        ActivityId:
-          type: integer
-          format: int32
-    MatterStatueOfLimitation:
-      type: object
-      properties:
-        DoesNotExpire:
-          type: boolean
-        ExpirationDate:
-          type: string
-    BillableActivity:
-      type: object
-      properties:
-        TotalSeconds:
-          type: integer
-          format: int32
-        BillableUnits:
-          type: number
-          format: double
-        ActivityName:
-          type: string
-        Amount:
-          type: number
-          format: double
-        IsCredit:
-          type: boolean
-        Rate:
-          type: number
-          format: double
-        UserId:
-          type: integer
-          format: int32
-        ClientId:
-          type: integer
-          format: int32
-        MatterId:
-          type: integer
-          format: int32
-        DateAndTime:
-          type: string
-          format: date-time
-        Notes:
-          type: string
-        ActivityTypeId:
-          type: integer
-          format: int32
-        UserFullName:
-          type: string
-        IsNoCharge:
-          type: boolean
-        IsNonBillable:
-          type: boolean
-        CurrencySymbol:
-          type: string
-        Title:
-          type: string
-        User:
-          type: object
-          $ref: '#/components/schemas/User'
-        IsInvoiced:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
-    LedesCodesCache_Lookup:
-      type: object
-      properties:
-        billingCodesExpense:
-          type: object
-    MatterRelatedContact:
-      type: object
-      properties:
-        ContactId:
-          type: integer
-          format: int32
-        Contact:
-          type: object
-          $ref: '#/components/schemas/Contact'
-        MatterID:
-          type: integer
-          format: int32
-        Role:
-          type: string
-        Position:
-          type: integer
-          format: int32
-        RelationshipName:
-          type: string
-        IsDefault:
-          type: boolean
-        IsUser:
-          type: boolean
-        IsAttendeeRole:
-          type: boolean
-        IsEventOwnerRole:
-          type: boolean
-        TaskAssigneeRole:
-          type: boolean
-        TaskOwnerRole:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
-    BillableActivityFilter:
-      type: object
-      properties:
-        Sort:
-          type: string
-          enum:
-          - Date
-          - Type
-          - Description
-          - User
-          - Hours
-          - Amount
-        IsDescending:
-          type: boolean
-        MatterId:
-          type: integer
-          format: int32
-        Offset:
-          type: integer
-          format: int32
-        Fetch:
-          type: integer
-          format: int32
-    TaskEventMilestone:
-      type: object
-      properties:
-        TaskId:
-          type: integer
-          format: int32
-        EventId:
-          type: integer
-          format: int32
-        MatterTemplateMilestoneId:
-          type: integer
-          format: int32
-        MilestoneDate:
-          type: string
-          format: date-time
-        ID:
-          type: integer
-          format: int32
     Matter:
       type: object
       properties:
@@ -727,210 +411,27 @@ components:
         ID:
           type: integer
           format: int32
-    GetUnitsBilledForPeriodRequest:
+    GetActivitiesForMatterRequest:
       type: object
       properties:
-        TimePeriod:
-          type: string
-    User:
-      type: object
-      properties:
-        FullName:
-          type: string
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        MiddleName:
-          type: string
-        ContactId:
+        MatterId:
           type: integer
           format: int32
-        Initials:
-          type: string
-        ID:
+        Offset:
           type: integer
           format: int32
-    ShareInvoiceSetting:
-      type: object
-      properties:
-        Contact:
-          type: object
-          $ref: '#/components/schemas/Contact'
-        ContactID:
+        Fetch:
           type: integer
           format: int32
-        FullName:
-          type: string
-        ShareByPortal:
-          type: boolean
-        ShareByEmail:
-          type: boolean
-        EmailTypeSelected:
-          type: string
-        ID:
+        ActivityTypeId:
           type: integer
           format: int32
-    MatterEverGreenInfo:
-      type: object
-      properties:
-        IsOn:
-          type: boolean
-        MinimumRequiredRetainer:
-          type: number
-          format: double
-        ReplenishWhenBelow:
-          type: number
-          format: double
-    GetTimeExpenseResponse:
-      type: object
-      properties:
-        Time:
-          type: object
-          $ref: '#/components/schemas/BillableTime'
-        Expense:
-          type: object
-          $ref: '#/components/schemas/Expense'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetActivityTypeIdRequest:
+    GetTimeExpenseRequest:
       type: object
       properties:
         ActivityId:
           type: integer
           format: int32
-    Client:
-      type: object
-      properties:
-        Name:
-          type: string
-        Code:
-          type: string
-        MiddleName:
-          type: string
-        LastName:
-          type: string
-        IsCompany:
-          type: boolean
-        ContactID:
-          type: integer
-          format: int32
-        CompanyID:
-          type: integer
-          format: int32
-        CompanyName:
-          type: string
-        WorkEmail:
-          type: string
-        FullName:
-          type: string
-        HomeAddress:
-          type: object
-          $ref: '#/components/schemas/ContactAddress'
-        Relationships:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactRelationship'
-        HomeEmail:
-          type: string
-        MobilePhone:
-          type: string
-        Notes:
-          type: string
-        PreferredDisplayName:
-          type: string
-        PrimaryContact:
-          type: string
-        PrimaryContactId:
-          type: integer
-          format: int32
-        Salutation:
-          type: string
-        SkypeUserName:
-          type: string
-        Suffix:
-          type: string
-        Title:
-          type: string
-        WorkAddress:
-          type: object
-          $ref: '#/components/schemas/ContactAddress'
-        WorkFax:
-          type: string
-        WorkPhone:
-          type: string
-        HomePhone:
-          type: string
-        WorkPhoneExt:
-          type: string
-        Tags:
-          type: array
-          items:
-            type: string
-        ID:
-          type: integer
-          format: int32
-    GetAllLedesResponse:
-      type: object
-      properties:
-        Ledes:
-          type: object
-          $ref: '#/components/schemas/LedesCodesCache_Lookup'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetUnitsBilledForPeriodResponse:
-      type: object
-      properties:
-        BillableUnits:
-          type: number
-          format: double
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     MatterType:
       type: object
       properties:
@@ -939,85 +440,7 @@ components:
         ID:
           type: integer
           format: int32
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    DeleteActivityResponse:
-      type: object
-      properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    ValidationResult:
-      type: object
-      properties:
-        MinValue:
-          type: boolean
-        MaxValue:
-          type: boolean
-        MinLength:
-          type: boolean
-        MaxLength:
-          type: boolean
-        Required:
-          type: boolean
-        PropertyDisplayName:
-          type: string
-        Precision:
-          type: boolean
-        ValueEntered:
-          type: object
-        Name:
-          type: string
-        ObjectName:
-          type: string
-        ExternalID:
-          type: string
-        MinValueMessage:
-          type: string
-        MaxValueMessage:
-          type: string
-        MinLengthMessage:
-          type: string
-        MaxLengthMessage:
-          type: string
-        RequiredMessage:
-          type: string
-        RequiredPrecisionMessage:
-          type: string
-        BaseFailureMessage:
-          type: string
-        FailedValidationMessages:
-          type: array
-          items:
-            type: string
-        FailedCharacterValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterValidationRule'
-        IsValid:
-          type: boolean
-    Expense:
+    BillableTime:
       type: object
       properties:
         Description:
@@ -1028,6 +451,10 @@ components:
         ClientId:
           type: integer
           format: int32
+        Tags:
+          type: array
+          items:
+            type: string
         Matter:
           type: object
           $ref: '#/components/schemas/Matter'
@@ -1040,7 +467,10 @@ components:
         BillingDate:
           type: string
           format: date-time
-        Cost:
+        BillableUnits:
+          type: number
+          format: double
+        CostOverride:
           type: number
           format: double
         IsLineItemOverride:
@@ -1049,18 +479,16 @@ components:
           type: boolean
         NonBillable:
           type: boolean
-        LEDESExpenseCode:
+        LEDESTaskCode:
           type: string
-        IsFlatFee:
-          type: boolean
-        MatterName:
+        LEDESActivityCode:
           type: string
         IsTaxable:
           type: boolean
         IsSurchargeable:
           type: boolean
-        IsConvenienceFee:
-          type: boolean
+        MatterName:
+          type: string
         UserFullName:
           type: string
         IsInvoiced:
@@ -1070,100 +498,118 @@ components:
         ActivityTypeId:
           type: integer
           format: int32
-        ExpenseCodeDescription:
+        ActivityCodeDescription:
           type: string
-        VendorContactId:
+        TaskCodeDescription:
+          type: string
+        TotalSeconds:
           type: integer
           format: int32
-        VendorFullName:
+        ID:
+          type: integer
+          format: int32
+    ContactRelationship:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+        RelationshipId:
+          type: integer
+          format: int32
+        RelationshipName:
           type: string
-        Tags:
-          type: array
-          items:
-            type: string
-        SyncQBOAsCheck:
+        Role:
+          type: string
+        Position:
+          type: integer
+          format: int32
+        IsCompany:
           type: boolean
         ID:
           type: integer
           format: int32
-    SaveBillableTimeRequest:
+    GetActivityTypeIdResponse:
+      type: object
+      properties:
+        ActivityTypeId:
+          type: integer
+          format: int32
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    ContactAddress:
+      type: object
+      properties:
+        AddressLine1:
+          type: string
+        AddressLine2:
+          type: string
+        City:
+          type: string
+        State:
+          type: string
+        PostalCode:
+          type: string
+        Country:
+          type: string
+        IsEmpty:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    SaveBillableTimeResponse:
       type: object
       properties:
         BillableTime:
           type: object
           $ref: '#/components/schemas/BillableTime'
-    Contact:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    TaskEventMilestone:
       type: object
       properties:
-        Name:
-          type: string
-        MiddleName:
-          type: string
-        FullName:
-          type: string
-        LastName:
-          type: string
-        IsCompany:
-          type: boolean
-        WorkEmail:
-          type: string
-        WorkPhone:
-          type: string
-        WorkPhoneExt:
-          type: string
-        WorkFax:
-          type: string
-        WorkAddressLine1:
-          type: string
-        WorkAddressLine2:
-          type: string
-        WorkCity:
-          type: string
-        WorkState:
-          type: string
-        WorkPostalCode:
-          type: string
-        WorkCountry:
-          type: string
-        ClientID:
+        TaskId:
           type: integer
           format: int32
-        HomeEmail:
-          type: string
-        HomePhone:
-          type: string
-        HomeAddressLine1:
-          type: string
-        HomeAddressLine2:
-          type: string
-        HomeCity:
-          type: string
-        HomeState:
-          type: string
-        HomePostalCode:
-          type: string
-        HomeCountry:
-          type: string
-        ExternalID2:
-          type: string
-        LastModifiedDate:
+        EventId:
+          type: integer
+          format: int32
+        MatterTemplateMilestoneId:
+          type: integer
+          format: int32
+        MilestoneDate:
           type: string
           format: date-time
-        ContactTypeId:
-          type: integer
-          format: int32
-        CompanyId:
-          type: integer
-          format: int32
-        CompanyName:
-          type: string
-        Initials:
-          type: string
-        Notes:
-          type: string
-        UserId:
-          type: integer
-          format: int32
         ID:
           type: integer
           format: int32
@@ -1184,45 +630,69 @@ components:
         ID:
           type: integer
           format: int32
-    GetActivitiesForMatterRequest:
+    CharacterValidationRule:
       type: object
       properties:
-        MatterId:
-          type: integer
-          format: int32
-        Offset:
-          type: integer
-          format: int32
-        Fetch:
-          type: integer
-          format: int32
-        ActivityTypeId:
-          type: integer
-          format: int32
-    GetActivitiesForMatterResponse:
-      type: object
-      properties:
-        Activities:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillableActivity'
-        Success:
+        ShouldMatch:
           type: boolean
         Message:
           type: string
-        ErrorMessage:
+        Regex:
           type: string
-        ErrorNumber:
+    BillableActivity:
+      type: object
+      properties:
+        TotalSeconds:
           type: integer
           format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
+        BillableUnits:
+          type: number
+          format: double
+        ActivityName:
+          type: string
+        Amount:
+          type: number
+          format: double
+        IsCredit:
+          type: boolean
+        Rate:
+          type: number
+          format: double
+        UserId:
+          type: integer
+          format: int32
+        ClientId:
+          type: integer
+          format: int32
+        MatterId:
+          type: integer
+          format: int32
+        DateAndTime:
+          type: string
+          format: date-time
+        Notes:
+          type: string
+        ActivityTypeId:
+          type: integer
+          format: int32
+        UserFullName:
+          type: string
+        IsNoCharge:
+          type: boolean
+        IsNonBillable:
+          type: boolean
+        CurrencySymbol:
+          type: string
+        Title:
+          type: string
+        User:
+          type: object
+          $ref: '#/components/schemas/User'
+        IsInvoiced:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
     Task:
       type: object
       properties:
@@ -1309,12 +779,132 @@ components:
         ID:
           type: integer
           format: int32
-    GetBillableActivitiesRequest:
+    ValidationResult:
       type: object
       properties:
-        Filter:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
           type: object
-          $ref: '#/components/schemas/BillableActivityFilter'
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    Client:
+      type: object
+      properties:
+        Name:
+          type: string
+        Code:
+          type: string
+        MiddleName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        ContactID:
+          type: integer
+          format: int32
+        CompanyID:
+          type: integer
+          format: int32
+        CompanyName:
+          type: string
+        WorkEmail:
+          type: string
+        FullName:
+          type: string
+        HomeAddress:
+          type: object
+          $ref: '#/components/schemas/ContactAddress'
+        Relationships:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactRelationship'
+        HomeEmail:
+          type: string
+        MobilePhone:
+          type: string
+        Notes:
+          type: string
+        PreferredDisplayName:
+          type: string
+        PrimaryContact:
+          type: string
+        PrimaryContactId:
+          type: integer
+          format: int32
+        Salutation:
+          type: string
+        SkypeUserName:
+          type: string
+        Suffix:
+          type: string
+        Title:
+          type: string
+        WorkAddress:
+          type: object
+          $ref: '#/components/schemas/ContactAddress'
+        WorkFax:
+          type: string
+        WorkPhone:
+          type: string
+        HomePhone:
+          type: string
+        WorkPhoneExt:
+          type: string
+        Tags:
+          type: array
+          items:
+            type: string
+        ID:
+          type: integer
+          format: int32
+    SaveBillableTimeRequest:
+      type: object
+      properties:
+        BillableTime:
+          type: object
+          $ref: '#/components/schemas/BillableTime'
     DeleteActivityRequest:
       type: object
       properties:
@@ -1323,46 +913,77 @@ components:
           format: int32
         SendToTimerBar:
           type: boolean
-    MatterPermissionType:
+    GetBillableActivitiesRequest:
       type: object
       properties:
-        Name:
-          type: string
-        ID:
-          type: integer
-          format: int32
-    ContactAddress:
-      type: object
-      properties:
-        AddressLine1:
-          type: string
-        AddressLine2:
-          type: string
-        City:
-          type: string
-        State:
-          type: string
-        PostalCode:
-          type: string
-        Country:
-          type: string
-        IsEmpty:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
+        Filter:
+          type: object
+          $ref: '#/components/schemas/BillableActivityFilter'
     GetFirmBalancesRequest:
       type: object
       properties:
         IncludeFullDetails:
           type: boolean
-    GetBillableActivitiesResponse:
+    ShareInvoiceSetting:
       type: object
       properties:
-        Activities:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillableActivity'
+        Contact:
+          type: object
+          $ref: '#/components/schemas/Contact'
+        ContactID:
+          type: integer
+          format: int32
+        FullName:
+          type: string
+        ShareByPortal:
+          type: boolean
+        ShareByEmail:
+          type: boolean
+        EmailTypeSelected:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    MatterRelatedContact:
+      type: object
+      properties:
+        ContactId:
+          type: integer
+          format: int32
+        Contact:
+          type: object
+          $ref: '#/components/schemas/Contact'
+        MatterID:
+          type: integer
+          format: int32
+        Role:
+          type: string
+        Position:
+          type: integer
+          format: int32
+        RelationshipName:
+          type: string
+        IsDefault:
+          type: boolean
+        IsUser:
+          type: boolean
+        IsAttendeeRole:
+          type: boolean
+        IsEventOwnerRole:
+          type: boolean
+        TaskAssigneeRole:
+          type: boolean
+        TaskOwnerRole:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    SaveExpenseResponse:
+      type: object
+      properties:
+        Expense:
+          type: object
+          $ref: '#/components/schemas/Expense'
         Success:
           type: boolean
         Message:
@@ -1380,29 +1001,12 @@ components:
           type: array
           items:
             type: string
-    GetActivityTypeIdResponse:
+    SaveExpenseRequest:
       type: object
       properties:
-        ActivityTypeId:
-          type: integer
-          format: int32
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
+        Expense:
+          type: object
+          $ref: '#/components/schemas/Expense'
     Event:
       type: object
       properties:
@@ -1542,12 +1146,59 @@ components:
         ID:
           type: integer
           format: int32
-    SaveBillableTimeResponse:
+    GetActivityTypeIdRequest:
       type: object
       properties:
-        BillableTime:
-          type: object
-          $ref: '#/components/schemas/BillableTime'
+        ActivityId:
+          type: integer
+          format: int32
+    MatterCustomField:
+      type: object
+      properties:
+        Name:
+          type: string
+        Value:
+          type: string
+        Position:
+          type: integer
+          format: int32
+        MatterID:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    User:
+      type: object
+      properties:
+        FullName:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        MiddleName:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        Initials:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    GetUnitsBilledForPeriodRequest:
+      type: object
+      properties:
+        TimePeriod:
+          type: string
+    GetActivitiesForMatterResponse:
+      type: object
+      properties:
+        Activities:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillableActivity'
         Success:
           type: boolean
         Message:
@@ -1565,6 +1216,226 @@ components:
           type: array
           items:
             type: string
+    EventAttendee:
+      type: object
+      properties:
+        EventID:
+          type: integer
+          format: int32
+        UserID:
+          type: integer
+          format: int32
+        User:
+          type: object
+          $ref: '#/components/schemas/User'
+        Bill:
+          type: boolean
+        NonBillable:
+          type: boolean
+        AttendeeName:
+          type: string
+        Contact:
+          type: object
+          $ref: '#/components/schemas/Contact'
+        IsRole:
+          type: boolean
+        Role:
+          type: string
+        ContactId:
+          type: integer
+          format: int32
+        InviteStatusTypeId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    MatterPermissionType:
+      type: object
+      properties:
+        Name:
+          type: string
+        ID:
+          type: integer
+          format: int32
+    Expense:
+      type: object
+      properties:
+        Description:
+          type: string
+        MatterId:
+          type: integer
+          format: int32
+        ClientId:
+          type: integer
+          format: int32
+        Matter:
+          type: object
+          $ref: '#/components/schemas/Matter'
+        UserId:
+          type: integer
+          format: int32
+        User:
+          type: object
+          $ref: '#/components/schemas/User'
+        BillingDate:
+          type: string
+          format: date-time
+        Cost:
+          type: number
+          format: double
+        IsLineItemOverride:
+          type: boolean
+        IsNoCharge:
+          type: boolean
+        NonBillable:
+          type: boolean
+        LEDESExpenseCode:
+          type: string
+        IsFlatFee:
+          type: boolean
+        MatterName:
+          type: string
+        IsTaxable:
+          type: boolean
+        IsSurchargeable:
+          type: boolean
+        IsConvenienceFee:
+          type: boolean
+        UserFullName:
+          type: string
+        IsInvoiced:
+          type: boolean
+        MatterClosed:
+          type: boolean
+        ActivityTypeId:
+          type: integer
+          format: int32
+        ExpenseCodeDescription:
+          type: string
+        VendorContactId:
+          type: integer
+          format: int32
+        VendorFullName:
+          type: string
+        Tags:
+          type: array
+          items:
+            type: string
+        SyncQBOAsCheck:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    DeleteActivityResponse:
+      type: object
+      properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    LedesCodesCache_Lookup:
+      type: object
+      properties:
+        billingCodesExpense:
+          type: object
+    GetAllLedesResponse:
+      type: object
+      properties:
+        Ledes:
+          type: object
+          $ref: '#/components/schemas/LedesCodesCache_Lookup'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetTimeExpenseResponse:
+      type: object
+      properties:
+        Time:
+          type: object
+          $ref: '#/components/schemas/BillableTime'
+        Expense:
+          type: object
+          $ref: '#/components/schemas/Expense'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    GetBillableActivitiesResponse:
+      type: object
+      properties:
+        Activities:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillableActivity'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    MatterEverGreenInfo:
+      type: object
+      properties:
+        IsOn:
+          type: boolean
+        MinimumRequiredRetainer:
+          type: number
+          format: double
+        ReplenishWhenBelow:
+          type: number
+          format: double
     GetFirmBalancesResponse:
       type: object
       properties:
@@ -1611,12 +1482,141 @@ components:
           type: array
           items:
             type: string
-    SaveExpenseResponse:
+    Contact:
       type: object
       properties:
-        Expense:
-          type: object
-          $ref: '#/components/schemas/Expense'
+        Name:
+          type: string
+        MiddleName:
+          type: string
+        FullName:
+          type: string
+        LastName:
+          type: string
+        IsCompany:
+          type: boolean
+        WorkEmail:
+          type: string
+        WorkPhone:
+          type: string
+        WorkPhoneExt:
+          type: string
+        WorkFax:
+          type: string
+        WorkAddressLine1:
+          type: string
+        WorkAddressLine2:
+          type: string
+        WorkCity:
+          type: string
+        WorkState:
+          type: string
+        WorkPostalCode:
+          type: string
+        WorkCountry:
+          type: string
+        ClientID:
+          type: integer
+          format: int32
+        HomeEmail:
+          type: string
+        HomePhone:
+          type: string
+        HomeAddressLine1:
+          type: string
+        HomeAddressLine2:
+          type: string
+        HomeCity:
+          type: string
+        HomeState:
+          type: string
+        HomePostalCode:
+          type: string
+        HomeCountry:
+          type: string
+        ExternalID2:
+          type: string
+        LastModifiedDate:
+          type: string
+          format: date-time
+        ContactTypeId:
+          type: integer
+          format: int32
+        CompanyId:
+          type: integer
+          format: int32
+        CompanyName:
+          type: string
+        Initials:
+          type: string
+        Notes:
+          type: string
+        UserId:
+          type: integer
+          format: int32
+        ID:
+          type: integer
+          format: int32
+    MatterBudget:
+      type: object
+      properties:
+        Id:
+          type: integer
+          format: int32
+        MatterID:
+          type: integer
+          format: int32
+        Budget:
+          type: number
+          format: double
+        IsEnabled:
+          type: boolean
+        IncludeTimeEntries:
+          type: boolean
+        IncludeFlatFeeEntries:
+          type: boolean
+        IncludeCosts:
+          type: boolean
+        UseUserDefaultRate:
+          type: boolean
+        ExcludeInvoiced:
+          type: boolean
+    MatterStatueOfLimitation:
+      type: object
+      properties:
+        DoesNotExpire:
+          type: boolean
+        ExpirationDate:
+          type: string
+    BillableActivityFilter:
+      type: object
+      properties:
+        Sort:
+          type: string
+          enum:
+          - Date
+          - Type
+          - Description
+          - User
+          - Hours
+          - Amount
+        IsDescending:
+          type: boolean
+        MatterId:
+          type: integer
+          format: int32
+        Offset:
+          type: integer
+          format: int32
+        Fetch:
+          type: integer
+          format: int32
+    GetUnitsBilledForPeriodResponse:
+      type: object
+      properties:
+        BillableUnits:
+          type: number
+          format: double
         Success:
           type: boolean
         Message:

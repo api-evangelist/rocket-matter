@@ -94,36 +94,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    FirstTimeUserInfoRequest:
-      type: object
-      properties:
-        UserInfo:
-          type: object
-          $ref: '#/components/schemas/SignupUserInfo'
-    SubscriptionAgreementResponse:
-      type: object
-      properties:
-        HasAgreed:
-          type: boolean
-        RequiresAgreement:
-          type: boolean
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
     CharacterValidationRule:
       type: object
       properties:
@@ -133,63 +103,6 @@ components:
           type: string
         Regex:
           type: string
-    SignupCCEntryResponse:
-      type: object
-      properties:
-        CreditCardResponse:
-          type: string
-          enum:
-          - CCError
-          - CCDeclined
-          - CCSuccess
-        InvalidCoupon:
-          type: boolean
-        AccountResponse:
-          type: string
-          enum:
-          - Failure
-          - Success
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    SignupCCEntryRequest:
-      type: object
-      properties:
-        CCNumber:
-          type: string
-        ExpMonth:
-          type: string
-        ExpYear:
-          type: string
-        CvvCode:
-          type: string
-        CouponCode:
-          type: string
-        BillingFrequency:
-          type: string
-          enum:
-          - Monthly
-          - Yearly
-          - TriAnnual
-          - Quarterly
-          - Biennial
-        BillingTierId:
-          type: integer
-          format: int32
     SignupUserInfo:
       type: object
       properties:
@@ -210,6 +123,11 @@ components:
           type: string
         Password:
           type: string
+    SubscriptionAgreementRequest:
+      type: object
+      properties:
+        UserAgreed:
+          type: boolean
     ValidationResult:
       type: object
       properties:
@@ -259,11 +177,93 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    SubscriptionAgreementRequest:
+    FirstTimeUserInfoRequest:
       type: object
       properties:
-        UserAgreed:
+        UserInfo:
+          type: object
+          $ref: '#/components/schemas/SignupUserInfo'
+    SignupCCEntryRequest:
+      type: object
+      properties:
+        CCNumber:
+          type: string
+        ExpMonth:
+          type: string
+        ExpYear:
+          type: string
+        CvvCode:
+          type: string
+        CouponCode:
+          type: string
+        BillingFrequency:
+          type: string
+          enum:
+          - Monthly
+          - Yearly
+          - TriAnnual
+          - Quarterly
+          - Biennial
+        BillingTierId:
+          type: integer
+          format: int32
+    SignupCCEntryResponse:
+      type: object
+      properties:
+        CreditCardResponse:
+          type: string
+          enum:
+          - CCError
+          - CCDeclined
+          - CCSuccess
+        InvalidCoupon:
           type: boolean
+        AccountResponse:
+          type: string
+          enum:
+          - Failure
+          - Success
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    SubscriptionAgreementResponse:
+      type: object
+      properties:
+        HasAgreed:
+          type: boolean
+        RequiresAgreement:
+          type: boolean
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
     FirstTimeUserInfoResponse:
       type: object
       properties:

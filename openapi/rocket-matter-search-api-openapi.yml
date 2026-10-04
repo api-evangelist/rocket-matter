@@ -69,36 +69,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GlobalSearchResultSet:
+    GlobalTagSearchResult:
       type: object
       properties:
-        GlobalContactsResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalContactSearchResult'
-        GlobalClientsResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalClientSearchResult'
-        GlobalMattersResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalMatterSearchResult'
-        GlobalActivityResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalActivitySearchResult'
-        GlobalTagsResults:
-          type: array
-          items:
-            $ref: '#/components/schemas/GlobalTagSearchResult'
-    GlobalMatterSearchResult:
-      type: object
-      properties:
-        MatterId:
+        TagId:
           type: integer
           format: int32
-        MatterName:
+        TagName:
           type: string
         ResultStrength:
           type: integer
@@ -107,6 +84,94 @@ components:
           type: array
           items:
             type: string
+    CharacterValidationRule:
+      type: object
+      properties:
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    GlobalActivitySearchResult:
+      type: object
+      properties:
+        ActivityId:
+          type: integer
+          format: int32
+        Description:
+          type: string
+        ResultStrength:
+          type: integer
+          format: int32
+        ResultTokens:
+          type: array
+          items:
+            type: string
+    ValidationResult:
+      type: object
+      properties:
+        MinValue:
+          type: boolean
+        MaxValue:
+          type: boolean
+        MinLength:
+          type: boolean
+        MaxLength:
+          type: boolean
+        Required:
+          type: boolean
+        PropertyDisplayName:
+          type: string
+        Precision:
+          type: boolean
+        ValueEntered:
+          type: object
+        Name:
+          type: string
+        ObjectName:
+          type: string
+        ExternalID:
+          type: string
+        MinValueMessage:
+          type: string
+        MaxValueMessage:
+          type: string
+        MinLengthMessage:
+          type: string
+        MaxLengthMessage:
+          type: string
+        RequiredMessage:
+          type: string
+        RequiredPrecisionMessage:
+          type: string
+        BaseFailureMessage:
+          type: string
+        FailedValidationMessages:
+          type: array
+          items:
+            type: string
+        FailedCharacterValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterValidationRule'
+        IsValid:
+          type: boolean
+    SearchOccurenceForTypeRequest:
+      type: object
+      properties:
+        Search:
+          type: string
+        Type:
+          type: string
+          enum:
+          - Contact
+          - Client
+          - Matter
+          - Activity
+          - Tag
+          - ContactCustomField
+          - MatterCustomField
     GlobalContactSearchResult:
       type: object
       properties:
@@ -124,13 +189,13 @@ components:
           type: array
           items:
             type: string
-    GlobalActivitySearchResult:
+    GlobalMatterSearchResult:
       type: object
       properties:
-        ActivityId:
+        MatterId:
           type: integer
           format: int32
-        Description:
+        MatterName:
           type: string
         ResultStrength:
           type: integer
@@ -139,30 +204,6 @@ components:
           type: array
           items:
             type: string
-    SearchOccurenceForTypeRequest:
-      type: object
-      properties:
-        Search:
-          type: string
-        Type:
-          type: string
-          enum:
-          - Contact
-          - Client
-          - Matter
-          - Activity
-          - Tag
-          - ContactCustomField
-          - MatterCustomField
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
     GlobalClientSearchResult:
       type: object
       properties:
@@ -175,30 +216,6 @@ components:
           type: integer
           format: int32
         ResultTokens:
-          type: array
-          items:
-            type: string
-    SearchOccurenceForTypeResponse:
-      type: object
-      properties:
-        Results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchResult'
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
           type: array
           items:
             type: string
@@ -222,21 +239,6 @@ components:
           items:
             $ref: '#/components/schemas/ValidationResult'
         Errors:
-          type: array
-          items:
-            type: string
-    GlobalTagSearchResult:
-      type: object
-      properties:
-        TagId:
-          type: integer
-          format: int32
-        TagName:
-          type: string
-        ResultStrength:
-          type: integer
-          format: int32
-        ResultTokens:
           type: array
           items:
             type: string
@@ -300,55 +302,6 @@ components:
           type: string
         ResultTypeDisplay:
           type: string
-    ValidationResult:
-      type: object
-      properties:
-        MinValue:
-          type: boolean
-        MaxValue:
-          type: boolean
-        MinLength:
-          type: boolean
-        MaxLength:
-          type: boolean
-        Required:
-          type: boolean
-        PropertyDisplayName:
-          type: string
-        Precision:
-          type: boolean
-        ValueEntered:
-          type: object
-        Name:
-          type: string
-        ObjectName:
-          type: string
-        ExternalID:
-          type: string
-        MinValueMessage:
-          type: string
-        MaxValueMessage:
-          type: string
-        MinLengthMessage:
-          type: string
-        MaxLengthMessage:
-          type: string
-        RequiredMessage:
-          type: string
-        RequiredPrecisionMessage:
-          type: string
-        BaseFailureMessage:
-          type: string
-        FailedValidationMessages:
-          type: array
-          items:
-            type: string
-        FailedCharacterValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/CharacterValidationRule'
-        IsValid:
-          type: boolean
     GlobalSearchRequest:
       type: object
       properties:
@@ -356,3 +309,50 @@ components:
           type: string
         IsMobile:
           type: boolean
+    GlobalSearchResultSet:
+      type: object
+      properties:
+        GlobalContactsResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalContactSearchResult'
+        GlobalClientsResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalClientSearchResult'
+        GlobalMattersResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalMatterSearchResult'
+        GlobalActivityResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalActivitySearchResult'
+        GlobalTagsResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalTagSearchResult'
+    SearchOccurenceForTypeResponse:
+      type: object
+      properties:
+        Results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string

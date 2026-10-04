@@ -63,41 +63,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DiscountConfiguration:
+    SaveDiscountConfigurationResponse:
       type: object
       properties:
-        Id:
-          type: string
-        DateCreated:
-          type: string
-          format: date-time
-        DateModified:
-          type: string
-          format: date-time
-        TenantId:
-          type: integer
-          format: int32
-        IsDeleted:
-          type: boolean
-        IsEnabled:
-          type: boolean
-        Description:
-          type: string
-        Rate:
-          type: number
-          format: double
-        Term:
-          type: integer
-          format: int32
-        AppliedToMatter:
-          type: boolean
-    GetAllDiscountsResponse:
-      type: object
-      properties:
-        Discounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/DiscountConfiguration'
+        DiscountConfiguration:
+          type: object
+          $ref: '#/components/schemas/DiscountConfiguration'
         Success:
           type: boolean
         Message:
@@ -173,12 +144,13 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    SaveDiscountConfigurationResponse:
+    GetAllDiscountsResponse:
       type: object
       properties:
-        DiscountConfiguration:
-          type: object
-          $ref: '#/components/schemas/DiscountConfiguration'
+        Discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiscountConfiguration'
         Success:
           type: boolean
         Message:
@@ -196,6 +168,34 @@ components:
           type: array
           items:
             type: string
+    DiscountConfiguration:
+      type: object
+      properties:
+        Id:
+          type: string
+        DateCreated:
+          type: string
+          format: date-time
+        DateModified:
+          type: string
+          format: date-time
+        TenantId:
+          type: integer
+          format: int32
+        IsDeleted:
+          type: boolean
+        IsEnabled:
+          type: boolean
+        Description:
+          type: string
+        Rate:
+          type: number
+          format: double
+        Term:
+          type: integer
+          format: int32
+        AppliedToMatter:
+          type: boolean
     SaveDiscountConfigurationRequest:
       type: object
       properties:

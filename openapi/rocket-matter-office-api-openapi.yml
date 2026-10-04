@@ -176,11 +176,9 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    OfficeConfiguredResponse:
+    DisconnectOfficeResponse:
       type: object
       properties:
-        IsConfigured:
-          type: boolean
         Success:
           type: boolean
         Message:
@@ -207,55 +205,18 @@ components:
           type: string
         Regex:
           type: string
-    UpdateOfficeUserSettingRequest:
+    SyncOutlookEmailRequest:
       type: object
       properties:
-        SyncContacts:
-          type: boolean
-        SyncCalendar:
-          type: boolean
-    Email:
+        OutlookEmail:
+          type: object
+          $ref: '#/components/schemas/Email'
+    SyncOutlookEmailResponse:
       type: object
       properties:
-        EmailUUId:
-          type: string
-        MatterId:
-          type: integer
-          format: int32
-        MatterName:
-          type: string
-        Attachments:
-          type: array
-          items:
-            type: string
-        BillableUnits:
-          type: number
-          format: double
-        BillingDate:
-          type: string
-          format: date-time
-        BillingUserId:
-          type: integer
-          format: int32
-        BillingUserName:
-          type: string
-        BillingDescription:
-          type: string
-        IsNoCharge:
-          type: boolean
-        IsNonBillable:
-          type: boolean
-        ActivityId:
-          type: integer
-          format: int32
-        Invoiced:
-          type: boolean
-        ID:
-          type: integer
-          format: int32
-    BaseResponse:
-      type: object
-      properties:
+        OutlookEmail:
+          type: object
+          $ref: '#/components/schemas/Email'
         Success:
           type: boolean
         Message:
@@ -273,23 +234,11 @@ components:
           type: array
           items:
             type: string
-    GetOutlookEmailRequest:
+    GetOfficeUrlResponse:
       type: object
       properties:
-        EmailUId:
+        Url:
           type: string
-    SyncOutlookEmailRequest:
-      type: object
-      properties:
-        OutlookEmail:
-          type: object
-          $ref: '#/components/schemas/Email'
-    SyncOutlookEmailResponse:
-      type: object
-      properties:
-        OutlookEmail:
-          type: object
-          $ref: '#/components/schemas/Email'
         Success:
           type: boolean
         Message:
@@ -356,9 +305,38 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    DisconnectOfficeResponse:
+    BaseResponse:
       type: object
       properties:
+        Success:
+          type: boolean
+        Message:
+          type: string
+        ErrorMessage:
+          type: string
+        ErrorNumber:
+          type: integer
+          format: int32
+        FailedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+        Errors:
+          type: array
+          items:
+            type: string
+    UpdateOfficeUserSettingRequest:
+      type: object
+      properties:
+        SyncContacts:
+          type: boolean
+        SyncCalendar:
+          type: boolean
+    OfficeConfiguredResponse:
+      type: object
+      properties:
+        IsConfigured:
+          type: boolean
         Success:
           type: boolean
         Message:
@@ -379,28 +357,6 @@ components:
     UpdateOfficeUserSettingResponse:
       type: object
       properties:
-        Success:
-          type: boolean
-        Message:
-          type: string
-        ErrorMessage:
-          type: string
-        ErrorNumber:
-          type: integer
-          format: int32
-        FailedValidations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-        Errors:
-          type: array
-          items:
-            type: string
-    GetOfficeUrlResponse:
-      type: object
-      properties:
-        Url:
-          type: string
         Success:
           type: boolean
         Message:
@@ -441,3 +397,47 @@ components:
           type: array
           items:
             type: string
+    Email:
+      type: object
+      properties:
+        EmailUUId:
+          type: string
+        MatterId:
+          type: integer
+          format: int32
+        MatterName:
+          type: string
+        Attachments:
+          type: array
+          items:
+            type: string
+        BillableUnits:
+          type: number
+          format: double
+        BillingDate:
+          type: string
+          format: date-time
+        BillingUserId:
+          type: integer
+          format: int32
+        BillingUserName:
+          type: string
+        BillingDescription:
+          type: string
+        IsNoCharge:
+          type: boolean
+        IsNonBillable:
+          type: boolean
+        ActivityId:
+          type: integer
+          format: int32
+        Invoiced:
+          type: boolean
+        ID:
+          type: integer
+          format: int32
+    GetOutlookEmailRequest:
+      type: object
+      properties:
+        EmailUId:
+          type: string

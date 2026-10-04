@@ -95,21 +95,6 @@ components:
         Date:
           type: string
           format: date-time
-    CharacterValidationRule:
-      type: object
-      properties:
-        ShouldMatch:
-          type: boolean
-        Message:
-          type: string
-        Regex:
-          type: string
-    SaveInterestConfigurationRequest:
-      type: object
-      properties:
-        InterestConfiguration:
-          type: object
-          $ref: '#/components/schemas/InterestConfiguration'
     SaveInterestConfigurationResponse:
       type: object
       properties:
@@ -133,13 +118,52 @@ components:
           type: array
           items:
             type: string
-    GetAllInterestRatesResponse:
+    CharacterValidationRule:
       type: object
       properties:
-        Interests:
-          type: array
-          items:
-            $ref: '#/components/schemas/InterestConfiguration'
+        ShouldMatch:
+          type: boolean
+        Message:
+          type: string
+        Regex:
+          type: string
+    InterestConfiguration:
+      type: object
+      properties:
+        Id:
+          type: string
+        DateCreated:
+          type: string
+          format: date-time
+        DateModified:
+          type: string
+          format: date-time
+        TenantId:
+          type: integer
+          format: int32
+        IsDeleted:
+          type: boolean
+        IsEnabled:
+          type: boolean
+        Description:
+          type: string
+        Rate:
+          type: number
+          format: double
+        Term:
+          type: integer
+          format: int32
+        MakeRecurring:
+          type: boolean
+        ChargeInterestOnInterest:
+          type: boolean
+        ApplyToAllUnpaid:
+          type: boolean
+        AppliedToMatter:
+          type: boolean
+    ChargeInterestFeesResponse:
+      type: object
+      properties:
         Success:
           type: boolean
         Message:
@@ -157,6 +181,12 @@ components:
           type: array
           items:
             type: string
+    SaveInterestConfigurationRequest:
+      type: object
+      properties:
+        InterestConfiguration:
+          type: object
+          $ref: '#/components/schemas/InterestConfiguration'
     ValidationResult:
       type: object
       properties:
@@ -206,43 +236,13 @@ components:
             $ref: '#/components/schemas/CharacterValidationRule'
         IsValid:
           type: boolean
-    InterestConfiguration:
+    GetAllInterestRatesResponse:
       type: object
       properties:
-        Id:
-          type: string
-        DateCreated:
-          type: string
-          format: date-time
-        DateModified:
-          type: string
-          format: date-time
-        TenantId:
-          type: integer
-          format: int32
-        IsDeleted:
-          type: boolean
-        IsEnabled:
-          type: boolean
-        Description:
-          type: string
-        Rate:
-          type: number
-          format: double
-        Term:
-          type: integer
-          format: int32
-        MakeRecurring:
-          type: boolean
-        ChargeInterestOnInterest:
-          type: boolean
-        ApplyToAllUnpaid:
-          type: boolean
-        AppliedToMatter:
-          type: boolean
-    ChargeInterestFeesResponse:
-      type: object
-      properties:
+        Interests:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterestConfiguration'
         Success:
           type: boolean
         Message:
