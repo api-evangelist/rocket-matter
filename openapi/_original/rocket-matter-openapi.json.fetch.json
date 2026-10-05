@@ -1,0 +1,12 @@
+{
+ "url": "https://developer.rocketmatter.com/rocketmatterapi.json",
+ "requested_url": "https://developer.rocketmatter.com/rocketmatterapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 470343,
+ "sha256": "e166bd65f9ee07087cf0e8939d08bc51625ff2b9dbabde74df9c87b5b4976e7d",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
