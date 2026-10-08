@@ -27,3 +27,34 @@ plans:
     currency: USD
     billing_period: month
     notes: "Paid annually"
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units: []
+  plans:
+  - name: Essentials
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Pro
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Premier
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Elite
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
