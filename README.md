@@ -64,5 +64,161 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Rocket Matter is a company surfaced via the API Evangelist harvest backlog (source: legal) and added to the network as a stub for full-pipeline profiling.
-- https://www.rocketmatter.com/
+Rocket Matter provides cloud‑based legal practice management software for law firms of all sizes. The platform combines case management, time tracking, billing, document automation, and client collaboration tools into a single, secure solution. Founded in 2008, Rocket Matter helps firms streamline workflows, improve client service, and increase profitability through an intuitive, modern interface and robust integrations.
+
+**Areas:** Company · Legal Tech · Software-as-a-Service · Practice Management · Cloud
+
+## Rocket Matter on APIs.io
+
+Everything profiled for Rocket Matter is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/rocket-matter/](https://apis.io/providers/rocket-matter/)** — or go straight to one of the APIs or properties below.
+
+### APIs (44)
+
+- [Rocket Matter Authentication API](https://apis.io/apis/rocket-matter/rocket-matter-authentication-api/) — How to authenticate against Rocket Matter API
+- [Rocket Matter Badges API](https://apis.io/apis/rocket-matter/rocket-matter-badges-api/) — The Badges API from Rocket Matter — 3 operation(s) for badges.
+- [Rocket Matter Billable Activity API](https://apis.io/apis/rocket-matter/rocket-matter-billableactivity-api/) — View, add, edit, and delete billable activities.
+- [Rocket Matter Billing Tiers API](https://apis.io/apis/rocket-matter/rocket-matter-billingtiers-api/) — The BillingTiers API from Rocket Matter — 2 operation(s) for billingtiers.
+- [Rocket Matter Calendar Entries API](https://apis.io/apis/rocket-matter/rocket-matter-calendarentries-api/) — View, create, and delete calendar events.
+- [Rocket Matter Clients API](https://apis.io/apis/rocket-matter/rocket-matter-clients-api/) — View, create, and delete clients.
+- [Rocket Matter Communicator API](https://apis.io/apis/rocket-matter/rocket-matter-communicator-api/) — The Communicator API from Rocket Matter — 18 operation(s) for communicator.
+- [Rocket Matter Contacts API](https://apis.io/apis/rocket-matter/rocket-matter-contacts-api/) — View, edit, create, and delete contacts.
+- [Rocket Matter Court Rules API](https://apis.io/apis/rocket-matter/rocket-matter-courtrules-api/) — The CourtRules API from Rocket Matter — 12 operation(s) for courtrules.
+- [Rocket Matter Discounts API](https://apis.io/apis/rocket-matter/rocket-matter-discounts-api/) — Attorney matter discounts.
+- [Rocket Matter Documents API](https://apis.io/apis/rocket-matter/rocket-matter-documents-api/) — The Documents API from Rocket Matter — 22 operation(s) for documents.
+- [Rocket Matter Document Templates API](https://apis.io/apis/rocket-matter/rocket-matter-documenttemplates-api/) — Document template operations.
+- [Rocket Matter Drop Box API](https://apis.io/apis/rocket-matter/rocket-matter-dropbox-api/) — The DropBox API from Rocket Matter — 1 operation(s) for dropbox.
+- [Rocket Matter Features API](https://apis.io/apis/rocket-matter/rocket-matter-features-api/) — The Features API from Rocket Matter — 2 operation(s) for features.
+- [Rocket Matter Firm Roles API](https://apis.io/apis/rocket-matter/rocket-matter-firmroles-api/) — The FirmRoles API from Rocket Matter — 7 operation(s) for firmroles.
+- [Rocket Matter Google API](https://apis.io/apis/rocket-matter/rocket-matter-google-api/) — The Google API from Rocket Matter — 2 operation(s) for google.
+- [Rocket Matter Interests API](https://apis.io/apis/rocket-matter/rocket-matter-interests-api/) — The Interests API from Rocket Matter — 3 operation(s) for interests.
+- [Rocket Matter Invoices API](https://apis.io/apis/rocket-matter/rocket-matter-invoices-api/) — The Invoices API from Rocket Matter — 28 operation(s) for invoices.
+- [Rocket Matter Matters API](https://apis.io/apis/rocket-matter/rocket-matter-matters-api/) — The Matters API from Rocket Matter — 22 operation(s) for matters.
+- [Rocket Matter Matter Template Date Options API](https://apis.io/apis/rocket-matter/rocket-matter-mattertemplatedateoptions-api/) — Manages the date options for a matter template.
+- [Rocket Matter Matter Template Milestone Actions API](https://apis.io/apis/rocket-matter/rocket-matter-mattertemplatemilestoneactions-api/) — Handles cascading milestone dependencies with tasks and events created from matter templates.
+- [Rocket Matter Matter Templates API](https://apis.io/apis/rocket-matter/rocket-matter-mattertemplates-api/) — Manage creating, editing and deleting matter templates.
+- [Rocket Matter Matter Types API](https://apis.io/apis/rocket-matter/rocket-matter-mattertypes-api/) — The MatterTypes API from Rocket Matter — 1 operation(s) for mattertypes.
+- [Rocket Matter Messages API](https://apis.io/apis/rocket-matter/rocket-matter-messages-api/) — Phone message operations.
+- [Rocket Matter Mobile API](https://apis.io/apis/rocket-matter/rocket-matter-mobile-api/) — Manage mobile device-specific actions.
+- [Rocket Matter Office API](https://apis.io/apis/rocket-matter/rocket-matter-office-api/) — Manages Office 365 integration.
+- [Rocket Matter Origin System API](https://apis.io/apis/rocket-matter/rocket-matter-originsystem-api/) — The OriginSystem API from Rocket Matter — 23 operation(s) for originsystem.
+- [Rocket Matter Quickbooks API](https://apis.io/apis/rocket-matter/rocket-matter-quickbooks-api/) — Manages the Quickbooks Online integration.
+- [Rocket Matter Rates API](https://apis.io/apis/rocket-matter/rocket-matter-rates-api/) — Operations for user hourly rates.
+- [Rocket Matter Recurring Billing API](https://apis.io/apis/rocket-matter/rocket-matter-recurringbilling-api/) — The RecurringBilling API from Rocket Matter — 6 operation(s) for recurringbilling.
+- [Rocket Matter Reports API](https://apis.io/apis/rocket-matter/rocket-matter-reports-api/) — Operations for running reports.
+- [Rocket Matter Search API](https://apis.io/apis/rocket-matter/rocket-matter-search-api/) — Search for Contacts, Clients, Matters, Activities, Tags, ContactCustomFields, and MatterCustomFields.
+- [Rocket Matter Signup API](https://apis.io/apis/rocket-matter/rocket-matter-signup-api/) — Operations to create new Rocket Matter accounts.
+- [Rocket Matter Surcharge Rates API](https://apis.io/apis/rocket-matter/rocket-matter-surchargerates-api/) — The SurchargeRates API from Rocket Matter — 5 operation(s) for surchargerates.
+- [Rocket Matter Tags API](https://apis.io/apis/rocket-matter/rocket-matter-tags-api/) — Tags can be attached to contacts, documents, matters and events in order to group, sort, and find related items.
+- [Rocket Matter Tasks API](https://apis.io/apis/rocket-matter/rocket-matter-tasks-api/) — Operations for user tasks. All tasks must be assigned to a user but are not required to be attached to a matter.
+- [Rocket Matter Tax Rates API](https://apis.io/apis/rocket-matter/rocket-matter-taxrates-api/) — Operations for managing tax rates.
+- [Rocket Matter Time Options API](https://apis.io/apis/rocket-matter/rocket-matter-timeoptions-api/) — The TimeOptions API from Rocket Matter — 2 operation(s) for timeoptions.
+- [Rocket Matter Timer API](https://apis.io/apis/rocket-matter/rocket-matter-timer-api/) — Operations for timer activities to track billable time worked.
+- [Rocket Matter Trust API](https://apis.io/apis/rocket-matter/rocket-matter-trust-api/) — Client trust accounts to hold retainer funds.
+- [Rocket Matter Two Factor Authentication API](https://apis.io/apis/rocket-matter/rocket-matter-twofactorauthentication-api/) — Operations to configure and manage SMS two-factor authentication for user login security.
+- [Rocket Matter Users API](https://apis.io/apis/rocket-matter/rocket-matter-users-api/) — Operations to manage Rocket Matter users.
+- [Rocket Matter Validations API](https://apis.io/apis/rocket-matter/rocket-matter-validations-api/) — The Validations API from Rocket Matter — 1 operation(s) for validations.
+- [Rocket Matter Work Flow API](https://apis.io/apis/rocket-matter/rocket-matter-workflow-api/) — The WorkFlow API from Rocket Matter — 4 operation(s) for workflow.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [rocket-matter-mcp.yml](https://apis.io/servers/rocket-matter/rocket-matter-mcp-yml/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Rocket Matter Agentic Access](https://apis.io/agentic-access/rocket-matter/rocket-matter-agentic-access/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Rocket Matter API Rules](https://apis.io/rules/rocket-matter/rocket-matter-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Rocket Matter Domain Security](https://apis.io/security/rocket-matter/rocket-matter-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Rocket Matter Plans Pricing](https://apis.io/plans/rocket-matter/rocket-matter-plans-pricing/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.rocketmatter.com/)
+- [Getting started](https://www.rocketmatter.com/free-trial/)
+- [API reference](https://developer.rocketmatter.com/)
+- [Pricing](https://www.rocketmatter.com/pricing/)
+- [Sign up](https://www.rocketmatter.com/free-trial/)
+- [Support](https://support.rocketmatter.com/)
+- [Blog](https://www.rocketmatter.com/blog/)
+- [Security](https://www.rocketmatter.com/features/security/)
+- [Terms of service](https://www.rocketmatter.com/terms-and-conditions/)
+- [Privacy policy](https://www.rocketmatter.com/privacy-policy/)
+
+## API Evangelist rating
+
+**Kin Score 41.9** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 40.2 |
+| Contract governance | 22.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 26.2 |
+| Access clarity | 76.3 |
+
+**Agent readiness 33.0** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/rocket-matter/](https://apis.io/providers/rocket-matter/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Rocket Matter: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/rocket-matter/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
